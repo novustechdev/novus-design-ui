@@ -67,12 +67,13 @@ end of this session.
 ## Next session: start here
 
 1. Read `memory/MEMORY.md`, then this file. State of the world in one line:
-   shipped v0.1.0, docs live, no failing gates, no open tasks.
-2. If continuing development: bump version + CHANGELOG entry per release, run
-   `node site/build.mjs && scripts/gates.sh`, publish with
-   `NODE_AUTH_TOKEN=$(gh auth token) npm publish` (needs `write:packages` on the
-   gh token), deploy docs with `gh workflow run pages.yml` if the push trigger
-   drops again.
+   shipped v0.2.0 on public npm (tokenless), docs live, no failing gates, no
+   open tasks.
+2. If continuing development: bump version + CHANGELOG per release, run
+   `node site/build.mjs && scripts/gates.sh`, have the owner run `npm publish`
+   in a real terminal (passkey 2FA browser approval), tag vX.Y.Z + `gh release
+   create` with the packed tarball, and `gh workflow run pages.yml --ref main`
+   if the push trigger drops again.
 3. If a new feature starts: `/speckit-specify` opens feature 002; the constitution
    (v1.3.0) and gates carry over unchanged.
 4. Known environment facts (details in `memory/project_operations.md`): snap
