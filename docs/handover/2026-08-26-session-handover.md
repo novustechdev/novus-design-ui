@@ -17,8 +17,13 @@ end of this session.
 - Full speckit lifecycle: constitution (v1.0.0 → 1.3.0), spec (18 FRs, 7
   clarifications), plan, 35 tasks, 2 converge passes, all implemented.
 - Package: root-is-the-package layout (tokens.css verbatim + woff2 fonts + logos +
-  photos + `js/novus-theme.js`), published to GitHub Packages under the interim
-  `@sgultom99` scope. `.npmrc` uses env-var auth only.
+  photos + `js/novus-theme.js`). Distribution journey: 0.1.0 to GitHub Packages
+  (private, interim `@sgultom99` scope), then FINAL: 0.2.0 to PUBLIC npm as
+  unscoped `novus-design-kit` for tokenless installs, with third-party marks
+  (logos/clients, logos/schemes) stripped from the artifact (69 files, 4.9 MB).
+  Verified by an anonymous install (clean HOME, no npmrc) and a fresh sample app
+  built from the README quick start (Carlito + Novus Blue + dark persistence,
+  zero failed requests).
 - Docs site: 41 static pages built by zero-dependency `site/build.mjs` from
   `site/components.json` + fragments. Ant-design-style sidebars, 22-component
   catalog with by-construction-faithful snippets, 8 foundations pages, version
@@ -34,16 +39,23 @@ end of this session.
   GitHub Pages deploy workflow that runs gates before deploying.
 - T027 browser pass done against the live site via Chromium/CDP (dark toggle +
   persistence, OS-dark with JS off, 375px, logo swap); toggle touch target fixed.
+- Repo governance: `main` created as protected default branch (no force pushes
+  or deletions); semantic releases v0.1.0 and v0.2.0 on GitHub with the exact
+  npm tarballs attached; the github-pages environment allow-list now includes
+  `main` (deploys from it failed until that fix).
 - README rewritten as a developer manual (quick start, per-framework and
   per-theme sections with links to verified guides); proven by building a fresh
   sample app from the published registry package (screenshots sent to owner).
 
 ## Verify
 
-- [ ] `node site/build.mjs && scripts/gates.sh` after any content change (last
-      full run this session: ALL GATES PASS)
-- [ ] Speckit-sync commit at session end pushed and Pages redeployed (deploy is
-      only needed when `site/` changes; README/spec-only commits don't affect it)
+- [x] Final build + all 14 gates: ALL GATES PASS (after the footer version stamp)
+- [x] Live site sweep at v0.2.0: 20/20 URLs return 200; header badge and footer
+      both state v0.2.0; install page is tokenless; zero stale `@sgultom99`
+      references; asset index labels client/scheme marks repository-only
+- [x] Anonymous `npm install novus-design-kit` works (no registry setup, no
+      token); third-party marks absent from the installed package
+- [ ] Nothing outstanding to re-verify; next release repeats quickstart.md §6
 
 ## Open items
 
