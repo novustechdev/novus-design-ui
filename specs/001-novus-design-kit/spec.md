@@ -15,6 +15,9 @@
 - Q: When developers install the kit, what form should the components take — pure CSS with documented HTML patterns, or framework components? → A: CSS-first and framework-agnostic: tokens, component classes, fonts, and assets with copyable HTML patterns, consumable from any web stack; framework-specific wrappers (React/Vue) are out of scope for v1.
 - Q: Where should the npm package be published — public npm or a private internal registry? → A: A private internal registry (Novus-controlled feed); proprietary photos and logos never reach a public registry, and developers authenticate once then use standard npm/yarn commands.
 - Q: Who should be able to view the reference/demo documentation site — the public internet or Novus people only? → A: Public, like ant.design: anyone can browse the design system and component docs with no login; the site doubles as a brand showcase, while the installable package remains private.
+- Q: What verification standard must the framework/theme guides meet before a release? → A: All eight guides are verified: each guide's snippets are executed in a throwaway sample project before their first release, and re-verified when the target library ships a new major version.
+- Q: Where will the public reference site be deployed? → A: GitHub Pages. The repository is pushed to GitHub and the built `site/dist` is published via Pages; the site must keep working under a `/repo-name/` sub-path (it uses relative URLs throughout), with a custom domain as an optional later step.
+- Q: Should the reference site show which kit version it documents? → A: Yes — the build stamps the package version into the site header as a badge, so developers can tell whether the docs match their installed version.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -221,7 +224,12 @@ as the official asset.
   Material, Ant Design) showing how each stack or library consumes the kit,
   with all framework/library-side theming derived from the tokens by reference
   (`var(--…)` or runtime reads of computed values) — never copied values
-  (constitution Principle VI).
+  (constitution Principle VI). Every guide's snippets MUST be verified by
+  executing them in a sample project before the guide's first release, and
+  re-verified when the target library releases a new major version; a guide
+  that has not passed verification does not ship.
+- **FR-018**: The reference site MUST display the kit version it documents,
+  stamped from the package version at build time and shown in the site header.
 
 ### Key Entities
 
@@ -257,6 +265,9 @@ as the official asset.
 - **SC-006**: After adoption, new Novus frontends contain zero hand-copied
   brand files (fonts, logos, token files) — the package is the only brand
   source.
+- **SC-007**: 100% of published framework/theme guides have had their snippets
+  executed successfully in a sample project (verification recorded per guide)
+  at every release.
 
 ## Assumptions
 
@@ -267,10 +278,12 @@ as the official asset.
 - The package is published under a Novus scope; developers perform a one-time
   registry authentication, after which standard npm/yarn commands work. The
   specific registry product is chosen at planning time (must be private).
-- The reference site is a public static site (like ant.design) with no login;
-  search and an interactive playground are not required for v1 (a categorized,
-  navigable list covers discovery at this component count). Publishing brand
-  photos, logos, and sourced copy on the public site is an accepted, deliberate
+- The reference site is a public static site (like ant.design) with no login,
+  deployed to GitHub Pages from the built `site/dist`; all internal links are
+  relative so the site works under a `/repo-name/` sub-path. Search and an
+  interactive playground are not required for v1 (a categorized, navigable
+  list covers discovery at this component count). Publishing brand photos,
+  logos, and sourced copy on the public site is an accepted, deliberate
   exposure — the private registry protects only the installable package.
 - Reference-site copy comes from `Novus_Context.md` and the brand guide in the
   reference kit; where approved copy is missing, the page carries a sourced-copy

@@ -112,7 +112,8 @@ function sideNav(groups, currentFile) {
   return `<details class="sidenav"><summary>Menu</summary><div class="sidenav__body">${body}</div></details>`;
 }
 
-const header = read(join(SRC, "partials/header.html"));
+const KIT_VERSION = JSON.parse(read(join(ROOT, "package.json"))).version;
+const header = read(join(SRC, "partials/header.html")).replaceAll("{{VERSION}}", KIT_VERSION);
 const footer = read(join(SRC, "partials/footer.html"));
 
 function shell({ title, content, depth, active, sidebar }) {
