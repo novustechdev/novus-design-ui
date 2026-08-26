@@ -31,8 +31,8 @@ page completeness); manual release checks per quickstart.md (dark parity with
 toggle + OS + JS off, 375px pass, hover audit)
 
 **Target Platform**: Evergreen browsers (last 2 major versions); reference site
-is a static site deployable to any static host (Azure Static Web Apps
-recommended — Novus is on Azure DevOps)
+is a static site deployed to GitHub Pages (clarified decision; workflow in
+.github/workflows/pages.yml runs the gates before deploying)
 
 **Project Type**: Library (npm package) + static documentation site
 
@@ -86,7 +86,7 @@ specs/001-novus-design-kit/
 ### Source Code (repository root)
 
 ```text
-package.json             # @novus/design-kit — private registry; files: tokens.css, fonts/, logos/, photos/, js/, README.md
+package.json             # @sgultom99/novus-design-kit — GitHub Packages (interim scope); files: tokens.css, fonts/, logos/, photos/, js/, README.md
 tokens.css               # verbatim copy of references/Novus_Design_System_Kit_v2/tokens.css
 fonts/                   # carlito *.woff2 (woff2 only; ttf not shipped)
 logos/                   # official logo/lockup/icon assets (as in the reference kit)

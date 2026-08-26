@@ -33,5 +33,5 @@
 
 ## Ops handoff (before first real publish)
 
-- [ ] Replace `publishConfig.registry` placeholder in package.json with the real private feed URL (DevOps)
-- [ ] Publish from a state where all boxes above are checked
+- [x] Registry finalized: GitHub Packages (npm.pkg.github.com), publishConfig set; v0.1.0 published 2026-08-26
+- [x] Published: @sgultom99/novus-design-kit@0.1.0 (private visibility), install verified from a fresh project

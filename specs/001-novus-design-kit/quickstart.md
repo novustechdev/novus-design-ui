@@ -76,7 +76,7 @@ diff -r -x ttf fonts references/Novus_Design_System_Kit_v2/fonts
 diff -r logos  references/Novus_Design_System_Kit_v2/logos
 diff -r photos references/Novus_Design_System_Kit_v2/photos
 # bump version in package.json + CHANGELOG.md entry (migration note if MAJOR)
-npm publish                                # to the private @novus feed
+NODE_AUTH_TOKEN=$(gh auth token) npm publish   # to GitHub Packages (needs write:packages)
 ```
 
 **Expected**: publish succeeds only from a state where steps 1–5 all pass.
