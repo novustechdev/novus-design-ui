@@ -100,13 +100,13 @@ and the three spec clarifications.
 
 ## D8. Site hosting & visibility
 
-- **Decision**: `site/dist/` is a plain static artifact deployable to any static host;
-  recommend Azure Static Web Apps (company platform). Public, no auth (clarification).
-  Install page states "Novus developers only" for registry access and never embeds
-  feed tokens.
-- **Rationale**: Clarification locked public visibility; static output keeps hosting a
-  pure ops choice that doesn't affect the codebase.
-- **Alternatives considered**: GitHub Pages (fine technically; Azure keeps one vendor).
+- **Decision** (updated by clarification, 2026-08-26): GitHub Pages, publishing the
+  built `site/dist`. Public, no auth. The site uses relative URLs throughout, so it
+  works under the `/repo-name/` sub-path; custom domain optional later. Install page
+  states "Novus developers only" for registry access and never embeds feed tokens.
+- **Rationale**: Owner decision; free, deploys straight from the repository.
+- **Alternatives considered**: Azure Static Web Apps (earlier recommendation — same
+  vendor as DevOps), existing Novus web infra (extra vhost to operate).
 
 ## D9. Upstream sync (SharePoint master)
 
