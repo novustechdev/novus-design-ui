@@ -78,22 +78,52 @@ const SITE_CSS = `
   .typerow td:first-child{white-space:nowrap;}
   .sitefoot{margin-top:var(--space-8);}
   @media (max-width:520px){ .pagenav{flex-direction:column;} }
+  /* ant.design-style docs layout: mobile-first collapsible menu, sticky sidebar from 900px */
+  .docwrap{display:grid;gap:var(--space-5);align-items:start;}
+  .doccontent{min-width:0;}
+  .sidenav{border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);}
+  .sidenav > summary{cursor:pointer;padding:var(--space-2) var(--space-3);font-weight:var(--weight-medium);color:var(--text-secondary);font-size:var(--text-sm);}
+  .sidenav__body{padding:var(--space-2) 0 var(--space-3);}
+  .sidenav .eyebrow{padding:var(--space-3) var(--space-3) var(--space-1);margin:0;}
+  .sidenav a{display:block;padding:var(--space-1) var(--space-3);color:var(--text-secondary);text-decoration:none;font-size:var(--text-sm);border-left:2px solid transparent;}
+  .sidenav a:hover{color:var(--text);background:var(--bg-subtle);text-decoration:none;}
+  .sidenav a[aria-current="page"]{color:var(--accent-text);background:var(--accent-subtle);border-left-color:var(--accent);font-weight:var(--weight-medium);}
+  @media (min-width:900px){
+    .docwrap{grid-template-columns:224px minmax(0,1fr);gap:var(--space-6);}
+    .sidenav{position:sticky;top:var(--space-4);max-height:calc(100vh - var(--space-6));overflow-y:auto;border:0;background:transparent;}
+    .sidenav > summary{display:none;}
+  }
 `;
 
 const COPY_JS = `
   document.querySelectorAll("[data-theme-toggle]").forEach(b=>{b.hidden=false;b.addEventListener("click",()=>window.novusTheme&&window.novusTheme.toggle());});
   if(navigator.clipboard)document.querySelectorAll(".demo__copy").forEach(b=>{b.hidden=false;b.addEventListener("click",()=>{navigator.clipboard.writeText(b.closest(".demo").querySelector("code").textContent);b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1200);});});
+  var sn=document.querySelector(".sidenav");if(sn&&matchMedia("(min-width:900px)").matches)sn.open=true;
 `;
+
+/* Collapsible-on-mobile, sticky-on-desktop section menu (JS-off: opens on tap). */
+function sideNav(groups, currentFile) {
+  let body = "";
+  for (const [label, items] of groups) {
+    if (label) body += `<p class="eyebrow">${esc(label)}</p>`;
+    for (const [href, text] of items)
+      body += `<a href="${href}"${href === currentFile ? ' aria-current="page"' : ""}>${esc(text)}</a>`;
+  }
+  return `<details class="sidenav"><summary>Menu</summary><div class="sidenav__body">${body}</div></details>`;
+}
 
 const header = read(join(SRC, "partials/header.html"));
 const footer = read(join(SRC, "partials/footer.html"));
 
-function shell({ title, content, depth, active }) {
+function shell({ title, content, depth, active, sidebar }) {
   const rel = "../".repeat(depth);
   let hdr = header.replaceAll("{{REL}}", rel);
   for (const k of ["home", "foundations", "components", "install"]) {
     hdr = hdr.replace(`{{CUR_${k}}}`, k === active ? ' aria-current="page"' : "");
   }
+  const main = sidebar
+    ? `<div class="docwrap">\n${sidebar}\n<div class="doccontent">\n${content}\n</div>\n</div>`
+    : content;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -107,7 +137,7 @@ function shell({ title, content, depth, active }) {
 <body>
 ${hdr}
 <main class="appmain site-main">
-${content}
+${main}
 </main>
 ${footer.replaceAll("{{REL}}", rel)}
 <script>${COPY_JS}</script>
@@ -161,10 +191,8 @@ if (existsSync(foundDir)) {
     let raw = read(join(foundDir, f));
     if (raw.includes("<!--ASSET-INDEX-->")) raw = raw.replace("<!--ASSET-INDEX-->", assetIndex());
     const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, label])[1];
-    const subnav = `<nav class="nav" aria-label="Foundations" style="padding-inline:0;overflow-x:auto">${present
-      .map(([g, l]) => `<a href="${g}"${g === f ? ' aria-current="page"' : ""}>${l}</a>`)
-      .join("")}</nav>`;
-    writePage(join(DIST, "foundations", f), shell({ title, content: subnav + transformDemos(raw), depth: 1, active: "foundations" }));
+    const sidebar = sideNav([["Foundations", present.map(([g, l]) => [g, l])]], f);
+    writePage(join(DIST, "foundations", f), shell({ title, content: transformDemos(raw), depth: 1, active: "foundations", sidebar }));
     built.push(`foundations/${f}`);
   }
 }
@@ -180,8 +208,15 @@ if (existsSync(manifestPath)) {
       throw new Error(`components.json: fragment missing for "${c.id}": site/${c.fragment}`);
   }
 
+  /* Section menu: Overview + every component, grouped by category (ant.design style) */
+  const compGroups = [["", [["overview.html", "Overview"]]]].concat(
+    manifest.categories
+      .map((cat) => [cat, comps.filter((c) => c.category === cat).map((c) => [`${c.id}.html`, c.name])])
+      .filter(([, items]) => items.length)
+  );
+
   /* Detail pages, with prev/next inside each category */
-  comps.forEach((c, i) => {
+  comps.forEach((c) => {
     const inCat = comps.filter((x) => x.category === c.category);
     const pos = inCat.indexOf(c);
     const prev = inCat[pos - 1], next = inCat[pos + 1];
@@ -196,16 +231,19 @@ ${frag}
   <span>${prev ? `<a href="${prev.id}.html">‹ ${esc(prev.name)}</a>` : ""}</span>
   <span>${next ? `<a href="${next.id}.html">${esc(next.name)} ›</a>` : ""}</span>
 </div>`;
-    writePage(join(DIST, "components", `${c.id}.html`), shell({ title: c.name, content, depth: 1, active: "components" }));
+    writePage(join(DIST, "components", `${c.id}.html`), shell({ title: c.name, content, depth: 1, active: "components", sidebar: sideNav(compGroups, `${c.id}.html`) }));
     built.push(`components/${c.id}.html`);
   });
 
-  /* Overview grid — preview auto-derived from each fragment's FIRST demo (no duplication) */
-  let ov = `<h1>Components</h1>\n<p>Every component the kit ships, by category. Each page carries live examples, a copyable snippet per example, and usage guidance.</p>`;
+  /* Overview grid — preview auto-derived from each fragment's FIRST demo (no duplication).
+     Lives at overview.html, NEVER index.html: clean-URL servers serve a subdirectory
+     index.html at "/components" (no trailing slash), which breaks every relative link
+     on the page (root cause of the detail-page 404s). */
+  let ov = `<h1>Components</h1>\n<p>All ${comps.length} components the kit ships, by category. Each page carries live examples, a copyable snippet per example, and usage guidance.</p>`;
   for (const cat of manifest.categories) {
     const inCat = comps.filter((c) => c.category === cat);
     if (!inCat.length) continue;
-    ov += `\n<h2>${esc(cat)}</h2>\n<div class="ovgrid">`;
+    ov += `\n<h2 id="${cat.toLowerCase().replace(/[^a-z]+/g, "-")}">${esc(cat)}</h2>\n<div class="ovgrid">`;
     for (const c of inCat) {
       const first = read(join(SITE, c.fragment)).match(/<section class="demo"[^>]*>([\s\S]*?)<\/section>/);
       ov += `
@@ -217,9 +255,38 @@ ${frag}
     }
     ov += `\n</div>`;
   }
-  writePage(join(DIST, "components", "index.html"), shell({ title: "Components", content: ov, depth: 1, active: "components" }));
-  built.push("components/index.html");
+  writePage(join(DIST, "components", "overview.html"), shell({ title: "Components", content: ov, depth: 1, active: "components", sidebar: sideNav(compGroups, "overview.html") }));
+  built.push("components/overview.html");
+
+  /* Redirect stub for anyone landing on /components or /components/ — never a content page. */
+  writeFileSync(join(DIST, "components", "index.html"), `<!DOCTYPE html><!--redirect-stub-->
+<html lang="en"><head><meta charset="utf-8"><title>Components — Novus Design Kit</title>
+<script>location.replace(location.pathname.replace(/\\/?(index(\\.html)?)?$/, "/overview.html"));</script>
+</head><body><p><a href="overview.html">Component overview</a></p></body></html>
+`);
 }
+
+/* Post-build gates: every internal link resolves, and no subdirectory carries a
+   content index.html (clean-URL servers break relative links on those pages). */
+function walk(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+    e.isDirectory() ? walk(join(dir, e.name)) : [join(dir, e.name)]
+  );
+}
+const broken = [];
+for (const p of walk(DIST).filter((p) => p.endsWith(".html"))) {
+  const html = read(p).replace(/<pre[\s\S]*?<\/pre>/g, ""); // code samples aren't links
+  for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    const u = m.group?.(1) ?? m[1];
+    if (/^(https?:|#|mailto:|data:)/.test(u)) continue;
+    const target = join(dirname(p), u.split("#")[0]);
+    if (!existsSync(target)) broken.push(`${p.slice(DIST.length + 1)} → ${u}`);
+  }
+  if (basename(p) === "index.html" && dirname(p) !== DIST && !read(p).includes("<!--redirect-stub-->"))
+    broken.push(`${p.slice(DIST.length + 1)}: content page named index.html in a subdirectory`);
+}
+if (broken.length) throw new Error(`Link gate failed:\n  ${broken.join("\n  ")}`);
+console.log("Link gate: all internal links resolve; no subdirectory content index pages.");
 
 /* Asset index — enumerated from the package's real asset trees at build time */
 function assetIndex() {

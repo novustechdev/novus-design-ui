@@ -54,7 +54,8 @@ if [ -f site/components.json ]; then
 
     EXTRA=""
     for p in site/dist/components/*.html; do
-      id=$(basename "$p" .html); [ "$id" = "index" ] && continue
+      id=$(basename "$p" .html)
+      { [ "$id" = "index" ] || [ "$id" = "overview" ]; } && continue
       grep -q "\"id\"[[:space:]]*:[[:space:]]*\"$id\"" site/components.json || EXTRA="$EXTRA $id"
     done
     gate "built page → manifest entry" $([ -z "$EXTRA" ]; echo $?) "$EXTRA"

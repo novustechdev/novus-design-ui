@@ -23,9 +23,26 @@
   </div>
 </section>
 
+<section class="demo" data-title="Internal-tool header (two-mark rule)">
+  <div class="appheader" style="border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4)">
+    <div class="appheader__left">
+      <img src="../logos/lockups/novaplan.png" alt="novaplan" style="height:var(--space-6);width:auto">
+    </div>
+    <div class="appheader__right">
+      <span class="badge badge--success"><span class="badge__dot"></span> Live</span>
+      <span class="appheader__sep"></span>
+      <span class="appheader__endorse">
+        <img class="brandlogo--light" src="../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies">
+        <img class="brandlogo--dark" src="../logos/Novus_Logo_White_transparent.png" alt="Novus Technologies">
+      </span>
+    </div>
+  </div>
+</section>
+
 <h2>Usage</h2>
 <ul class="bullets">
   <li>The bars are full-bleed (background and hairline span the viewport) but their inner content aligns to the shared 1200px column — use the <code>__inner</code> wrappers.</li>
-  <li>External surfaces lead with the Novus master lockup on the left; internal tools lead with the app's own mark and move the Novus lockup right as endorsement (<code>.appheader</code>).</li>
+  <li>External surfaces lead with the Novus master lockup on the left, prominent. Internal tools invert it: the app's own lockup leads far left, the Novus master lockup endorses far right — the two marks are never adjacent.</li>
+  <li>Below 520px the divider drops and the endorsement steps down to 20px — it never disappears.</li>
   <li>Ship the persisted theme toggle in the header; apply it before paint (<code>js/novus-theme.js</code>).</li>
 </ul>
