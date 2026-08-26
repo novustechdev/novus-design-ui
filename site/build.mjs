@@ -141,14 +141,30 @@ for (const name of ["index.html", "install.html"]) {
   built.push(name);
 }
 
-/* Foundations */
+/* Foundations — fixed reading order drives the section subnav */
+const FOUNDATIONS = [
+  ["principles.html", "Principles"],
+  ["color.html", "Color"],
+  ["typography.html", "Typography"],
+  ["layout.html", "Spacing & layout"],
+  ["logos.html", "Logos"],
+  ["photography.html", "Photography"],
+  ["dark-mode.html", "Dark mode"],
+  ["assets.html", "Asset index"],
+];
 const foundDir = join(SRC, "foundations");
 if (existsSync(foundDir)) {
-  for (const f of readdirSync(foundDir).filter((f) => f.endsWith(".html")).sort()) {
+  const present = FOUNDATIONS.filter(([f]) => existsSync(join(foundDir, f)));
+  for (const extra of readdirSync(foundDir).filter((f) => f.endsWith(".html") && !FOUNDATIONS.some(([k]) => k === f)))
+    present.push([extra, basename(extra, ".html")]);
+  for (const [f, label] of present) {
     let raw = read(join(foundDir, f));
     if (raw.includes("<!--ASSET-INDEX-->")) raw = raw.replace("<!--ASSET-INDEX-->", assetIndex());
-    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, basename(f, ".html")])[1];
-    writePage(join(DIST, "foundations", f), shell({ title, content: transformDemos(raw), depth: 1, active: "foundations" }));
+    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, label])[1];
+    const subnav = `<nav class="nav" aria-label="Foundations" style="padding-inline:0;overflow-x:auto">${present
+      .map(([g, l]) => `<a href="${g}"${g === f ? ' aria-current="page"' : ""}>${l}</a>`)
+      .join("")}</nav>`;
+    writePage(join(DIST, "foundations", f), shell({ title, content: subnav + transformDemos(raw), depth: 1, active: "foundations" }));
     built.push(`foundations/${f}`);
   }
 }

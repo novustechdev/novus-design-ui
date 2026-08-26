@@ -1,0 +1,39 @@
+<!-- title: Dark mode -->
+<p class="eyebrow">Foundations</p>
+<h1>Dark mode</h1>
+<p>Light is home; dark is <b>re-tuned for app screens, not inverted</b>. Grounds go
+deep blue-slate, raised surfaces get <em>lighter</em>, text roles swap to their dark
+steps, and every logo swaps to its dark treatment. The kit wires all of it — your job
+is to use role tokens and ship the toggle.</p>
+
+<h2>Dual trigger — both, always</h2>
+<ul class="bullets">
+  <li><b>Explicit choice:</b> <code>&lt;html data-theme="dark"&gt;</code> (or <code>"light"</code>).</li>
+  <li><b>OS preference:</b> with no attribute set, <code>@media (prefers-color-scheme: dark)</code> re-tunes everything — including with JavaScript disabled.</li>
+  <li>Any dark rule you add must be mirrored under both triggers. Toggle-only or OS-only dark is a defect.</li>
+</ul>
+
+<h2>The persisted toggle</h2>
+<p>Load the kit's helper in <code>&lt;head&gt;</code> so a saved choice applies before
+first paint, then wire any button to it:</p>
+
+<section class="demo" data-title="Toggle pattern">
+  <button class="btn btn--secondary" onclick="novusTheme.toggle()">Toggle theme</button>
+</section>
+
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;script src="node_modules/@novus/design-kit/js/novus-theme.js"&gt;&lt;/script&gt;
+&lt;button onclick="novusTheme.toggle()"&gt;…&lt;/button&gt;</code></pre>
+
+<h2>What changes automatically</h2>
+<ul class="bullets">
+  <li>Master lockup: colour → white (the <code>.brandlogo--light/--dark</code> pair).</li>
+  <li>Product lockups: identity colours → the two light blues.</li>
+  <li>Status tints, accent text, shadows, and surfaces re-tune to their dark steps.</li>
+</ul>
+
+<h2>What to avoid</h2>
+<ul class="bullets">
+  <li>Never hardcode a dark text colour on a token surface — it disappears in dark mode. Use <code>--text</code>, <code>--accent-text</code>, <code>--success-text</code>…</li>
+  <li>Never keep a product's identity colour in dark-mode lockups.</li>
+  <li>Never rely on the toggle alone — a device merely set to dark must look identical.</li>
+</ul>

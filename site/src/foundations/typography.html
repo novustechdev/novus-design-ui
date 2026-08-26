@@ -1,0 +1,35 @@
+<!-- title: Typography -->
+<p class="eyebrow">Foundations</p>
+<h1>Typography</h1>
+<p><b>Carlito</b> is the locked Novus face — metric-identical to Calibri, open-source,
+self-hosted by the kit so it renders the same on every platform. The stack falls back
+to Calibri, then system sans. No other typeface appears in Novus work.</p>
+
+<section class="demo" data-title="Specimen">
+  <div>
+    <p style="font-size:var(--text-display);line-height:var(--lh-display);font-weight:var(--weight-bold);margin:0">Aa Bb Cc 0123</p>
+    <p class="muted" style="margin:0">Carlito 400 &amp; 700 · Latin · self-hosted woff2</p>
+  </div>
+</section>
+
+<h2>Type scale</h2>
+<table class="table">
+  <thead><tr><th>Token</th><th class="num">Size</th><th>Sample</th></tr></thead>
+  <tbody class="typerow">
+    <tr><td><code>--text-xs</code></td><td class="num">12px</td><td style="font-size:var(--text-xs)">Captions, eyebrows</td></tr>
+    <tr><td><code>--text-sm</code></td><td class="num">14px</td><td style="font-size:var(--text-sm)">Secondary, labels, tables</td></tr>
+    <tr><td><code>--text-base</code></td><td class="num">16px</td><td style="font-size:var(--text-base)">Body copy</td></tr>
+    <tr><td><code>--text-lg</code></td><td class="num">20px</td><td style="font-size:var(--text-lg)">H4, large bullets</td></tr>
+    <tr><td><code>--text-xl</code></td><td class="num">24px</td><td style="font-size:var(--text-xl)">H3, app names</td></tr>
+    <tr><td><code>--text-2xl</code></td><td class="num">30px</td><td style="font-size:var(--text-2xl)">H2</td></tr>
+    <tr><td><code>--text-4xl</code></td><td class="num">48px</td><td style="font-size:var(--text-4xl)">H1</td></tr>
+  </tbody>
+</table>
+
+<h2>Rules</h2>
+<ul class="bullets">
+  <li>Weights: 400 regular, 700 bold; 600 falls back to 700. Emphasis by weight — never italics or all-caps shouting.</li>
+  <li>Body copy caps at ~68ch for readability (the kit sets this on paragraphs).</li>
+  <li>Carlito covers Latin plus common punctuation; exotic Unicode symbols render as tofu — draw icons as inline SVG instead.</li>
+  <li>Decks use a separate, larger slide scale (tokens.css §9) — never on web pages.</li>
+</ul>
