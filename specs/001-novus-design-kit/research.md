@@ -21,7 +21,11 @@ and the three spec clarifications.
 
 ## D2. Package name & registry
 
-- **Decision**: `@novus/design-kit`, published to a private Azure Artifacts npm feed.
+- **Decision** (updated at publish, 2026-08-26): `@sgultom99/novus-design-kit`, published
+  to GitHub Packages (npm.pkg.github.com), attached to the sgultom99/novus-design-ui
+  repository. GitHub Packages requires auth even to install, satisfying the private-
+  registry rule; the @sgultom99 scope is interim until a Novus org exists (MAJOR rename).
+  Original decision superseded: `@novus/design-kit` on an Azure Artifacts feed.
   One-time developer auth (`.npmrc` with the feed URL) documented in README and on the
   public site without any credential material.
 - **Rationale**: Clarification locked "private registry". Novus already runs Azure

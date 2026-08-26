@@ -4,7 +4,7 @@
 
 **Created**: 2026-08-26
 
-**Status**: Draft
+**Status**: Shipped — v0.1.0 published to GitHub Packages, docs live on GitHub Pages (2026-08-26)
 
 **Input**: User description: "build novus design kit for core component library and reference demo page like https://ant.design/docs/spec/introduce and component list like https://ant.design/components/overview/, that has design system pattern and component list detail and overview, but I want it using reference novus design system kit brand, icon, photos, logos, fonts like explain at referenfes/Novus_Design_System_Kit_v2. this novus design kit will be available in npm/yarn also so all developer from novustech can used it"
 
