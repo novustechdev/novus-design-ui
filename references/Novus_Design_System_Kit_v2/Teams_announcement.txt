@@ -1,0 +1,39 @@
+📣 Novus Design System — refreshed kit is live (please re-download)
+
+Hi team,
+
+The Novus Design System has had a lot of updates over the last few weeks, so the shared folder
+has been REFRESHED and fully replaced. The previous copy is now out of date — please switch to
+the new one.
+
+✅ WHAT TO DO (5 minutes)
+1) Download the whole "Novus Design System Kit" folder again from SharePoint. It has replaced the
+   old contents — delete any older local copy you kept so nothing stale is lying around.
+2) Open START_HERE.md first.
+3) Install Carlito — open Install_the_Novus_font.md and install the two .ttf files. Nothing renders
+   correctly until you do this (macOS especially swaps the font silently).
+
+🎯 THE MAIN CHANGE: PRESENTATIONS ARE HTML-FIRST
+From now on, build every presentation as a self-contained HTML deck FIRST. HTML is the master
+format — it always carries the latest Novus design language (Carlito, the section-nav footer,
+product lockups, the architecture block, the globe title). Convert to PDF or PowerPoint LATER, from
+the approved HTML, only when a specific recipient needs those formats.
+• The HTML template is in the kit: slide-template/html/novus-slide-template.html
+• Step-by-step guide: slide-template/Make_an_HTML_deck.md
+
+👉 PICK YOUR TOOL
+• Claude (claude.ai, incl. free) — builds HTML decks, apps and copy → For_Claude_users.md
+• Microsoft 365 Copilot — for Word and for converting an approved deck to PowerPoint → For_Copilot_users.md
+  (For a document/app, attach tokens.css + Novus_Context.md and ask it to derive everything from the tokens.)
+
+📌 A FEW LOCKED RULES
+• Type is Carlito everywhere. Colours come from the tokens — no ad-hoc hex.
+• Logos are always placed from the logos/ folder — a typed-out "NOVUS" is not the logo.
+• We are "Service as Software", never "SaaS". Cite real clients only.
+
+This folder is a read-only reference snapshot (2026-08-25). Don't edit the system inside it — if
+something looks off or the files disagree, flag it to me and I'll reconcile the master.
+
+Questions? Ping me.
+Thanks,
+Rick

@@ -1,0 +1,33 @@
+{
+  "name": "@novus/design-kit",
+  "version": "0.1.0",
+  "description": "Novus Technologies design kit — tokens, component styles, Carlito fonts, and official brand assets. Framework-agnostic CSS; import tokens.css and build.",
+  "license": "UNLICENSED",
+  "author": "Novus Technologies Pte Ltd",
+  "homepage": "https://www.novustech.com.sg",
+  "style": "tokens.css",
+  "files": [
+    "tokens.css",
+    "fonts/",
+    "logos/",
+    "photos/",
+    "js/",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": "./tokens.css",
+    "./tokens.css": "./tokens.css",
+    "./js/novus-theme.js": "./js/novus-theme.js",
+    "./fonts/*": "./fonts/*",
+    "./logos/*": "./logos/*",
+    "./photos/*": "./photos/*"
+  },
+  "scripts": {
+    "build:site": "node site/build.mjs",
+    "gates": "scripts/gates.sh"
+  },
+  "publishConfig": {
+    "registry": "https://REPLACE-WITH-PRIVATE-NOVUS-FEED/npm/registry/"
+  }
+}

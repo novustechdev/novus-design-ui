@@ -1,0 +1,385 @@
+<!doctype html>
+<!--
+  Novus HTML slide template — authoring scaffold.
+  • DERIVED ARTIFACT (LOCKED 2026-07-09): this file derives from ../../tokens.css §9–§D3 and is
+    resynced IN THE SAME CHANGE as any amendment to those sections (same lockstep as brand.html).
+    If this file and tokens.css disagree, tokens.css wins — fix this file.
+  • Design variables come from ../../tokens.css (the single source of truth).
+  • Same layout set as the PowerPoint template: Title (branded full-bleed bg), Agenda,
+    Content (with the section-nav footer), Section Divider, Closing, Two-Column.
+  • NAV BAR = CONTENT SLIDES ONLY (LOCKED §D0, 2026-07-09): the tracker appears on
+    in-section content slides only; Title, Agenda, Dividers, Closing and appendices carry
+    NO nav bar. FOOTER on every slide: logo bottom-LEFT as a PLACED ASSET (colour on
+    light, white on dark — NEVER retype the wordmark) + CENTRED "CONFIDENTIAL · <topic> ·
+    <year>" + page number.
+  • TITLE = THE WEBSITE HERO (LOCKED §D0, 2026-07-09): dark ground, white master lockup
+    top-left, headline + kicker left, hero-map globe right — copy the hero-map SVG from
+    site/pages/home.html + the .hero-map rules from site/assets/site.css at build time
+    (animated in HTML, static in PDF/PPTX; title_bg_white.png corp plate is SUPERSEDED).
+  • SECTION COLOUR SEQUENCE (LOCKED §D0, 2026-07-09): variable section count (4–10, ten is
+    the ceiling — updated 2026-08-18), colours contiguous from: 1 blue #0070C0 · 2 amber #E8A300 · 3 green #00A04A ·
+    4 indigo #534AB7 · 5 deep-blue #00457A · 6 orange #E87830 · 7 slate #51606F ·
+    8 deep-green #0A6E38 · 9 bronze #8A5E00 · 10 light-blue #338ACE. Red is NEVER a section colour.
+    ONE SCHEME: eyebrow text + dot + active nav segment = the SAME BRIGHT accent (never −700).
+  • IMAGERY LAYER (LOCKED §11.L, 2026-07-17): decks may carry photography as a first-class
+    layer — layouts 3e (split) and 3f (five-pillar composition) below, plus .fig/.fig--duotone/
+    .fig--scrim/.pcard. Photos come from the SAME graded set as the website V2
+    (site/assets/img-src/) — never start a parallel photo library for slides. Key traps:
+    cap the media box in a split (§11.L4), scrims are always --blue-900 at alpha (§11.L3),
+    and a lockup must read LARGER than its caption (§11.L5).
+  • PORTFOLIO = FIVE PILLARS (LOCKED §D3a): novabank · novapay · novastore · novatrust ·
+    novaboost sit in the composed-product row; novaai is the band UNDERNEATH. novaboost is a
+    portfolio pillar AND keeps its own product section, like every other vertical.
+  • PRODUCT SLIDE = A SPEC SHEET (LOCKED §D4 / §11.P): layout 3g below. The lockup is CAPPED and
+    paired with the product LINE — the mark identifies, it is NOT the artwork. Four registers are
+    mandatory: capabilities · value to partners · proof stats · spec chips, plus the photo.
+    READ every field from catalogue/novus-catalogue.json + site/content.json — never retype
+    product copy into a builder, or the deck WILL drift from the website (§11.P2).
+  • DENSE DECKS (LOCKED §11.O): content slides use the compact scale; title/divider/closing stay
+    large. Densify the COMPONENT, never trim the story.
+  • OPEN IN CHROME to author. SHIPPING RULE (tokens.css §10): a delivered deck must be
+    SELF-CONTAINED — inline tokens + fonts + images (base64) and drop this <link>, or Safari
+    shows a black screen. Build the shippable file self-contained; don't ship this linked scaffold.
+    ALSO §11.M: the shipped file MUST carry @page{size:1280px 720px;margin:0} + the print block
+    (both are in ../deck.css) or the renderer paginates onto A4 — every slide clipped on the
+    right with dead space beneath. Verify the rendered PDF page box is 16:9 (960x540pt).
+  • COMPONENTS LIVE IN ../deck.css (LOCKED 2026-08-20): this scaffold no longer keeps a private
+    copy of the deck CSS. deck.css is THE shared library that the builders and this scaffold both
+    consume, so an author always sees exactly what ships. Never re-add component CSS here.
+  • Before delivery: qc_check.py --conformance + 2x visual pass (see How_to_build_a_Novus_HTML_deck.md).
+-->
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<title>Novus Slide Template</title>
+<link rel="stylesheet" href="../../tokens.css">
+<link rel="stylesheet" href="../deck.css">
+<style>
+/* ── HERO-MAP (title slide globe) — baked in from site/assets/site.css, kit edition ──
+   Do not restyle: these rules are the website hero's, so the deck title matches the site. */
+.hero-map{display:block;width:100%;height:auto;color:var(--accent);}
+.hero-map .globe-sphere{stroke:none;}
+.hero-map .globe-ring{stroke:var(--accent);stroke-opacity:.30;stroke-width:1.3;}
+.hero-map .land{fill:url(#novaLand);}
+.hero-map .grid{fill:none;stroke:var(--accent);opacity:.11;stroke-width:.8;}
+.hero-map .rail{fill:none;stroke:var(--accent);stroke-width:1.2;opacity:.30;}
+.hero-map .flow{fill:none;stroke:var(--accent-text);stroke-width:2;stroke-linecap:round;
+  stroke-dasharray:2 13;animation:novaflow 1.5s linear infinite;}
+.hero-map .node{fill:var(--orange-400);stroke:var(--surface);stroke-width:1.1;}
+.hero-map .hub{fill:var(--orange-400);}
+.hero-map .hub-core{fill:var(--text-on-accent);}
+.hero-map .ring{fill:none;stroke:var(--orange-400);stroke-width:1.4;opacity:.5;
+  transform-box:fill-box;transform-origin:center;animation:novapulse 2.8s ease-out infinite;}
+.hero-map .ring--hub{stroke-width:1.8;animation-duration:2.2s;}
+.hero-map .lbl{fill:var(--text-secondary);font-family:var(--font-sans);font-size:8.5px;font-weight:var(--weight-medium);}
+.hero-map .lbl--hub{fill:var(--accent-text);font-size:9.5px;font-weight:var(--weight-bold);}
+.hero-map .flow{fill:none;stroke:var(--accent-text);stroke-width:2;stroke-linecap:round;
+  stroke-dasharray:2 13;animation:novaflow 1.5s linear infinite;}
+.hero-map .ring{fill:none;stroke:var(--orange-400);stroke-width:1.4;opacity:.5;
+  transform-box:fill-box;transform-origin:center;animation:novapulse 2.8s ease-out infinite;}
+@keyframes novapulse{0%{transform:scale(1);opacity:.55;}70%{transform:scale(3);opacity:0;}100%{opacity:0;}}
+@keyframes novaflow{to{stroke-dashoffset:-60;}}
+@media (prefers-reduced-motion:reduce){
+  .hero-map .flow{animation:none;stroke-dasharray:4 7;opacity:.55;}   /* static dotted rails */
+  .hero-map .ring{animation:none;opacity:.28;}
+}
+
+
+  /* Scaffold-only: the authoring canvas. EVERY component style lives in ../deck.css. */
+  body{margin:0;background:#5b6b7a;}
+</style>
+</head>
+<body>
+
+<!-- 1 · TITLE (LOCKED §D0 2026-07-09) — THE WEBSITE HERO: dark ground, white master
+     lockup top-left, headline + kicker left, hero-map globe right.
+     KIT EDITION (2026-08-25): the hero-map globe and its CSS are ALREADY BAKED IN below —
+     nothing to fetch. Just replace the headline, kicker and sub-line. The flows animate in
+     HTML and rest static for PDF/PPTX (prefers-reduced-motion is handled).
+     NO NAV BAR on the title slide. -->
+<section class="slide" data-theme="dark">
+  <img src="../../logos/Novus_Logo_White_transparent.png" alt="Novus Technologies" style="position:absolute;left:64px;top:42px;height:36px;width:auto;">
+  <div style="position:absolute;left:64px;top:206px;width:540px;">
+    <div class="kicker">Eyebrow · kicker line</div>
+    <h1 style="font-size:58px;line-height:1.08;font-weight:700;color:#fff;margin:0;">Presentation title goes here</h1>
+    <p class="s-sub" style="margin-top:14px;">One supporting sentence that frames the story.</p>
+  </div>
+  <div style="position:absolute;right:56px;top:100px;width:460px;">
+    <!-- HERO-MAP GLOBE — baked in from site/pages/home.html (kit edition, 2026-08-25).
+         Styled by the .hero-map rules in this file's <style> block. Colours come from
+         tokens.css, so it adapts to the slide theme automatically. -->
+    <svg class="hero-map" viewBox="0 0 360 360" role="img"
+               aria-label="A globe showing the region Novus serves — Africa, Asia, Southeast Asia and Australia in subtle blue — with seven markers on the countries where Novus operates and transaction flows converging on the Singapore hub.">
+            <defs>
+              <radialGradient id="novaOcean" cx="40%" cy="34%" r="82%">
+                <stop offset="0" stop-color="var(--blue-600)" stop-opacity=".08"/>
+                <stop offset="1" stop-color="var(--blue-900)" stop-opacity=".16"/>
+              </radialGradient>
+              <linearGradient id="novaLand" x1="0" y1="0" x2="0.1" y2="1">
+                <stop offset="0" stop-color="var(--blue-400)" stop-opacity=".62"/>
+                <stop offset="1" stop-color="var(--blue-700)" stop-opacity=".72"/>
+              </linearGradient>
+              <clipPath id="novaGlobe"><circle cx="180" cy="188" r="150"/></clipPath>
+            </defs>
+            <circle class="globe-sphere" cx="180" cy="188" r="150" fill="url(#novaOcean)"/>
+            <g clip-path="url(#novaGlobe)">
+              <path class="land" fill-rule="evenodd" d="M57.9 254.0 L46.4 231.0 L45.4 217.4 L38.0 190.9 L39.1 180.0 L38.2 175.5 L36.1 176.9 L35.5 171.6 L34.5 171.6 L32.0 175.7 L31.3 174.5 L30.6 176.7 L31.2 168.9 L34.5 151.7 L40.9 131.8 L48.6 115.6 L58.6 100.3 L58.5 101.6 L62.0 98.6 L68.3 97.5 L63.1 104.6 L63.1 106.0 L65.3 107.9 L64.6 109.9 L66.8 112.4 L70.3 108.0 L72.6 106.6 L75.5 109.5 L79.8 111.0 L83.5 109.5 L84.3 110.9 L85.0 110.2 L87.1 110.8 L94.3 102.7 L96.6 98.5 L94.6 98.2 L90.7 99.6 L90.1 98.5 L86.8 99.5 L86.2 98.4 L84.7 98.4 L86.5 92.7 L92.6 89.2 L94.9 89.4 L99.2 87.6 L101.5 87.6 L104.7 89.7 L110.2 88.5 L111.2 86.4 L107.5 81.5 L113.4 77.8 L106.6 79.6 L105.9 80.7 L107.6 81.1 L106.9 81.7 L102.7 83.1 L103.2 81.9 L102.2 81.3 L104.3 80.0 L102.7 79.5 L103.2 78.8 L101.9 79.0 L92.6 86.5 L91.9 89.5 L87.7 91.3 L88.2 89.9 L87.1 89.7 L84.6 91.7 L84.1 90.6 L81.6 96.4 L80.9 95.8 L78.2 99.0 L80.3 91.1 L82.6 88.2 L82.2 84.7 L83.7 80.6 L81.2 82.7 L79.4 86.2 L79.2 91.2 L78.5 92.0 L78.2 90.7 L73.8 95.7 L76.3 91.5 L76.2 88.2 L78.5 83.1 L73.3 85.6 L59.0 99.9 L68.8 87.4 L81.4 75.3 L102.8 62.0 L105.0 61.2 L99.9 64.4 L97.7 66.6 L99.5 65.9 L99.1 67.0 L103.5 65.4 L104.2 66.0 L112.5 61.1 L111.7 62.2 L112.4 62.2 L115.8 59.2 L121.9 58.1 L116.7 58.3 L120.9 54.8 L129.4 51.0 L119.3 54.6 L101.5 64.6 L108.6 58.8 L104.2 60.7 L104.7 60.0 L111.9 55.6 L130.9 48.4 L142.0 46.0 L142.3 46.6 L140.5 47.4 L143.1 47.9 L143.9 49.5 L139.5 51.0 L136.6 50.3 L134.1 52.7 L134.9 53.4 L137.1 51.9 L138.2 52.6 L143.2 50.5 L144.2 50.9 L147.4 48.4 L149.1 48.7 L147.1 50.3 L156.0 48.1 L155.1 48.7 L161.0 48.7 L162.8 47.2 L168.9 48.8 L169.7 48.3 L168.1 47.5 L168.8 46.1 L171.7 44.7 L174.3 44.7 L173.2 45.8 L173.1 47.9 L173.9 48.5 L170.9 50.6 L172.0 50.8 L175.1 49.2 L175.3 48.0 L174.2 47.4 L175.1 46.5 L174.3 45.8 L175.9 44.7 L176.9 46.0 L178.1 45.1 L181.2 45.5 L180.4 44.1 L184.9 43.9 L184.2 43.5 L184.8 43.0 L193.2 41.4 L200.6 42.6 L201.2 42.9 L200.1 43.7 L203.8 44.3 L211.0 44.1 L218.5 46.4 L217.0 45.5 L221.2 45.8 L218.5 44.7 L232.4 47.5 L245.7 53.2 L254.3 57.7 L265.5 65.3 L271.9 71.4 L255.4 59.0 L252.0 56.6 L248.8 54.9 L254.3 59.2 L251.1 58.5 L251.6 59.2 L248.3 59.4 L251.1 65.5 L255.3 67.0 L255.0 66.3 L255.9 66.4 L259.1 68.1 L266.2 75.7 L269.1 84.9 L268.5 86.1 L266.4 85.2 L265.4 87.7 L266.5 89.8 L265.1 92.1 L271.3 98.2 L272.8 101.8 L269.8 103.3 L266.7 98.3 L267.5 97.9 L263.0 95.4 L262.2 92.5 L260.3 91.7 L256.7 93.8 L256.7 90.7 L255.3 89.7 L253.1 93.1 L251.6 93.2 L251.3 94.1 L254.8 96.8 L256.4 97.4 L257.4 95.9 L261.0 97.9 L259.1 98.5 L257.7 102.2 L260.0 103.3 L265.3 109.2 L265.9 110.9 L265.1 111.5 L267.2 113.4 L267.9 117.1 L267.0 117.3 L265.2 125.7 L261.1 129.9 L258.0 131.3 L257.1 130.5 L256.2 131.7 L251.5 133.3 L251.3 135.9 L250.1 136.0 L249.5 133.3 L246.5 132.5 L241.6 137.3 L241.4 139.0 L249.9 148.5 L251.5 153.2 L251.7 157.7 L250.0 159.4 L243.1 165.6 L242.1 163.9 L242.6 162.2 L238.8 160.3 L236.3 156.3 L232.1 155.2 L232.2 153.2 L230.1 153.2 L228.7 163.9 L230.3 164.0 L232.0 168.6 L238.2 173.6 L241.5 184.6 L239.8 184.8 L234.6 180.8 L231.2 171.1 L227.1 166.1 L226.8 167.7 L227.3 158.2 L222.3 144.3 L218.3 147.4 L215.3 146.6 L215.3 141.1 L213.4 137.4 L210.1 135.1 L207.4 130.0 L205.2 129.9 L204.8 132.2 L201.8 131.7 L201.5 132.6 L197.0 133.0 L197.2 134.9 L195.9 136.3 L192.5 138.0 L185.5 144.1 L185.5 145.3 L180.8 146.9 L179.6 161.0 L178.3 161.2 L177.1 163.1 L177.9 164.0 L175.5 164.7 L173.6 167.2 L171.2 164.8 L166.9 154.9 L165.9 150.1 L163.8 146.7 L162.1 133.4 L156.8 134.5 L153.9 131.6 L155.1 130.7 L154.5 129.8 L150.2 127.1 L148.1 123.6 L136.9 124.4 L128.1 122.9 L127.7 120.0 L126.8 119.6 L122.7 121.1 L120.3 120.3 L116.8 117.9 L115.4 112.7 L113.2 112.3 L111.1 113.1 L111.2 118.3 L113.3 120.6 L113.6 125.2 L114.7 122.2 L115.7 122.7 L114.7 125.5 L115.2 126.9 L120.0 126.7 L126.1 121.3 L126.2 126.4 L130.1 128.0 L132.1 131.1 L128.5 135.6 L126.9 136.1 L126.2 139.3 L120.2 142.6 L120.1 143.6 L113.3 145.7 L112.5 147.7 L104.3 151.7 L97.6 153.5 L96.0 155.0 L92.9 155.2 L92.1 148.6 L92.9 144.7 L88.6 133.5 L89.0 127.7 L87.6 126.3 L86.6 117.4 L85.8 117.4 L87.5 114.5 L87.6 114.1 L87.6 113.5 L84.3 118.4 L83.7 113.5 L83.3 121.9 L84.2 127.2 L83.3 129.1 L84.9 131.8 L83.9 140.1 L85.3 141.7 L85.9 146.8 L92.5 155.8 L91.0 157.5 L93.5 160.8 L94.6 160.8 L109.1 156.8 L108.6 160.3 L102.2 174.0 L97.5 180.5 L90.0 187.2 L84.2 194.7 L82.3 200.2 L81.8 204.9 L83.2 205.9 L83.0 210.1 L86.2 216.0 L88.2 226.0 L86.6 231.2 L83.2 233.3 L79.8 238.8 L84.0 249.3 L80.5 253.1 L82.6 260.2 L80.4 270.2 L79.0 271.8 L75.0 271.6 L73.4 273.6 L71.7 272.8 L57.9 254.0 ZM119.1 96.5 L121.5 98.0 L127.1 97.8 L128.6 93.7 L127.5 93.0 L128.5 91.6 L127.3 91.5 L128.4 89.8 L131.7 89.7 L130.7 87.4 L128.4 89.3 L129.2 86.1 L127.5 85.4 L126.9 83.3 L128.6 82.8 L129.3 81.5 L132.1 81.5 L133.5 78.6 L130.7 78.2 L126.9 79.4 L121.3 82.7 L121.8 84.4 L121.0 85.7 L122.4 90.4 L123.4 91.1 L122.0 91.2 L119.6 94.0 L119.1 96.5 ZM69.7 93.3 L73.4 89.2 L69.5 93.8 L69.7 93.3 ZM89.1 102.6 L90.5 101.1 L93.2 100.5 L89.1 102.6 ZM78.7 100.5 L81.3 101.3 L78.9 102.1 L77.9 101.4 L78.7 100.5 ZM70.2 96.5 L73.7 95.2 L71.0 98.5 L70.2 96.5 ZM75.2 87.3 L73.7 88.8 L76.5 85.7 L75.2 87.3 ZM94.5 64.9 L87.1 70.2 L91.8 66.7 L94.5 64.9 ZM107.4 227.9 L107.7 231.5 L106.1 251.3 L103.2 252.8 L100.2 251.4 L96.8 244.3 L97.9 239.5 L95.8 232.9 L96.3 229.9 L99.9 228.8 L102.4 225.8 L102.5 223.4 L103.4 223.7 L104.9 219.3 L108.7 227.4 L108.3 229.3 L107.4 227.9 ZM94.9 64.7 L100.3 61.0 L102.5 59.9 L83.8 73.2 L96.0 64.0 L94.9 64.7 ZM100.4 64.6 L102.7 63.5 L99.9 65.4 L100.4 64.6 ZM133.4 330.4 L130.9 328.9 L140.0 329.4 L141.2 328.6 L140.4 327.6 L145.7 328.8 L146.3 327.7 L153.6 324.8 L162.1 327.0 L169.1 327.0 L170.5 328.2 L169.3 329.2 L170.6 329.6 L170.2 330.5 L172.0 330.9 L174.5 328.8 L188.4 325.3 L189.8 326.2 L195.7 326.5 L199.6 326.3 L204.1 324.6 L205.9 326.0 L213.9 324.9 L217.1 326.3 L229.4 325.3 L231.4 324.3 L229.5 326.0 L233.5 326.0 L231.5 327.5 L232.8 327.6 L229.2 329.7 L216.4 333.5 L200.4 336.6 L185.2 337.9 L159.1 336.5 L143.7 333.5 L138.7 332.2 L133.7 330.6 L131.1 329.8 L133.4 330.4 ZM161.0 300.6 L163.8 301.3 L163.6 302.4 L161.1 302.5 L161.0 300.6 ZM264.1 210.8 L250.4 208.3 L243.8 205.9 L245.5 203.4 L248.3 203.6 L251.4 205.7 L255.7 206.0 L256.2 204.9 L266.6 209.8 L264.1 210.8 ZM242.4 203.3 L237.5 199.0 L229.5 187.5 L227.8 183.2 L219.6 175.0 L219.4 173.7 L224.9 174.3 L232.8 182.5 L235.3 182.5 L240.6 187.7 L239.7 189.9 L241.9 190.8 L243.1 194.1 L244.8 194.4 L245.9 196.0 L245.0 203.3 L242.4 203.3 ZM269.3 191.9 L268.3 198.5 L268.0 197.6 L265.5 198.7 L264.7 197.1 L262.1 196.2 L259.5 197.1 L258.7 195.8 L255.4 195.7 L255.1 192.2 L252.9 189.2 L252.6 186.9 L254.2 182.7 L255.9 183.6 L257.6 183.2 L258.0 180.9 L261.6 179.9 L269.9 169.9 L271.2 172.4 L274.3 173.9 L270.8 179.5 L272.4 182.0 L272.0 183.2 L274.4 185.6 L272.0 185.9 L271.4 190.1 L269.3 191.9 ZM184.6 168.4 L184.3 171.1 L180.9 172.4 L179.2 166.6 L180.4 162.4 L184.6 168.4 ZM250.1 141.2 L248.2 140.4 L247.8 138.3 L248.7 137.1 L252.1 136.5 L252.8 137.4 L251.8 140.0 L250.1 141.2 ZM273.0 79.8 L271.4 78.8 L272.1 80.2 L257.6 66.1 L269.0 74.8 L267.3 74.3 L273.0 79.8 ZM172.7 42.3 L165.1 43.6 L161.1 45.0 L160.4 45.7 L161.1 46.4 L157.3 45.8 L164.1 43.1 L172.7 42.3 ZM217.3 44.3 L216.8 43.9 L218.8 44.4 L217.3 44.3 ZM217.1 43.3 L215.1 43.0 L214.4 42.8 L217.1 43.3 ZM210.7 42.5 L213.9 42.7 L215.4 43.2 L210.7 42.5 ZM152.5 41.6 L153.8 41.1 L154.8 41.0 L154.1 41.4 L152.5 41.6 ZM149.1 42.0 L153.0 40.8 L156.9 40.3 L155.5 40.8 L149.1 42.0 ZM190.4 41.3 L190.2 40.6 L192.9 41.1 L190.4 41.3 ZM189.9 40.8 L184.9 40.1 L186.3 39.7 L189.9 40.8 ZM159.6 40.0 L157.9 40.5 L156.5 40.5 L157.6 40.1 L159.6 40.0 ZM168.1 40.0 L165.9 40.0 L168.4 40.0 L168.1 40.0 ZM284.2 295.9 L283.0 297.0 L287.8 292.3 L284.2 295.9 ZM279.4 291.3 L282.8 285.8 L283.5 286.7 L285.4 286.2 L281.3 290.7 L279.4 291.3 ZM259.8 271.8 L255.6 274.2 L253.3 274.1 L251.2 272.3 L254.2 267.9 L255.0 261.8 L254.0 254.0 L254.6 255.0 L254.5 252.9 L255.6 254.5 L255.2 249.9 L258.2 243.6 L257.9 245.4 L263.9 241.0 L272.4 238.5 L278.2 230.4 L278.5 232.5 L279.4 232.0 L279.0 230.8 L279.8 229.6 L280.5 230.2 L284.0 224.9 L286.6 223.8 L288.3 226.5 L290.4 226.7 L293.2 220.6 L296.5 219.5 L295.6 217.3 L296.5 217.0 L300.5 219.8 L302.4 218.8 L302.8 220.1 L299.4 226.8 L304.0 233.6 L307.5 226.9 L310.8 215.8 L310.4 225.7 L311.3 224.7 L311.7 226.8 L310.0 236.7 L311.1 240.3 L309.6 252.0 L303.1 265.1 L291.9 279.2 L286.7 282.5 L287.3 280.1 L284.7 282.0 L283.5 281.0 L283.2 279.1 L284.5 275.6 L283.6 275.3 L285.2 272.7 L282.5 274.6 L286.6 269.5 L282.0 273.8 L282.6 268.9 L279.9 266.4 L271.5 268.0 L267.8 269.6 L266.0 271.6 L259.8 271.8 ZM320.1 239.6 L319.8 241.3 L318.5 245.2 L319.8 240.4 L320.1 239.6 ZM323.7 230.5 L323.6 230.8 L324.1 229.1 L323.7 230.5 ZM324.7 226.7 L324.2 228.7 L324.9 225.9 L324.7 226.7 ZM325.9 214.6 L326.1 215.3 L326.0 216.2 L325.8 216.2 L325.9 214.6 ZM274.9 212.4 L276.5 214.0 L275.5 214.7 L273.0 212.9 L274.9 212.4 ZM285.0 210.6 L289.1 209.9 L281.7 215.0 L282.8 212.2 L285.0 210.6 ZM325.9 213.7 L325.5 213.1 L325.7 212.1 L325.9 213.7 ZM326.3 211.3 L326.6 209.7 L326.2 213.5 L326.3 211.3 ZM271.2 209.1 L273.2 209.6 L273.6 210.7 L268.6 211.6 L271.2 209.1 ZM276.8 209.5 L279.3 210.1 L281.1 209.1 L280.7 210.6 L275.1 211.0 L276.8 209.5 ZM326.1 208.9 L326.0 210.3 L325.7 207.1 L326.1 208.9 ZM325.1 207.3 L324.8 205.7 L324.9 205.2 L325.1 207.3 ZM317.1 205.6 L319.2 215.5 L316.8 214.4 L315.7 209.1 L314.5 207.9 L311.4 212.3 L309.6 211.8 L308.7 209.6 L307.5 209.1 L305.3 209.9 L307.1 207.1 L306.5 202.1 L300.6 197.3 L299.5 198.8 L298.0 195.4 L300.8 193.8 L298.5 193.8 L295.8 190.5 L298.8 189.0 L301.3 190.0 L301.9 195.2 L303.3 196.8 L306.4 192.5 L311.1 194.8 L315.2 198.1 L316.4 202.3 L317.9 203.9 L318.0 205.3 L317.1 205.6 ZM301.6 202.2 L301.7 204.2 L300.8 206.0 L300.8 204.1 L301.6 202.2 ZM324.1 201.2 L324.6 205.1 L324.2 206.1 L323.9 203.4 L324.1 201.2 ZM320.2 202.4 L320.5 201.1 L321.0 202.3 L322.4 198.9 L322.0 202.3 L319.8 204.5 L318.7 203.0 L318.8 202.2 L320.2 202.4 ZM321.6 194.5 L323.1 198.4 L322.8 200.5 L322.7 197.9 L321.4 195.2 L321.6 194.5 ZM289.5 196.2 L289.2 197.9 L288.0 197.4 L287.7 196.3 L289.5 196.2 ZM295.5 196.1 L296.0 198.1 L294.7 197.0 L291.1 196.9 L291.6 195.4 L295.5 196.1 ZM276.5 189.4 L278.3 191.7 L282.9 189.6 L282.8 190.8 L281.9 190.4 L279.4 193.0 L282.3 200.2 L281.1 202.7 L280.4 201.8 L281.5 199.7 L279.5 200.7 L278.0 197.4 L278.3 194.9 L276.9 195.7 L276.8 202.5 L274.7 202.1 L275.2 197.1 L273.8 195.3 L276.1 187.6 L278.2 184.6 L282.1 185.7 L284.3 185.6 L286.1 183.7 L286.5 184.3 L285.0 186.9 L276.8 187.4 L276.5 189.4 ZM291.6 190.4 L290.4 185.4 L291.3 182.3 L292.6 185.0 L291.6 190.4 ZM284.0 171.9 L283.8 168.8 L282.5 167.6 L279.8 170.0 L280.0 167.0 L282.0 165.3 L282.8 166.5 L284.3 164.6 L285.6 164.6 L285.3 162.6 L286.9 163.8 L287.6 171.6 L286.7 169.0 L286.3 173.4 L284.0 171.9 ZM269.7 166.2 L272.8 161.0 L273.6 158.4 L274.2 160.5 L269.7 166.2 ZM282.3 158.8 L281.0 164.5 L279.7 162.7 L280.4 159.7 L281.4 159.5 L281.3 161.3 L282.3 158.8 ZM278.0 157.1 L280.4 157.9 L278.7 160.8 L278.5 158.3 L278.0 157.1 ZM283.8 158.3 L283.6 157.3 L282.2 155.4 L283.9 155.4 L285.5 159.3 L284.0 158.6 L284.8 161.0 L284.0 161.6 L282.7 158.1 L283.8 158.3 ZM276.1 153.2 L276.7 156.3 L274.4 153.1 L276.1 153.2 ZM281.1 152.3 L281.9 155.4 L279.3 152.8 L279.0 153.8 L277.5 152.3 L274.8 152.1 L275.2 150.4 L274.6 149.8 L274.5 150.7 L273.3 149.3 L272.3 145.7 L273.2 146.6 L272.8 140.4 L276.0 141.1 L276.9 143.9 L275.9 146.8 L276.7 150.9 L281.1 152.3 ZM270.9 124.6 L270.8 131.9 L268.6 128.1 L269.9 123.9 L270.9 124.6 ZM280.8 107.0 L279.1 105.3 L280.0 103.3 L281.8 104.5 L281.8 105.9 L280.5 105.7 L280.8 107.0 ZM283.5 105.3 L281.2 102.8 L276.8 104.4 L279.0 106.0 L279.4 110.7 L275.2 105.7 L277.1 101.0 L280.8 100.8 L279.7 97.1 L281.1 98.1 L281.5 95.2 L278.6 90.5 L278.0 89.2 L278.8 88.8 L282.6 93.2 L286.5 101.7 L283.8 102.8 L283.5 105.3 ZM274.8 85.1 L275.7 85.0 L272.7 80.9 L277.5 83.9 L277.4 83.1 L279.4 85.2 L278.7 85.7 L279.5 87.6 L277.0 86.3 L278.2 88.4 L277.1 88.5 L274.8 85.1 Z"/>
+              <g class="grid"><path d="M149.3 334.7 L144.3 333.5 L139.3 332.2 L134.4 330.7 L129.5 329.0 L124.7 327.1 L119.9 325.0 L115.2 322.8 L110.6 320.4 L106.1 317.9 L101.7 315.2 L97.4 312.4 L93.2 309.4 L89.1 306.2 L85.0 302.9 L81.2 299.5 L77.4 295.9 L73.7 292.2 L70.2 288.4 L66.8 284.4 L63.6 280.3 L60.5 276.2 L57.5 271.9 L54.7 267.5 L52.1 263.0 L49.6 258.4 L47.2 253.8 L45.1 249.0 L43.0 244.2 L41.2 239.3 L39.5 234.4 L38.0 229.3 L36.7 224.3 L35.5 219.2 L34.5 214.0 L33.7 208.9 L33.1 203.7 L32.6 198.5 L32.4 193.2 L32.3 188.0 L32.4 182.8 L32.6 177.5 L33.1 172.3 L33.7 167.1 L34.5 162.0 L35.5 156.8 L36.7 151.7 L38.0 146.7 L39.5 141.6 L41.2 136.7 L43.0 131.8 L45.1 127.0 L47.2 122.2 L49.6 117.6 L52.1 113.0 L54.7 108.5 L57.5 104.1 L60.5 99.8 L63.6 95.7 L66.8 91.6 L70.2 87.6 L73.7 83.8 L77.4 80.1 L81.2 76.5 L85.0 73.1 L89.1 69.8 L93.2 66.6 L97.4 63.6 L101.7 60.8 L106.1 58.1 L110.6 55.6 L115.2 53.2 L119.9 51.0 L124.7 48.9 L129.5 47.0 L134.4 45.3 L139.3 43.8 L144.3 42.5 L149.3 41.3 M160.0 335.7 L156.1 334.7 L152.2 333.5 L148.3 332.2 L144.5 330.7 L140.7 329.0 L137.0 327.1 L133.3 325.0 L129.6 322.8 L126.1 320.4 L122.5 317.9 L119.1 315.2 L115.7 312.4 L112.5 309.4 L109.3 306.2 L106.1 302.9 L103.1 299.5 L100.2 295.9 L97.3 292.2 L94.6 288.4 L92.0 284.4 L89.5 280.3 L87.0 276.2 L84.7 271.9 L82.6 267.5 L80.5 263.0 L78.5 258.4 L76.7 253.8 L75.0 249.0 L73.5 244.2 L72.0 239.3 L70.7 234.4 L69.5 229.3 L68.5 224.3 L67.6 219.2 L66.8 214.0 L66.2 208.9 L65.7 203.7 L65.4 198.5 L65.2 193.2 L65.1 188.0 L65.2 182.8 L65.4 177.5 L65.7 172.3 L66.2 167.1 L66.8 162.0 L67.6 156.8 L68.5 151.7 L69.5 146.7 L70.7 141.6 L72.0 136.7 L73.5 131.8 L75.0 127.0 L76.7 122.2 L78.5 117.6 L80.5 113.0 L82.6 108.5 L84.7 104.1 L87.0 99.8 L89.5 95.7 L92.0 91.6 L94.6 87.6 L97.3 83.8 L100.2 80.1 L103.1 76.5 L106.1 73.1 L109.3 69.8 L112.5 66.6 L115.7 63.6 L119.1 60.8 L122.5 58.1 L126.1 55.6 L129.6 53.2 L133.3 51.0 L137.0 48.9 L140.7 47.0 L144.5 45.3 L148.3 43.8 L152.2 42.5 L156.1 41.3 L160.0 40.3 M171.1 335.7 L169.3 334.7 L167.6 333.5 L165.9 332.2 L164.1 330.7 L162.5 329.0 L160.8 327.1 L159.1 325.0 L157.5 322.8 L155.9 320.4 L154.3 317.9 L152.8 315.2 L151.3 312.4 L149.8 309.4 L148.4 306.2 L147.0 302.9 L145.7 299.5 L144.4 295.9 L143.1 292.2 L141.9 288.4 L140.7 284.4 L139.6 280.3 L138.5 276.2 L137.5 271.9 L136.5 267.5 L135.6 263.0 L134.7 258.4 L133.9 253.8 L133.1 249.0 L132.4 244.2 L131.8 239.3 L131.2 234.4 L130.7 229.3 L130.2 224.3 L129.8 219.2 L129.5 214.0 L129.2 208.9 L129.0 203.7 L128.8 198.5 L128.7 193.2 L128.7 188.0 L128.7 182.8 L128.8 177.5 L129.0 172.3 L129.2 167.1 L129.5 162.0 L129.8 156.8 L130.2 151.7 L130.7 146.7 L131.2 141.6 L131.8 136.7 L132.4 131.8 L133.1 127.0 L133.9 122.2 L134.7 117.6 L135.6 113.0 L136.5 108.5 L137.5 104.1 L138.5 99.8 L139.6 95.7 L140.7 91.6 L141.9 87.6 L143.1 83.8 L144.4 80.1 L145.7 76.5 L147.0 73.1 L148.4 69.8 L149.8 66.6 L151.3 63.6 L152.8 60.8 L154.3 58.1 L155.9 55.6 L157.5 53.2 L159.1 51.0 L160.8 48.9 L162.5 47.0 L164.1 45.3 L165.9 43.8 L167.6 42.5 L169.3 41.3 L171.1 40.3 M184.5 335.7 L185.4 334.7 L186.3 333.5 L187.2 332.2 L188.0 330.7 L188.9 329.0 L189.8 327.1 L190.6 325.0 L191.4 322.8 L192.2 320.4 L193.0 317.9 L193.8 315.2 L194.6 312.4 L195.3 309.4 L196.0 306.2 L196.7 302.9 L197.4 299.5 L198.1 295.9 L198.7 292.2 L199.4 288.4 L200.0 284.4 L200.5 280.3 L201.1 276.2 L201.6 271.9 L202.1 267.5 L202.6 263.0 L203.0 258.4 L203.4 253.8 L203.8 249.0 L204.2 244.2 L204.5 239.3 L204.8 234.4 L205.0 229.3 L205.3 224.3 L205.5 219.2 L205.7 214.0 L205.8 208.9 L205.9 203.7 L206.0 198.5 L206.0 193.2 L206.0 188.0 L206.0 182.8 L206.0 177.5 L205.9 172.3 L205.8 167.1 L205.7 162.0 L205.5 156.8 L205.3 151.7 L205.0 146.7 L204.8 141.6 L204.5 136.7 L204.2 131.8 L203.8 127.0 L203.4 122.2 L203.0 117.6 L202.6 113.0 L202.1 108.5 L201.6 104.1 L201.1 99.8 L200.5 95.7 L200.0 91.6 L199.4 87.6 L198.7 83.8 L198.1 80.1 L197.4 76.5 L196.7 73.1 L196.0 69.8 L195.3 66.6 L194.6 63.6 L193.8 60.8 L193.0 58.1 L192.2 55.6 L191.4 53.2 L190.6 51.0 L189.8 48.9 L188.9 47.0 L188.0 45.3 L187.2 43.8 L186.3 42.5 L185.4 41.3 L184.5 40.3 M196.7 335.7 L200.0 334.7 L203.3 333.5 L206.6 332.2 L209.8 330.7 L213.0 329.0 L216.1 327.1 L219.2 325.0 L222.3 322.8 L225.3 320.4 L228.2 317.9 L231.1 315.2 L233.9 312.4 L236.7 309.4 L239.4 306.2 L242.0 302.9 L244.5 299.5 L247.0 295.9 L249.4 292.2 L251.7 288.4 L253.9 284.4 L256.0 280.3 L258.0 276.2 L259.9 271.9 L261.8 267.5 L263.5 263.0 L265.1 258.4 L266.7 253.8 L268.1 249.0 L269.4 244.2 L270.6 239.3 L271.7 234.4 L272.7 229.3 L273.6 224.3 L274.3 219.2 L275.0 214.0 L275.5 208.9 L275.9 203.7 L276.2 198.5 L276.4 193.2 L276.4 188.0 L276.4 182.8 L276.2 177.5 L275.9 172.3 L275.5 167.1 L275.0 162.0 L274.3 156.8 L273.6 151.7 L272.7 146.7 L271.7 141.6 L270.6 136.7 L269.4 131.8 L268.1 127.0 L266.7 122.2 L265.1 117.6 L263.5 113.0 L261.8 108.5 L259.9 104.1 L258.0 99.8 L256.0 95.7 L253.9 91.6 L251.7 87.6 L249.4 83.8 L247.0 80.1 L244.5 76.5 L242.0 73.1 L239.4 69.8 L236.7 66.6 L233.9 63.6 L231.1 60.8 L228.2 58.1 L225.3 55.6 L222.3 53.2 L219.2 51.0 L216.1 48.9 L213.0 47.0 L209.8 45.3 L206.6 43.8 L203.3 42.5 L200.0 41.3 L196.7 40.3 M204.5 335.7 L209.3 334.7 L214.1 333.5 L218.9 332.2 L223.6 330.7 L228.2 329.0 L232.8 327.1 L237.3 325.0 L241.8 322.8 L246.2 320.4 L250.5 317.9 L254.7 315.2 L258.8 312.4 L262.9 309.4 L266.8 306.2 L270.6 302.9 L274.3 299.5 L277.9 295.9 L281.4 292.2 L284.7 288.4 L288.0 284.4 L291.1 280.3 L294.0 276.2 L296.9 271.9 L299.5 267.5 L302.1 263.0 L304.5 258.4 L306.7 253.8 L308.8 249.0 L310.7 244.2 L312.5 239.3 L314.1 234.4 L315.5 229.3 L316.8 224.3 L317.9 219.2 L318.8 214.0 L319.6 208.9 L320.2 203.7 L320.6 198.5 L320.9 193.2 L321.0 188.0 L320.9 182.8 L320.6 177.5 L320.2 172.3 L319.6 167.1 L318.8 162.0 L317.9 156.8 L316.8 151.7 L315.5 146.7 L314.1 141.6 L312.5 136.7 L310.7 131.8 L308.8 127.0 L306.7 122.2 L304.5 117.6 L302.1 113.0 L299.5 108.5 L296.9 104.1 L294.0 99.8 L291.1 95.7 L288.0 91.6 L284.7 87.6 L281.4 83.8 L277.9 80.1 L274.3 76.5 L270.6 73.1 L266.8 69.8 L262.9 66.6 L258.8 63.6 L254.7 60.8 L250.5 58.1 L246.2 55.6 L241.8 53.2 L237.3 51.0 L232.8 48.9 L228.2 47.0 L223.6 45.3 L218.9 43.8 L214.1 42.5 L209.3 41.3 L204.5 40.3 M105.4 317.9 L105.7 317.9 L106.1 317.9 L106.6 317.9 L107.2 317.9 L107.9 317.9 L108.7 317.9 L109.5 317.9 L110.5 317.9 L111.5 317.9 L112.6 317.9 L113.8 317.9 L115.0 317.9 L116.4 317.9 L117.8 317.9 L119.3 317.9 L120.9 317.9 L122.5 317.9 L124.3 317.9 L126.0 317.9 L127.9 317.9 L129.8 317.9 L131.8 317.9 L133.8 317.9 L135.9 317.9 L138.1 317.9 L140.3 317.9 L142.5 317.9 L144.8 317.9 L147.1 317.9 L149.5 317.9 L151.9 317.9 L154.3 317.9 L156.8 317.9 L159.3 317.9 L161.9 317.9 L164.4 317.9 L167.0 317.9 L169.6 317.9 L172.2 317.9 L174.8 317.9 L177.4 317.9 L180.0 317.9 L182.6 317.9 L185.2 317.9 L187.8 317.9 L190.4 317.9 L193.0 317.9 L195.6 317.9 L198.1 317.9 L200.7 317.9 L203.2 317.9 L205.7 317.9 L208.1 317.9 L210.5 317.9 L212.9 317.9 L215.2 317.9 L217.5 317.9 L219.7 317.9 L221.9 317.9 L224.1 317.9 L226.2 317.9 L228.2 317.9 L230.2 317.9 L232.1 317.9 L234.0 317.9 L235.7 317.9 L237.5 317.9 L239.1 317.9 L240.7 317.9 L242.2 317.9 L243.6 317.9 L245.0 317.9 L246.2 317.9 L247.4 317.9 L248.5 317.9 L249.5 317.9 L250.5 317.9 L251.3 317.9 L252.1 317.9 L252.8 317.9 L253.4 317.9 L253.9 317.9 L254.3 317.9 L254.6 317.9 M50.4 263.0 L50.8 263.0 L51.4 263.0 L52.1 263.0 L52.9 263.0 L54.0 263.0 L55.1 263.0 L56.5 263.0 L57.9 263.0 L59.6 263.0 L61.3 263.0 L63.2 263.0 L65.3 263.0 L67.5 263.0 L69.8 263.0 L72.3 263.0 L74.9 263.0 L77.6 263.0 L80.5 263.0 L83.5 263.0 L86.6 263.0 L89.8 263.0 L93.1 263.0 L96.5 263.0 L100.0 263.0 L103.6 263.0 L107.4 263.0 L111.2 263.0 L115.0 263.0 L119.0 263.0 L123.1 263.0 L127.2 263.0 L131.3 263.0 L135.6 263.0 L139.9 263.0 L144.2 263.0 L148.6 263.0 L153.0 263.0 L157.4 263.0 L161.9 263.0 L166.4 263.0 L170.9 263.0 L175.5 263.0 L180.0 263.0 L184.5 263.0 L189.1 263.0 L193.6 263.0 L198.1 263.0 L202.6 263.0 L207.0 263.0 L211.4 263.0 L215.8 263.0 L220.1 263.0 L224.4 263.0 L228.7 263.0 L232.8 263.0 L236.9 263.0 L241.0 263.0 L245.0 263.0 L248.8 263.0 L252.6 263.0 L256.4 263.0 L260.0 263.0 L263.5 263.0 L266.9 263.0 L270.2 263.0 L273.4 263.0 L276.5 263.0 L279.5 263.0 L282.4 263.0 L285.1 263.0 L287.7 263.0 L290.2 263.0 L292.5 263.0 L294.7 263.0 L296.8 263.0 L298.7 263.0 L300.4 263.0 L302.1 263.0 L303.5 263.0 L304.9 263.0 L306.0 263.0 L307.1 263.0 L307.9 263.0 L308.6 263.0 L309.2 263.0 L309.6 263.0 M30.4 188.0 L30.8 188.0 L31.5 188.0 L32.3 188.0 L33.3 188.0 L34.5 188.0 L35.8 188.0 L37.3 188.0 L39.0 188.0 L40.9 188.0 L43.0 188.0 L45.2 188.0 L47.6 188.0 L50.1 188.0 L52.8 188.0 L55.6 188.0 L58.6 188.0 L61.8 188.0 L65.1 188.0 L68.5 188.0 L72.1 188.0 L75.8 188.0 L79.6 188.0 L83.6 188.0 L87.7 188.0 L91.8 188.0 L96.1 188.0 L100.5 188.0 L105.0 188.0 L109.6 188.0 L114.2 188.0 L119.0 188.0 L123.8 188.0 L128.7 188.0 L133.6 188.0 L138.7 188.0 L143.7 188.0 L148.8 188.0 L154.0 188.0 L159.1 188.0 L164.3 188.0 L169.5 188.0 L174.8 188.0 L180.0 188.0 L185.2 188.0 L190.5 188.0 L195.7 188.0 L200.9 188.0 L206.0 188.0 L211.2 188.0 L216.3 188.0 L221.3 188.0 L226.4 188.0 L231.3 188.0 L236.2 188.0 L241.0 188.0 L245.8 188.0 L250.4 188.0 L255.0 188.0 L259.5 188.0 L263.9 188.0 L268.2 188.0 L272.3 188.0 L276.4 188.0 L280.4 188.0 L284.2 188.0 L287.9 188.0 L291.5 188.0 L294.9 188.0 L298.2 188.0 L301.4 188.0 L304.4 188.0 L307.2 188.0 L309.9 188.0 L312.4 188.0 L314.8 188.0 L317.0 188.0 L319.1 188.0 L321.0 188.0 L322.7 188.0 L324.2 188.0 L325.5 188.0 L326.7 188.0 L327.7 188.0 L328.5 188.0 L329.2 188.0 L329.6 188.0 M50.4 113.0 L50.8 113.0 L51.4 113.0 L52.1 113.0 L52.9 113.0 L54.0 113.0 L55.1 113.0 L56.5 113.0 L57.9 113.0 L59.6 113.0 L61.3 113.0 L63.2 113.0 L65.3 113.0 L67.5 113.0 L69.8 113.0 L72.3 113.0 L74.9 113.0 L77.6 113.0 L80.5 113.0 L83.5 113.0 L86.6 113.0 L89.8 113.0 L93.1 113.0 L96.5 113.0 L100.0 113.0 L103.6 113.0 L107.4 113.0 L111.2 113.0 L115.0 113.0 L119.0 113.0 L123.1 113.0 L127.2 113.0 L131.3 113.0 L135.6 113.0 L139.9 113.0 L144.2 113.0 L148.6 113.0 L153.0 113.0 L157.4 113.0 L161.9 113.0 L166.4 113.0 L170.9 113.0 L175.5 113.0 L180.0 113.0 L184.5 113.0 L189.1 113.0 L193.6 113.0 L198.1 113.0 L202.6 113.0 L207.0 113.0 L211.4 113.0 L215.8 113.0 L220.1 113.0 L224.4 113.0 L228.7 113.0 L232.8 113.0 L236.9 113.0 L241.0 113.0 L245.0 113.0 L248.8 113.0 L252.6 113.0 L256.4 113.0 L260.0 113.0 L263.5 113.0 L266.9 113.0 L270.2 113.0 L273.4 113.0 L276.5 113.0 L279.5 113.0 L282.4 113.0 L285.1 113.0 L287.7 113.0 L290.2 113.0 L292.5 113.0 L294.7 113.0 L296.8 113.0 L298.7 113.0 L300.4 113.0 L302.1 113.0 L303.5 113.0 L304.9 113.0 L306.0 113.0 L307.1 113.0 L307.9 113.0 L308.6 113.0 L309.2 113.0 L309.6 113.0 M105.4 58.1 L105.7 58.1 L106.1 58.1 L106.6 58.1 L107.2 58.1 L107.9 58.1 L108.7 58.1 L109.5 58.1 L110.5 58.1 L111.5 58.1 L112.6 58.1 L113.8 58.1 L115.0 58.1 L116.4 58.1 L117.8 58.1 L119.3 58.1 L120.9 58.1 L122.5 58.1 L124.3 58.1 L126.0 58.1 L127.9 58.1 L129.8 58.1 L131.8 58.1 L133.8 58.1 L135.9 58.1 L138.1 58.1 L140.3 58.1 L142.5 58.1 L144.8 58.1 L147.1 58.1 L149.5 58.1 L151.9 58.1 L154.3 58.1 L156.8 58.1 L159.3 58.1 L161.9 58.1 L164.4 58.1 L167.0 58.1 L169.6 58.1 L172.2 58.1 L174.8 58.1 L177.4 58.1 L180.0 58.1 L182.6 58.1 L185.2 58.1 L187.8 58.1 L190.4 58.1 L193.0 58.1 L195.6 58.1 L198.1 58.1 L200.7 58.1 L203.2 58.1 L205.7 58.1 L208.1 58.1 L210.5 58.1 L212.9 58.1 L215.2 58.1 L217.5 58.1 L219.7 58.1 L221.9 58.1 L224.1 58.1 L226.2 58.1 L228.2 58.1 L230.2 58.1 L232.1 58.1 L234.0 58.1 L235.7 58.1 L237.5 58.1 L239.1 58.1 L240.7 58.1 L242.2 58.1 L243.6 58.1 L245.0 58.1 L246.2 58.1 L247.4 58.1 L248.5 58.1 L249.5 58.1 L250.5 58.1 L251.3 58.1 L252.1 58.1 L252.8 58.1 L253.4 58.1 L253.9 58.1 L254.3 58.1 L254.6 58.1"/></g>
+            </g>
+            <circle class="globe-ring" cx="180" cy="188" r="150" fill="none"/>
+            <g><path class="rail" d="M240.5 184.5 Q253.9 180.5 235.4 179.8"/><path class="rail" d="M240.5 184.5 Q259.8 195.9 247.2 204.2"/><path class="rail" d="M240.5 184.5 Q256.6 167.0 241.9 158.0"/><path class="rail" d="M240.5 184.5 Q273.3 163.2 275.2 150.2"/><path class="rail" d="M240.5 184.5 Q225.1 171.8 179.6 169.9"/><path class="rail" d="M240.5 184.5 Q144.7 229.8 69.6 250.6"/></g>
+            <g><path class="flow" d="M240.5 184.5 Q253.9 180.5 235.4 179.8" style="animation-delay:0s"/><path class="flow" d="M240.5 184.5 Q259.8 195.9 247.2 204.2" style="animation-delay:-0.4s"/><path class="flow" d="M240.5 184.5 Q256.6 167.0 241.9 158.0" style="animation-delay:-0.8s"/><path class="flow" d="M240.5 184.5 Q273.3 163.2 275.2 150.2" style="animation-delay:-1.2s"/><path class="flow" d="M240.5 184.5 Q225.1 171.8 179.6 169.9" style="animation-delay:-1.6s"/><path class="flow" d="M240.5 184.5 Q144.7 229.8 69.6 250.6" style="animation-delay:-2.0s"/></g>
+            <g><circle class="ring" cx="235.4" cy="179.8" r="6" style="animation-delay:-0.2s"/><circle class="ring" cx="247.2" cy="204.2" r="6" style="animation-delay:-1.0s"/><circle class="ring" cx="241.9" cy="158.0" r="6" style="animation-delay:-1.6s"/><circle class="ring" cx="275.2" cy="150.2" r="6" style="animation-delay:-2.2s"/><circle class="ring" cx="179.6" cy="169.9" r="6" style="animation-delay:-1.3s"/><circle class="ring" cx="69.6" cy="250.6" r="6" style="animation-delay:-0.6s"/><circle class="node" cx="235.4" cy="179.8" r="3.4"/><circle class="node" cx="247.2" cy="204.2" r="3.4"/><circle class="node" cx="241.9" cy="158.0" r="3.4"/><circle class="node" cx="275.2" cy="150.2" r="3.4"/><circle class="node" cx="179.6" cy="169.9" r="3.4"/><circle class="node" cx="69.6" cy="250.6" r="3.4"/></g>
+            <g><text class="lbl" x="280.2" y="143.2" text-anchor="start">Manila</text><text class="lbl" x="174.6" y="162.9" text-anchor="end">Colombo</text><text class="lbl" x="64.6" y="243.6" text-anchor="end">Botswana</text><text class="lbl lbl--hub" x="247.5" y="188.5" text-anchor="start">Singapore · HQ</text><text class="lbl" x="237" y="152.5" text-anchor="end">Phnom Penh</text><text class="lbl" x="253.5" y="208.5" text-anchor="start">Jakarta</text><text class="lbl" x="228" y="176.5" text-anchor="end">Kuala Lumpur</text></g>
+            <circle class="ring ring--hub" cx="240.5" cy="184.5" r="9"/>
+            <circle class="hub" cx="240.5" cy="184.5" r="5.2"/>
+            <circle class="hub-core" cx="240.5" cy="184.5" r="2.2"/>
+          </svg>
+  </div>
+  <div class="s-foot"><div class="footrow"><span></span><span style="flex:1;text-align:center;">CONFIDENTIAL · TOPIC · 2026</span><span></span></div></div>
+</section>
+
+<!-- 2 · AGENDA — colour-numbered rows in the locked sequence; shaded nav, no active segment -->
+<section class="slide">
+  <div class="s-eyebrow"><span class="dot"></span>Agenda</div>
+  <h2 class="s-title">What we'll cover today</h2>
+  <div class="s-body">
+    <div class="ag"><span class="n" style="background:var(--blue-500)">1</span>Section one</div>
+    <div class="ag"><span class="n" style="background:var(--amber-400)">2</span>Section two</div>
+    <div class="ag"><span class="n" style="background:var(--green-500)">3</span>Section three</div>
+    <div class="ag"><span class="n" style="background:var(--indigo-500)">4</span>Section four</div>
+    <div class="ag"><span class="n" style="background:var(--blue-700)">5</span>Section five</div>
+    <!-- 6th/7th sections when the deck needs them (colours are contiguous, never reordered):
+    <div class="ag"><span class="n" style="background:var(--orange-400)">6</span>Section six</div>
+    <div class="ag"><span class="n" style="background:var(--neutral-600)">7</span>Section seven</div> -->
+  </div>
+  <div class="s-foot">
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">2 / 18</span></div>
+  </div>
+</section>
+
+<!-- 3 · CONTENT (light) — ONE SCHEME: eyebrow + dot + active nav segment = same bright accent -->
+<section class="slide">
+  <div class="s-eyebrow c3"><span class="dot"></span>Section three</div>
+  <h2 class="s-title">Content slide headline</h2>
+  <p class="s-sub">An optional one-line intro that sets up the body below.</p>
+  <div class="s-body">
+    <div class="grid g3">
+      <div class="tile"><h4>Point one</h4><p>Short supporting description for the first point.</p></div>
+      <div class="tile"><h4>Point two</h4><p>Short supporting description for the second point.</p></div>
+      <div class="tile"><h4>Point three</h4><p>Short supporting description for the third point.</p></div>
+    </div>
+    <p class="lead-line">A punchy closing line — <span class="hl">the one thing to remember</span>.</p>
+  </div>
+  <div class="s-foot sec3">
+    <div class="navbar"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">3 / 18</span></div>
+  </div>
+</section>
+
+<!-- 3b · CONTENT — CARDS / BOXES (the alternative to a bulleted list) -->
+<section class="slide">
+  <div class="s-eyebrow c2"><span class="dot"></span>Section two</div>
+  <h2 class="s-title">Boxes &amp; highlights — the card style</h2>
+  <p class="s-sub">Pick this style instead of a list when each point deserves its own box.</p>
+  <div class="s-body">
+    <div class="grid g3">
+      <div class="tile"><h4>Card one</h4><p>A short, self-contained idea in its own highlighted box.</p></div>
+      <div class="tile"><h4>Card two</h4><p>A short, self-contained idea in its own highlighted box.</p></div>
+      <div class="tile"><h4>Card three</h4><p>A short, self-contained idea in its own highlighted box.</p></div>
+    </div>
+  </div>
+  <div class="s-foot sec2">
+    <div class="navbar"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">4 / 18</span></div>
+  </div>
+</section>
+
+<!-- 3c · PLATFORM ARCHITECTURE (LOCKED §D3) — 3 component lockups + novaai spanning band with 3 pips -->
+<section class="slide">
+  <div class="s-eyebrow c3"><span class="dot"></span>Section three</div>
+  <h2 class="s-title">Three core platforms, one intelligence core</h2>
+  <p class="s-sub">Every product is composed from three modular components — with novaai spanning all three.</p>
+  <div class="s-body">
+    <div class="arch-slide">
+      <div class="arch-comps">
+        <div class="arch-c"><b>novahub</b><span class="arch-tag">Experience, intelligence &amp; services</span></div>
+        <div class="arch-c"><b>novaware</b><span class="arch-tag">Deployment &amp; orchestration</span></div>
+        <div class="arch-c"><b>novaserve</b><span class="arch-tag">Operational continuity</span></div>
+      </div>
+      <div class="arch-core theme-novaai">
+        <span class="arch-pips" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="arch-core-in"><b>novaai</b><span class="arch-note">AI Intelligence Core · Data Flywheel</span></span>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot sec3">
+    <div class="navbar"><i></i><i></i><i class="on"></i><i></i><i></i></div>
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">5 / 18</span></div>
+  </div>
+</section>
+
+<!-- 3e · SPLIT — COPY BESIDE A PHOTO (LOCKED §11.L, 2026-07-17). The imagery workhorse.
+     The media box is CAPPED (.split__media .fig): a ratio-driven figure left to grow to the
+     column width drives the row straight through the footer band. object-fit:cover crops. -->
+<section class="slide">
+  <div class="s-eyebrow c1"><span class="dot"></span>Section one</div>
+  <h2 class="s-title">A headline the photograph supports</h2>
+  <div class="s-body">
+    <div class="split split--wide-media">
+      <div class="split__copy">
+        <p>One or two sentences of lede. Keep the copy column short — when a split slide
+           overflows, the COPY column is usually the offender, not the photo (§11.N).</p>
+        <ul class="blist">
+          <li>Supporting point one</li>
+          <li>Supporting point two</li>
+          <li>Supporting point three</li>
+        </ul>
+      </div>
+      <div class="split__media">
+        <figure class="fig fig--photo fig--duotone">
+          <img src="" alt="Describe what the photograph shows and why it is here.">
+        </figure>
+      </div>
+    </div>
+  </div>
+  <div class="s-foot sec1">
+    <div class="navbar"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">7 / 18</span></div>
+  </div>
+</section>
+
+<!-- 3f · FIVE-PILLAR COMPOSITION DIAGRAM (LOCKED §D3a) — the full portfolio picture:
+     FIVE composed products (novaboost included) → joiner → three components → novaai band.
+     Lockups are PLACED ASSETS from logos/lockups/ and must read LARGER than their caption. -->
+<section class="slide">
+  <div class="s-eyebrow c2"><span class="dot"></span>Section two</div>
+  <h2 class="s-title">Modular components, composed into products</h2>
+  <div class="s-body">
+    <div class="compose">
+      <div class="cprods">
+        <div class="cprod theme-novabank"><img class="plk" src="../../logos/lockups/novabank.png" alt="novabank"><span>Banking &amp; the last mile</span></div>
+        <div class="cprod theme-novapay"><img class="plk" src="../../logos/lockups/novapay.png" alt="novapay"><span>Accept, switch, issue, settle</span></div>
+        <div class="cprod theme-novastore"><img class="plk" src="../../logos/lockups/novastore.png" alt="novastore"><span>Retail, fuel &amp; F&amp;B</span></div>
+        <div class="cprod theme-novatrust"><img class="plk" src="../../logos/lockups/novatrust.png" alt="novatrust"><span>Security as a Service</span></div>
+        <div class="cprod theme-novaboost"><img class="plk" src="../../logos/lockups/novaboost.png" alt="novaboost"><span>People &amp; managed operations</span></div>
+      </div>
+      <div class="cjoin">built on the platform</div>
+      <div class="arch-comps">
+        <div class="arch-c"><img class="plk" src="../../logos/lockups/novahub.png" alt="novahub" style="height:29px"><span class="arch-tag">Experience, intelligence &amp; services</span></div>
+        <div class="arch-c"><img class="plk" src="../../logos/lockups/novaware.png" alt="novaware" style="height:29px"><span class="arch-tag">Deployment &amp; orchestration</span></div>
+        <div class="arch-c"><img class="plk" src="../../logos/lockups/novaserve.png" alt="novaserve" style="height:29px"><span class="arch-tag">Operational continuity</span></div>
+      </div>
+      <div class="arch-core theme-novaai">
+        <span class="arch-pips" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="arch-core-in"><img class="plk" src="../../logos/lockups/novaai.png" alt="novaai" style="height:29px"><span class="arch-note">AI Intelligence Core · Data Flywheel</span></span>
+      </div>
+      <p class="ccap">All five products are composed from three modular components —
+        <b>novahub</b>, <b>novaware</b> and <b>novaserve</b> — with <b>novaai</b> interacting with all three.</p>
+    </div>
+  </div>
+  <div class="s-foot sec2">
+    <div class="navbar"><i></i><i class="on"></i><i></i><i></i><i></i></div>
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">8 / 18</span></div>
+  </div>
+</section>
+
+<!-- 3g · PRODUCT SHEET (LOCKED §D4) — the vertical slide. Every field READ from the
+     catalogue + site content.json; nothing retyped. The slide carries the product's
+     accentTheme so bullets, stat rules, chips and the pill all take its identity colour. -->
+<section class="slide theme-novabank">
+  <div class="s-eyebrow c4"><span class="dot"></span>The portfolio</div>
+  <div class="phead">
+    <img class="plk" src="../../logos/lockups/novabank.png" alt="novabank">
+    <span class="pline">Digital Banking</span>
+  </div>
+  <p class="psum">Bank-in-a-Box and agency banking that reach the last mile.</p>
+  <div class="s-body">
+    <div class="psheet">
+      <div class="pcol"><h5>What it does</h5>
+        <ul class="caps">
+          <li>Bank-in-a-Box core &mdash; accounts, ledger, KYC, onboarding</li>
+          <li>Agency banking &mdash; last-mile via agent networks &amp; kiosks</li>
+          <li>ATM as a Service &mdash; end-to-end fleet management</li>
+          <li>Card issuance &mdash; debit, prepaid &amp; virtual cards</li>
+          <li>Open APIs &amp; BaaS layer</li>
+          <li>Regulatory reporting &mdash; AML/CFT, central-bank compliance</li>
+        </ul>
+      </div>
+      <div class="pcol"><h5>Value to partners</h5>
+        <ul class="pben">
+          <li><b>Launch a digital bank in weeks, not years.</b>Turnkey infrastructure under your brand.</li>
+          <li><b>Reach the unbanked at scale.</b>Agent networks and mobile-first tools unlock new markets.</li>
+          <li><b>Generate fee revenue from BaaS.</b>Monetise banking for fintechs and corporates.</li>
+        </ul>
+      </div>
+      <div class="pcol">
+        <figure class="fig fig--photo fig--duotone"><img src="" alt="The product in use."></figure>
+        <div class="pstats">
+          <div class="pstat"><b>8,426</b><span>ATM Go terminals (RCBC, Philippines)</span></div>
+          <div class="pstat"><b>16M</b><span>Customers served (People&rsquo;s Bank, Sri Lanka)</span></div>
+          <div class="pstat"><b>265+</b><span>Self-banking units across 25 districts</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="pspecs">
+      <span class="chip"><b>Deployment model</b> &middot; Bank-in-a-Box + agency network</span>
+      <span class="chip"><b>Channels</b> &middot; Agent, ATM, mobile, USSD, kiosk</span>
+      <span class="chip"><b>APIs</b> &middot; Open / BaaS</span>
+      <span class="chip"><b>Delivery</b> &middot; Service as Software &middot; 24/7 managed</span>
+    </div>
+  </div>
+  <div class="s-foot sec4">
+    <div class="navbar"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL &middot; TOPIC &middot; 2026</span><span class="pg">9 / 18</span></div>
+  </div>
+</section>
+
+<!-- 3d · FULL-BLEED IMAGE — photographic content only (§11.E); footer on a bottom scrim (§11.F) -->
+<section class="slide" style="padding:0;">
+  <img src="" alt="Full-bleed photographic image" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;max-width:none;">
+  <div style="position:absolute;left:0;right:0;top:0;padding:34px 64px 48px;background:linear-gradient(180deg,rgba(14,35,54,.82),rgba(14,35,54,0));">
+    <div class="s-eyebrow" style="color:#fff"><span class="dot"></span>Section four</div>
+    <h2 class="s-title" style="color:#fff">Caption headline over the image</h2>
+  </div>
+  <div class="bleed-scrim"></div>
+  <div class="s-foot onbleed sec4">
+    <div class="navbar"><i></i><i></i><i></i><i class="on"></i><i></i></div>
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_White_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">6 / 18</span></div>
+  </div>
+</section>
+
+<!-- 4 · SECTION DIVIDER (dark) — kicker in the section's bright accent; white logo; shaded nav -->
+<section class="slide" data-theme="dark">
+  <div class="s-body" style="display:flex;flex-direction:column;justify-content:center;">
+    <div class="kicker c4">Part 04</div>
+    <h2 class="hero">Section title</h2>
+  </div>
+  <div class="s-foot">
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_White_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">7 / 18</span></div>
+  </div>
+</section>
+
+<!-- 5 · CLOSING (dark) -->
+<section class="slide" data-theme="dark">
+  <div class="s-body" style="display:flex;flex-direction:column;justify-content:center;">
+    <h2 class="hero" style="font-size:var(--slide-hero,72px);">Closing line — the call to action</h2>
+    <p class="s-sub" style="margin-top:18px;">Contact · website · date</p>
+  </div>
+  <div class="s-foot">
+    <div class="footrow"><span class="fl"><img class="lk" src="../../logos/Novus_Logo_White_transparent.png" alt="Novus Technologies"></span>
+      <span class="fc">CONFIDENTIAL · TOPIC · 2026</span><span class="pg">18 / 18</span></div>
+  </div>
+</section>
+
+</body>
+</html>
