@@ -149,9 +149,9 @@
       "id": "field-input",
       "name": "Field & Input",
       "category": "Forms",
-      "classes": [".field", ".field--error", ".field__help", ".field__error", ".input"],
+      "classes": [".field", ".field--error", ".field__help", ".field__error", ".input", ".select", ".textarea"],
       "fragment": "src/components/field-input.html",
-      "summary": "Labelled form control with help and error states."
+      "summary": "Labelled text input, select, and textarea with help and error states."
     },
     {
       "id": "lead-form",

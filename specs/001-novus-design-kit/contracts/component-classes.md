@@ -55,12 +55,16 @@ Out of v1 catalog (deck/poster/doc systems, documented in `slide-template/`):
 | `/foundations/photography.html` | Approved photos and usage |
 | `/foundations/dark-mode.html` | Dual trigger, pre-paint toggle pattern |
 | `/foundations/assets.html` | Bundled asset index: every file in `logos/` and `photos/` with preview + package path (generated at build time) |
-| `/components/index.html` | Overview grid: every manifest component, grouped by category, with preview + link |
+| `/components/overview.html` | Overview grid: every manifest component, grouped by category, with preview + link |
 | `/components/<id>.html` | One per manifest entry: live examples per variant/state, copyable snippet per example, do/don't guidance |
+| `/components/index.html` | Redirect stub → overview.html only. Content pages are never a subdirectory `index.html`: clean-URL hosts serve those at `/components` (no trailing slash), which breaks every relative link on the page. The build fails if one is emitted |
 
 Every page: shared shell (header with master lockup at `--logo-height`, nav,
 theme toggle, footer), works at 375px, works with JS disabled (toggle button is
-the only JS-dependent control; OS dark preference still applies).
+the only JS-dependent control; OS dark preference still applies). Foundations
+and components pages carry an ant.design-style section sidebar: sticky menu of
+every page in the section from 900px up, a collapsible menu on mobile (native
+`<details>`, so it works with JS off).
 
 URL stability: routes are public API for deep-linking; renaming a route after
 launch requires a redirect stub.
