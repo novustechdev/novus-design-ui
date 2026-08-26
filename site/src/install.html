@@ -1,0 +1,47 @@
+<!-- title: Install -->
+<h1>Install</h1>
+
+<div class="alert alert--info" style="margin-bottom:var(--space-5);max-width:68ch">
+  <span><b>Novus developers only.</b> The package lives on Novus's private registry —
+  ask DevOps for the feed URL and authenticate with your own credentials. It is not on
+  public npm, and the bundled logos and photography are proprietary.</span>
+</div>
+
+<h2>1. Point the scope at the private feed (once per machine)</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm config set @novus:registry &lt;private-feed-url&gt;</code></pre>
+
+<h2>2. Install</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install @novus/design-kit
+# or
+yarn add @novus/design-kit</code></pre>
+
+<h2>3. Wire it in</h2>
+<p>Plain HTML, served over http(s):</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;link rel="stylesheet" href="/node_modules/@novus/design-kit/tokens.css"&gt;
+&lt;script src="/node_modules/@novus/design-kit/js/novus-theme.js"&gt;&lt;/script&gt;</code></pre>
+<p>Bundler (Vite / webpack / Next.js), once at the app root:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import "@novus/design-kit/tokens.css";
+import "@novus/design-kit/js/novus-theme.js";</code></pre>
+<p style="max-width:68ch">Carlito is self-hosted by the stylesheet via relative URLs — no font setup. Keep the
+theme script in <code>&lt;head&gt;</code> so a persisted dark-mode choice applies before
+first paint.</p>
+
+<h2>4. Build with tokens and components</h2>
+<section class="demo" data-title="First component">
+  <button class="btn btn--primary">Talk to us</button>
+</section>
+<p style="max-width:68ch">Never hardcode a value the tokens define — if you're about to type a hex colour or a
+pixel size, there's a <code>var(--…)</code> for it. Start with
+<a href="foundations/principles.html">the principles</a> and the
+<a href="components/index.html">component catalog</a>.</p>
+
+<h2>Overriding tokens</h2>
+<p style="max-width:68ch">Layer your app's overrides <em>after</em> the import — never edit kit files. Anything
+you don't override keeps tracking the kit across upgrades:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>/* after tokens.css */
+:root { --container: 1400px; }</code></pre>
+
+<h2>Upgrading</h2>
+<p style="max-width:68ch">Releases are semantically versioned with a maintained changelog; breaking changes
+(removed class, custom property, import path, or asset file) ship only in a MAJOR
+with a migration note.</p>

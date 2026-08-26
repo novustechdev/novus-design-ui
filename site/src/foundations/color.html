@@ -1,0 +1,43 @@
+<!-- title: Color -->
+<p class="eyebrow">Foundations</p>
+<h1>Color</h1>
+<p>Components reference <b>semantic role tokens</b>, never raw scale values — that is
+what lets dark mode re-dress everything at once. Reach for a raw ramp step only when a
+semantic token doesn't cover the hue.</p>
+
+<h2>Semantic roles</h2>
+<div class="swatchgrid">
+  <div><div class="swatch" style="background:var(--bg)"></div><code>--bg</code></div>
+  <div><div class="swatch" style="background:var(--bg-subtle)"></div><code>--bg-subtle</code></div>
+  <div><div class="swatch" style="background:var(--surface)"></div><code>--surface</code></div>
+  <div><div class="swatch" style="background:var(--text)"></div><code>--text</code></div>
+  <div><div class="swatch" style="background:var(--text-secondary)"></div><code>--text-secondary</code></div>
+  <div><div class="swatch" style="background:var(--border)"></div><code>--border</code></div>
+  <div><div class="swatch" style="background:var(--accent)"></div><code>--accent</code></div>
+  <div><div class="swatch" style="background:var(--accent-text)"></div><code>--accent-text</code></div>
+  <div><div class="swatch" style="background:var(--success)"></div><code>--success</code></div>
+  <div><div class="swatch" style="background:var(--warning)"></div><code>--warning</code></div>
+  <div><div class="swatch" style="background:var(--danger)"></div><code>--danger</code></div>
+  <div><div class="swatch" style="background:var(--info-subtle)"></div><code>--info-subtle</code></div>
+</div>
+
+<h2>Product accents</h2>
+<p>Each product re-skins the accent role via a theme class — see
+<a href="../components/product-themes.html">Product themes</a>.</p>
+<div class="swatchgrid">
+  <div class="theme-novapay"><div class="swatch" style="background:var(--accent)"></div><code>novapay · blue</code></div>
+  <div class="theme-novabank"><div class="swatch" style="background:var(--accent)"></div><code>novabank · green</code></div>
+  <div class="theme-novastore"><div class="swatch" style="background:var(--accent)"></div><code>novastore · amber</code></div>
+  <div class="theme-novatrust"><div class="swatch" style="background:var(--accent)"></div><code>novatrust · deep blue</code></div>
+  <div class="theme-novaboost"><div class="swatch" style="background:var(--accent)"></div><code>novaboost · orange</code></div>
+  <div class="theme-novaai"><div class="swatch" style="background:var(--accent)"></div><code>novaai · indigo</code></div>
+</div>
+
+<h2>Discipline</h2>
+<ul class="bullets">
+  <li>One accent per view. Blue is the default; a product screen carries its product accent throughout.</li>
+  <li>Green is success/status only — never a page or panel ground.</li>
+  <li>The page ground is white <code>--bg</code>; never ground a page on the subtle tint.</li>
+  <li>Text on tinted surfaces uses the <code>*-text</code> role tokens so it stays legible in dark mode.</li>
+  <li>AA contrast is checked per mode; the roles are tuned independently for light and dark.</li>
+</ul>

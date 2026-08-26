@@ -1,0 +1,32 @@
+<!-- title: Spacing & layout -->
+<p class="eyebrow">Foundations</p>
+<h1>Spacing &amp; layout</h1>
+<p>One spacing scale, one content column, one radius scale — all tokens.</p>
+
+<h2>Spacing scale</h2>
+<section class="demo" data-title="--space-1 … --space-8">
+  <div class="grid" style="gap:var(--space-2)">
+    <div style="height:var(--space-3);width:var(--space-1);background:var(--accent)"></div>
+    <div style="height:var(--space-3);width:var(--space-2);background:var(--accent)"></div>
+    <div style="height:var(--space-3);width:var(--space-4);background:var(--accent)"></div>
+    <div style="height:var(--space-3);width:var(--space-6);background:var(--accent)"></div>
+    <div style="height:var(--space-3);width:var(--space-8);background:var(--accent)"></div>
+  </div>
+</section>
+
+<h2>Radius scale</h2>
+<div class="swatchgrid">
+  <div><div class="swatch" style="border-radius:var(--radius-sm)"></div><code>--radius-sm</code></div>
+  <div><div class="swatch" style="border-radius:var(--radius-md)"></div><code>--radius-md</code></div>
+  <div><div class="swatch" style="border-radius:var(--radius-lg)"></div><code>--radius-lg</code></div>
+  <div><div class="swatch" style="border-radius:var(--radius-pill)"></div><code>--radius-pill</code></div>
+</div>
+
+<h2>The app shell</h2>
+<ul class="bullets">
+  <li>Every app shares one centered content column: <code>--container</code> = 1200px with <code>--gutter</code> side padding; <code>--container-narrow</code> = 760px for reading.</li>
+  <li>Header and nav are full-bleed, but their inner content aligns to the same column — the logo and menu never touch the window edge.</li>
+  <li>The master lockup sits at <code>--logo-height</code> (26px) in every app, one step smaller than the app name.</li>
+  <li>Radius comes only from the token scale — no ad-hoc radius values.</li>
+  <li>Motion: 120–260ms token durations, and everything respects <code>prefers-reduced-motion</code>.</li>
+</ul>

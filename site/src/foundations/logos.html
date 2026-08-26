@@ -1,0 +1,47 @@
+<!-- title: Logo usage -->
+<p class="eyebrow">Foundations</p>
+<h1>Logo usage</h1>
+<p>Logos are <b>placed assets</b> — never retyped, never redrawn, never CSS-filtered.
+Pick the treatment by background; swap to white in dark mode.</p>
+
+<h2>Master lockup — six treatments</h2>
+<div class="assetgrid">
+  <div class="clogo"><img src="../logos/Novus_Logo_Colour_transparent.png" alt="Colour"><code>colour — light grounds (default)</code></div>
+  <div class="clogo"><img src="../logos/Novus_Logo_Blue_transparent.png" alt="Blue"><code>blue — single brand colour</code></div>
+  <div class="clogo"><img src="../logos/Novus_Logo_Green_transparent.png" alt="Green"><code>green</code></div>
+  <div class="clogo"><img src="../logos/Novus_Logo_Grey_transparent.png" alt="Grey"><code>grey</code></div>
+  <div class="clogo"><img src="../logos/Novus_Logo_Black_transparent.png" alt="Black"><code>black — mono print</code></div>
+  <div class="clogo" style="background:var(--blue-900)"><img src="../logos/Novus_Logo_White_transparent.png" alt="White"><code style="color:var(--blue-200)">white — dark grounds</code></div>
+</div>
+
+<section class="demo" data-title="Dark-mode swap (toggle the theme to see it)">
+  <div class="brandlock">
+    <img class="brandlogo--light" src="../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies">
+    <img class="brandlogo--dark" src="../logos/Novus_Logo_White_transparent.png" alt="Novus Technologies">
+  </div>
+</section>
+
+<h2>Product &amp; platform lockups</h2>
+<div class="assetgrid">
+  <div class="clogo"><img src="../logos/lockups/novapay.png" alt="novapay"><code>novapay</code></div>
+  <div class="clogo"><img src="../logos/lockups/novabank.png" alt="novabank"><code>novabank</code></div>
+  <div class="clogo"><img src="../logos/lockups/novastore.png" alt="novastore"><code>novastore</code></div>
+  <div class="clogo"><img src="../logos/lockups/novatrust.png" alt="novatrust"><code>novatrust</code></div>
+  <div class="clogo"><img src="../logos/lockups/novaboost.png" alt="novaboost"><code>novaboost</code></div>
+  <div class="clogo"><img src="../logos/lockups/novahub.png" alt="novahub"><code>novahub</code></div>
+  <div class="clogo"><img src="../logos/lockups/novaware.png" alt="novaware"><code>novaware</code></div>
+  <div class="clogo"><img src="../logos/lockups/novaserve.png" alt="novaserve"><code>novaserve</code></div>
+  <div class="clogo"><img src="../logos/lockups/novaai.png" alt="novaai"><code>novaai</code></div>
+</div>
+
+<h2>Rules</h2>
+<ul class="bullets">
+  <li>Colour lockup on light grounds; <b>white</b> on dark, blue, or photographic grounds — via the <code>.brandlogo--light/--dark</code> pair, never inline display styles.</li>
+  <li>Header height is <code>--logo-height</code> (26px) in every app — same asset, same size, no per-app shrink.</li>
+  <li>Product names are lowercase and solid-set: <code>novapay</code>, never "NovaPay" or "nova pay". Standalone placement uses the full lockup.</li>
+  <li>In dark mode all product lockups render in the two light blues — identity colour is a light-mode affordance.</li>
+  <li>The wordmark variant (no TECHNOLOGIES) is for sub-brand/secondary placements where the parent is already established.</li>
+  <li>Client and partner marks keep their original colours on white tiles — never recoloured or inverted.</li>
+</ul>
+
+<p>Every bundled asset with its package path is on the <a href="assets.html">asset index</a>.</p>
