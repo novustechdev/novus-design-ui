@@ -87,7 +87,7 @@
       "category": "Data Display",
       "classes": [".stat", ".stat__value", ".stat__label", ".statrow", ".statrow--wide"],
       "fragment": "src/components/stats.html",
-      "summary": "KPI cells that reflow instead of colliding — the canonical stat layout."
+      "summary": "KPI cells that reflow instead of colliding, the canonical stat layout."
     },
     {
       "id": "bullets",
@@ -95,7 +95,7 @@
       "category": "Data Display",
       "classes": [".bullets"],
       "fragment": "src/components/bullets.html",
-      "summary": "Hanging-indent list — wrapped text aligns under the text, never the marker."
+      "summary": "Hanging-indent list, wrapped text aligns under the text, never the marker."
     },
     {
       "id": "leaders",
@@ -111,7 +111,7 @@
       "category": "Data Display",
       "classes": [".clientwall", ".clogo", ".schemewall", ".slogo"],
       "fragment": "src/components/logo-wall.html",
-      "summary": "Client and scheme proof walls — full-colour marks on white tiles, no hover."
+      "summary": "Client and scheme proof walls, full-colour marks on white tiles, no hover."
     },
     {
       "id": "collapse",
@@ -127,7 +127,7 @@
       "category": "Data Display",
       "classes": [".vchain-strip", ".vchain", ".vchain-arrow"],
       "fragment": "src/components/value-chain.html",
-      "summary": "Labelled steps joined by › arrows — informational, no hover."
+      "summary": "Labelled steps joined by › arrows, informational, no hover."
     },
     {
       "id": "alert",
@@ -143,7 +143,7 @@
       "category": "Feedback",
       "classes": [".modal", ".modal__backdrop", ".modal__actions", ".modal-close", ".vdialog"],
       "fragment": "src/components/modal.html",
-      "summary": "In-page detail dialog — native dialog gives focus trap, Esc, and inert background."
+      "summary": "In-page detail dialog, native dialog gives focus trap, Esc, and inert background."
     },
     {
       "id": "field-input",
@@ -175,7 +175,7 @@
       "category": "Theming",
       "classes": [".theme-novus", ".theme-novapay", ".theme-novabank", ".theme-novastore", ".theme-novatrust", ".theme-novaboost", ".theme-novaai"],
       "fragment": "src/components/product-themes.html",
-      "summary": "Scope classes that re-skin the accent role to a product identity — one accent per view."
+      "summary": "Scope classes that re-skin the accent role to a product identity, one accent per view."
     }
   ]
 }
