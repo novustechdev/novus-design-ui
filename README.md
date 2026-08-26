@@ -76,6 +76,15 @@ Anything you don't override keeps tracking the kit across upgrades. Brand
 values (colors, type, logos) are locked — if one looks wrong, raise it with the
 design-system owner instead of patching locally.
 
+## Reference site deployment (ops)
+
+The public reference site deploys to **GitHub Pages** via
+`.github/workflows/pages.yml` (build → gates → deploy of `site/dist`). One-time
+setup: push this repository to GitHub, then in repo Settings → Pages set Source
+to "GitHub Actions". The site uses relative URLs throughout, so it works under
+the `/repo-name/` sub-path; a custom domain is optional. The workflow runs the
+quality gates and fails the deploy if any gate is red.
+
 ## Versioning
 
 Semantic versioning with a maintained [CHANGELOG](CHANGELOG.md). Breaking

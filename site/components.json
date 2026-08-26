@@ -21,7 +21,7 @@
       "id": "avatar",
       "name": "Avatar",
       "category": "General",
-      "classes": [".avatar--photo", ".bio-photo", ".bio-id", ".leader .avatar"],
+      "classes": [".avatar--photo", ".bio-photo", ".bio-id"],
       "fragment": "src/components/avatar.html",
       "summary": "Round headshot or monogram identity slot, small on cards and large in bio modals."
     },
@@ -141,7 +141,7 @@
       "id": "modal",
       "name": "Modal",
       "category": "Feedback",
-      "classes": [".modal", ".modal__backdrop", ".modal__actions", ".modal-close", "dialog.vdialog"],
+      "classes": [".modal", ".modal__backdrop", ".modal__actions", ".modal-close", ".vdialog"],
       "fragment": "src/components/modal.html",
       "summary": "In-page detail dialog — native dialog gives focus trap, Esc, and inert background."
     },

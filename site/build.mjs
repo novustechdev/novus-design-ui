@@ -125,7 +125,7 @@ function shell({ title, content, depth, active, sidebar }) {
   const main = sidebar
     ? `<div class="docwrap">\n${sidebar}\n<div class="doccontent">\n${content}\n</div>\n</div>`
     : content;
-  return `<!DOCTYPE html>
+  const page = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -145,6 +145,11 @@ ${footer.replaceAll("{{REL}}", rel)}
 </body>
 </html>
 `;
+  /* Nav/link placeholders resolve to the FIRST PUBLISHED guide of each section,
+     so an unshipped guide (FR-017) never leaves a dead nav entry. */
+  return page
+    .replaceAll("{{NAV_FW}}", `${rel}frameworks/${FW_FIRST}`)
+    .replaceAll("{{NAV_TH}}", `${rel}themes/${TH_FIRST}`);
 }
 
 function writePage(outPath, page) {
@@ -161,6 +166,38 @@ cpSync(join(ROOT, "tokens.css"), join(DIST, "tokens.css"));
 for (const dir of ["fonts", "logos", "photos", "js"]) cpSync(join(ROOT, dir), join(DIST, dir), { recursive: true });
 
 const built = [];
+
+/* FR-017: a guide that has not passed verification does not ship.
+   Publication is driven by the verification record. */
+const VERIFY_REC = join(ROOT, "specs/001-novus-design-kit/checklists/guide-verification.md");
+const verifiedGuides = new Set();
+if (existsSync(VERIFY_REC)) {
+  for (const m of read(VERIFY_REC).matchAll(/^\| *([a-z0-9-]+) *\|.*\| *pass *\|$/gm)) verifiedGuides.add(m[1]);
+}
+const GUIDE_SECTIONS = [
+  ["frameworks", "Frameworks", [
+    ["blazor.html", "Blazor"],
+    ["react.html", "React"],
+    ["vite.html", "Vite"],
+    ["vue.html", "Vue.js"],
+  ]],
+  ["themes", "Themes", [
+    ["tailwind.html", "Tailwind CSS"],
+    ["fluent2.html", "Fluent 2"],
+    ["material.html", "Material"],
+    ["antd.html", "Ant Design"],
+  ]],
+];
+const publishedGuides = {};
+for (const [dir, , pages] of GUIDE_SECTIONS) {
+  publishedGuides[dir] = pages.filter(
+    ([f]) => existsSync(join(SRC, dir, f)) && verifiedGuides.has(basename(f, ".html"))
+  );
+  for (const [f] of pages.filter(([f]) => existsSync(join(SRC, dir, f)) && !verifiedGuides.has(basename(f, ".html"))))
+    console.log(`SKIPPED (unverified per FR-017): ${dir}/${f}`);
+}
+const FW_FIRST = publishedGuides.frameworks?.[0]?.[0] ?? "blazor.html";
+const TH_FIRST = publishedGuides.themes?.[0]?.[0] ?? "tailwind.html";
 
 /* Root pages (landing, install) */
 for (const name of ["index.html", "install.html"]) {
@@ -198,27 +235,12 @@ if (existsSync(foundDir)) {
   }
 }
 
-/* Integration guides — framework stacks and UI-library themes (constitution VI) */
-const GUIDE_SECTIONS = [
-  ["frameworks", "Frameworks", [
-    ["blazor.html", "Blazor"],
-    ["react.html", "React"],
-    ["vite.html", "Vite"],
-    ["vue.html", "Vue.js"],
-  ]],
-  ["themes", "Themes", [
-    ["tailwind.html", "Tailwind CSS"],
-    ["fluent2.html", "Fluent 2"],
-    ["material.html", "Material"],
-    ["antd.html", "Ant Design"],
-  ]],
-];
-for (const [dir, label, pages] of GUIDE_SECTIONS) {
-  const srcDir = join(SRC, dir);
-  if (!existsSync(srcDir)) continue;
-  const present = pages.filter(([f]) => existsSync(join(srcDir, f)));
+/* Integration guides — framework stacks and UI-library themes (constitution VI);
+   only guides the verification record marks "pass" are published (FR-017). */
+for (const [dir, label] of GUIDE_SECTIONS) {
+  const present = publishedGuides[dir];
   for (const [f, name] of present) {
-    const raw = read(join(srcDir, f));
+    const raw = read(join(SRC, dir, f));
     const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, name])[1];
     const sidebar = sideNav([[label, present.map(([g, l]) => [g, l])]], f);
     writePage(join(DIST, dir, f), shell({ title, content: transformDemos(raw), depth: 1, active: dir, sidebar }));

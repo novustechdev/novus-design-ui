@@ -61,16 +61,32 @@ if [ -f site/components.json ]; then
     gate "built page → manifest entry" $([ -z "$EXTRA" ]; echo $?) "$EXTRA"
   fi
 
-  # Orphan classes: every web-component root block in tokens.css owned by a manifest entry.
+  # Orphan classes: every web-component root block in tokens.css owned by EXACTLY ONE
+  # manifest entry (data-model.md: no orphans, no double-ownership).
   # Deck/poster/doc systems (tokens.css §9–14) are documented in slide-template/, not here.
   DECK_BLOCKS="novus-slides|nslide|novus-poster|novus-doc"
-  ORPHANS=""
+  ORPHANS=""; DUPS=""
   for block in $(grep -oE '^\.[a-z][a-z0-9-]*' tokens.css | sed -E 's/^\.//; s/(__|--).*$//' | sort -u | grep -vE "^($DECK_BLOCKS)$"); do
-    grep -q "\.$block\b" site/components.json || ORPHANS="$ORPHANS $block"
+    n=$(grep -c "\"\.$block\b" site/components.json)
+    [ "$n" -eq 0 ] && ORPHANS="$ORPHANS $block"
+    [ "$n" -gt 1 ] && DUPS="$DUPS $block(x$n)"
   done
   gate "orphan-class check" $([ -z "$ORPHANS" ]; echo $?) "$ORPHANS"
+  gate "double-ownership check" $([ -z "$DUPS" ]; echo $?) "$DUPS"
 else
   echo "WARN  site/components.json not present — manifest gates skipped"
+fi
+
+# 8. Guide verification (FR-017/SC-007): every published guide has a passing record row
+REC="specs/001-novus-design-kit/checklists/guide-verification.md"
+if [ -d site/dist/frameworks ] || [ -d site/dist/themes ]; then
+  UNVERIFIED=""
+  for p in site/dist/frameworks/*.html site/dist/themes/*.html; do
+    [ -f "$p" ] || continue
+    id=$(basename "$p" .html)
+    grep -qE "^\| *$id *\|.*\| *pass *\|$" "$REC" 2>/dev/null || UNVERIFIED="$UNVERIFIED $id"
+  done
+  gate "guide verification record" $([ -z "$UNVERIFIED" ]; echo $?) "unverified:$UNVERIFIED"
 fi
 
 echo
