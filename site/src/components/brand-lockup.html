@@ -1,0 +1,24 @@
+<section class="demo" data-title="Master lockup with dark-mode swap">
+  <div class="brandlock">
+    <img class="brandlogo--light" src="../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies">
+    <img class="brandlogo--dark" src="../logos/Novus_Logo_White_transparent.png" alt="Novus Technologies">
+    <span class="appname">app name</span>
+  </div>
+</section>
+
+<section class="demo" data-title="Product lockup (placed asset)">
+  <img src="../logos/lockups/novapay.png" alt="novapay" style="height:var(--space-6);width:auto">
+</section>
+
+<section class="demo" data-title="Two-tone wordmark (text pattern)">
+  <span class="theme-novabank wm"><span class="nm">nova</span><span class="sf">bank</span></span>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>The logo is a placed asset — never typed, never CSS-drawn. Colour lockup in light, white in dark, swapped by the <code>.brandlogo--light/--dark</code> pair. No inline <code>display</code> on the images.</li>
+  <li>Header lockup height is <code>--logo-height</code> (26px), one step smaller than the app name — the app name is the primary identifier.</li>
+  <li>Product names are lowercase and solid-set: <code>novapay</code>, never "nova pay" or "NovaPay". The two-tone split alone separates "nova" from the suffix.</li>
+  <li>In dark mode every product lockup drops its identity colour and renders in the two light blues — the kit's CSS does this automatically.</li>
+  <li>In your app, reference assets as <code>@novus/design-kit/logos/…</code>.</li>
+</ul>

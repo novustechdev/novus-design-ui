@@ -1,0 +1,31 @@
+<section class="demo" data-title="Header + nav + main (shared column)">
+  <div style="border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden">
+    <header class="appbar">
+      <div class="appbar__inner">
+        <div class="brandlock">
+          <img class="brandlogo--light" src="../logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies">
+          <img class="brandlogo--dark" src="../logos/Novus_Logo_White_transparent.png" alt="Novus Technologies">
+          <span class="appname">console</span>
+        </div>
+        <button class="btn btn--ghost btn--sm">Sign out</button>
+      </div>
+    </header>
+    <nav class="appnav">
+      <div class="appnav__inner nav" style="border-bottom:0">
+        <a href="#" aria-current="page">Dashboard</a>
+        <a href="#">Reports</a>
+        <a href="#">Settings</a>
+      </div>
+    </nav>
+    <main class="appmain" style="padding-block:var(--space-4)">
+      <p class="muted" style="margin:0">Main content aligns to the same centered column as the bars above.</p>
+    </main>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>The bars are full-bleed (background and hairline span the viewport) but their inner content aligns to the shared 1200px column — use the <code>__inner</code> wrappers.</li>
+  <li>External surfaces lead with the Novus master lockup on the left; internal tools lead with the app's own mark and move the Novus lockup right as endorsement (<code>.appheader</code>).</li>
+  <li>Ship the persisted theme toggle in the header; apply it before paint (<code>js/novus-theme.js</code>).</li>
+</ul>

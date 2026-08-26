@@ -14,28 +14,32 @@ each family's detail page; exact grouping finalized in `site/components.json`):
 | Button | General | `.btn` (+ `--primary --secondary --ghost --danger --sm --lg`) |
 | Badge | General | `.badge` (+ `--accent --success --warning --danger`, `__dot`) |
 | Avatar | General | `.avatar--photo`, `.bio-photo`, `.bio-id` |
-| Brand lockup | General | `.brandlock`, `.brandlogo--light`, `.wm` |
+| Brand lockup | General | `.brandlock`, `.brandlogo--light/--dark`, `.vlogo`, `.wm` |
 | Container | Layout | `.container`, `.container--narrow` |
 | Grid & Row | Layout | `.grid`, `.row` |
-| Surface | Layout | `.surface` |
-| App shell | Layout | `.appbar`, `.appheader`, `.appnav__inner`, `.appmain` |
+| Surface & text utilities | Layout | `.surface`, `.muted` |
+| App shell | Layout | `.appbar`, `.appnav`, `.appmain`, `.appheader` |
 | Card | Data Display | `.card` (+ `--interactive --raised`), `.card-trigger` |
 | Table | Data Display | `.table` |
 | Stats | Data Display | `.statrow` (+ `--wide`), `.stat` |
 | Bullets | Data Display | `.bullets` |
 | Leaders | Data Display | `.leaders`, `.leader` |
-| Logo wall | Data Display | `.clientwall`, `.clogo` |
-| Collapse | Data Display | `.collapse`, `.disclosure` |
+| Logo wall | Data Display | `.clientwall`, `.clogo`, `.schemewall`, `.slogo` |
+| Collapse & Disclosure | Data Display | `.collapse`, `.disclosure` |
+| Value chain | Data Display | `.vchain-strip`, `.vchain`, `.vchain-arrow` |
 | Alert | Feedback | `.alert` (+ `--info --success --warning --danger`) |
-| Modal | Feedback | `.modal`, `.modal__backdrop`, `.modal-close` |
+| Modal | Feedback | `.modal`, `.modal__backdrop`, `.modal-close`, `dialog.vdialog` |
 | Field & Input | Forms | `.field` (+ `--error`, `__help`, `__error`), `.input` |
-| Lead form | Forms | `.lead-form`, `.cta-row` |
+| Lead form & CTA row | Forms | `.lead-form`, `.cta-row` |
 | Nav | Navigation | `.nav` |
 | Product themes | Theming | `.theme-novus`, `.theme-novapay`, `.theme-novabank`, `.theme-novastore`, `.theme-novatrust`, `.theme-novaboost`, `.theme-novaai` |
 
-Out of v1 catalog (deck/poster system, documented in `slide-template/`):
-`.novus-slides`, `.nslide*`, `.novus-poster`, `.vchain*`, `.vdialog*`, `.vlogo`,
-`.slogo`, `.schemewall`.
+(22 families. An earlier draft mis-scoped `.vlogo`, `.wm`, `.vchain*`,
+`.vdialog`, `.schemewall`/`.slogo` as deck-only — they are web components in
+tokens.css §4/§8b and are in the catalog above.)
+
+Out of v1 catalog (deck/poster/doc systems, documented in `slide-template/`):
+`.novus-slides`, `.nslide*`, `.novus-poster`, `.novus-doc`.
 
 ## Reference-site routes (public static site)
 
