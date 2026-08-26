@@ -40,10 +40,14 @@ const toggleTheme = () =&gt; window.novusTheme.toggle();
 }
 &lt;/style&gt;</code></pre>
 
+<h2>Verified result</h2>
+<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against vue 3.5 on vite 8.</p>
+<img src="../assets/samples/vue.png" alt="Rendered sample: the kit styling Vue.js components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
+
 <h2>Rules of the road</h2>
 <ul class="bullets">
-  <li>Kit classes are global — no <code>:deep()</code> needed to use them inside scoped components.</li>
+  <li>Kit classes are global, no <code>:deep()</code> needed to use them inside scoped components.</li>
   <li>Scoped styles reference <code>var(--…)</code> tokens; never re-declare a value the tokens define.</li>
   <li>Keep the theme import first in <code>main.js</code> so the persisted choice applies as early as possible.</li>
-  <li>Adding a component library? Theme it from the tokens — see <a href="../themes/antd.html">Ant Design</a> or <a href="../themes/material.html">Material</a>.</li>
+  <li>Adding a component library? Theme it from the tokens, see <a href="../themes/antd.html">Ant Design</a> or <a href="../themes/material.html">Material</a>.</li>
 </ul>

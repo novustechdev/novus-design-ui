@@ -3,7 +3,7 @@
 <h1>Novus Design with Material</h1>
 <p style="max-width:68ch">Teams using Material UI (MUI) keep its component behaviour and re-skin it with
 Novus tokens. MUI decomposes palette colours at runtime (it computes colour
-channels), so a raw <code>var()</code> string in the palette throws — the Novus
+channels), so a raw <code>var()</code> string in the palette throws, the Novus
 pattern is the same as Ant Design's: <b>read the computed token values from the
 document at runtime</b> and rebuild the theme when the mode flips. Verified
 against MUI v9.</p>
@@ -44,11 +44,15 @@ token values (same tick pattern as the <a href="antd.html">Ant Design guide</a>)
 const toggle = () =&gt; { window.novusTheme.toggle(); setThemeTick(themeTick + 1); };
 // novusMui() is re-called on re-render and picks up the dark values</code></pre>
 
+<h2>Verified result</h2>
+<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against @mui/material 9.3.</p>
+<img src="../assets/samples/material.png" alt="Rendered sample: the kit styling Material UI components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
+
 <h2>Rules of the road</h2>
 <ul class="bullets">
   <li>MUI supplies behaviour (data grid, autocomplete, dialogs); Novus supplies identity. Never run two accent systems on one view.</li>
-  <li>Palette colours: always runtime reads via <code>getComputedStyle</code> — a <code>var()</code> string anywhere in <code>palette</code> throws (MUI error #9). Non-colour values (font, radius) take <code>var()</code> references fine.</li>
+  <li>Palette colours: always runtime reads via <code>getComputedStyle</code>, a <code>var()</code> string anywhere in <code>palette</code> throws (MUI error #9). Non-colour values (font, radius) take <code>var()</code> references fine.</li>
   <li>In <code>sx</code> props and styled components, keep referencing <code>var(--…)</code> tokens directly.</li>
   <li>Where a MUI component and a kit component overlap (buttons, chips, cards), prefer the kit's class-based component on brand-critical surfaces.</li>
-  <li>Logos remain placed assets from the package — theming never touches them.</li>
+  <li>Logos remain placed assets from the package, theming never touches them.</li>
 </ul>

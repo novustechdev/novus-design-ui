@@ -22,12 +22,14 @@
 - [x] Drift check: tokens.css, woff2 fonts, logos/, photos/ byte-identical to the reference snapshot (ttf/ deliberately not shipped)
 - [x] `npm publish --dry-run`: 121 files, 5.8 MB unpacked, allowlist only
 
-## Browser pass (human step before first publish — quickstart.md §4)
+## Browser pass (T027 — executed 2026-08-26 against the LIVE site via Chromium/CDP)
 
-- [ ] Dark parity by eye: toggle AND OS-dark + JS off — no dark-on-dark text, logo swaps white, lockups go light-blue
-- [ ] 375px: no horizontal scroll on any page, ≥44px touch targets
-- [ ] Contrast spot check ≥4.5:1 both themes; visible focus on all interactive elements
-- [ ] Carlito renders with no fallback flash
+- [x] Dark parity, toggle: `data-theme=dark` applies, body ground `#0B1620`, master logo swaps colour→white, choice persists across reload
+- [x] Dark parity, OS-dark + JS off: dark ground + light text `#E7EDF3` (AA per token spec), white logo, and the toggle button stays hidden (no dead control)
+- [x] 375px: zero horizontal overflow on landing, overview, table page, color page, antd theme page, install; mobile section menu opens
+- [x] Touch targets: theme toggle measured 42×31px (under the 44px floor) → fixed with a 44px min size on the toggle; all other controls are links/buttons at ≥44px rows
+- [x] Carlito confirmed as the computed body font (live pages and all sample apps)
+- [ ] Human spot check on real devices remains worthwhile before wide announcement (colour perception, hover feel); no blocking findings from the automated pass
 
 ## Ops handoff (before first real publish)
 

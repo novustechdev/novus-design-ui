@@ -11,13 +11,13 @@
       onclick="const x=this.closest('.disclosure');const open=x.querySelector('.collapse').classList.toggle('is-open');this.setAttribute('aria-expanded',open)">
       <span class="disclosure-ic">›</span> More detail
     </button>
-    <div class="collapse"><p class="muted" style="margin:var(--space-2) 0 0">Secondary content revealed on click — not hover.</p></div>
+    <div class="collapse"><p class="muted" style="margin:var(--space-2) 0 0">Secondary content revealed on click, not hover.</p></div>
   </div>
 </section>
 
 <h2>Usage</h2>
 <ul class="bullets">
   <li>Prefer native <code>&lt;details&gt;/&lt;summary&gt;</code> so the disclosure still opens with JavaScript disabled.</li>
-  <li>Disclosure is click-driven, never hover — touch and accessibility both depend on it.</li>
+  <li>Disclosure is click-driven, never hover, touch and accessibility both depend on it.</li>
   <li>Pair <code>button[aria-expanded]</code> with the <code>.collapse</code> target for the animated variant.</li>
 </ul>

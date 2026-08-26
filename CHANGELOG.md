@@ -3,7 +3,7 @@
 All notable changes to `@novus/design-kit`. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning is semantic.
 
-## [0.1.0] — 2026-08-26
+## [0.1.0], 2026-08-26
 
 ### Added
 
@@ -13,6 +13,6 @@ All notable changes to `@novus/design-kit`. Format follows
 - Official brand assets: master logo and wordmark (6 treatments each), product
   and platform lockups, pictographs (SVG + pre-tinted PNG), client and scheme
   marks, approved photography.
-- `js/novus-theme.js` — persisted pre-paint light/dark toggle helper.
+- `js/novus-theme.js`, persisted pre-paint light/dark toggle helper.
 - Reference site source (`site/`) with foundations, component catalog, and
   asset index.

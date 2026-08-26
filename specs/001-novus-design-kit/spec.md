@@ -227,7 +227,9 @@ as the official asset.
   (constitution Principle VI). Every guide's snippets MUST be verified by
   executing them in a sample project before the guide's first release, and
   re-verified when the target library releases a new major version; a guide
-  that has not passed verification does not ship.
+  that has not passed verification does not ship. Each guide page MUST embed
+  the rendered result of its verified sample and name the verified library
+  version.
 - **FR-018**: The reference site MUST display the kit version it documents,
   stamped from the package version at build time and shown in the site header.
 
