@@ -1,11 +1,12 @@
 <!-- title: Novus Design with Ant Design -->
 <p class="eyebrow">Themes</p>
 <h1>Novus Design with Ant Design</h1>
-<p style="max-width:68ch">Ant Design v5 derives its full colour palettes from seed tokens at runtime, so it
+<p style="max-width:68ch">Ant Design derives its full colour palettes from seed tokens at runtime, so it
 needs computable colour values — a raw <code>var()</code> string won't work there.
 The Novus pattern: <b>read the computed token values from the document at runtime</b>
 and feed those into <code>ConfigProvider</code>. Still by reference — no value is
-ever copied into code — and a theme flip just re-reads the tokens.</p>
+ever copied into code — and a theme flip just re-reads the tokens. Verified
+against antd v6 (the v5 API is the same).</p>
 
 <h2>1. Load the kit alongside antd</h2>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import "@novus/design-kit/js/novus-theme.js";

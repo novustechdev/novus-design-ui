@@ -2,54 +2,52 @@
 <p class="eyebrow">Themes</p>
 <h1>Novus Design with Material</h1>
 <p style="max-width:68ch">Teams using Material UI (MUI) keep its component behaviour and re-skin it with
-Novus tokens. MUI only computes colour variants when you omit them — so provide
-every variant explicitly as a <code>var(--…)</code> reference and the strings pass
-straight through to CSS, staying in sync with dark mode.</p>
+Novus tokens. MUI decomposes palette colours at runtime (it computes colour
+channels), so a raw <code>var()</code> string in the palette throws — the Novus
+pattern is the same as Ant Design's: <b>read the computed token values from the
+document at runtime</b> and rebuild the theme when the mode flips. Verified
+against MUI v9.</p>
 
 <h2>1. Load the kit alongside MUI</h2>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import "@novus/design-kit/js/novus-theme.js";
 import "@novus/design-kit/tokens.css";</code></pre>
 
-<h2>2. Derive the MUI theme from Novus tokens</h2>
+<h2>2. Derive the MUI theme by reading the tokens</h2>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import { createTheme, ThemeProvider } from "@mui/material/styles";
 
-const novusMui = createTheme({
+const t = (name) =&gt;
+  getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+// call inside your app so a theme flip can rebuild it
+const novusMui = () =&gt; createTheme({
+  // non-colour values are CSS-consumed, so var() references are fine here
   typography: { fontFamily: "var(--font-sans)" },
   shape: { borderRadius: "var(--radius-md)" },
+  // palette colours are decomposed by MUI -> runtime reads, never var() strings
   palette: {
-    // all variants given -> MUI computes nothing, strings pass through
-    primary: {
-      main: "var(--accent)",
-      light: "var(--accent-hover)",
-      dark: "var(--accent-active)",
-      contrastText: "var(--text-on-accent)",
-    },
-    error: {
-      main: "var(--danger)",
-      light: "var(--danger-subtle)",
-      dark: "var(--danger-text)",
-      contrastText: "var(--text-on-accent)",
-    },
-    background: { default: "var(--bg)", paper: "var(--surface)" },
-    text: { primary: "var(--text)", secondary: "var(--text-secondary)" },
-    divider: "var(--border)",
+    primary: { main: t("--accent"), light: t("--accent-hover"), dark: t("--accent-active"), contrastText: t("--text-on-accent") },
+    error: { main: t("--danger"), contrastText: t("--text-on-accent") },
+    background: { default: t("--bg"), paper: t("--surface") },
+    text: { primary: t("--text"), secondary: t("--text-secondary") },
+    divider: t("--border"),
   },
 });
 
-&lt;ThemeProvider theme={novusMui}&gt;
+&lt;ThemeProvider theme={novusMui()}&gt;
   &lt;App /&gt;
 &lt;/ThemeProvider&gt;</code></pre>
 
 <h2>3. Dark mode</h2>
-<p style="max-width:68ch">Because every mapped value is a variable, the palette re-tunes when
-<code>novusTheme.toggle()</code> flips <code>data-theme</code> — no second MUI theme
-needed. Don't use MUI's <code>palette.mode: "dark"</code> switching for brand
-surfaces; the tokens already carry both modes.</p>
+<p style="max-width:68ch">Rebuild the theme when the kit toggle flips, so the palette re-reads the dark
+token values (same tick pattern as the <a href="antd.html">Ant Design guide</a>):</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>const [themeTick, setThemeTick] = useState(0);
+const toggle = () =&gt; { window.novusTheme.toggle(); setThemeTick(themeTick + 1); };
+// novusMui() is re-called on re-render and picks up the dark values</code></pre>
 
 <h2>Rules of the road</h2>
 <ul class="bullets">
   <li>MUI supplies behaviour (data grid, autocomplete, dialogs); Novus supplies identity. Never run two accent systems on one view.</li>
-  <li>Always give <code>main</code>, <code>light</code>, <code>dark</code>, and <code>contrastText</code> together — an omitted variant makes MUI try to compute from a <code>var()</code> string, which fails.</li>
+  <li>Palette colours: always runtime reads via <code>getComputedStyle</code> — a <code>var()</code> string anywhere in <code>palette</code> throws (MUI error #9). Non-colour values (font, radius) take <code>var()</code> references fine.</li>
   <li>In <code>sx</code> props and styled components, keep referencing <code>var(--…)</code> tokens directly.</li>
   <li>Where a MUI component and a kit component overlap (buttons, chips, cards), prefer the kit's class-based component on brand-critical surfaces.</li>
   <li>Logos remain placed assets from the package — theming never touches them.</li>

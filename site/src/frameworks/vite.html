@@ -26,17 +26,24 @@ document.querySelector("#mark").src = lockup;   // hashed, cache-safe URL</code>
 
 <h2>4. Zero-flash dark mode (optional)</h2>
 <p style="max-width:68ch">Module imports run after first paint, so a user whose saved theme differs from
-their OS preference can see a one-frame flash. To remove it entirely, load the tiny
-helper as a blocking script in <code>index.html</code> instead of importing it:</p>
+their OS preference can see a one-frame flash. To remove it, keep the module import
+(it provides <code>novusTheme.toggle()</code>) and add this tiny blocking pre-paint
+snippet inline in <code>index.html</code> — a <code>/node_modules</code> script tag
+does <em>not</em> survive <code>vite build</code>:</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;head&gt;
-  &lt;script src="/node_modules/@novus/design-kit/js/novus-theme.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    try {
+      var t = localStorage.getItem("novus-theme");
+      if (t === "light" || t === "dark")
+        document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  &lt;/script&gt;
 &lt;/head&gt;</code></pre>
-<p style="max-width:68ch">(Vite serves and bundles head scripts referenced this way via its HTML entry
-handling; keep exactly one of the two loading methods.)</p>
 
 <h2>Rules of the road</h2>
 <ul class="bullets">
   <li>Import tokens.css exactly once, at the entry — not per component.</li>
   <li>Reference assets through imports (hashed URLs) rather than copying files into <code>public/</code>.</li>
+  <li>tokens.css registers every logo asset as a <code>url()</code> token, so Vite copies the full logo set (~1.5 MB) into your build output — expected, and harmless for app builds.</li>
   <li>Framework templates on Vite (React, Vue) follow their own guide for component patterns — this page covers the build tool layer.</li>
 </ul>
