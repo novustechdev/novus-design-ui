@@ -1,0 +1,62 @@
+# Contract: CSS class API & reference-site routes
+
+## CSS class API
+
+The kit's component interface is its class names (BEM-ish: block, `block__element`,
+`block--modifier`) plus the CSS custom properties in tokens.css. Classes and custom
+properties are API: removing or renaming either is a breaking change (MAJOR).
+
+v1 catalog — component families and their root classes (sub-elements documented on
+each family's detail page; exact grouping finalized in `site/components.json`):
+
+| Family | Category | Root classes |
+|--------|----------|--------------|
+| Button | General | `.btn` (+ `--primary --secondary --ghost --danger --sm --lg`) |
+| Badge | General | `.badge` (+ `--accent --success --warning --danger`, `__dot`) |
+| Avatar | General | `.avatar--photo`, `.bio-photo`, `.bio-id` |
+| Brand lockup | General | `.brandlock`, `.brandlogo--light`, `.wm` |
+| Container | Layout | `.container`, `.container--narrow` |
+| Grid & Row | Layout | `.grid`, `.row` |
+| Surface | Layout | `.surface` |
+| App shell | Layout | `.appbar`, `.appheader`, `.appnav__inner`, `.appmain` |
+| Card | Data Display | `.card` (+ `--interactive --raised`), `.card-trigger` |
+| Table | Data Display | `.table` |
+| Stats | Data Display | `.statrow` (+ `--wide`), `.stat` |
+| Bullets | Data Display | `.bullets` |
+| Leaders | Data Display | `.leaders`, `.leader` |
+| Logo wall | Data Display | `.clientwall`, `.clogo` |
+| Collapse | Data Display | `.collapse`, `.disclosure` |
+| Alert | Feedback | `.alert` (+ `--info --success --warning --danger`) |
+| Modal | Feedback | `.modal`, `.modal__backdrop`, `.modal-close` |
+| Field & Input | Forms | `.field` (+ `--error`, `__help`, `__error`), `.input` |
+| Lead form | Forms | `.lead-form`, `.cta-row` |
+| Nav | Navigation | `.nav` |
+| Product themes | Theming | `.theme-novus`, `.theme-novapay`, `.theme-novabank`, `.theme-novastore`, `.theme-novatrust`, `.theme-novaboost`, `.theme-novaai` |
+
+Out of v1 catalog (deck/poster system, documented in `slide-template/`):
+`.novus-slides`, `.nslide*`, `.novus-poster`, `.vchain*`, `.vdialog*`, `.vlogo`,
+`.slogo`, `.schemewall`.
+
+## Reference-site routes (public static site)
+
+| Route | Page |
+|-------|------|
+| `/` | Landing: what the kit is, install teaser, links into both sections |
+| `/install.html` | Install & wiring guide ("Novus developers only" note for registry access; no credentials) |
+| `/foundations/principles.html` | Design principles (from constitution + Novus_Context.md) |
+| `/foundations/color.html` | Palette, semantic tokens, product accents, one-accent rule |
+| `/foundations/typography.html` | Carlito, type scale, weights |
+| `/foundations/layout.html` | Spacing scale, container, grid, app shell |
+| `/foundations/logos.html` | Logo treatments, lockups, dark-mode behavior, placement rules |
+| `/foundations/photography.html` | Approved photos and usage |
+| `/foundations/dark-mode.html` | Dual trigger, pre-paint toggle pattern |
+| `/foundations/assets.html` | Bundled asset index: every file in `logos/` and `photos/` with preview + package path (generated at build time) |
+| `/components/index.html` | Overview grid: every manifest component, grouped by category, with preview + link |
+| `/components/<id>.html` | One per manifest entry: live examples per variant/state, copyable snippet per example, do/don't guidance |
+
+Every page: shared shell (header with master lockup at `--logo-height`, nav,
+theme toggle, footer), works at 375px, works with JS disabled (toggle button is
+the only JS-dependent control; OS dark preference still applies).
+
+URL stability: routes are public API for deep-linking; renaming a route after
+launch requires a redirect stub.
