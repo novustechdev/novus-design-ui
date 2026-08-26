@@ -1,13 +1,15 @@
 <!--
 Sync Impact Report
-- Version change: 1.0.0 → 1.0.1 (PATCH: radius rule clarified)
-- Modified principles: II. Enterprise Monochrome, Near-Flat — radius rule reworded from
-  "≤ 6px, never 8px+" to "only values from the tokens.css radius scale, no ad-hoc radii",
-  resolving the conflict with Principle I (tokens define --radius-md:8px … --radius-pill).
-  Quality Gate 5 updated to match.
-- Added sections: none
+- Version change: 1.0.1 → 1.1.0 (MINOR: new principle added)
+- Modified principles: none
+- Added sections: Principle VI. Framework-Agnostic Integration — the kit must remain
+  consumable from any web stack; official integration guides (Blazor, Tailwind CSS,
+  Fluent 2, and future additions) derive framework theming from tokens.css by variable
+  reference, never by copying values.
 - Removed sections: none
 - Follow-up TODOs: none
+- Prior amendment (1.0.0 → 1.0.1, 2026-08-26): Principle II radius rule reworded to
+  "only values from the tokens.css radius scale"; Quality Gate 5 updated to match.
 -->
 
 # Novus Design Kit Constitution
@@ -78,6 +80,24 @@ as a Service" MUST NOT appear in any output, including negated or contrast uses.
 **Rationale**: The kit is the brand's enforcement point; if it leaks off-brand
 assets or copy, every consumer inherits the leak.
 
+### VI. Framework-Agnostic Integration
+
+The kit MUST remain consumable from any web stack: its contract is CSS custom
+properties, component classes, and static assets — never a binding to one
+framework. Official integration guides on the reference site (Blazor, Tailwind
+CSS, Fluent 2, and future additions) show each framework consuming the kit, and
+MUST derive all framework-side theming from tokens.css **by variable reference**
+(`var(--…)`) — copying a token's value into a framework config forks the brand
+and breaks dark mode, and is a defect. A framework layer may supply behaviour
+and layout, but identity (colour, type, radius, shadow, logos, components)
+comes from the kit; no view runs two accent systems. Framework-specific
+component wrappers remain out of the kit itself — integration is documented,
+not shipped as code.
+
+**Rationale**: Novus teams build on different stacks; a kit that locks to one
+framework stops being the company standard, and duplicated values drift the
+moment tokens change.
+
 ## Design Standards & Constraints
 
 - Typeface: Carlito via `var(--font-sans)` only; no other font, no raw font-family.
@@ -123,4 +143,4 @@ in the PR description against Principle III.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
   MUST NOT ship with a known gate failure.
 
-**Version**: 1.0.1 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26
+**Version**: 1.1.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26

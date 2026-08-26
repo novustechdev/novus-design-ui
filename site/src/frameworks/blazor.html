@@ -1,0 +1,51 @@
+<!-- title: Novus Design for Blazor -->
+<p class="eyebrow">Frameworks</p>
+<h1>Novus Design for Blazor</h1>
+<p style="max-width:68ch">The kit is plain CSS + static assets, so Blazor (Server and WebAssembly) consumes it
+with no wrapper library: serve the package from <code>wwwroot</code>, link one
+stylesheet, and use the component classes in your Razor markup.</p>
+
+<h2>1. Get the package into wwwroot</h2>
+<p style="max-width:68ch">Install with npm as usual, then copy the package into <code>wwwroot/lib</code> at
+build time with an MSBuild target in your <code>.csproj</code>:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;Target Name="CopyNovusKit" BeforeTargets="Build"&gt;
+  &lt;ItemGroup&gt;
+    &lt;NovusKit Include="node_modules/@novus/design-kit/**/*" /&gt;
+  &lt;/ItemGroup&gt;
+  &lt;Copy SourceFiles="@(NovusKit)"
+        DestinationFiles="@(NovusKit-&gt;'wwwroot/lib/novus-design-kit/%(RecursiveDir)%(Filename)%(Extension)')"
+        SkipUnchangedFiles="true" /&gt;
+&lt;/Target&gt;</code></pre>
+
+<h2>2. Link it once</h2>
+<p style="max-width:68ch">In <code>Components/App.razor</code> (.NET 8+) or <code>wwwroot/index.html</code>
+(WebAssembly), inside <code>&lt;head&gt;</code>:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;link rel="stylesheet" href="lib/novus-design-kit/tokens.css" /&gt;
+&lt;script src="lib/novus-design-kit/js/novus-theme.js"&gt;&lt;/script&gt;</code></pre>
+
+<h2>3. Use the classes in Razor markup</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;button class="btn btn--primary" @onclick="Submit"&gt;Talk to us&lt;/button&gt;
+
+&lt;div class="card card--interactive" style="position:relative"&gt;
+    &lt;h3&gt;@Title&lt;/h3&gt;
+    &lt;p class="muted"&gt;@Summary&lt;/p&gt;
+    &lt;button class="card-trigger" aria-label="Open" @onclick="Open"&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+<h2>4. Theme toggle via JS interop</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>@inject IJSRuntime JS
+
+&lt;button class="btn btn--ghost btn--sm" @onclick="Toggle"&gt;Theme&lt;/button&gt;
+
+@code {
+    private async Task Toggle() =&gt;
+        await JS.InvokeVoidAsync("novusTheme.toggle");
+}</code></pre>
+
+<h2>Rules of the road</h2>
+<ul class="bullets">
+  <li>The kit's classes are global by design — they compose with Blazor CSS isolation; you never need <code>::deep</code> to reach them.</li>
+  <li>Don't re-declare brand values in component-scoped CSS; reference <code>var(--…)</code> tokens there too.</li>
+  <li>Keep the theme script in <code>&lt;head&gt;</code> so the persisted choice applies before first render.</li>
+  <li>Pairing with Fluent UI Blazor? See <a href="fluent2.html">Novus Design for Fluent 2</a> — Novus tokens stay the source of truth.</li>
+</ul>

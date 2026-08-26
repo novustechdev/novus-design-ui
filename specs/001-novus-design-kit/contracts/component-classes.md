@@ -57,6 +57,9 @@ Out of v1 catalog (deck/poster/doc systems, documented in `slide-template/`):
 | `/foundations/assets.html` | Bundled asset index: every file in `logos/` and `photos/` with preview + package path (generated at build time) |
 | `/components/overview.html` | Overview grid: every manifest component, grouped by category, with preview + link |
 | `/components/<id>.html` | One per manifest entry: live examples per variant/state, copyable snippet per example, do/don't guidance |
+| `/frameworks/blazor.html` | Novus Design for Blazor: wwwroot copy target, wiring, Razor usage, JS-interop toggle |
+| `/frameworks/tailwind.html` | Novus Design for Tailwind CSS: v4 `@theme inline` and v3 config token mapping |
+| `/frameworks/fluent2.html` | Novus Design for Fluent 2: Fluent UI React v9 / Fluent UI Blazor themed from Novus tokens by `var()` reference |
 | `/components/index.html` | Redirect stub → overview.html only. Content pages are never a subdirectory `index.html`: clean-URL hosts serve those at `/components` (no trailing slash), which breaks every relative link on the page. The build fails if one is emitted |
 
 Every page: shared shell (header with master lockup at `--logo-height`, nav,
