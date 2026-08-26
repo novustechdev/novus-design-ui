@@ -195,3 +195,9 @@ phase ends with a gates run, so every increment is releasable.
 - [X] T032 Verify the four theme guides (Tailwind CSS, Fluent 2, Material, Ant Design) in sample projects with the real libraries installed — specifically prove the MUI all-variants var() passthrough and the antd getComputedStyle runtime-read pattern — correct site/src/themes/*.html where reality differs, and record results, per FR-017 (missing)
 - [X] T033 Add the GitHub Pages deployment workflow .github/workflows/pages.yml (checkout → node site/build.mjs → upload site/dist → deploy-pages) plus a README/ops note covering pushing the repository to GitHub and enabling Pages, per FR-016 and the GitHub Pages hosting clarification (missing)
 - [X] T034 Extend the orphan-class gate in scripts/gates.sh to also fail when a tokens.css root class is claimed by more than one components.json entry, per data-model.md manifest rules (partial)
+
+---
+
+## Phase 9: Convergence
+
+- [ ] T035 Verify the Blazor guide on a machine with the .NET SDK: sample Blazor app, execute the MSBuild copy target, head wiring, Razor class usage, and IJSRuntime toggle from site/src/frameworks/blazor.html; correct the guide where reality differs, then flip the blazor row in specs/001-novus-design-kit/checklists/guide-verification.md to pass — the build filter publishes the page automatically, per FR-017 and Constitution VI (partial)
