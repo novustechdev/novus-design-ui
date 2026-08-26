@@ -1,15 +1,16 @@
 <!--
 Sync Impact Report
-- Version change: 1.0.1 → 1.1.0 (MINOR: new principle added)
-- Modified principles: none
-- Added sections: Principle VI. Framework-Agnostic Integration — the kit must remain
-  consumable from any web stack; official integration guides (Blazor, Tailwind CSS,
-  Fluent 2, and future additions) derive framework theming from tokens.css by variable
-  reference, never by copying values.
+- Version change: 1.1.0 → 1.2.0 (MINOR: Principle VI guidance materially expanded)
+- Modified principles: VI. Framework-Agnostic Integration — integration guides split
+  into two required sets: FRAMEWORK guides (Blazor, React, Vite, Vue.js) and UI THEME
+  guides (Tailwind CSS, Fluent 2, Material, Ant Design). Derivation rule widened: by
+  `var(--…)` reference, or by runtime reads of computed token values where a library
+  must calculate derived colors — never hardcoded copies.
+- Added sections: none
 - Removed sections: none
 - Follow-up TODOs: none
-- Prior amendment (1.0.0 → 1.0.1, 2026-08-26): Principle II radius rule reworded to
-  "only values from the tokens.css radius scale"; Quality Gate 5 updated to match.
+- Prior amendments: 1.0.1 → 1.1.0 (Principle VI added); 1.0.0 → 1.0.1 (Principle II
+  radius rule reworded to "only values from the tokens.css radius scale").
 -->
 
 # Novus Design Kit Constitution
@@ -84,15 +85,18 @@ assets or copy, every consumer inherits the leak.
 
 The kit MUST remain consumable from any web stack: its contract is CSS custom
 properties, component classes, and static assets — never a binding to one
-framework. Official integration guides on the reference site (Blazor, Tailwind
-CSS, Fluent 2, and future additions) show each framework consuming the kit, and
-MUST derive all framework-side theming from tokens.css **by variable reference**
-(`var(--…)`) — copying a token's value into a framework config forks the brand
-and breaks dark mode, and is a defect. A framework layer may supply behaviour
-and layout, but identity (colour, type, radius, shadow, logos, components)
-comes from the kit; no view runs two accent systems. Framework-specific
-component wrappers remain out of the kit itself — integration is documented,
-not shipped as code.
+framework. The reference site MUST carry two sets of integration guides:
+**framework guides** — Blazor, React, Vite, Vue.js — showing each application
+stack consuming the kit, and **UI theme guides** — Tailwind CSS, Fluent 2,
+Material, Ant Design — showing each UI library re-skinned with Novus tokens.
+All framework- and library-side theming MUST derive from tokens.css **by
+reference**: `var(--…)` where the library accepts CSS values, or a runtime read
+of the computed token value where a library must calculate derived colors.
+Copying a token's value into a config forks the brand and breaks dark mode, and
+is a defect. A framework or library supplies behaviour and layout, but identity
+(colour, type, radius, shadow, logos, components) comes from the kit; no view
+runs two accent systems. Framework-specific component wrappers remain out of
+the kit itself — integration is documented, not shipped as code.
 
 **Rationale**: Novus teams build on different stacks; a kit that locks to one
 framework stops being the company standard, and duplicated values drift the
@@ -143,4 +147,4 @@ in the PR description against Principle III.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
   MUST NOT ship with a known gate failure.
 
-**Version**: 1.1.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26
+**Version**: 1.2.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26

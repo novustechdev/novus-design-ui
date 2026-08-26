@@ -1,0 +1,42 @@
+<!-- title: Novus Design for Vite -->
+<p class="eyebrow">Frameworks</p>
+<h1>Novus Design for Vite</h1>
+<p style="max-width:68ch">Vite projects — vanilla JS or any framework template — consume the kit with zero
+configuration: import the stylesheet in your entry module and Vite bundles the
+Carlito fonts and rewrites their URLs automatically.</p>
+
+<h2>1. Install and import</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install @novus/design-kit</code></pre>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// src/main.js — first lines of the entry module
+import "@novus/design-kit/js/novus-theme.js";
+import "@novus/design-kit/tokens.css";</code></pre>
+<p style="max-width:68ch">That's the whole setup: the <code>@font-face</code> rules in tokens.css use relative
+URLs, so Vite resolves the woff2 files out of the package, hashes them, and serves
+them in dev and build without any plugin.</p>
+
+<h2>2. Use components in plain HTML</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;div id="app"&gt;
+  &lt;button class="btn btn--primary"&gt;Talk to us&lt;/button&gt;
+  &lt;span class="badge badge--success"&gt;&lt;span class="badge__dot"&gt;&lt;/span&gt; Live&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+<h2>3. Brand assets as imports</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import lockup from "@novus/design-kit/logos/lockups/novapay.png";
+document.querySelector("#mark").src = lockup;   // hashed, cache-safe URL</code></pre>
+
+<h2>4. Zero-flash dark mode (optional)</h2>
+<p style="max-width:68ch">Module imports run after first paint, so a user whose saved theme differs from
+their OS preference can see a one-frame flash. To remove it entirely, load the tiny
+helper as a blocking script in <code>index.html</code> instead of importing it:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;head&gt;
+  &lt;script src="/node_modules/@novus/design-kit/js/novus-theme.js"&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+<p style="max-width:68ch">(Vite serves and bundles head scripts referenced this way via its HTML entry
+handling; keep exactly one of the two loading methods.)</p>
+
+<h2>Rules of the road</h2>
+<ul class="bullets">
+  <li>Import tokens.css exactly once, at the entry — not per component.</li>
+  <li>Reference assets through imports (hashed URLs) rather than copying files into <code>public/</code>.</li>
+  <li>Framework templates on Vite (React, Vue) follow their own guide for component patterns — this page covers the build tool layer.</li>
+</ul>

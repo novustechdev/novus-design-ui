@@ -118,7 +118,7 @@ const footer = read(join(SRC, "partials/footer.html"));
 function shell({ title, content, depth, active, sidebar }) {
   const rel = "../".repeat(depth);
   let hdr = header.replaceAll("{{REL}}", rel);
-  for (const k of ["home", "foundations", "components", "frameworks", "install"]) {
+  for (const k of ["home", "foundations", "components", "frameworks", "themes", "install"]) {
     hdr = hdr.replace(`{{CUR_${k}}}`, k === active ? ' aria-current="page"' : "");
   }
   const main = sidebar
@@ -197,21 +197,31 @@ if (existsSync(foundDir)) {
   }
 }
 
-/* Frameworks — integration guides, one page per framework */
-const FRAMEWORKS = [
-  ["blazor.html", "Blazor"],
-  ["tailwind.html", "Tailwind CSS"],
-  ["fluent2.html", "Fluent 2"],
+/* Integration guides — framework stacks and UI-library themes (constitution VI) */
+const GUIDE_SECTIONS = [
+  ["frameworks", "Frameworks", [
+    ["blazor.html", "Blazor"],
+    ["react.html", "React"],
+    ["vite.html", "Vite"],
+    ["vue.html", "Vue.js"],
+  ]],
+  ["themes", "Themes", [
+    ["tailwind.html", "Tailwind CSS"],
+    ["fluent2.html", "Fluent 2"],
+    ["material.html", "Material"],
+    ["antd.html", "Ant Design"],
+  ]],
 ];
-const fwDir = join(SRC, "frameworks");
-if (existsSync(fwDir)) {
-  const present = FRAMEWORKS.filter(([f]) => existsSync(join(fwDir, f)));
-  for (const [f, label] of present) {
-    const raw = read(join(fwDir, f));
-    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, label])[1];
-    const sidebar = sideNav([["Frameworks", present.map(([g, l]) => [g, l])]], f);
-    writePage(join(DIST, "frameworks", f), shell({ title, content: transformDemos(raw), depth: 1, active: "frameworks", sidebar }));
-    built.push(`frameworks/${f}`);
+for (const [dir, label, pages] of GUIDE_SECTIONS) {
+  const srcDir = join(SRC, dir);
+  if (!existsSync(srcDir)) continue;
+  const present = pages.filter(([f]) => existsSync(join(srcDir, f)));
+  for (const [f, name] of present) {
+    const raw = read(join(srcDir, f));
+    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, name])[1];
+    const sidebar = sideNav([[label, present.map(([g, l]) => [g, l])]], f);
+    writePage(join(DIST, dir, f), shell({ title, content: transformDemos(raw), depth: 1, active: dir, sidebar }));
+    built.push(`${dir}/${f}`);
   }
 }
 

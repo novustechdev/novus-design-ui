@@ -1,0 +1,49 @@
+<!-- title: Novus Design for Vue.js -->
+<p class="eyebrow">Frameworks</p>
+<h1>Novus Design for Vue.js</h1>
+<p style="max-width:68ch">Vue single-file components use the kit's classes directly in templates. Import the
+stylesheet once in <code>main.js</code>; scoped styles coexist cleanly because the
+kit's classes are global and its tokens are CSS variables.</p>
+
+<h2>1. Install and wire</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install @novus/design-kit</code></pre>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// main.js
+import "@novus/design-kit/js/novus-theme.js";
+import "@novus/design-kit/tokens.css";
+import { createApp } from "vue";
+import App from "./App.vue";
+
+createApp(App).mount("#app");</code></pre>
+
+<h2>2. Use the classes in a single-file component</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;script setup&gt;
+defineProps(["title", "summary"]);
+const emit = defineEmits(["open"]);
+const toggleTheme = () =&gt; window.novusTheme.toggle();
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class="card card--interactive" style="position: relative"&gt;
+    &lt;h3&gt;{{ title }}&lt;/h3&gt;
+    &lt;p class="muted"&gt;{{ summary }}&lt;/p&gt;
+    &lt;button class="card-trigger" :aria-label="`Open ${title}`" @click="emit('open')" /&gt;
+  &lt;/div&gt;
+  &lt;button class="btn btn--ghost btn--sm" @click="toggleTheme"&gt;Theme&lt;/button&gt;
+&lt;/template&gt;</code></pre>
+
+<h2>3. Scoped styles stay on tokens</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;style scoped&gt;
+.detail {
+  padding: var(--space-4);
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+&lt;/style&gt;</code></pre>
+
+<h2>Rules of the road</h2>
+<ul class="bullets">
+  <li>Kit classes are global — no <code>:deep()</code> needed to use them inside scoped components.</li>
+  <li>Scoped styles reference <code>var(--…)</code> tokens; never re-declare a value the tokens define.</li>
+  <li>Keep the theme import first in <code>main.js</code> so the persisted choice applies as early as possible.</li>
+  <li>Adding a component library? Theme it from the tokens — see <a href="../themes/antd.html">Ant Design</a> or <a href="../themes/material.html">Material</a>.</li>
+</ul>
