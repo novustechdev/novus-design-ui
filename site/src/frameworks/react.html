@@ -1,13 +1,13 @@
 <!-- title: Novus Design for React -->
 <p class="eyebrow">Frameworks</p>
 <h1>Novus Design for React</h1>
-<p style="max-width:68ch">The kit ships no React wrappers by design — its classes and tokens <em>are</em> the
+<p style="max-width:68ch">The kit ships no React wrappers by design, its classes and tokens <em>are</em> the
 API. Import one stylesheet at the app root and use the component classes in JSX;
 everything re-tunes for dark mode automatically.</p>
 
 <h2>1. Install and wire</h2>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install @novus/design-kit</code></pre>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// main.tsx / index.jsx — once, before anything renders
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// main.tsx / index.jsx, once, before anything renders
 import "@novus/design-kit/js/novus-theme.js";
 import "@novus/design-kit/tokens.css";</code></pre>
 
@@ -37,9 +37,13 @@ import logoWhite  from "@novus/design-kit/logos/Novus_Logo_White_transparent.png
 &lt;img className="brandlogo--light" src={logoColour} alt="Novus Technologies" /&gt;
 &lt;img className="brandlogo--dark"  src={logoWhite}  alt="Novus Technologies" /&gt;</code></pre>
 
+<h2>Verified result</h2>
+<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against react 18.3 on vite 8.</p>
+<img src="../assets/samples/react.png" alt="Rendered sample: the kit styling React components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
+
 <h2>Rules of the road</h2>
 <ul class="bullets">
-  <li>Don't build a parallel component library of styled wrappers — a thin local component that applies kit classes (like <code>ProductCard</code> above) is fine; re-implementing <code>.btn</code>/<code>.card</code> visuals in CSS-in-JS is not.</li>
-  <li>In styled-components/emotion/CSS modules, reference <code>var(--…)</code> tokens — never literal values the tokens define.</li>
+  <li>Don't build a parallel component library of styled wrappers, a thin local component that applies kit classes (like <code>ProductCard</code> above) is fine; re-implementing <code>.btn</code>/<code>.card</code> visuals in CSS-in-JS is not.</li>
+  <li>In styled-components/emotion/CSS modules, reference <code>var(--…)</code> tokens, never literal values the tokens define.</li>
   <li>Using a component library on top? See the theme guides: <a href="../themes/antd.html">Ant Design</a>, <a href="../themes/material.html">Material</a>, <a href="../themes/fluent2.html">Fluent 2</a>.</li>
 </ul>

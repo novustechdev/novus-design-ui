@@ -1,18 +1,18 @@
 # @novus/design-kit
 
 The Novus Technologies design kit: design tokens, component styles, the Carlito
-typeface, and the official brand assets — as one installable package. Framework-
+typeface, and the official brand assets, as one installable package. Framework-
 agnostic: import one stylesheet and build with documented HTML patterns in any
 web stack.
 
 > **Novus developers only.** The package is published to Novus's private
 > registry. It is not on public npm, and the bundled logos and photography are
-> proprietary — don't republish them.
+> proprietary, don't republish them.
 
 ## Install
 
 One-time setup (per machine): point the `@novus` scope at the private feed and
-authenticate with your own credentials — ask DevOps for the feed URL. Never
+authenticate with your own credentials, ask DevOps for the feed URL. Never
 commit tokens.
 
 ```bash
@@ -29,7 +29,7 @@ npm install @novus/design-kit        # or: yarn add @novus/design-kit
 <script src="/node_modules/@novus/design-kit/js/novus-theme.js"></script>
 ```
 
-**Bundler** (Vite / webpack / Next.js) — once at the app root:
+**Bundler** (Vite / webpack / Next.js), once at the app root:
 
 ```js
 import "@novus/design-kit/tokens.css";
@@ -42,7 +42,7 @@ before first paint so a persisted dark-mode choice doesn't flash).
 
 ## Use it
 
-Everything derives from the tokens — never hardcode a value they define:
+Everything derives from the tokens, never hardcode a value they define:
 
 ```html
 <button class="btn btn--primary">Talk to us</button>
@@ -59,13 +59,23 @@ Everything derives from the tokens — never hardcode a value they define:
   in light, the White variant in dark (use the `.brandlogo--light`/`--dark` pair).
   Never retype or redraw a logo.
 
-Full documentation — foundations, every component with live examples and
-copyable snippets, and the asset index — is on the reference site (see
+Full documentation, foundations, every component with live examples and
+copyable snippets, and the asset index, is on the reference site (see
 `site/` in this repository; each release publishes it).
+
+## Framework and theme guides
+
+The reference site carries verified integration guides: frameworks (Blazor,
+React, Vite, Vue.js) and UI-library themes (Tailwind CSS, Fluent 2, Material,
+Ant Design). Every guide's snippets are executed in a real sample project
+before publication, each page shows the rendered result and the library
+version it was verified against, and an unverified guide does not ship
+(enforced at build time). Verification history lives in
+`specs/001-novus-design-kit/checklists/guide-verification.md`.
 
 ## Overriding and extending tokens
 
-Layer your app's values **after** the import — never edit kit files:
+Layer your app's values **after** the import, never edit kit files:
 
 ```css
 /* after tokens.css */
@@ -73,7 +83,7 @@ Layer your app's values **after** the import — never edit kit files:
 ```
 
 Anything you don't override keeps tracking the kit across upgrades. Brand
-values (colors, type, logos) are locked — if one looks wrong, raise it with the
+values (colors, type, logos) are locked, if one looks wrong, raise it with the
 design-system owner instead of patching locally.
 
 ## Reference site deployment (ops)

@@ -16,7 +16,7 @@ theme guides in one app), `vue-app/` (Vue guide) — session scratchpad, 2026-08
 | react | react 18.3.1 (vite 8.2.2) | react-libs | 2026-08-26 | pass |
 | vite | vite 8.2.2 | vite-vanilla | 2026-08-26 | pass |
 | vue | vue 3.5.41 (vite 8.2.2) | vue-app | 2026-08-26 | pass |
-| blazor | — (.NET SDK not available on build machine; owner: Santo/DevOps — verify on a machine with dotnet, then flip this row) | — | 2026-08-26 | blocked |
+| blazor | .NET SDK 10.0.400 (Blazor Web App template, InteractiveServer) | blazor-app | 2026-08-26 | pass |
 | tailwind | tailwindcss 4.3.3 (@tailwindcss/vite) | react-libs | 2026-08-26 | pass |
 | fluent2 | @fluentui/react-components 9.74.7 | react-libs | 2026-08-26 | pass |
 | material | @mui/material 9.3.1 | react-libs | 2026-08-26 | pass |
@@ -33,3 +33,9 @@ theme guides in one app), `vue-app/` (Vue guide) — session scratchpad, 2026-08
 - **Fluent 2**: `var()` values in the theme override object work as written.
 - **Ant Design**: pattern works unchanged on antd v6 (guide originally written
   against the v5 API).
+- **Blazor** (verified 2026-08-26 after installing the .NET SDK): copy target,
+  head wiring, Razor markup, and IJSRuntime toggle all work as written. One
+  finding folded back: the default template's Bootstrap collides with the kit's
+  `.btn` and its app.css overrides Carlito; the guide now says to remove both
+  template stylesheet links. Every guide page now embeds its sample's rendered
+  screenshot under "Verified result".

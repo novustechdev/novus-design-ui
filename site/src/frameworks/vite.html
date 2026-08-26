@@ -1,13 +1,13 @@
 <!-- title: Novus Design for Vite -->
 <p class="eyebrow">Frameworks</p>
 <h1>Novus Design for Vite</h1>
-<p style="max-width:68ch">Vite projects — vanilla JS or any framework template — consume the kit with zero
+<p style="max-width:68ch">Vite projects, vanilla JS or any framework template, consume the kit with zero
 configuration: import the stylesheet in your entry module and Vite bundles the
 Carlito fonts and rewrites their URLs automatically.</p>
 
 <h2>1. Install and import</h2>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install @novus/design-kit</code></pre>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// src/main.js — first lines of the entry module
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// src/main.js, first lines of the entry module
 import "@novus/design-kit/js/novus-theme.js";
 import "@novus/design-kit/tokens.css";</code></pre>
 <p style="max-width:68ch">That's the whole setup: the <code>@font-face</code> rules in tokens.css use relative
@@ -28,7 +28,7 @@ document.querySelector("#mark").src = lockup;   // hashed, cache-safe URL</code>
 <p style="max-width:68ch">Module imports run after first paint, so a user whose saved theme differs from
 their OS preference can see a one-frame flash. To remove it, keep the module import
 (it provides <code>novusTheme.toggle()</code>) and add this tiny blocking pre-paint
-snippet inline in <code>index.html</code> — a <code>/node_modules</code> script tag
+snippet inline in <code>index.html</code>, a <code>/node_modules</code> script tag
 does <em>not</em> survive <code>vite build</code>:</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;head&gt;
   &lt;script&gt;
@@ -40,10 +40,14 @@ does <em>not</em> survive <code>vite build</code>:</p>
   &lt;/script&gt;
 &lt;/head&gt;</code></pre>
 
+<h2>Verified result</h2>
+<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against vite 8.</p>
+<img src="../assets/samples/vite.png" alt="Rendered sample: the kit styling Vite components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
+
 <h2>Rules of the road</h2>
 <ul class="bullets">
-  <li>Import tokens.css exactly once, at the entry — not per component.</li>
+  <li>Import tokens.css exactly once, at the entry, not per component.</li>
   <li>Reference assets through imports (hashed URLs) rather than copying files into <code>public/</code>.</li>
-  <li>tokens.css registers every logo asset as a <code>url()</code> token, so Vite copies the full logo set (~1.5 MB) into your build output — expected, and harmless for app builds.</li>
-  <li>Framework templates on Vite (React, Vue) follow their own guide for component patterns — this page covers the build tool layer.</li>
+  <li>tokens.css registers every logo asset as a <code>url()</code> token, so Vite copies the full logo set (~1.5 MB) into your build output, expected, and harmless for app builds.</li>
+  <li>Framework templates on Vite (React, Vue) follow their own guide for component patterns, this page covers the build tool layer.</li>
 </ul>

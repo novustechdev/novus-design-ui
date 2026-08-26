@@ -2,7 +2,7 @@
 <p class="eyebrow">Themes</p>
 <h1>Novus Design with Fluent 2</h1>
 <p style="max-width:68ch">Teams building on Microsoft's Fluent 2 (Fluent UI React v9, or Fluent UI Blazor)
-keep Fluent's component behaviour and accessibility — and re-skin it with Novus
+keep Fluent's component behaviour and accessibility, and re-skin it with Novus
 tokens so everything renders on-brand. The rule is one-directional:
 <b>tokens.css is the source of truth; Fluent's theme is derived from it</b>, never
 the other way around.</p>
@@ -13,7 +13,7 @@ import "@novus/design-kit/js/novus-theme.js";</code></pre>
 
 <h2>2. Derive the Fluent theme from Novus tokens (React v9)</h2>
 <p style="max-width:68ch">Fluent v9 theme values land in CSS custom properties, so you can point them straight
-at the Novus variables — no hex duplication, and dark mode stays in sync:</p>
+at the Novus variables, no hex duplication, and dark mode stays in sync:</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 
 const novusFluent = {
@@ -47,13 +47,17 @@ neutrals, swap the base theme on the same event:</p>
 <ul class="bullets">
   <li>Load <code>tokens.css</code> after the Fluent providers so Novus values win the cascade.</li>
   <li>Bind Fluent's accent design token to the Novus accent (its theming reads CSS custom properties) rather than picking a colour in Fluent's own palette tools.</li>
-  <li>Keep Carlito: set the base font token to <code>var(--font-sans)</code> — Fluent's Segoe default is off-brand.</li>
+  <li>Keep Carlito: set the base font token to <code>var(--font-sans)</code>, Fluent's Segoe default is off-brand.</li>
 </ul>
+
+<h2>Verified result</h2>
+<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against @fluentui/react-components 9.74.</p>
+<img src="../assets/samples/fluent2.png" alt="Rendered sample: the kit styling Fluent 2 components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
 
 <h2>Rules of the road</h2>
 <ul class="bullets">
   <li>Fluent supplies behaviour (menus, grids, dialogs, focus management); Novus supplies identity. Never run two accent systems on one view.</li>
-  <li>Map tokens by reference (<code>var(--…)</code>) — copying hex values forks the brand and breaks dark mode.</li>
+  <li>Map tokens by reference (<code>var(--…)</code>), copying hex values forks the brand and breaks dark mode.</li>
   <li>Where a Fluent component and a kit component overlap (buttons, badges, cards), prefer the kit's class-based component for brand-critical surfaces.</li>
-  <li>Logos remain placed assets from the package — Fluent theming never touches them.</li>
+  <li>Logos remain placed assets from the package, Fluent theming never touches them.</li>
 </ul>

@@ -1,16 +1,18 @@
 <!--
 Sync Impact Report
-- Version change: 1.1.0 → 1.2.0 (MINOR: Principle VI guidance materially expanded)
-- Modified principles: VI. Framework-Agnostic Integration — integration guides split
-  into two required sets: FRAMEWORK guides (Blazor, React, Vite, Vue.js) and UI THEME
-  guides (Tailwind CSS, Fluent 2, Material, Ant Design). Derivation rule widened: by
-  `var(--…)` reference, or by runtime reads of computed token values where a library
-  must calculate derived colors — never hardcoded copies.
+- Version change: 1.2.0 → 1.3.0 (MINOR: two principles materially expanded)
+- Modified principles:
+  V. Brand & Copy Fidelity: house copy style added: published site and README copy
+  avoids em-dash punctuation (reads as machine-generated); enforced by a quality gate.
+  VI. Framework-Agnostic Integration: every guide page must embed the rendered result
+  of its verified sample project and name the library version it was verified against;
+  verification is recorded per guide and an unverified guide does not ship (build-time
+  publication filter + release gate).
 - Added sections: none
-- Removed sections: none
+- Removed sections: none (Quality Gates list extended with gates 8 and 9)
 - Follow-up TODOs: none
-- Prior amendments: 1.0.1 → 1.1.0 (Principle VI added); 1.0.0 → 1.0.1 (Principle II
-  radius rule reworded to "only values from the tokens.css radius scale").
+- Prior amendments: 1.1.0 → 1.2.0 (Principle VI guide sets expanded); 1.0.1 → 1.1.0
+  (Principle VI added); 1.0.0 → 1.0.1 (Principle II radius rule reworded).
 -->
 
 # Novus Design Kit Constitution
@@ -77,6 +79,8 @@ lockups to the two light blues. Product names are lowercase and solid-set
 decks, never written fresh; missing copy gets a `<!-- copy: Novus_Context.md -->`
 slot. The business model is "Service as Software": the strings "SaaS" and "Software
 as a Service" MUST NOT appear in any output, including negated or contrast uses.
+House copy style: published site and README copy MUST NOT use em-dash punctuation
+(it reads as machine-generated); prefer commas, colons, or shorter sentences.
 
 **Rationale**: The kit is the brand's enforcement point; if it leaks off-brand
 assets or copy, every consumer inherits the leak.
@@ -96,7 +100,11 @@ Copying a token's value into a config forks the brand and breaks dark mode, and
 is a defect. A framework or library supplies behaviour and layout, but identity
 (colour, type, radius, shadow, logos, components) comes from the kit; no view
 runs two accent systems. Framework-specific component wrappers remain out of
-the kit itself — integration is documented, not shipped as code.
+the kit itself — integration is documented, not shipped as code. Every guide's
+snippets MUST be executed in a sample project before publication; each guide
+page embeds its sample's rendered result and names the verified library
+version; verification is recorded per guide, and an unverified guide MUST NOT
+ship (enforced by a build-time publication filter and a release gate).
 
 **Rationale**: Novus teams build on different stacks; a kit that locks to one
 framework stops being the company standard, and duplicated values drift the
@@ -131,6 +139,9 @@ Every change to the kit MUST pass these gates before merge:
    template/placeholder text (including CJK scaffold leaks).
 7. New components ship with documentation and a reference-page demo in the same
    change; a component without a demo is incomplete.
+8. Copy style: `grep -r "—"` on published site copy and README → zero matches.
+9. Guide verification: every published framework/theme guide has a passing row
+   in the verification record; unverified guides are excluded from the build.
 
 Reviews reject on any gate failure; gates are not advisory.
 
@@ -147,4 +158,4 @@ in the PR description against Principle III.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
   MUST NOT ship with a known gate failure.
 
-**Version**: 1.2.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26
+**Version**: 1.3.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26

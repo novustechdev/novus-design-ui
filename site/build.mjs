@@ -42,6 +42,7 @@ function transformDemos(html) {
 const SITE_CSS = `
   .appname{font-weight:var(--weight-bold);font-size:var(--text-lg);color:var(--text);}
   .brandlock{text-decoration:none;}
+  .themetoggle{min-height:2.75rem;min-width:2.75rem;}
   .themetoggle .ic-sun{display:none;}
   [data-theme="dark"] .themetoggle .ic-moon{display:none;}
   [data-theme="dark"] .themetoggle .ic-sun{display:block;}
@@ -130,7 +131,7 @@ function shell({ title, content, depth, active, sidebar }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} — Novus Design Kit</title>
+<title>${esc(title)} · Novus Design Kit</title>
 <link rel="stylesheet" href="${rel}tokens.css">
 <script src="${rel}js/novus-theme.js"></script>
 <style>${SITE_CSS}</style>
@@ -164,6 +165,8 @@ mkdirSync(DIST, { recursive: true });
 /* Runtime assets: the site consumes the SAME files the package publishes. */
 cpSync(join(ROOT, "tokens.css"), join(DIST, "tokens.css"));
 for (const dir of ["fonts", "logos", "photos", "js"]) cpSync(join(ROOT, dir), join(DIST, dir), { recursive: true });
+/* Site-only assets (verified-sample screenshots); not part of the npm package */
+if (existsSync(join(SRC, "assets"))) cpSync(join(SRC, "assets"), join(DIST, "assets"), { recursive: true });
 
 const built = [];
 
@@ -311,7 +314,7 @@ ${frag}
 
   /* Redirect stub for anyone landing on /components or /components/ — never a content page. */
   writeFileSync(join(DIST, "components", "index.html"), `<!DOCTYPE html><!--redirect-stub-->
-<html lang="en"><head><meta charset="utf-8"><title>Components — Novus Design Kit</title>
+<html lang="en"><head><meta charset="utf-8"><title>Components · Novus Design Kit</title>
 <script>location.replace(location.pathname.replace(/\\/?(index(\\.html)?)?$/, "/overview.html"));</script>
 </head><body><p><a href="overview.html">Component overview</a></p></body></html>
 `);

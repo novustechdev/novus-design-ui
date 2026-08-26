@@ -126,7 +126,7 @@ project resolves the official file.
 
 ## Phase 7: Polish & Cross-Cutting Concerns
 
-- [ ] T027 Run the full manual gate checklist from quickstart.md §4 (dark parity with toggle AND OS+JS-off, 375px pass, hover audit, contrast + focus states) across all built pages; fix findings; record results in specs/001-novus-design-kit/checklists/release-gates.md
+- [X] T027 Run the full manual gate checklist from quickstart.md §4 (dark parity with toggle AND OS+JS-off, 375px pass, hover audit, contrast + focus states) across all built pages; fix findings; record results in specs/001-novus-design-kit/checklists/release-gates.md
 - [X] T028 Release readiness: drift check of shipped files against `references/Novus_Design_System_Kit_v2/` — `tokens.css` identical, `fonts/` woff2 files identical (`ttf/` deliberately not shipped), `logos/` and `photos/` trees identical; full `scripts/gates.sh` run, `npm pack` final inspection, `npm publish --dry-run`; actual feed URL + publish is an ops handoff noted in README
 
 ---
@@ -200,4 +200,4 @@ phase ends with a gates run, so every increment is releasable.
 
 ## Phase 9: Convergence
 
-- [ ] T035 Verify the Blazor guide on a machine with the .NET SDK: sample Blazor app, execute the MSBuild copy target, head wiring, Razor class usage, and IJSRuntime toggle from site/src/frameworks/blazor.html; correct the guide where reality differs, then flip the blazor row in specs/001-novus-design-kit/checklists/guide-verification.md to pass — the build filter publishes the page automatically, per FR-017 and Constitution VI (partial)
+- [X] T035 Verify the Blazor guide on a machine with the .NET SDK: sample Blazor app, execute the MSBuild copy target, head wiring, Razor class usage, and IJSRuntime toggle from site/src/frameworks/blazor.html; correct the guide where reality differs, then flip the blazor row in specs/001-novus-design-kit/checklists/guide-verification.md to pass — the build filter publishes the page automatically, per FR-017 and Constitution VI (partial)

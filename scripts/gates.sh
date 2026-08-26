@@ -37,6 +37,10 @@ gate "SaaS-string grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 HITS=$(grep -rnP '[\x{4E00}-\x{9FFF}]' site/src site/dist 2>/dev/null)
 gate "CJK leak grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
+# 6b. Copy style: no em dashes in AUTHORED copy (upstream kit docs in logos/ are excluded authority)
+HITS=$(grep -rn "—" site/src README.md CHANGELOG.md 2>/dev/null; grep -rn --include="*.html" "—" site/dist 2>/dev/null)
+gate "em-dash copy-style" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
+
 # 7. Manifest ↔ detail-page completeness + orphan-class check
 if [ -f site/components.json ]; then
   MISSING_FRAG=""
