@@ -19,6 +19,7 @@
 - Q: Where will the public reference site be deployed? → A: GitHub Pages. The repository is pushed to GitHub and the built `site/dist` is published via Pages; the site must keep working under a `/repo-name/` sub-path (it uses relative URLs throughout), with a custom domain as an optional later step.
 - Q: Should the reference site show which kit version it documents? → A: Yes — the build stamps the package version into the site header as a badge, so developers can tell whether the docs match their installed version.
 - Q: Which concrete private registry hosts the package? → A: GitHub Packages (npm.pkg.github.com), attached to the sgultom99/novus-design-ui repository. Installs always require a GitHub token with read:packages, satisfying FR-001's private-registry rule; the @sgultom99 scope is interim until a Novus org scope exists (rename ships as a MAJOR).
+- Owner decision (2026-08-26, post-ship): package visibility on GitHub Packages is set to PUBLIC for the time being, deliberately overriding the private-visibility posture. Rationale: the same assets are already world-readable via the public repository and docs site, and GitHub Packages still requires a token for npm installs regardless of visibility, so the registry remains auth-gated. Revisit at the Novus org migration. Also: `main` is the protected default branch, and releases are tagged semantically (v0.1.0 released with the npm tarball attached).
 
 ## User Scenarios & Testing *(mandatory)*
 
