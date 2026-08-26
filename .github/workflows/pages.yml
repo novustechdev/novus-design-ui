@@ -26,6 +26,9 @@ jobs:
         run: node site/build.mjs
       - name: Run quality gates
         run: scripts/gates.sh
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/dist
