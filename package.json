@@ -1,6 +1,6 @@
 {
-  "name": "@sgultom99/novus-design-kit",
-  "version": "0.1.0",
+  "name": "novus-design-kit",
+  "version": "0.2.0",
   "description": "Novus Technologies design kit: tokens, component styles, Carlito fonts, and official brand assets. Framework-agnostic CSS; import tokens.css and build.",
   "license": "UNLICENSED",
   "author": "Novus Technologies Pte Ltd",
@@ -10,6 +10,8 @@
     "tokens.css",
     "fonts/",
     "logos/",
+    "!logos/clients/",
+    "!logos/schemes/",
     "photos/",
     "js/",
     "README.md",
@@ -28,7 +30,8 @@
     "gates": "scripts/gates.sh"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "repository": {
     "type": "git",

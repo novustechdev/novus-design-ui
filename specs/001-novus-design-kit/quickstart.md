@@ -39,7 +39,7 @@ npm init -y && npm install <path-to-tgz>
 ```
 
 Create `index.html` that links
-`node_modules/@sgultom99/novus-design-kit/tokens.css`, includes the theme helper script,
+`node_modules/novus-design-kit/tokens.css`, includes the theme helper script,
 and pastes — unmodified — the Button, Card, and App shell snippets from the
 built site. Serve statically (`npx serve` or any static server) and open it.
 

@@ -6,10 +6,10 @@ API. Import one stylesheet at the app root and use the component classes in JSX;
 everything re-tunes for dark mode automatically.</p>
 
 <h2>1. Install and wire</h2>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install @sgultom99/novus-design-kit</code></pre>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install novus-design-kit</code></pre>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// main.tsx / index.jsx, once, before anything renders
-import "@sgultom99/novus-design-kit/js/novus-theme.js";
-import "@sgultom99/novus-design-kit/tokens.css";</code></pre>
+import "novus-design-kit/js/novus-theme.js";
+import "novus-design-kit/tokens.css";</code></pre>
 
 <h2>2. Use the classes in JSX</h2>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>export function ProductCard({ title, summary, onOpen }) {
@@ -31,8 +31,8 @@ import "@sgultom99/novus-design-kit/tokens.css";</code></pre>
 &lt;/button&gt;</code></pre>
 
 <h2>4. Brand assets</h2>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import logoColour from "@sgultom99/novus-design-kit/logos/Novus_Logo_Colour_transparent.png";
-import logoWhite  from "@sgultom99/novus-design-kit/logos/Novus_Logo_White_transparent.png";
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import logoColour from "novus-design-kit/logos/Novus_Logo_Colour_transparent.png";
+import logoWhite  from "novus-design-kit/logos/Novus_Logo_White_transparent.png";
 
 &lt;img className="brandlogo--light" src={logoColour} alt="Novus Technologies" /&gt;
 &lt;img className="brandlogo--dark"  src={logoWhite}  alt="Novus Technologies" /&gt;</code></pre>

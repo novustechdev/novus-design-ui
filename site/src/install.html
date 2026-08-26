@@ -2,33 +2,29 @@
 <h1>Install</h1>
 
 <div class="alert alert--info" style="margin-bottom:var(--space-5);max-width:68ch">
-  <span><b>Novus developers only.</b> The package lives on GitHub Packages, which
-  requires authentication even to install. Create a GitHub personal access token
-  (classic) with the <code>read:packages</code> scope. It is not on public npm, and
-  the bundled logos and photography are proprietary.</span>
+  <span>The package installs from public npm with no registry setup and no token.
+  Third-party marks (client and card-scheme logos) are not in the npm artifact;
+  they live in the repository for approved proof-wall use. The bundled Novus
+  logos and photography remain proprietary: don't republish them.</span>
 </div>
 
-<h2>1. Point the scope at GitHub Packages (once per machine)</h2>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm config set @sgultom99:registry https://npm.pkg.github.com
-npm config set //npm.pkg.github.com/:_authToken YOUR_GITHUB_TOKEN</code></pre>
-
-<h2>2. Install</h2>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install @sgultom99/novus-design-kit
+<h2>1. Install</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install novus-design-kit
 # or
-yarn add @sgultom99/novus-design-kit</code></pre>
+yarn add novus-design-kit</code></pre>
 
-<h2>3. Wire it in</h2>
+<h2>2. Wire it in</h2>
 <p>Plain HTML, served over http(s):</p>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;link rel="stylesheet" href="/node_modules/@sgultom99/novus-design-kit/tokens.css"&gt;
-&lt;script src="/node_modules/@sgultom99/novus-design-kit/js/novus-theme.js"&gt;&lt;/script&gt;</code></pre>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;link rel="stylesheet" href="/node_modules/novus-design-kit/tokens.css"&gt;
+&lt;script src="/node_modules/novus-design-kit/js/novus-theme.js"&gt;&lt;/script&gt;</code></pre>
 <p>Bundler (Vite / webpack / Next.js), once at the app root:</p>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import "@sgultom99/novus-design-kit/tokens.css";
-import "@sgultom99/novus-design-kit/js/novus-theme.js";</code></pre>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import "novus-design-kit/tokens.css";
+import "novus-design-kit/js/novus-theme.js";</code></pre>
 <p style="max-width:68ch">Carlito is self-hosted by the stylesheet via relative URLs, no font setup. Keep the
 theme script in <code>&lt;head&gt;</code> so a persisted dark-mode choice applies before
 first paint.</p>
 
-<h2>4. Build with tokens and components</h2>
+<h2>3. Build with tokens and components</h2>
 <section class="demo" data-title="First component">
   <button class="btn btn--primary">Talk to us</button>
 </section>

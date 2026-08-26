@@ -21,7 +21,7 @@ and the three spec clarifications.
 
 ## D2. Package name & registry
 
-- **Decision** (updated at publish, 2026-08-26): `@sgultom99/novus-design-kit`, published
+- **Decision** (updated at publish, 2026-08-26): `novus-design-kit`, published
   to GitHub Packages (npm.pkg.github.com), attached to the sgultom99/novus-design-ui
   repository. GitHub Packages requires auth even to install, satisfying the private-
   registry rule; the @sgultom99 scope is interim until a Novus org exists (MAJOR rename).
