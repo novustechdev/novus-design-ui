@@ -1,0 +1,21 @@
+<section class="demo" data-title="Grid">
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+    <div class="card">One</div>
+    <div class="card">Two</div>
+    <div class="card">Three</div>
+  </div>
+</section>
+
+<section class="demo" data-title="Row (wrapping action line)">
+  <div class="row">
+    <button class="btn btn--primary">Talk to us</button>
+    <button class="btn btn--secondary">Download</button>
+    <span class="badge badge--success">99.8% uptime</span>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Mobile-first: use <code>auto-fit/minmax()</code> columns so layouts stack on phones instead of squeezing.</li>
+  <li>Gaps come from the spacing scale (<code>--space-*</code>), never ad-hoc pixel values.</li>
+</ul>

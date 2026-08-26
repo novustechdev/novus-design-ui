@@ -1,0 +1,15 @@
+<section class="demo" data-title="Stat row (canonical layout)">
+  <div class="statrow statrow--wide">
+    <div class="stat"><span class="stat__value">1M+</span><span class="stat__label">touchpoints served</span></div>
+    <div class="stat"><span class="stat__value">120M+</span><span class="stat__label">transactions / month</span></div>
+    <div class="stat"><span class="stat__value">99.8%</span><span class="stat__label">platform uptime</span></div>
+    <div class="stat"><span class="stat__value">7</span><span class="stat__label">countries</span></div>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Big numbers never collide: the value is <code>nowrap</code>, the cell shrinks (<code>min-width:0</code>), and <code>.statrow</code> reflows to fewer columns instead of overlapping.</li>
+  <li>Abbreviate long figures (1M+, 120M+) rather than letting a column overflow.</li>
+  <li>Status colour on metric boxes signals a judgement (trend, risk) — never colour a pure-data figure.</li>
+</ul>

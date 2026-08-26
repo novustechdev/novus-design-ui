@@ -1,0 +1,181 @@
+{
+  "categories": ["General", "Layout", "Data Display", "Feedback", "Forms", "Navigation", "Theming"],
+  "components": [
+    {
+      "id": "button",
+      "name": "Button",
+      "category": "General",
+      "classes": [".btn", ".btn--primary", ".btn--secondary", ".btn--ghost", ".btn--danger", ".btn--sm", ".btn--lg"],
+      "fragment": "src/components/button.html",
+      "summary": "Action trigger in five variants and three sizes, with loading and disabled states."
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "category": "General",
+      "classes": [".badge", ".badge--accent", ".badge--success", ".badge--warning", ".badge--danger", ".badge__dot"],
+      "fragment": "src/components/badge.html",
+      "summary": "Status chip with semantic tints and an optional dot."
+    },
+    {
+      "id": "avatar",
+      "name": "Avatar",
+      "category": "General",
+      "classes": [".avatar--photo", ".bio-photo", ".bio-id", ".leader .avatar"],
+      "fragment": "src/components/avatar.html",
+      "summary": "Round headshot or monogram identity slot, small on cards and large in bio modals."
+    },
+    {
+      "id": "brand-lockup",
+      "name": "Brand lockup",
+      "category": "General",
+      "classes": [".brandlock", ".brandlogo--light", ".brandlogo--dark", ".vlogo", ".wm"],
+      "fragment": "src/components/brand-lockup.html",
+      "summary": "Placed master logo with automatic dark-mode swap, and the two-tone product wordmark."
+    },
+    {
+      "id": "container",
+      "name": "Container",
+      "category": "Layout",
+      "classes": [".container", ".container--narrow"],
+      "fragment": "src/components/container.html",
+      "summary": "The shared centered content column every app aligns to."
+    },
+    {
+      "id": "grid-row",
+      "name": "Grid & Row",
+      "category": "Layout",
+      "classes": [".grid", ".row"],
+      "fragment": "src/components/grid-row.html",
+      "summary": "Token-gapped grid, and a wrapping flex line for button groups."
+    },
+    {
+      "id": "surface",
+      "name": "Surface & text utilities",
+      "category": "Layout",
+      "classes": [".surface", ".muted"],
+      "fragment": "src/components/surface.html",
+      "summary": "Surface ground and secondary-text helpers that stay correct in dark mode."
+    },
+    {
+      "id": "app-shell",
+      "name": "App shell",
+      "category": "Layout",
+      "classes": [".appbar", ".appbar__inner", ".appnav", ".appnav__inner", ".appmain", ".appheader"],
+      "fragment": "src/components/app-shell.html",
+      "summary": "Full-bleed header and nav whose content aligns to the shared 1200px column."
+    },
+    {
+      "id": "card",
+      "name": "Card",
+      "category": "Data Display",
+      "classes": [".card", ".card--raised", ".card--interactive", ".card-trigger"],
+      "fragment": "src/components/card.html",
+      "summary": "Bordered surface; interactive cards lift on hover and take a stretched-link trigger."
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "category": "Data Display",
+      "classes": [".table"],
+      "fragment": "src/components/table.html",
+      "summary": "Data-dense table with tinted header and right-aligned tabular numerals."
+    },
+    {
+      "id": "stats",
+      "name": "Stats",
+      "category": "Data Display",
+      "classes": [".stat", ".stat__value", ".stat__label", ".statrow", ".statrow--wide"],
+      "fragment": "src/components/stats.html",
+      "summary": "KPI cells that reflow instead of colliding — the canonical stat layout."
+    },
+    {
+      "id": "bullets",
+      "name": "Bullets",
+      "category": "Data Display",
+      "classes": [".bullets"],
+      "fragment": "src/components/bullets.html",
+      "summary": "Hanging-indent list — wrapped text aligns under the text, never the marker."
+    },
+    {
+      "id": "leaders",
+      "name": "Leaders",
+      "category": "Data Display",
+      "classes": [".leaders", ".leader"],
+      "fragment": "src/components/leaders.html",
+      "summary": "Clickable people cards with round avatar, name, and role."
+    },
+    {
+      "id": "logo-wall",
+      "name": "Logo wall",
+      "category": "Data Display",
+      "classes": [".clientwall", ".clogo", ".schemewall", ".slogo"],
+      "fragment": "src/components/logo-wall.html",
+      "summary": "Client and scheme proof walls — full-colour marks on white tiles, no hover."
+    },
+    {
+      "id": "collapse",
+      "name": "Collapse & Disclosure",
+      "category": "Data Display",
+      "classes": [".collapse", ".disclosure"],
+      "fragment": "src/components/collapse.html",
+      "summary": "Progressive disclosure behind a click toggle; native details works with JS off."
+    },
+    {
+      "id": "value-chain",
+      "name": "Value chain",
+      "category": "Data Display",
+      "classes": [".vchain-strip", ".vchain", ".vchain-arrow"],
+      "fragment": "src/components/value-chain.html",
+      "summary": "Labelled steps joined by › arrows — informational, no hover."
+    },
+    {
+      "id": "alert",
+      "name": "Alert",
+      "category": "Feedback",
+      "classes": [".alert", ".alert--info", ".alert--success", ".alert--warning", ".alert--danger"],
+      "fragment": "src/components/alert.html",
+      "summary": "Inline banner in the four semantic tones; risk messages are always red."
+    },
+    {
+      "id": "modal",
+      "name": "Modal",
+      "category": "Feedback",
+      "classes": [".modal", ".modal__backdrop", ".modal__actions", ".modal-close", "dialog.vdialog"],
+      "fragment": "src/components/modal.html",
+      "summary": "In-page detail dialog — native dialog gives focus trap, Esc, and inert background."
+    },
+    {
+      "id": "field-input",
+      "name": "Field & Input",
+      "category": "Forms",
+      "classes": [".field", ".field--error", ".field__help", ".field__error", ".input"],
+      "fragment": "src/components/field-input.html",
+      "summary": "Labelled form control with help and error states."
+    },
+    {
+      "id": "lead-form",
+      "name": "Lead form & CTA row",
+      "category": "Forms",
+      "classes": [".lead-form", ".cta-row"],
+      "fragment": "src/components/lead-form.html",
+      "summary": "Lead-capture form grid, and the one-row contact CTA."
+    },
+    {
+      "id": "nav",
+      "name": "Nav",
+      "category": "Navigation",
+      "classes": [".nav"],
+      "fragment": "src/components/nav.html",
+      "summary": "Horizontal link bar; the current page carries aria-current."
+    },
+    {
+      "id": "product-themes",
+      "name": "Product themes",
+      "category": "Theming",
+      "classes": [".theme-novus", ".theme-novapay", ".theme-novabank", ".theme-novastore", ".theme-novatrust", ".theme-novaboost", ".theme-novaai"],
+      "fragment": "src/components/product-themes.html",
+      "summary": "Scope classes that re-skin the accent role to a product identity — one accent per view."
+    }
+  ]
+}

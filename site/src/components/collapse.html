@@ -1,0 +1,23 @@
+<section class="demo" data-title="Native disclosure (works with JS off)">
+  <details style="border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4)">
+    <summary style="cursor:pointer;font-weight:var(--weight-medium)">Regulatory standing</summary>
+    <p class="muted" style="margin:var(--space-3) 0 0">BSP-registered Operator of Payment Systems and BancNet member in the Philippines.</p>
+  </details>
+</section>
+
+<section class="demo" data-title="Animated collapse (JS pattern)">
+  <div class="disclosure">
+    <button class="btn btn--ghost btn--sm" aria-expanded="false"
+      onclick="const x=this.closest('.disclosure');const open=x.querySelector('.collapse').classList.toggle('is-open');this.setAttribute('aria-expanded',open)">
+      <span class="disclosure-ic">›</span> More detail
+    </button>
+    <div class="collapse"><p class="muted" style="margin:var(--space-2) 0 0">Secondary content revealed on click — not hover.</p></div>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Prefer native <code>&lt;details&gt;/&lt;summary&gt;</code> so the disclosure still opens with JavaScript disabled.</li>
+  <li>Disclosure is click-driven, never hover — touch and accessibility both depend on it.</li>
+  <li>Pair <code>button[aria-expanded]</code> with the <code>.collapse</code> target for the animated variant.</li>
+</ul>
