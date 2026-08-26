@@ -216,6 +216,10 @@ as the official asset.
 - **FR-016**: The reference site MUST be publicly accessible with no login, and
   its install instructions MUST reference the private registry without exposing
   credentials, tokens, or internal-only URLs.
+- **FR-017**: The reference site MUST include framework integration guides
+  (initially Blazor, Tailwind CSS, and Fluent 2) showing how each stack consumes
+  the kit, with all framework-side theming derived from the tokens by variable
+  reference — never copied values (constitution Principle VI).
 
 ### Key Entities
 

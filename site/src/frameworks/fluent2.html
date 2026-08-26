@@ -1,0 +1,59 @@
+<!-- title: Novus Design for Fluent 2 -->
+<p class="eyebrow">Frameworks</p>
+<h1>Novus Design for Fluent 2</h1>
+<p style="max-width:68ch">Teams building on Microsoft's Fluent 2 (Fluent UI React v9, or Fluent UI Blazor)
+keep Fluent's component behaviour and accessibility — and re-skin it with Novus
+tokens so everything renders on-brand. The rule is one-directional:
+<b>tokens.css is the source of truth; Fluent's theme is derived from it</b>, never
+the other way around.</p>
+
+<h2>1. Load the kit alongside Fluent</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import "@novus/design-kit/tokens.css";
+import "@novus/design-kit/js/novus-theme.js";</code></pre>
+
+<h2>2. Derive the Fluent theme from Novus tokens (React v9)</h2>
+<p style="max-width:68ch">Fluent v9 theme values land in CSS custom properties, so you can point them straight
+at the Novus variables — no hex duplication, and dark mode stays in sync:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import { FluentProvider, webLightTheme } from "@fluentui/react-components";
+
+const novusFluent = {
+  ...webLightTheme,
+  fontFamilyBase:            "var(--font-sans)",
+  colorBrandBackground:      "var(--accent)",
+  colorBrandBackgroundHover: "var(--accent-hover)",
+  colorBrandBackgroundPressed: "var(--accent-active)",
+  colorBrandForeground1:     "var(--accent-text)",
+  colorBrandForegroundLink:  "var(--accent-text)",
+  colorNeutralBackground1:   "var(--surface)",
+  colorNeutralForeground1:   "var(--text)",
+  colorNeutralForeground2:   "var(--text-secondary)",
+  colorNeutralStroke1:       "var(--border)",
+  borderRadiusMedium:        "var(--radius-md)",
+  borderRadiusLarge:         "var(--radius-lg)",
+};
+
+&lt;FluentProvider theme={novusFluent}&gt;
+  &lt;App /&gt;
+&lt;/FluentProvider&gt;</code></pre>
+
+<h2>3. Keep the theme switch on the kit's toggle</h2>
+<p style="max-width:68ch">Because the mapped values are variables, most of the theme re-tunes automatically
+when <code>novusTheme.toggle()</code> flips <code>data-theme</code>. For Fluent's own
+neutrals, swap the base theme on the same event:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>const base = novusTheme.current() === "dark" ? webDarkTheme : webLightTheme;
+// re-apply the same Novus overrides on top of the chosen base</code></pre>
+
+<h2>4. Fluent UI Blazor</h2>
+<ul class="bullets">
+  <li>Load <code>tokens.css</code> after the Fluent providers so Novus values win the cascade.</li>
+  <li>Bind Fluent's accent design token to the Novus accent (its theming reads CSS custom properties) rather than picking a colour in Fluent's own palette tools.</li>
+  <li>Keep Carlito: set the base font token to <code>var(--font-sans)</code> — Fluent's Segoe default is off-brand.</li>
+</ul>
+
+<h2>Rules of the road</h2>
+<ul class="bullets">
+  <li>Fluent supplies behaviour (menus, grids, dialogs, focus management); Novus supplies identity. Never run two accent systems on one view.</li>
+  <li>Map tokens by reference (<code>var(--…)</code>) — copying hex values forks the brand and breaks dark mode.</li>
+  <li>Where a Fluent component and a kit component overlap (buttons, badges, cards), prefer the kit's class-based component for brand-critical surfaces.</li>
+  <li>Logos remain placed assets from the package — Fluent theming never touches them.</li>
+</ul>

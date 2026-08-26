@@ -1,0 +1,50 @@
+<!-- title: Novus Design for Tailwind CSS -->
+<p class="eyebrow">Frameworks</p>
+<h1>Novus Design for Tailwind CSS</h1>
+<p style="max-width:68ch">Map the Novus tokens into Tailwind's theme so every utility resolves to a token —
+then <code>bg-accent</code>, <code>text-text</code>, and <code>rounded-md</code> are
+on-brand by construction and re-tune in dark mode for free. Never copy hex values
+into the Tailwind config: reference the CSS variables.</p>
+
+<h2>1. Import the kit first</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>/* app.css */
+@import "@novus/design-kit/tokens.css";</code></pre>
+
+<h2>2a. Tailwind v4 — map tokens in CSS</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>@theme inline {
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--text-secondary);
+  --color-border: var(--border);
+  --font-sans: var(--font-sans);
+  --radius-md: var(--radius-md);
+}</code></pre>
+
+<h2>2b. Tailwind v3 — map tokens in the config</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>theme:{extend:{colors:{'blue-500':'var(--blue-500)',accent:'var(--accent)',bg:'var(--bg)',
+  surface:'var(--surface)',text:'var(--text)',border:'var(--border)'},
+  fontFamily:{sans:'var(--font-sans)'},borderRadius:{md:'var(--radius-md)'}}}</code></pre>
+
+<h2>3. Compose utilities with kit components</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;!-- layout via Tailwind, visual identity via the kit --&gt;
+&lt;div class="flex flex-wrap gap-4"&gt;
+  &lt;button class="btn btn--primary"&gt;Talk to us&lt;/button&gt;
+  &lt;span class="badge badge--success"&gt;On track&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+<h2>4. Dark mode</h2>
+<p style="max-width:68ch">Nothing extra: because every mapped value is a CSS variable, the kit's dual-trigger
+dark mode re-tunes your Tailwind utilities automatically. Don't use Tailwind's
+<code>dark:</code> variant to restyle brand colours — the tokens already carry both
+modes.</p>
+
+<h2>Rules of the road</h2>
+<ul class="bullets">
+  <li>Tailwind owns layout and spacing utilities; the kit owns identity — colours, type, radius, shadows, and the shipped components.</li>
+  <li>Never re-declare a brand colour as a hex in the config; if a value isn't mapped yet, map another <code>var(--…)</code>.</li>
+  <li>Don't rebuild <code>.btn</code>/<code>.card</code> out of utilities — use the shipped classes and compose around them.</li>
+  <li>One accent per view still applies, whatever utilities are in play.</li>
+</ul>

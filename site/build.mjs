@@ -118,7 +118,7 @@ const footer = read(join(SRC, "partials/footer.html"));
 function shell({ title, content, depth, active, sidebar }) {
   const rel = "../".repeat(depth);
   let hdr = header.replaceAll("{{REL}}", rel);
-  for (const k of ["home", "foundations", "components", "install"]) {
+  for (const k of ["home", "foundations", "components", "frameworks", "install"]) {
     hdr = hdr.replace(`{{CUR_${k}}}`, k === active ? ' aria-current="page"' : "");
   }
   const main = sidebar
@@ -194,6 +194,24 @@ if (existsSync(foundDir)) {
     const sidebar = sideNav([["Foundations", present.map(([g, l]) => [g, l])]], f);
     writePage(join(DIST, "foundations", f), shell({ title, content: transformDemos(raw), depth: 1, active: "foundations", sidebar }));
     built.push(`foundations/${f}`);
+  }
+}
+
+/* Frameworks — integration guides, one page per framework */
+const FRAMEWORKS = [
+  ["blazor.html", "Blazor"],
+  ["tailwind.html", "Tailwind CSS"],
+  ["fluent2.html", "Fluent 2"],
+];
+const fwDir = join(SRC, "frameworks");
+if (existsSync(fwDir)) {
+  const present = FRAMEWORKS.filter(([f]) => existsSync(join(fwDir, f)));
+  for (const [f, label] of present) {
+    const raw = read(join(fwDir, f));
+    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, label])[1];
+    const sidebar = sideNav([["Frameworks", present.map(([g, l]) => [g, l])]], f);
+    writePage(join(DIST, "frameworks", f), shell({ title, content: transformDemos(raw), depth: 1, active: "frameworks", sidebar }));
+    built.push(`frameworks/${f}`);
   }
 }
 
