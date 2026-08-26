@@ -1,9 +1,11 @@
 # Project state (as of 2026-08-26)
 
-- **Package**: `novus-design-kit@0.2.0` on public npm (tokenless installs; third-party marks stripped from the artifact). Historical: `@sgultom99/novus-design-kit@0.1.0` on GitHub Packages
-  (npm.pkg.github.com), private visibility; installs need a GitHub token with
-  `read:packages`. Scope is interim (GitHub Packages requires scope = repo
-  owner); moving to a Novus org scope is a planned MAJOR.
+- **Package**: `novus-design-kit@0.2.0` on PUBLIC npm, tokenless install
+  (`npm install novus-design-kit`); third-party marks (logos/clients,
+  logos/schemes) stripped from the artifact, repository-only. npm account
+  sgultom99, 2FA via passkey: publishing needs the owner in a real terminal.
+  Historical: `@sgultom99/novus-design-kit@0.1.0` on GitHub Packages (private,
+  auth-gated), kept as an artifact only.
 - **Repo**: github.com/sgultom99/novus-design-ui, default branch **main**
   (protected: no force pushes or deletions, conversation resolution required;
   direct pushes allowed). Branch 001-novus-design-kit frozen at the same
