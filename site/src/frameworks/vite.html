@@ -6,10 +6,10 @@ configuration: import the stylesheet in your entry module and Vite bundles the
 Carlito fonts and rewrites their URLs automatically.</p>
 
 <h2>1. Install and import</h2>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install @sgultom99/novus-design-kit</code></pre>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install novus-design-kit</code></pre>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// src/main.js, first lines of the entry module
-import "@sgultom99/novus-design-kit/js/novus-theme.js";
-import "@sgultom99/novus-design-kit/tokens.css";</code></pre>
+import "novus-design-kit/js/novus-theme.js";
+import "novus-design-kit/tokens.css";</code></pre>
 <p style="max-width:68ch">That's the whole setup: the <code>@font-face</code> rules in tokens.css use relative
 URLs, so Vite resolves the woff2 files out of the package, hashes them, and serves
 them in dev and build without any plugin.</p>
@@ -21,7 +21,7 @@ them in dev and build without any plugin.</p>
 &lt;/div&gt;</code></pre>
 
 <h2>3. Brand assets as imports</h2>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import lockup from "@sgultom99/novus-design-kit/logos/lockups/novapay.png";
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import lockup from "novus-design-kit/logos/lockups/novapay.png";
 document.querySelector("#mark").src = lockup;   // hashed, cache-safe URL</code></pre>
 
 <h2>4. Zero-flash dark mode (optional)</h2>

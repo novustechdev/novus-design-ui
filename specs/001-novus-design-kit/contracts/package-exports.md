@@ -1,4 +1,4 @@
-# Contract: `@sgultom99/novus-design-kit` package exports
+# Contract: `novus-design-kit` package exports
 
 The public interface consumers depend on. Any breaking change here is a MAJOR bump.
 
@@ -13,18 +13,18 @@ scope when one exists, as a MAJOR rename.
 # one-time, per developer (token goes in the user ~/.npmrc, never committed)
 npm config set @sgultom99:registry https://npm.pkg.github.com
 npm config set //npm.pkg.github.com/:_authToken YOUR_GITHUB_TOKEN
-npm install @sgultom99/novus-design-kit    # or: yarn add @sgultom99/novus-design-kit
+npm install novus-design-kit    # or: yarn add novus-design-kit
 ```
 
 ## Import paths (the contract surface)
 
 | Path | Contents | Notes |
 |------|----------|-------|
-| `@sgultom99/novus-design-kit/tokens.css` | All tokens + component classes + @font-face + dark-mode rules | The one required import. `fonts/` resolves relatively — bundlers and static servers must serve the package's `fonts/` dir (standard behavior) |
-| `@sgultom99/novus-design-kit/fonts/*.woff2` | Carlito 400/700 latin | Self-referenced by tokens.css; direct import rarely needed |
-| `@sgultom99/novus-design-kit/logos/*` | Master logo 6 treatments, wordmarks, product lockups, icons, client logos | Filenames are API — renames are breaking |
-| `@sgultom99/novus-design-kit/photos/*` | Approved photography | Filenames are API — renames are breaking |
-| `@sgultom99/novus-design-kit/js/novus-theme.js` | Pre-paint persisted theme helper | See below |
+| `novus-design-kit/tokens.css` | All tokens + component classes + @font-face + dark-mode rules | The one required import. `fonts/` resolves relatively — bundlers and static servers must serve the package's `fonts/` dir (standard behavior) |
+| `novus-design-kit/fonts/*.woff2` | Carlito 400/700 latin | Self-referenced by tokens.css; direct import rarely needed |
+| `novus-design-kit/logos/*` | Master logo 6 treatments, wordmarks, product lockups, icons, client logos | Filenames are API — renames are breaking |
+| `novus-design-kit/photos/*` | Approved photography | Filenames are API — renames are breaking |
+| `novus-design-kit/js/novus-theme.js` | Pre-paint persisted theme helper | See below |
 
 `package.json` `files` allowlist: `tokens.css`, `fonts/`, `logos/`, `photos/`,
 `js/`, `README.md`, `CHANGELOG.md`. Nothing else ships (no site/, specs/,
@@ -34,12 +34,12 @@ references/).
 
 ```html
 <!-- Plain HTML -->
-<link rel="stylesheet" href="/node_modules/@sgultom99/novus-design-kit/tokens.css">
+<link rel="stylesheet" href="/node_modules/novus-design-kit/tokens.css">
 ```
 
 ```js
 // Bundler (Vite / webpack / Next.js) — once at app root
-import "@sgultom99/novus-design-kit/tokens.css";
+import "novus-design-kit/tokens.css";
 ```
 
 ## `novus-theme.js` behavior contract

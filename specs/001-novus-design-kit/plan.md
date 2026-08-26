@@ -86,7 +86,7 @@ specs/001-novus-design-kit/
 ### Source Code (repository root)
 
 ```text
-package.json             # @sgultom99/novus-design-kit — GitHub Packages (interim scope); files: tokens.css, fonts/, logos/, photos/, js/, README.md
+package.json             # novus-design-kit — GitHub Packages (interim scope); files: tokens.css, fonts/, logos/, photos/, js/, README.md
 tokens.css               # verbatim copy of references/Novus_Design_System_Kit_v2/tokens.css
 fonts/                   # carlito *.woff2 (woff2 only; ttf not shipped)
 logos/                   # official logo/lockup/icon assets (as in the reference kit)

@@ -1,6 +1,6 @@
 # Project state (as of 2026-08-26)
 
-- **Package**: `@sgultom99/novus-design-kit@0.1.0` on GitHub Packages
+- **Package**: `novus-design-kit@0.2.0` on public npm (tokenless installs; third-party marks stripped from the artifact). Historical: `@sgultom99/novus-design-kit@0.1.0` on GitHub Packages
   (npm.pkg.github.com), private visibility; installs need a GitHub token with
   `read:packages`. Scope is interim (GitHub Packages requires scope = repo
   owner); moving to a Novus org scope is a planned MAJOR.

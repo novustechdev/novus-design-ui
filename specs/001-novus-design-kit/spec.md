@@ -20,6 +20,7 @@
 - Q: Should the reference site show which kit version it documents? → A: Yes — the build stamps the package version into the site header as a badge, so developers can tell whether the docs match their installed version.
 - Q: Which concrete private registry hosts the package? → A: GitHub Packages (npm.pkg.github.com), attached to the sgultom99/novus-design-ui repository. Installs always require a GitHub token with read:packages, satisfying FR-001's private-registry rule; the @sgultom99 scope is interim until a Novus org scope exists (rename ships as a MAJOR).
 - Owner decision (2026-08-26, post-ship): package visibility on GitHub Packages is set to PUBLIC for the time being, deliberately overriding the private-visibility posture. Rationale: the same assets are already world-readable via the public repository and docs site, and GitHub Packages still requires a token for npm installs regardless of visibility, so the registry remains auth-gated. Revisit at the Novus org migration. Also: `main` is the protected default branch, and releases are tagged semantically (v0.1.0 released with the npm tarball attached).
+- Owner decision (2026-08-26, supersedes the two registry decisions above): the real goal is TOKENLESS install, which no private registry can provide (privacy is enforced by credentials). v0.2.0 ships to public npm as unscoped `novus-design-kit`, with third-party marks (logos/clients, logos/schemes) excluded from the artifact; first-party Novus assets ship. FR-001 amended accordingly. The GitHub Packages 0.1.0 stays as a historical artifact and its visibility flip is moot.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -166,10 +167,14 @@ as the official asset.
 ### Functional Requirements
 
 - **FR-001**: The kit MUST be installable with a single standard npm or yarn
-  command by any Novus Tech developer, and importable so that tokens, component
-  styles, fonts, and assets are available without manual file copying. It is
-  published to a private Novus-controlled registry; proprietary assets MUST NOT
-  be published to any public registry.
+  command by any Novus Tech developer, tokenless (no registry configuration or
+  credentials), and importable so that tokens, component styles, fonts, and
+  assets are available without manual file copying. It is published to the
+  public npm registry as `novus-design-kit`; THIRD-PARTY marks (client and
+  card-scheme logos) MUST NOT be included in the published artifact and remain
+  repository-only. (Amended 2026-08-26 by owner decision; the original
+  private-registry rule and its GitHub Packages implementation are recorded in
+  Clarifications.)
 - **FR-002**: The kit MUST expose the Novus design tokens (color, typography,
   spacing, radius, shadow, layout) as the single source of truth, sourced from
   the Novus Design System Kit v2 reference — no invented values.

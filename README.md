@@ -1,4 +1,4 @@
-# @sgultom99/novus-design-kit
+# novus-design-kit
 
 The Novus Technologies design kit: design tokens, component styles, the Carlito
 typeface, dark mode, and the official brand assets, as one installable package.
@@ -9,69 +9,54 @@ class patterns, so it works the same in Blazor, React, Vite, Vue, or plain HTML.
 (foundations, all 22 components with live examples and copyable snippets,
 verified framework and theme guides, and the full asset index)
 
-> **Novus developers only.** The package is published to GitHub Packages, which
-> requires authentication even to install. It is not on public npm, and the
-> bundled logos and photography are proprietary. Don't republish them.
+> The package installs tokenless from public npm. Third-party marks (client
+> and card-scheme logos) are deliberately NOT in the npm artifact; they live in
+> the repository and on the docs site for approved proof-wall use. The bundled
+> Novus logos and photography remain proprietary. Don't republish them.
 
 ## What's inside
 
 | Import path | Contents |
 |---|---|
-| `@sgultom99/novus-design-kit/tokens.css` | Everything: tokens, component classes, Carlito @font-face, dark mode |
-| `@sgultom99/novus-design-kit/js/novus-theme.js` | Persisted light/dark toggle helper (pre-paint safe) |
-| `@sgultom99/novus-design-kit/fonts/*` | Carlito 400/700 woff2 (self-referenced by tokens.css) |
-| `@sgultom99/novus-design-kit/logos/*` | Master logo (6 treatments), product lockups, pictographs, client and scheme marks |
-| `@sgultom99/novus-design-kit/photos/*` | Approved Novus photography |
+| `novus-design-kit/tokens.css` | Everything: tokens, component classes, Carlito @font-face, dark mode |
+| `novus-design-kit/js/novus-theme.js` | Persisted light/dark toggle helper (pre-paint safe) |
+| `novus-design-kit/fonts/*` | Carlito 400/700 woff2 (self-referenced by tokens.css) |
+| `novus-design-kit/logos/*` | Master logo (6 treatments), product lockups, pictographs (client and scheme marks are repository-only) |
+| `novus-design-kit/photos/*` | Approved Novus photography |
 
 ## Quick start
 
-**1. Authenticate once per machine.** Create a GitHub personal access token
-(classic) with the `read:packages` scope, then:
+**1. Install.** No registry setup, no token:
 
 ```bash
-npm config set @sgultom99:registry https://npm.pkg.github.com
-npm config set //npm.pkg.github.com/:_authToken YOUR_GITHUB_TOKEN
+npm install novus-design-kit    # or: yarn add novus-design-kit
 ```
 
-For a project or CI setup, use a committed `.npmrc` with an environment
-variable instead (no token in the file):
-
-```ini
-@sgultom99:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
-```
-
-**2. Install.**
-
-```bash
-npm install @sgultom99/novus-design-kit    # or: yarn add @sgultom99/novus-design-kit
-```
-
-**3. Wire it in.** With a bundler, once at the app entry (theme helper first so
+**2. Wire it in.** With a bundler, once at the app entry (theme helper first so
 a saved dark-mode choice applies early):
 
 ```js
-import "@sgultom99/novus-design-kit/js/novus-theme.js";
-import "@sgultom99/novus-design-kit/tokens.css";
+import "novus-design-kit/js/novus-theme.js";
+import "novus-design-kit/tokens.css";
 ```
 
 Plain HTML served over http(s):
 
 ```html
-<link rel="stylesheet" href="/node_modules/@sgultom99/novus-design-kit/tokens.css">
-<script src="/node_modules/@sgultom99/novus-design-kit/js/novus-theme.js"></script>
+<link rel="stylesheet" href="/node_modules/novus-design-kit/tokens.css">
+<script src="/node_modules/novus-design-kit/js/novus-theme.js"></script>
 ```
 
 Carlito loads automatically: tokens.css self-hosts it via relative URLs.
 
-**4. Build your first screen.**
+**3. Build your first screen.**
 
 ```html
 <header class="appbar">
   <div class="appbar__inner">
     <div class="brandlock">
-      <img class="brandlogo--light" src="node_modules/@sgultom99/novus-design-kit/logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies">
-      <img class="brandlogo--dark"  src="node_modules/@sgultom99/novus-design-kit/logos/Novus_Logo_White_transparent.png"  alt="Novus Technologies">
+      <img class="brandlogo--light" src="node_modules/novus-design-kit/logos/Novus_Logo_Colour_transparent.png" alt="Novus Technologies">
+      <img class="brandlogo--dark"  src="node_modules/novus-design-kit/logos/Novus_Logo_White_transparent.png"  alt="Novus Technologies">
       <span class="appname">my app</span>
     </div>
     <button class="btn btn--ghost btn--sm" onclick="novusTheme.toggle()">Theme</button>
@@ -124,8 +109,8 @@ zero configuration. Import in the entry module and Vite bundles the fonts and
 assets with hashed URLs:
 
 ```js
-import "@sgultom99/novus-design-kit/tokens.css";
-import lockup from "@sgultom99/novus-design-kit/logos/lockups/novapay.png";
+import "novus-design-kit/tokens.css";
+import lockup from "novus-design-kit/logos/lockups/novapay.png";
 ```
 
 **Vue.js** ([verified guide](https://sgultom99.github.io/novus-design-ui/frameworks/vue.html)):
@@ -187,7 +172,7 @@ Reference logos, lockups, and photos by package path (the
 lists every file):
 
 ```jsx
-import logo from "@sgultom99/novus-design-kit/logos/Novus_Logo_Colour_transparent.png";
+import logo from "novus-design-kit/logos/Novus_Logo_Colour_transparent.png";
 ```
 
 Logos are placed assets: never retype, redraw, recolour, or CSS-filter one.

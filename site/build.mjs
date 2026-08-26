@@ -349,8 +349,8 @@ function assetIndex() {
     ["Product & platform lockups", "logos/lockups", (f) => f.endsWith(".png")],
     ["Pictographs (SVG)", "logos/icons", (f) => f.endsWith(".svg")],
     ["Pictographs (pre-tinted PNG)", "logos/icons/png", (f) => f.endsWith(".png")],
-    ["Client marks", "logos/clients", (f) => /\.(png|jpe?g)$/i.test(f)],
-    ["Scheme & rail marks", "logos/schemes", (f) => /\.(png|jpe?g)$/i.test(f)],
+    ["Client marks (repository-only: not in the npm package)", "logos/clients", (f) => /\.(png|jpe?g)$/i.test(f)],
+    ["Scheme & rail marks (repository-only: not in the npm package)", "logos/schemes", (f) => /\.(png|jpe?g)$/i.test(f)],
     ["Photography", "photos", (f) => /\.(png|jpe?g)$/i.test(f)],
   ];
   let html = "";
@@ -362,7 +362,7 @@ function assetIndex() {
     const photo = dir === "photos";
     html += `\n<h3>${label}</h3>\n<div class="assetgrid">`;
     for (const f of files) {
-      html += `\n<div class="clogo${photo ? " clogo--photo" : ""}"><img src="../${dir}/${f}" alt="${esc(f)}" loading="lazy"><code>@sgultom99/novus-design-kit/${dir}/${f}</code></div>`;
+      html += `\n<div class="clogo${photo ? " clogo--photo" : ""}"><img src="../${dir}/${f}" alt="${esc(f)}" loading="lazy"><code>novus-design-kit/${dir}/${f}</code></div>`;
     }
     html += `\n</div>`;
   }
