@@ -1,23 +1,25 @@
-# @novus/design-kit
+# @sgultom99/novus-design-kit
 
 The Novus Technologies design kit: design tokens, component styles, the Carlito
 typeface, and the official brand assets, as one installable package. Framework-
 agnostic: import one stylesheet and build with documented HTML patterns in any
 web stack.
 
-> **Novus developers only.** The package is published to Novus's private
-> registry. It is not on public npm, and the bundled logos and photography are
-> proprietary, don't republish them.
+> **Novus developers only.** The package is published to GitHub Packages
+> (a private-style registry: installs always require authentication). It is
+> not on public npm, and the bundled logos and photography are proprietary,
+> don't republish them.
 
 ## Install
 
-One-time setup (per machine): point the `@novus` scope at the private feed and
-authenticate with your own credentials, ask DevOps for the feed URL. Never
-commit tokens.
+One-time setup (per machine): create a GitHub personal access token (classic)
+with the `read:packages` scope, then point the scope at GitHub Packages and
+store your token in your user `~/.npmrc`. Never commit tokens.
 
 ```bash
-npm config set @novus:registry <private-feed-url>
-npm install @novus/design-kit        # or: yarn add @novus/design-kit
+npm config set @sgultom99:registry https://npm.pkg.github.com
+npm config set //npm.pkg.github.com/:_authToken YOUR_GITHUB_TOKEN
+npm install @sgultom99/novus-design-kit        # or: yarn add @sgultom99/novus-design-kit
 ```
 
 ## Wire it in
@@ -25,15 +27,15 @@ npm install @novus/design-kit        # or: yarn add @novus/design-kit
 **Plain HTML** (served over http(s)):
 
 ```html
-<link rel="stylesheet" href="/node_modules/@novus/design-kit/tokens.css">
-<script src="/node_modules/@novus/design-kit/js/novus-theme.js"></script>
+<link rel="stylesheet" href="/node_modules/@sgultom99/novus-design-kit/tokens.css">
+<script src="/node_modules/@sgultom99/novus-design-kit/js/novus-theme.js"></script>
 ```
 
 **Bundler** (Vite / webpack / Next.js), once at the app root:
 
 ```js
-import "@novus/design-kit/tokens.css";
-import "@novus/design-kit/js/novus-theme.js";
+import "@sgultom99/novus-design-kit/tokens.css";
+import "@sgultom99/novus-design-kit/js/novus-theme.js";
 ```
 
 `tokens.css` self-hosts Carlito via relative `fonts/…woff2` URLs, so fonts work

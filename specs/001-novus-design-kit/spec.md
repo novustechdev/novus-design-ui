@@ -18,6 +18,7 @@
 - Q: What verification standard must the framework/theme guides meet before a release? → A: All eight guides are verified: each guide's snippets are executed in a throwaway sample project before their first release, and re-verified when the target library ships a new major version.
 - Q: Where will the public reference site be deployed? → A: GitHub Pages. The repository is pushed to GitHub and the built `site/dist` is published via Pages; the site must keep working under a `/repo-name/` sub-path (it uses relative URLs throughout), with a custom domain as an optional later step.
 - Q: Should the reference site show which kit version it documents? → A: Yes — the build stamps the package version into the site header as a badge, so developers can tell whether the docs match their installed version.
+- Q: Which concrete private registry hosts the package? → A: GitHub Packages (npm.pkg.github.com), attached to the sgultom99/novus-design-ui repository. Installs always require a GitHub token with read:packages, satisfying FR-001's private-registry rule; the @sgultom99 scope is interim until a Novus org scope exists (rename ships as a MAJOR).
 
 ## User Scenarios & Testing *(mandatory)*
 
