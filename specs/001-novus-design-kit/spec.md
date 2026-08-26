@@ -217,9 +217,11 @@ as the official asset.
   its install instructions MUST reference the private registry without exposing
   credentials, tokens, or internal-only URLs.
 - **FR-017**: The reference site MUST include framework integration guides
-  (initially Blazor, Tailwind CSS, and Fluent 2) showing how each stack consumes
-  the kit, with all framework-side theming derived from the tokens by variable
-  reference — never copied values (constitution Principle VI).
+  (Blazor, React, Vite, Vue.js) and UI theme guides (Tailwind CSS, Fluent 2,
+  Material, Ant Design) showing how each stack or library consumes the kit,
+  with all framework/library-side theming derived from the tokens by reference
+  (`var(--…)` or runtime reads of computed values) — never copied values
+  (constitution Principle VI).
 
 ### Key Entities
 

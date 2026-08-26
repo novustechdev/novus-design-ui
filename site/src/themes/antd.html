@@ -1,0 +1,63 @@
+<!-- title: Novus Design with Ant Design -->
+<p class="eyebrow">Themes</p>
+<h1>Novus Design with Ant Design</h1>
+<p style="max-width:68ch">Ant Design v5 derives its full colour palettes from seed tokens at runtime, so it
+needs computable colour values — a raw <code>var()</code> string won't work there.
+The Novus pattern: <b>read the computed token values from the document at runtime</b>
+and feed those into <code>ConfigProvider</code>. Still by reference — no value is
+ever copied into code — and a theme flip just re-reads the tokens.</p>
+
+<h2>1. Load the kit alongside antd</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import "@novus/design-kit/js/novus-theme.js";
+import "@novus/design-kit/tokens.css";
+import "antd/dist/reset.css";</code></pre>
+
+<h2>2. Derive the antd theme by reading the tokens</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import { ConfigProvider, theme as antdTheme } from "antd";
+import { useState } from "react";
+
+const t = (name) =&gt;
+  getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+
+const novusAntd = () =&gt; ({
+  algorithm: window.novusTheme.current() === "dark"
+    ? antdTheme.darkAlgorithm
+    : antdTheme.defaultAlgorithm,
+  token: {
+    colorPrimary: t("--accent"),
+    colorSuccess: t("--success"),
+    colorWarning: t("--warning"),
+    colorError:   t("--danger"),
+    colorLink:    t("--accent-text"),
+    colorTextBase: t("--text"),
+    colorBgBase:   t("--bg"),
+    fontFamily:    t("--font-sans"),
+    borderRadius:  parseFloat(t("--radius-md")),
+  },
+});
+
+export function AppShell({ children }) {
+  const [themeTick, setThemeTick] = useState(0);
+  const toggle = () =&gt; { window.novusTheme.toggle(); setThemeTick(themeTick + 1); };
+
+  return (
+    &lt;ConfigProvider theme={novusAntd()}&gt;
+      &lt;button className="btn btn--ghost btn--sm" onClick={toggle}&gt;Theme&lt;/button&gt;
+      {children}
+    &lt;/ConfigProvider&gt;
+  );
+}</code></pre>
+
+<h2>3. Dark mode</h2>
+<p style="max-width:68ch">The toggle flips <code>data-theme</code>, the tokens re-tune, and the re-render
+re-reads them — antd's dark algorithm and the Novus dark values stay in lockstep.
+OS-preference-only visitors get the right mode too, because
+<code>novusTheme.current()</code> falls back to <code>prefers-color-scheme</code>.</p>
+
+<h2>Rules of the road</h2>
+<ul class="bullets">
+  <li>antd supplies behaviour (tables, forms, date pickers); Novus supplies identity. One accent per view, whichever library renders it.</li>
+  <li>Never paste token values into the config as literals — read them with <code>getComputedStyle</code> so tokens.css stays the single source of truth.</li>
+  <li>Where an antd component and a kit component overlap (buttons, badges, alerts), prefer the kit's class-based component on brand-critical surfaces.</li>
+  <li>Logos remain placed assets from the package — never antd icons or typed text.</li>
+</ul>

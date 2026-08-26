@@ -58,8 +58,13 @@ Out of v1 catalog (deck/poster/doc systems, documented in `slide-template/`):
 | `/components/overview.html` | Overview grid: every manifest component, grouped by category, with preview + link |
 | `/components/<id>.html` | One per manifest entry: live examples per variant/state, copyable snippet per example, do/don't guidance |
 | `/frameworks/blazor.html` | Novus Design for Blazor: wwwroot copy target, wiring, Razor usage, JS-interop toggle |
-| `/frameworks/tailwind.html` | Novus Design for Tailwind CSS: v4 `@theme inline` and v3 config token mapping |
-| `/frameworks/fluent2.html` | Novus Design for Fluent 2: Fluent UI React v9 / Fluent UI Blazor themed from Novus tokens by `var()` reference |
+| `/frameworks/react.html` | Novus Design for React: entry wiring, JSX class usage, asset imports |
+| `/frameworks/vite.html` | Novus Design for Vite: zero-config import, hashed asset imports, zero-flash head script |
+| `/frameworks/vue.html` | Novus Design for Vue.js: main.js wiring, SFC usage, scoped styles on tokens |
+| `/themes/tailwind.html` | Novus Design with Tailwind CSS: v4 `@theme inline` and v3 config token mapping |
+| `/themes/fluent2.html` | Novus Design with Fluent 2: Fluent UI React v9 / Fluent UI Blazor themed by `var()` reference |
+| `/themes/material.html` | Novus Design with Material: MUI theme with all palette variants as `var()` strings |
+| `/themes/antd.html` | Novus Design with Ant Design: ConfigProvider fed by runtime `getComputedStyle` token reads |
 | `/components/index.html` | Redirect stub → overview.html only. Content pages are never a subdirectory `index.html`: clean-URL hosts serve those at `/components` (no trailing slash), which breaks every relative link on the page. The build fails if one is emitted |
 
 Every page: shared shell (header with master lockup at `--logo-height`, nav,
