@@ -362,7 +362,7 @@ function assetIndex() {
     const photo = dir === "photos";
     html += `\n<h3>${label}</h3>\n<div class="assetgrid">`;
     for (const f of files) {
-      html += `\n<div class="clogo${photo ? " clogo--photo" : ""}"><img src="../${dir}/${f}" alt="${esc(f)}" loading="lazy"><code>@novus/design-kit/${dir}/${f}</code></div>`;
+      html += `\n<div class="clogo${photo ? " clogo--photo" : ""}"><img src="../${dir}/${f}" alt="${esc(f)}" loading="lazy"><code>@sgultom99/novus-design-kit/${dir}/${f}</code></div>`;
     }
     html += `\n</div>`;
   }

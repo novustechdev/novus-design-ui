@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `@novus/design-kit`. Format follows
+All notable changes to `@sgultom99/novus-design-kit`. Format follows
 [Keep a Changelog](https://keepachangelog.com/); versioning is semantic.
 
 ## [0.1.0], 2026-08-26

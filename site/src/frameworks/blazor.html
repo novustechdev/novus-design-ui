@@ -10,7 +10,7 @@ stylesheet, and use the component classes in your Razor markup.</p>
 build time with an MSBuild target in your <code>.csproj</code>:</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;Target Name="CopyNovusKit" BeforeTargets="Build"&gt;
   &lt;ItemGroup&gt;
-    &lt;NovusKit Include="node_modules/@novus/design-kit/**/*" /&gt;
+    &lt;NovusKit Include="node_modules/@sgultom99/novus-design-kit/**/*" /&gt;
   &lt;/ItemGroup&gt;
   &lt;Copy SourceFiles="@(NovusKit)"
         DestinationFiles="@(NovusKit-&gt;'wwwroot/lib/novus-design-kit/%(RecursiveDir)%(Filename)%(Extension)')"
