@@ -2,10 +2,12 @@
 
 ## Where we are
 
-The kit is **shipped**. `@sgultom99/novus-design-kit@0.1.0` is published to GitHub
-Packages (private visibility, install verified from a fresh project), and the docs
-site is live at https://sgultom99.github.io/novus-design-ui/ (repo:
-github.com/sgultom99/novus-design-ui, branch `001-novus-design-kit` = default).
+The kit is **shipped**. `novus-design-kit@0.2.0` is on PUBLIC npm with tokenless
+installs (third-party client/scheme marks excluded from the artifact,
+repository-only). Historical: `@sgultom99/novus-design-kit@0.1.0` on GitHub
+Packages. Docs live at https://sgultom99.github.io/novus-design-ui/ (repo:
+github.com/sgultom99/novus-design-ui, default branch `main`, protected; releases
+tagged v0.1.0/v0.2.0 with tarballs attached).
 All 35 speckit tasks are complete, the constitution is at v1.3.0, and all 14
 release gates pass. The speckit artifacts were synced to the shipped state at the
 end of this session.
@@ -49,8 +51,11 @@ end of this session.
   succeed via `gh workflow run pages.yml --repo sgultom99/novus-design-ui --ref
   001-novus-design-kit`. If it persists, check Settings → Webhooks deliveries or
   GitHub support.
-- **Scope rename**: moving `@sgultom99/novus-design-kit` → a Novus org scope is a
-  planned MAJOR (documented in contract + README) once the org exists.
+- **Naming**: now unscoped `novus-design-kit` on npmjs; a future move to a Novus
+  org scope on npmjs would be a MAJOR (optional, the unscoped name works fine).
+- **npm publishing**: account sgultom99, 2FA via passkey; publish needs a real
+  TTY for the browser approval (the in-session `!` runner can't), so owner runs
+  `npm publish` in their own terminal.
 - **Next release nicety**: add `"./package.json": "./package.json"` to the
   `exports` map in package.json (some tools read it; no consumer breakage today).
 - **Human device pass**: automated T027 checks all pass; a quick real-device look
