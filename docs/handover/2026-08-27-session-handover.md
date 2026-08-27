@@ -84,7 +84,17 @@ two flavors (Blazor Server + Vite/Tailwind) with a WASM demo twin hosted at
   exists (owner may archive it). Cloudflare CNAME still targets
   sgultom99.github.io, which routes fine; retargeting to
   novustechdev.github.io is cosmetic and needs a CF token.
-- OPEN: owner runs `npm publish` from the repo root for 0.3.0 (passkey).
+- DONE 2026-08-27: 0.3.0 published to npm by the owner (dist-tag latest).
 - Gate lesson: the manifest ownership gates count LINES in components.json;
   keep classes arrays on one line, and composition components must describe
   ("composes .table") rather than list owned classes.
+
+## Addendum 3: 0.3.0 published; mobile foundations (feature 005)
+
+- 0.3.0 is live on npm (owner published; dist-tag latest; repository field
+  novustechdev). Release notes/memory pending-notes closed.
+- Constitution 1.8.0: Principle VIII Mobile Foundation Parity. Feature 005
+  shipped: foundations/mobile-android.html (Compose + Material 3) and
+  foundations/mobile-ios.html (SwiftUI + HIG), token mappings only, new
+  "mobile token parity" gate (hex/0xFF/0x forms must exist in tokens.css;
+  negative-tested). Landing chips + README section added.

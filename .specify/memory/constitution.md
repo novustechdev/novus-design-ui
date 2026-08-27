@@ -1,8 +1,11 @@
 <!--
 Sync Impact Report
-- Version change: 1.6.0 → 1.7.0 (MINOR: Governance gains a release rule — changelog
+- Version change: 1.7.0 → 1.8.0 (MINOR: Principle VIII added — Mobile Foundation
+  Parity for native Android (Material 3 / Compose) and iOS (SwiftUI / HIG), with a
+  token-parity gate; owner decision 2026-08-27)
+- Prior amendment (1.6.0 -> 1.7.0): Governance gains a release rule — changelog
   and all version references updated with every tagged release; owner decision
-  2026-08-27)
+  2026-08-27
 - Prior amendment (1.5.1 -> 1.6.0): Principle II motion rule expanded to allow
   functional state-change motion, reduced-motion aware; owner decision 2026-08-27
 - Prior amendment (1.5.0 -> 1.5.1): presentation wording; owner decision
@@ -170,6 +173,33 @@ docs page's screenshots MUST link to the running demos.
 **Rationale**: A design kit is judged by its first real application; an
 unverified or off-convention demo teaches every consumer the wrong patterns.
 
+### VIII. Mobile Foundation Parity (Android & iOS)
+
+The design system extends to native mobile as FOUNDATION MAPPINGS: guidance
+that maps tokens.css onto each platform's dominant native system: Material 3
+with Jetpack Compose on Android, SwiftUI with the Human Interface Guidelines
+on iOS. Mobile foundation pages MUST derive every colour, radius, spacing,
+and type value from tokens.css (rem values map at 16px per rem to dp/pt) and
+MUST NOT invent platform-only values; a build gate verifies that every hex
+literal on a mobile foundation page exists verbatim in tokens.css. Carlito
+remains the only typeface (bundled per platform; the TTF source is the design
+system master, not this package). Dark mode keeps the dual-trigger discipline
+in platform terms: follow the system appearance AND offer a persisted in-app
+override. The kit's judgement rules carry over unchanged: one accent per
+view, traffic-light colour only on judgements, lowercase solid-set product
+names, placed logo assets. Mobile foundation pages are design mappings, NOT
+run-verified guides in the Principle VI sense: they are labelled as such on
+the page, and their verification standard is the token-parity gate plus
+review, because the toolchains (Xcode especially) cannot run in the docs
+build environment. A mobile page MUST name the platform library versions its
+mapping targets.
+
+**Rationale**: Product teams ship native apps; without an authoritative
+token mapping each team re-derives the brand by eye and drifts. A mapping
+whose every value is machine-checked against tokens.css keeps one source of
+truth across web and mobile, while honest labelling separates it from
+run-verified guides.
+
 ## Design Standards & Constraints
 
 - Typeface: Carlito via `var(--font-sans)` only; no other font, no raw font-family.
@@ -232,4 +262,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.7.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
+**Version**: 1.8.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27

@@ -1,0 +1,113 @@
+<!-- title: iOS foundations -->
+<h1>iOS foundations</h1>
+<p>The Novus design system mapped onto native iOS: <b>SwiftUI under the Human
+Interface Guidelines</b>, the platform's standard stack. Every value is taken
+from <code>tokens.css</code> (rem converts at 16px per rem to pt), and the build
+rejects any colour on this page that is not a token value.</p>
+
+<div class="alert">Design mapping, not a run-verified guide: this page maps tokens to
+SwiftUI and names its targets (iOS 18+, Swift 6, SwiftUI). Xcode cannot run in
+the docs build environment, so verification is the token-parity gate plus review,
+per constitution Principle VIII.</div>
+
+<h2>Colors: dynamic light and dark from one definition</h2>
+<p>Define each semantic colour once with both appearances; the system switches
+them with the appearance, exactly like the web tokens' dark block.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import SwiftUI
+
+extension Color {
+    static func novus(_ light: UInt32, _ dark: UInt32) -> Color {
+        Color(UIColor { $0.userInterfaceStyle == .dark
+            ? UIColor(rgb: dark) : UIColor(rgb: light) })
+    }
+
+    // token: light hex, dark hex
+    static let novusBg            = novus(0xFFFFFF, 0x0B1620) // --bg
+    static let novusSurface       = novus(0xFFFFFF, 0x122131) // --surface
+    static let novusSurfaceRaised = novus(0xF4F7FA, 0x18293B) // --bg-subtle / --surface-raised
+    static let novusText          = novus(0x0E2336, 0xE7EDF3) // --text
+    static let novusTextSecondary = novus(0x51606F, 0xAEBCC9) // --text-secondary
+    static let novusTextMuted     = novus(0x6B7886, 0x8597A6) // --text-muted
+    static let novusBorder        = novus(0xDCE3EB, 0x2A3B4D) // --border
+    static let novusAccent        = novus(0x0070C0, 0x0070C0) // --accent (holds in dark)
+    static let novusAccentText    = novus(0x00457A, 0x7CC0EE) // --accent-text
+    static let novusSuccess       = novus(0x00A04A, 0x2BB266) // --success (judgements only)
+    static let novusWarning       = novus(0xE8A300, 0xE8A300) // --warning (judgements only)
+    static let novusDanger        = novus(0xC0473F, 0xD56A61) // --danger (risk always red)
+}
+
+extension UIColor {
+    convenience init(rgb: UInt32) {
+        self.init(red:   CGFloat((rgb >> 16) &amp; 0xFF) / 255,
+                  green: CGFloat((rgb >> 8)  &amp; 0xFF) / 255,
+                  blue:  CGFloat(rgb         &amp; 0xFF) / 255, alpha: 1)
+    }
+}</code></pre>
+
+<h2>Typography: Carlito only</h2>
+<p>Bundle Carlito 400 and 700 in the app (TTF from the design system master or
+Google Fonts; this npm package ships woff2 for the web only), register both in
+<code>UIAppFonts</code>, then map the kit scale with Dynamic Type support.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>extension Font {
+    // rem times 16 = pt, relative styles keep Dynamic Type scaling
+    static let novus2xl  = Font.custom("Carlito-Bold",    size: 30, relativeTo: .largeTitle) // --text-2xl
+    static let novusXl   = Font.custom("Carlito-Bold",    size: 24, relativeTo: .title)      // --text-xl
+    static let novusLg   = Font.custom("Carlito-Bold",    size: 20, relativeTo: .title3)     // --text-lg
+    static let novusMd   = Font.custom("Carlito-Bold",    size: 18, relativeTo: .headline)   // --text-md
+    static let novusBase = Font.custom("Carlito-Regular", size: 16, relativeTo: .body)       // --text-base
+    static let novusSm   = Font.custom("Carlito-Regular", size: 14, relativeTo: .subheadline)// --text-sm
+    static let novusXs   = Font.custom("Carlito-Regular", size: 12, relativeTo: .caption)    // --text-xs
+}</code></pre>
+
+<h2>Spacing and radius</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>enum NovusSpace { // --space-1 .. --space-8
+    static let s1: CGFloat = 4;  static let s2: CGFloat = 8
+    static let s3: CGFloat = 12; static let s4: CGFloat = 16
+    static let s5: CGFloat = 24; static let s6: CGFloat = 32
+    static let s7: CGFloat = 48; static let s8: CGFloat = 64
+}
+enum NovusRadius { // --radius-sm/md/lg/xl
+    static let sm: CGFloat = 6; static let md: CGFloat = 8
+    static let lg: CGFloat = 12; static let xl: CGFloat = 16
+}</code></pre>
+
+<h2>Dark mode: dual trigger, same as the web</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>@main struct NovusApp: App {
+    @AppStorage("novus-theme") private var theme = "system"
+    var body: some Scene {
+        WindowGroup {
+            RootView()
+                .preferredColorScheme(
+                    theme == "light" ? .light :
+                    theme == "dark"  ? .dark  : nil) // nil = follow the system
+        }
+    }
+}</code></pre>
+<ul class="bullets">
+  <li><code>nil</code> follows the system appearance; the persisted override is the second trigger, matching the web kit's <code>novus-theme.js</code> behaviour (same storage key, even).</li>
+</ul>
+
+<h2>Component correspondence</h2>
+<div class="tablewrap"><table class="table">
+  <thead><tr><th>Kit component</th><th>SwiftUI equivalent</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td>.btn --primary</td><td>Button + .borderedProminent tint novusAccent</td><td>One per screen (one accent per view)</td></tr>
+    <tr><td>.btn --secondary</td><td>Button + .bordered</td><td>Outline look, no tonal fill</td></tr>
+    <tr><td>.btn --ghost</td><td>Button + .plain</td><td></td></tr>
+    <tr><td>.card</td><td>VStack in RoundedRectangle stroke novusBorder</td><td>Border over shadow, near-flat</td></tr>
+    <tr><td>.badge / chips</td><td>Capsule label</td><td>Self-describing text; judgement colours only on judgements</td></tr>
+    <tr><td>.table</td><td>List / LazyVStack rows</td><td>Dense rows, novusBorder dividers</td></tr>
+    <tr><td>.alert</td><td>inline banner / .alert modifier</td><td>Risk messages always novusDanger</td></tr>
+    <tr><td>.modal</td><td>.sheet / .confirmationDialog</td><td>Confirm far-right per Actions &amp; placement</td></tr>
+    <tr><td>.field / .input</td><td>TextField + .textFieldStyle(.roundedBorder)</td><td>Or a custom style on novusBorder</td></tr>
+    <tr><td>Stepper (progress)</td><td>HStack of numbered capsules</td><td>Not SwiftUI's numeric Stepper; current step is the only accent</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Rules that carry over unchanged</h2>
+<ul class="bullets">
+  <li>White (or near-black) ground, no gradients, elevation as a border stroke over shadow.</li>
+  <li>One accent per view; success and warning only where a judgement exists; risk messages always red; amounts always neutral.</li>
+  <li>Product names lowercase and solid-set (novapay); logos are placed assets from <code>logos/</code> (PDF or PNG in the asset catalog), never redrawn, SF Symbols never substitute for a Novus mark.</li>
+  <li>Touch targets 44pt minimum (the HIG floor and the kit floor agree); respect Dynamic Type.</li>
+</ul>

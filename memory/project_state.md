@@ -8,10 +8,10 @@
   motion allowed since constitution 1.6.0 (0.2s max, reduced-motion aware).
   Header = novapay lockup + icon theme toggle; below 520px the suffix hides and
   the endorsement mark steps to 20px (375px overflow guard).
-- **Speckit (current)**: active feature `specs/004-product-feedback` (T001-T016 done, was 003 through T036)
-  (tasks through T036 done); constitution v1.7.0.
+- **Speckit (current)**: active feature `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
+  (tasks through T036 done); constitution v1.8.0.
 
-- **Package**: `novus-design-kit` on PUBLIC npm (npm serves 0.2.0; repo at v0.3.0, npm publish of 0.3.0 pending owner passkey; packaged kit files identical), tokenless install
+- **Package**: `novus-design-kit` on PUBLIC npm (0.3.0 on npm, dist-tag latest, repository field novustechdev), tokenless install
   (`npm install novus-design-kit`); third-party marks (logos/clients,
   logos/schemes) stripped from the artifact, repository-only. npm account
   sgultom99, 2FA via passkey: publishing needs the owner in a real terminal.
