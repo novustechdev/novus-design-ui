@@ -1,0 +1,34 @@
+<section class="demo" data-title="Tabs (native radio inputs, works with JS off)">
+  <style>
+    .xtabs .xlist { display: flex; flex-wrap: wrap; gap: var(--space-1); border-bottom: 1px solid var(--border); margin-bottom: var(--space-4); }
+    .xtabs input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+    .xtabs .xlist label { position: relative; cursor: pointer; padding: var(--space-2) var(--space-3); min-height: 2.75rem; display: inline-flex; align-items: center; color: var(--text-secondary); font-size: var(--text-sm); font-weight: var(--weight-medium); transition: color 0.15s ease, background-color 0.15s ease; }
+    .xtabs .xlist label:hover { color: var(--text); background: var(--bg-subtle); border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
+    .xtabs .xlist label::after { content: ""; position: absolute; left: var(--space-3); right: var(--space-3); bottom: -1px; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform 0.18s ease; }
+    .xtabs input:checked + label { color: var(--accent-text); }
+    .xtabs input:checked + label::after { transform: scaleX(1); }
+    .xtabs .xpanel { animation: xtabfade 0.18s ease; }
+    .xtabs:has(input:checked) .xpanel { display: none; }
+    .xtabs:has(#t-over:checked) #p-over, .xtabs:has(#t-hist:checked) #p-hist, .xtabs:has(#t-keys:checked) #p-keys { display: block; }
+    @keyframes xtabfade { from { opacity: 0; transform: translateY(4px); } }
+    @media (prefers-reduced-motion: reduce) { .xtabs .xlist label, .xtabs .xlist label::after { transition: none; } .xtabs .xpanel { animation: none; } }
+  </style>
+  <div class="xtabs">
+    <div class="xlist" role="tablist" aria-label="Merchant sections">
+      <input type="radio" name="xtab" id="t-over" checked><label for="t-over">Overview</label>
+      <input type="radio" name="xtab" id="t-hist"><label for="t-hist">History</label>
+      <input type="radio" name="xtab" id="t-keys"><label for="t-keys">API keys</label>
+    </div>
+    <section class="xpanel" id="p-over"><p style="margin:0">Merchant standing, limits, and contacts live here.</p></section>
+    <section class="xpanel" id="p-hist"><p style="margin:0">Settlement history for the last 90 days.</p></section>
+    <section class="xpanel" id="p-keys"><p style="margin:0">Two active keys; rotation due next quarter.</p></section>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Tabs are native radio inputs switched by CSS <code>:has()</code>: no JavaScript, keyboard arrows work, and where <code>:has</code> is unsupported the panels degrade to stacking, never disappearing.</li>
+  <li>The animated accent underline is the active indicator; hover shows a background tint. Both are functional motion, 0.2s or less, disabled under reduced-motion.</li>
+  <li>Tabs divide one subject into facets. For moving between subjects use <a href="nav.html">navigation</a>; for a linear flow use the <a href="stepper.html">stepper</a>.</li>
+  <li>Keep labels to one or two words; five tabs at most.</li>
+</ul>

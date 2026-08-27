@@ -28,6 +28,7 @@ jobs:
       - name: Build admin kit demos
         run: |
           (cd admin-kits/tailwind && npm ci --no-audit --no-fund && npx vite build)
+          (cd admin-kits/material && npm ci --no-audit --no-fund && npx vite build)
           (cd admin-kits/blazor-demo && npm ci --no-audit --no-fund && dotnet publish -c Release -v q)
       - name: Build reference site
         run: node site/build.mjs

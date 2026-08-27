@@ -1,0 +1,20 @@
+<section class="demo" data-title="Descriptions (key-value details)">
+  <div class="card" style="max-width:32rem">
+    <h3>Terminal T-0117</h3>
+    <dl style="display:grid;grid-template-columns:auto 1fr;gap:var(--space-2) var(--space-5);margin:0">
+      <dt style="color:var(--text-muted);font-size:var(--text-sm)">Merchant</dt><dd style="margin:0">Hillcrest Grocers, lane 2</dd>
+      <dt style="color:var(--text-muted);font-size:var(--text-sm)">Model</dt><dd style="margin:0">PAX A920 Pro</dd>
+      <dt style="color:var(--text-muted);font-size:var(--text-sm)">Provisioned</dt><dd style="margin:0">2025-11-03</dd>
+      <dt style="color:var(--text-muted);font-size:var(--text-sm)">Last seen</dt><dd style="margin:0">2026-08-27, 09:12</dd>
+      <dt style="color:var(--text-muted);font-size:var(--text-sm)">Status</dt><dd style="margin:0"><span class="badge badge--danger"><span class="badge__dot"></span> Offline</span></dd>
+    </dl>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>A native <code>&lt;dl&gt;</code> on a two-column grid: muted terms left, values right. This is the record-detail pattern for drawers, sheets, and detail pages.</li>
+  <li>Values stay neutral; a judgement renders as a self-describing chip, never as coloured text.</li>
+  <li>Order fields by operational priority, not alphabetically; the field someone came to check goes first.</li>
+  <li>On narrow screens the grid collapses naturally; never truncate values with ellipsis in audit views.</li>
+</ul>

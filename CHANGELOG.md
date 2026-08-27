@@ -7,6 +7,18 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+- Third Admin Kit flavor: Material (Vite + @material/web 2.x under the Novus
+  tokens, the verified Material Web mapping), same screens and dataset as the
+  other flavors, hosted at /demos/material/. Material Web components require
+  JavaScript.
+- Component catalog grows 26 to 34: Tabs, Breadcrumb, Pagination, Progress,
+  Skeleton, Empty state, Timeline, Descriptions, all token compositions
+  adjusted to Novus foundations (static skeletons, judgement colour only on
+  judgements, native radio tabs).
+- Mobile prototypes gain the demo provenance bar; Compose mentions removed
+  from Android references (the team's stack is Material Components for
+  Android).
+
 - Product-team feedback round (feature 004): four new catalog components
   (Dropdown, Date picker, Calendar, Stepper: compositions over the frozen
   tokens), components search bar and a choose-by-function module on the

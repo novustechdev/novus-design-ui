@@ -226,6 +226,7 @@ if (existsSync(join(SRC, "manifest.webmanifest"))) cpSync(join(SRC, "manifest.we
 /* Live demos (feature 003): copy when their build output exists; CI always builds them */
 const DEMOS = [
   [join(ROOT, "admin-kits/tailwind/dist"), join(DIST, "demos/tailwind")],
+  [join(ROOT, "admin-kits/material/dist"), join(DIST, "demos/material")],
   [join(ROOT, "admin-kits/blazor-demo/bin/Release/net10.0/publish/wwwroot"), join(DIST, "demos/blazor")],
 ];
 for (const [from, to] of DEMOS) if (existsSync(from)) { cpSync(from, to, { recursive: true }); console.log("demo copied:", to.slice(DIST.length + 1)); }

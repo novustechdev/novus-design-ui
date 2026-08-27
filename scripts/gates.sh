@@ -18,8 +18,10 @@ AUTHORED="site/src js README.md CHANGELOG.md"
 ADMIN_SRC=$(find admin-kits -type f \( -name '*.razor' -o -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.mjs' \) \
   ! -path '*/node_modules/*' ! -path '*/bin/*' ! -path '*/obj/*' ! -path '*/dist/*' ! -path '*/wwwroot/lib/*' 2>/dev/null)
 
-# 1. No gradients anywhere in authored output (dist/tokens.css is the upstream copy)
-HITS=$( { grep -rn --exclude=tokens.css "gradient" $AUTHORED 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -n "gradient" $ADMIN_SRC 2>/dev/null; } | grep -v "no gradients")
+# 1. No gradients anywhere in authored output (dist/tokens.css is the upstream copy).
+# Vendored demo bundle JS (Material Web ripple internals, framework runtimes) is
+# third-party library code, not authored styling: excluded like Chart.js would be.
+HITS=$( { grep -rn --exclude=tokens.css "gradient" $AUTHORED 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -n "gradient" $ADMIN_SRC 2>/dev/null; } | grep -v "no gradients" | grep -vE 'site/dist/demos/[^:]*/assets/[^:]*\.js:')
 gate "gradient grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 2. No ad-hoc hex colours (tokens define every colour)
