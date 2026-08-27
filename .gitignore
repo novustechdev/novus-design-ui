@@ -3,3 +3,7 @@ site/dist/
 *.tgz
 *.log
 .DS_Store
+bin/
+obj/
+admin-kits/tailwind/dist/
+admin-kits/*/wwwroot/lib/

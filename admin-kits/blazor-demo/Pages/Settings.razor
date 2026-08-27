@@ -1,0 +1,25 @@
+@page "/settings"
+
+<PageTitle>Settings · Novus Admin Kit</PageTitle>
+
+<div class="pagehead"><h1>Settings</h1></div>
+
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start">
+    <div class="card">
+        <h3>Profile</h3>
+        <p class="muted">Demo only: this form does not persist.</p>
+        <form onsubmit="return false">
+            <div class="field"><label for="s-name">Name</label><input class="input" id="s-name" value="Operations Admin"></div>
+            <div class="field"><label for="s-mail">Email</label><input class="input" id="s-mail" type="email" value="ops.admin@novustech.com.sg"></div>
+            <div class="field"><label for="s-role">Role</label>
+                <select class="select" id="s-role"><option>Operations</option><option>Finance</option><option>Support</option></select>
+            </div>
+            <button class="btn btn--primary">Save</button>
+        </form>
+    </div>
+    <div class="card">
+        <h3>Appearance</h3>
+        <p class="muted">Light follows the OS unless you choose. The choice persists on this device.</p>
+        <button class="btn btn--secondary toggle44" data-theme-toggle>Toggle light / dark</button>
+    </div>
+</div>

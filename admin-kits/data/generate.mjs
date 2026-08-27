@@ -59,8 +59,18 @@ export const signals = ${JSON.stringify(d.signals, null, 1)};
 export const transactions = ${JSON.stringify(d.transactions, null, 1)};
 export const terminals = ${JSON.stringify(d.terminals, null, 1)};
 `;
+const jsHourly = `export const hourly = ${JSON.stringify(d.hourly, null, 1)};\n`;
 const jsOut = join(HERE, "../tailwind/src/data.js");
-if (existsSync(dirname(jsOut))) { writeFileSync(jsOut, js); console.log("wrote", jsOut); }
+if (existsSync(dirname(jsOut))) { writeFileSync(jsOut, js + jsHourly); console.log("wrote", jsOut); }
+
+/* ---- Blazor + WASM demo: chart-data.json for the analytics interop ---- */
+for (const rel of ["../blazor/wwwroot", "../blazor-demo/wwwroot"]) {
+  const dir = join(HERE, rel);
+  if (existsSync(dir)) {
+    writeFileSync(join(dir, "chart-data.json"), JSON.stringify(d.hourly));
+    console.log("wrote", join(dir, "chart-data.json"));
+  }
+}
 
 /* ---- Tailwind pages: inject static markup between DATA markers ---- */
 const chip = (kind, value, tone) =>
@@ -91,7 +101,7 @@ const blocks = {
   terminals: [...d.terminals].sort((a, b) => (a.health === "healthy") - (b.health === "healthy")).map(termRow).join("\n"),
 };
 
-for (const page of ["index.html", "transactions.html", "terminals.html", "settings.html"]) {
+for (const page of ["index.html", "transactions.html", "terminals.html", "settings.html", "analytics.html", "datagrid.html"]) {
   const p = join(HERE, "../tailwind", page);
   if (!existsSync(p)) continue;
   let html = readFileSync(p, "utf8");

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Analytics · Novus Admin Kit</title>
+<script>
+try { var t = localStorage.getItem("novus-theme");
+  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+} catch (e) {}
+</script>
+</head>
+<body>
+<div class="adminwrap">
+<header class="appbar">
+  <div class="appbar__inner appheader">
+    <div class="appheader__left">
+      <span class="appname">novapay operations · admin</span>
+    </div>
+    <div class="appheader__right">
+      <button class="btn btn--ghost btn--sm toggle44" data-theme-toggle>Theme</button>
+      <span class="appheader__sep"></span>
+      <span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span>
+    </div>
+  </div>
+</header>
+<div class="adminbody">
+  <details class="adminnav" open>
+    <summary>Menu</summary>
+    <nav aria-label="Admin">
+      <a href="index.html">Dashboard</a>
+      <a href="analytics.html" aria-current="page">Analytics</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="datagrid.html">Data grid</a>
+      <a href="terminals.html">Terminals</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </details>
+  <main>
+    <div class="pagehead"><h1>Analytics</h1><span class="muted">Volume by product per hour, with the total trajectory</span></div>
+    <div class="card">
+      <div style="height:22rem;position:relative">
+        <canvas id="volumechart" aria-label="Hourly transaction volume by product"></canvas>
+      </div>
+      <p class="muted" style="margin:var(--space-3) 0 0">Series colours are the product accents, read from the tokens at render time. Theme flips re-render the chart.</p>
+    </div>
+  </main>
+</div>
+</div>
+<script type="module" src="/src/app.js"></script>
+</body>
+</html>

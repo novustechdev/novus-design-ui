@@ -7,12 +7,16 @@
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid" Version="10.0.11" />
+  </ItemGroup>
+
   <Target Name="CopyNovusKit" BeforeTargets="Build">
     <ItemGroup>
       <NovusKit Include="node_modules/novus-design-kit/**/*" />
+      <ChartJs Include="node_modules/chart.js/dist/chart.umd.js" />
     </ItemGroup>
-    <Copy SourceFiles="@(NovusKit)"
-          DestinationFiles="@(NovusKit->'wwwroot/lib/novus-design-kit/%(RecursiveDir)%(Filename)%(Extension)')"
-          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(NovusKit)" DestinationFiles="@(NovusKit->'wwwroot/lib/novus-design-kit/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(ChartJs)" DestinationFiles="@(ChartJs->'wwwroot/lib/chartjs/%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 </Project>

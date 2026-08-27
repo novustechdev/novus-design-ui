@@ -7,7 +7,7 @@ consuming the published <code>novus-design-kit</code> package. Copy a flavor fol
 from the repository and start from a working, on-brand application.</p>
 
 <div class="statrow statrow--wide" style="margin-bottom:var(--space-6)">
-  <div class="stat"><span class="stat__value">4</span><span class="stat__label">screens per flavor</span></div>
+  <div class="stat"><span class="stat__value">6</span><span class="stat__label">screens per flavor</span></div>
   <div class="stat"><span class="stat__value">2</span><span class="stat__label">flavors, one dataset</span></div>
   <div class="stat"><span class="stat__value">0</span><span class="stat__label">tokens or logins to run</span></div>
 </div>
@@ -18,21 +18,27 @@ from the repository and start from a working, on-brand application.</p>
   <li><b>Transactions</b>: data-dense table, status filter, native detail dialog, plain empty state.</li>
   <li><b>Terminals</b>: fleet health with degraded and offline devices sorted first.</li>
   <li><b>Settings</b>: profile form (demo only, says so) and the persisted theme toggle.</li>
+  <li><b>Analytics</b>: hourly volume by product, stacked composition bars with a total trajectory line, styled by the locked Novus chart rules (token-fed at runtime).</li>
+  <li><b>Data grid</b>: all transactions with column sorting, search, and 10-per-page pagination (Blazor QuickGrid; progressive enhanced table in the Tailwind flavor).</li>
   <li>Internal-tool header (app identity left, Novus endorsement right), sidebar that collapses to a native menu on mobile, traffic-light colour only on judgement chips, amounts always neutral, self-describing chips, dual-trigger dark mode, JS-off navigation.</li>
 </ul>
 
 <h2>Novus Admin Kit with Blazor</h2>
 <p style="max-width:68ch">Blazor Web App (.NET 10): server-rendered pages, InteractiveServer only on the
-transactions filter and detail dialog. Verified 2026-08-27; screenshots below are
-from the verified run.</p>
+transactions filter and detail dialog. Verified 2026-08-27; screenshots below are from the verified run, and every image opens the live demo. The hosted demo is a WebAssembly build (requires JavaScript); the copyable flavor is server-rendered and works without it.</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/blazor from the repository, then
 npm install     # pulls novus-design-kit; the build copies it to wwwroot/lib
 dotnet run</code></pre>
+<div class="row" style="margin-bottom:var(--space-4)">
+  <a class="btn btn--primary" href="demos/blazor/index.html">Open the live demo</a>
+</div>
 <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-  <figure style="margin:0"><img src="assets/admin-kit/blazor-dashboard-light.png" alt="Blazor flavor dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, light</figcaption></figure>
-  <figure style="margin:0"><img src="assets/admin-kit/blazor-dashboard-dark.png" alt="Blazor flavor dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, dark</figcaption></figure>
-  <figure style="margin:0"><img src="assets/admin-kit/blazor-transactions.png" alt="Blazor flavor transactions" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
-  <figure style="margin:0"><img src="assets/admin-kit/blazor-mobile.png" alt="Blazor flavor at 375px" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/index.html"><img src="assets/admin-kit/blazor-dashboard-light.png" alt="blazor flavor: Dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, light</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/index.html"><img src="assets/admin-kit/blazor-dashboard-dark.png" alt="blazor flavor: Dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, dark</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/index.html"><img src="assets/admin-kit/blazor-analytics.png" alt="blazor flavor: Analytics: token-fed chart" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Analytics: token-fed chart</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/index.html"><img src="assets/admin-kit/blazor-datagrid.png" alt="blazor flavor: Data grid: sort, search, pages" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, pages</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/index.html"><img src="assets/admin-kit/blazor-transactions.png" alt="blazor flavor: Transactions with filter and dialog" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/index.html"><img src="assets/admin-kit/blazor-mobile.png" alt="blazor flavor: 375px, no horizontal scroll" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
 </div>
 
 <h2>Novus Admin Kit with Tailwind</h2>
@@ -42,11 +48,16 @@ toggle. Verified 2026-08-27.</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/tailwind from the repository, then
 npm install
 npm run dev     # or: npm run build && npm run preview</code></pre>
+<div class="row" style="margin-bottom:var(--space-4)">
+  <a class="btn btn--primary" href="demos/tailwind/index.html">Open the live demo</a>
+</div>
 <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-  <figure style="margin:0"><img src="assets/admin-kit/tailwind-dashboard-light.png" alt="Tailwind flavor dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, light</figcaption></figure>
-  <figure style="margin:0"><img src="assets/admin-kit/tailwind-dashboard-dark.png" alt="Tailwind flavor dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, dark</figcaption></figure>
-  <figure style="margin:0"><img src="assets/admin-kit/tailwind-transactions.png" alt="Tailwind flavor transactions" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
-  <figure style="margin:0"><img src="assets/admin-kit/tailwind-mobile.png" alt="Tailwind flavor at 375px" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/index.html"><img src="assets/admin-kit/tailwind-dashboard-light.png" alt="tailwind flavor: Dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, light</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/index.html"><img src="assets/admin-kit/tailwind-dashboard-dark.png" alt="tailwind flavor: Dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, dark</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/index.html"><img src="assets/admin-kit/tailwind-analytics.png" alt="tailwind flavor: Analytics: token-fed chart" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Analytics: token-fed chart</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/index.html"><img src="assets/admin-kit/tailwind-datagrid.png" alt="tailwind flavor: Data grid: sort, search, pages" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, pages</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/index.html"><img src="assets/admin-kit/tailwind-transactions.png" alt="tailwind flavor: Transactions with filter and dialog" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/index.html"><img src="assets/admin-kit/tailwind-mobile.png" alt="tailwind flavor: 375px, no horizontal scroll" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
 </div>
 
 <h2>Parity and data</h2>

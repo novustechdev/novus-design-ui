@@ -1,0 +1,29 @@
+@page "/terminals"
+
+<PageTitle>Terminals · Novus Admin Kit</PageTitle>
+
+<div class="pagehead"><h1>Terminals</h1><span class="muted">Degraded and offline devices sort first</span></div>
+
+<div class="card" style="padding:0;overflow:hidden">
+    <div class="tablewrap">
+        <table class="table">
+            <thead><tr><th>Id</th><th>Location</th><th>Product</th><th class="num">Uptime</th><th>Health</th><th>Last seen</th></tr></thead>
+            <tbody>
+                @foreach (var t in SeedData.Terminals.OrderBy(t => t.Health == "healthy"))
+                {
+                    <tr>
+                        <td><code>@t.Id</code></td><td>@t.Location</td><td>@t.Product</td>
+                        <td class="num">@t.Uptime.ToString("F1")%</td>
+                        <td><span class="badge badge--@HealthTone(t.Health)"><span class="badge__dot"></span> Health · @Cap(t.Health)</span></td>
+                        <td>@t.LastSeen.Substring(11, 5)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    static string HealthTone(string h) => h switch { "healthy" => "success", "degraded" => "warning", _ => "danger" };
+    static string Cap(string s) => char.ToUpper(s[0]) + s[1..];
+}

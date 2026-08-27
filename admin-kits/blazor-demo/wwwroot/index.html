@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novus Admin Kit demo</title>
+    <base href="./" />
+    <script>
+        try {
+            var t = localStorage.getItem("novus-theme");
+            if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+        } catch (e) { }
+    </script>
+    <link rel="stylesheet" href="lib/novus-design-kit/tokens.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <script src="lib/novus-design-kit/js/novus-theme.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <main class="appmain" style="padding-block:var(--space-6)">
+            <p class="muted">Loading the Novus Admin Kit demo (WebAssembly). This demo requires JavaScript; the copyable Blazor flavor renders server-side and works without it.</p>
+        </main>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="admin.js"></script>
+    <script src="lib/chartjs/chart.umd.js"></script>
+    <script src="novus-chart.js"></script>
+</body>
+
+</html>

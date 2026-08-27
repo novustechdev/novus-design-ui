@@ -1,0 +1,12 @@
+@page "/analytics"
+
+<PageTitle>Analytics · Novus Admin Kit</PageTitle>
+
+<div class="pagehead"><h1>Analytics</h1><span class="muted">Volume by product per hour, with the total trajectory</span></div>
+
+<div class="card">
+    <div style="height:22rem;position:relative">
+        <canvas id="volumechart" aria-label="Hourly transaction volume by product"></canvas>
+    </div>
+    <p class="muted" style="margin:var(--space-3) 0 0">Series colours are the product accents, read from the tokens at render time. Theme flips re-render the chart.</p>
+</div>

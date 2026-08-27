@@ -1,0 +1,78 @@
+@page "/transactions"
+
+<PageTitle>Transactions · Novus Admin Kit</PageTitle>
+
+<div class="pagehead"><h1>Transactions</h1></div>
+
+<div class="filterrow">
+    <label for="statusfilter" class="muted">Status</label>
+    <select class="select" id="statusfilter" @onchange="OnFilter">
+        <option value="all">All</option>
+        <option value="settled">Settled</option>
+        <option value="pending">Pending</option>
+        <option value="failed">Failed</option>
+    </select>
+    <span class="muted">@Filtered.Count() of @SeedData.Transactions.Length</span>
+</div>
+
+<div class="card" style="padding:0;overflow:hidden">
+    <div class="tablewrap">
+        <table class="table">
+            <thead><tr><th>Id</th><th>Time</th><th>Terminal</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th></th></tr></thead>
+            <tbody>
+                @foreach (var t in Filtered)
+                {
+                    <tr>
+                        <td><code>@t.Id</code></td><td>@t.Ts.Substring(11, 5)</td><td>@t.Terminal</td>
+                        <td>@t.Product</td><td class="num">@t.Amount.ToString("F2")</td>
+                        <td><span class="badge badge--@StatusTone(t.Status)"><span class="badge__dot"></span> Status · @Cap(t.Status)</span></td>
+                        <td><button class="btn btn--ghost btn--sm" @onclick="() => Selected = t">Detail</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (!Filtered.Any())
+    {
+        <div class="emptystate">
+            <p>No transactions match this filter.</p>
+            <button class="btn btn--secondary btn--sm" @onclick="Reset">Reset filter</button>
+        </div>
+    }
+</div>
+
+@if (Selected is not null)
+{
+    <dialog class="vdialog" open>
+        <div class="vdialog__head">
+            <h3 style="margin:0">@Selected.Id</h3>
+            <button class="modal-close" aria-label="Close" @onclick="() => Selected = null">×</button>
+        </div>
+        <div class="vdialog__body">
+            <h4>Details</h4>
+            <table class="table">
+                <tbody>
+                    <tr><td>Terminal</td><td>@Selected.Terminal</td></tr>
+                    <tr><td>Product</td><td>@Selected.Product</td></tr>
+                    <tr><td>Amount</td><td class="num">@Selected.Amount.ToString("F2") @Selected.Currency</td></tr>
+                    <tr><td>Time</td><td>@Selected.Ts.Replace("T", " ").Substring(0, 16)</td></tr>
+                    <tr><td>Status</td><td>Status · @Cap(Selected.Status)</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </dialog>
+}
+
+@code {
+    string Filter = "all";
+    Transaction? Selected;
+
+    IEnumerable<Transaction> Filtered =>
+        Filter == "all" ? SeedData.Transactions : SeedData.Transactions.Where(t => t.Status == Filter);
+
+    void OnFilter(ChangeEventArgs e) { Filter = e.Value?.ToString() ?? "all"; Selected = null; }
+    void Reset() => Filter = "all";
+
+    static string StatusTone(string s) => s switch { "settled" => "success", "pending" => "warning", _ => "danger" };
+    static string Cap(string s) => char.ToUpper(s[0]) + s[1..];
+}
