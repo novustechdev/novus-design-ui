@@ -99,6 +99,7 @@ const SITE_CSS = `
   .appbar__inner, .appnav__inner, .appmain { max-width: none; }
   @media (min-width: 900px) { .docwrap { grid-template-columns: 240px minmax(0, 1fr); } }
   /* Vertical rhythm: token-scale breathing room between blocks */
+  .site-main p, .site-main .bullets { max-width: none; }
   .site-main h2 { margin-top: var(--space-7); }
   .site-main h3 { margin-top: var(--space-6); }
   .site-main > pre.demo__code, .doccontent > pre.demo__code { margin: var(--space-4) 0 var(--space-6); border: 1px solid var(--border); border-radius: var(--radius-md); }
@@ -191,22 +192,32 @@ const DEMOS = [
   [join(ROOT, "admin-kits/blazor-demo/bin/Release/net10.0/publish/wwwroot"), join(DIST, "demos/blazor")],
 ];
 for (const [from, to] of DEMOS) if (existsSync(from)) { cpSync(from, to, { recursive: true }); console.log("demo copied:", to.slice(DIST.length + 1)); }
-/* .NET publish sometimes leaves the boot-script reference unfingerprinted while the
-   file itself is fingerprinted (environment-dependent). Repair the reference to
-   whatever blazor.webassembly*.js actually shipped. */
+/* .NET publish sometimes leaves references unfingerprinted while shipping
+   fingerprinted files (environment-dependent). Repair any reference in the demo
+   host page whose target is missing but has a fingerprinted sibling. */
 {
   const bIndex = join(DIST, "demos/blazor/index.html");
-  const bFw = join(DIST, "demos/blazor/_framework");
-  if (existsSync(bIndex) && existsSync(bFw)) {
+  if (existsSync(bIndex)) {
     let html = read(bIndex);
-    const m = html.match(/_framework\/(blazor\.webassembly[^"]*\.js)/);
-    if (m && !existsSync(join(bFw, m[1]))) {
-      const real = readdirSync(bFw).find((f) => /^blazor\.webassembly.*\.js$/.test(f) && !f.endsWith(".br") && !f.endsWith(".gz"));
+    let changed = false;
+    for (const m of [...html.matchAll(/(?:href|src)="([^"]+)"/g)]) {
+      const u = m[1];
+      if (/^(https?:|data:|#)/.test(u)) continue;
+      const target = join(DIST, "demos/blazor", u);
+      if (existsSync(target)) continue;
+      const dir = dirname(target);
+      const base = basename(u);
+      const dot = base.lastIndexOf(".");
+      if (dot < 1 || !existsSync(dir)) continue;
+      const stem = base.slice(0, dot), ext = base.slice(dot);
+      const real = readdirSync(dir).find((f) => f !== base && f.startsWith(stem + ".") && f.endsWith(ext) && !f.endsWith(".br") && !f.endsWith(".gz"));
       if (real) {
-        writeFileSync(bIndex, html.replace(m[0], `_framework/${real}`));
-        console.log("blazor demo boot ref repaired ->", real);
+        html = html.replaceAll(u, u.slice(0, u.length - base.length) + real);
+        changed = true;
+        console.log("demo ref repaired:", base, "->", real);
       }
     }
+    if (changed) writeFileSync(bIndex, html);
   }
 }
 

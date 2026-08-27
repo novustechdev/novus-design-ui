@@ -1,6 +1,11 @@
 <!--
 Sync Impact Report
-- Version change: 1.4.0 → 1.5.0 (MINOR: Principle VII expanded; presentation standards added)
+- Version change: 1.5.0 → 1.5.1 (PATCH: presentation wording; owner decision)
+- Changed: docs prose follows the container full width on desktop; no fixed
+  ch-measure caps on documentation text (supersedes "prose keeps a readable
+  measure"). Commit authorship: repository commits are authored by the owner
+  (sgultom99) with no assistant trailers.
+- Prior amendment (1.4.0 -> 1.5.0): Principle VII expanded; presentation standards added
 - Modified: VII. Reference Applications now also requires an Analytics screen (charts
   following the locked Novus dashboard-chart rules: token-fed Chart.js defaults, soft
   dashed gridlines, rounded bars, no axis borders, composition plus trajectory reads,
@@ -169,9 +174,9 @@ unverified or off-convention demo teaches every consumer the wrong patterns.
 - Offline/single-file output inlines `tokens.css` and embeds woff2 fonts as base64;
   never `<link>` a stylesheet on a `file://` page.
 - Docs site and admin consoles: full-width fluid layout on desktop (side gutters
-  only, no fixed max-width page container); prose keeps a readable measure;
-  mobile-first responsive throughout; the docs site ships PWA basics (web app
-  manifest and theme-color). Vertical rhythm on docs pages: headings, standalone
+  only, no fixed max-width page container); documentation content follows the
+  container width with no fixed ch-measure caps; mobile-first responsive
+  throughout; the docs site ships PWA basics (web app manifest and theme-color). Vertical rhythm on docs pages: headings, standalone
   code blocks, figures, and tables carry token-scale top/bottom spacing.
 - Canonical docs host: https://ui-kit.novustech.dev (Cloudflare DNS CNAME to
   GitHub Pages; HTTPS enforced). Demo apps live under /demos/ on the same host.
@@ -213,4 +218,4 @@ in the PR description against Principle III.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
   MUST NOT ship with a known gate failure.
 
-**Version**: 1.5.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26
+**Version**: 1.5.1 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26

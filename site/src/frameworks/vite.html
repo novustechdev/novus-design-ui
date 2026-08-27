@@ -1,7 +1,7 @@
 <!-- title: Novus Design for Vite -->
 <p class="eyebrow">Frameworks</p>
 <h1>Novus Design for Vite</h1>
-<p style="max-width:68ch">Vite projects, vanilla JS or any framework template, consume the kit with zero
+<p>Vite projects, vanilla JS or any framework template, consume the kit with zero
 configuration: import the stylesheet in your entry module and Vite bundles the
 Carlito fonts and rewrites their URLs automatically.</p>
 
@@ -10,7 +10,7 @@ Carlito fonts and rewrites their URLs automatically.</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// src/main.js, first lines of the entry module
 import "novus-design-kit/js/novus-theme.js";
 import "novus-design-kit/tokens.css";</code></pre>
-<p style="max-width:68ch">That's the whole setup: the <code>@font-face</code> rules in tokens.css use relative
+<p>That's the whole setup: the <code>@font-face</code> rules in tokens.css use relative
 URLs, so Vite resolves the woff2 files out of the package, hashes them, and serves
 them in dev and build without any plugin.</p>
 
@@ -25,7 +25,7 @@ them in dev and build without any plugin.</p>
 document.querySelector("#mark").src = lockup;   // hashed, cache-safe URL</code></pre>
 
 <h2>4. Zero-flash dark mode (optional)</h2>
-<p style="max-width:68ch">Module imports run after first paint, so a user whose saved theme differs from
+<p>Module imports run after first paint, so a user whose saved theme differs from
 their OS preference can see a one-frame flash. To remove it, keep the module import
 (it provides <code>novusTheme.toggle()</code>) and add this tiny blocking pre-paint
 snippet inline in <code>index.html</code>, a <code>/node_modules</code> script tag
@@ -41,7 +41,7 @@ does <em>not</em> survive <code>vite build</code>:</p>
 &lt;/head&gt;</code></pre>
 
 <h2>Verified result</h2>
-<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against vite 8.</p>
+<p>Rendered from this guide's own sample project, executed and verified on 2026-08-26 against vite 8.</p>
 <img src="../assets/samples/vite.png" alt="Rendered sample: the kit styling Vite components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
 
 <h2>Rules of the road</h2>

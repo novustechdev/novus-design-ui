@@ -66,8 +66,8 @@ certificate, and the old github.io URL redirects.
   a linked demo page is absent from the built site.
 - Chart canvas needs concrete colours: values are read from tokens at runtime
   (getComputedStyle), never copied literals; theme flips re-read them.
-- Prose readability: full-width layout keeps a readable measure on long paragraphs;
-  tables, grids, code, and demos stretch.
+- Content follows the container full width on desktop (owner decision, 2026-08-27);
+  no ch-measure caps on docs prose. Tables, grids, code, and demos stretch too.
 
 ## Requirements
 

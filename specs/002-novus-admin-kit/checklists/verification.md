@@ -24,3 +24,8 @@ web asset scan silently breaks .NET's importmap and fingerprint substitution on
 clean builds (CI), while incremental local builds mask it. The Blazor guide and
 both csproj files updated; build.mjs additionally repairs a stale boot-script
 reference defensively.
+
+Feature 003 third finding folded back: a standalone WASM host page must link the
+app's scoped styles bundle (NovusAdminDemo.styles.css); QuickGrid's Paginator
+icons and layout live in it, and without it the pager renders as empty buttons.
+The generic build repair also covers its fingerprint reference.

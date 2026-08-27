@@ -1,6 +1,6 @@
 <!-- title: Overview -->
-<h1 style="max-width:24ch">Build on the Novus design system</h1>
-<p style="max-width:60ch">One package carries the whole visual system: design tokens, component
+<h1>Build on the Novus design system</h1>
+<p>One package carries the whole visual system: design tokens, component
 styles, the Carlito typeface, dark mode, and the official brand assets. Install it,
 import one stylesheet, and every screen you build is on-brand by construction.</p>
 <div class="row" style="margin-bottom:var(--space-7)">
@@ -35,3 +35,51 @@ import one stylesheet, and every screen you build is on-brand by construction.</
     <a class="card-trigger" href="foundations/assets.html" aria-label="Asset index"></a>
   </div>
 </div>
+
+<h2>Components at a glance</h2>
+<p>Everything below is rendered live by the kit on this page: buttons, badges, cards, stats, and alerts, all from one stylesheet.</p>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start">
+  <div class="card">
+    <h3>Actions</h3>
+    <div class="row" style="margin-bottom:var(--space-3)">
+      <button class="btn btn--primary">Talk to us</button>
+      <button class="btn btn--secondary">Secondary</button>
+      <button class="btn btn--ghost">Ghost</button>
+    </div>
+    <div class="row">
+      <span class="badge badge--success"><span class="badge__dot"></span> Live</span>
+      <span class="badge badge--warning"><span class="badge__dot"></span> At risk</span>
+      <span class="badge badge--accent">Accent</span>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Stats</h3>
+    <div class="statrow">
+      <div class="stat"><span class="stat__value">99.8%</span><span class="stat__label">uptime</span></div>
+      <div class="stat"><span class="stat__value">312</span><span class="stat__label">terminals</span></div>
+      <div class="stat"><span class="stat__value">7</span><span class="stat__label">countries</span></div>
+    </div>
+    <div class="alert alert--warning" style="margin-top:var(--space-4)">Certificate expires in 14 days.</div>
+  </div>
+  <div class="card card--interactive" style="position:relative">
+    <h3>Interactive card</h3>
+    <p class="muted" style="margin:0">Hover means clickable: lift, raised shadow, accent border. This one opens the full catalog.</p>
+    <span class="badge badge--accent" style="margin-top:var(--space-3)">22 components</span>
+    <a class="card-trigger" href="components/overview.html" aria-label="Open the component catalog"></a>
+  </div>
+</div>
+
+<h2>Novus Admin Kit</h2>
+<p>A complete enterprise operations console built on the kit: six screens including
+analytics with token-fed charts and a data grid, in Blazor and Tailwind flavors with
+strict parity. Copy a flavor folder and start from a working application, or click
+straight into the live demos.</p>
+<div class="row" style="margin-bottom:var(--space-4)">
+  <a class="btn btn--primary" href="admin-kit.html">Explore the Admin Kit</a>
+  <a class="btn btn--secondary" href="demos/blazor/">Live demo: Blazor</a>
+  <a class="btn btn--secondary" href="demos/tailwind/">Live demo: Tailwind</a>
+</div>
+<figure style="margin:0">
+  <a href="admin-kit.html"><img src="assets/admin-kit/tailwind-dashboard-light.png" alt="Novus Admin Kit dashboard" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a>
+  <figcaption class="muted">The Admin Kit dashboard: KPI stats, signal cards, and live transaction data.</figcaption>
+</figure>

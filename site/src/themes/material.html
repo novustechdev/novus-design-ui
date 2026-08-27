@@ -1,7 +1,7 @@
 <!-- title: Novus Design with Material -->
 <p class="eyebrow">Themes</p>
 <h1>Novus Design with Material</h1>
-<p style="max-width:68ch">Teams using Material UI (MUI) keep its component behaviour and re-skin it with
+<p>Teams using Material UI (MUI) keep its component behaviour and re-skin it with
 Novus tokens. MUI decomposes palette colours at runtime (it computes colour
 channels), so a raw <code>var()</code> string in the palette throws, the Novus
 pattern is the same as Ant Design's: <b>read the computed token values from the
@@ -38,14 +38,14 @@ const novusMui = () =&gt; createTheme({
 &lt;/ThemeProvider&gt;</code></pre>
 
 <h2>3. Dark mode</h2>
-<p style="max-width:68ch">Rebuild the theme when the kit toggle flips, so the palette re-reads the dark
+<p>Rebuild the theme when the kit toggle flips, so the palette re-reads the dark
 token values (same tick pattern as the <a href="antd.html">Ant Design guide</a>):</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>const [themeTick, setThemeTick] = useState(0);
 const toggle = () =&gt; { window.novusTheme.toggle(); setThemeTick(themeTick + 1); };
 // novusMui() is re-called on re-render and picks up the dark values</code></pre>
 
 <h2>Verified result</h2>
-<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against @mui/material 9.3.</p>
+<p>Rendered from this guide's own sample project, executed and verified on 2026-08-26 against @mui/material 9.3.</p>
 <img src="../assets/samples/material.png" alt="Rendered sample: the kit styling Material UI components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
 
 <h2>Rules of the road</h2>
