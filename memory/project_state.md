@@ -11,7 +11,7 @@
 - **Speckit (current)**: active feature `specs/003-adminkit-charts-demos`
   (tasks through T033 done); constitution v1.6.0.
 
-- **Package**: `novus-design-kit@0.2.0` on PUBLIC npm, tokenless install
+- **Package**: `novus-design-kit` on PUBLIC npm (npm serves 0.2.0; repo at v0.3.0, npm publish of 0.3.0 pending owner passkey; packaged kit files identical), tokenless install
   (`npm install novus-design-kit`); third-party marks (logos/clients,
   logos/schemes) stripped from the artifact, repository-only. npm account
   sgultom99, 2FA via passkey: publishing needs the owner in a real terminal.
