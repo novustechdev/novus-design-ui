@@ -119,7 +119,7 @@ const SITE_CSS = `
   .appbar__inner, .appnav__inner, .appmain { max-width: none; }
   @media (min-width: 900px) { .docwrap { grid-template-columns: 240px minmax(0, 1fr); } }
   /* Vertical rhythm: token-scale breathing room between blocks */
-  .site-main p, .site-main .bullets { max-width: none; }
+  .site-main p, .site-main .bullets, .sitefoot p { max-width: none; }
   .site-main h2 { margin-top: var(--space-7); }
   .site-main h3 { margin-top: var(--space-6); }
   .site-main > pre.demo__code, .doccontent > pre.demo__code { margin: var(--space-4) 0 var(--space-6); border: 1px solid var(--border); border-radius: var(--radius-md); }
