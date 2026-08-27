@@ -74,3 +74,23 @@
 .loginwrap { min-height: 100vh; display: grid; place-items: center; padding: var(--gutter); }
 .logincard { width: 100%; max-width: 24rem; }
 .logincard .brandmark { margin: 0 auto var(--space-4); }
+
+/* Icon theme toggle (moon in light, sun in dark), mirrored under both triggers */
+.themetoggle .ic-sun { display: none; }
+[data-theme="dark"] .themetoggle .ic-moon { display: none; }
+[data-theme="dark"] .themetoggle .ic-sun { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .themetoggle .ic-moon { display: none; }
+  :root:not([data-theme]) .themetoggle .ic-sun { display: block; }
+}
+[data-theme="light"] .themetoggle .ic-moon { display: block; }
+[data-theme="light"] .themetoggle .ic-sun { display: none; }
+/* The brandmark is a span: give it block layout wherever it is not a flex item */
+.logincard .brandmark { display: block; }
+
+/* Two-mark rule below 520px: divider drops, endorsement steps down, suffix hides */
+@media (max-width: 520px) {
+  .appsuffix { display: none; }
+  .brandmark { height: 20px; width: 65px; }
+  .appbar__inner { gap: var(--space-2); }
+}

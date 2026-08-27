@@ -25,7 +25,7 @@
 
     void Submit()
     {
-        if (User == "admin" && Pass == "admin") Nav.NavigateTo("");
+        if (User == "admin" && Pass == "admin") Nav.NavigateTo(Nav.BaseUri);
         else Error = true;
     }
 }

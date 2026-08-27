@@ -32,3 +32,6 @@
 - [X] T024 WASM demo login redirect: NavigateTo("/") escapes the app under base "./" (lands on the docs root); use the empty relative URI to reach the dashboard
 - [X] T025 Grid & Row page demonstrates rows: added a grid demo wrapping into two rows and constrained the action-row demo so the wrap is visible; usage copy explains both
 - [X] T026 Footer carries the copyright: (c) + build-time year before the company name and kit version line
+- [X] T027 Theme control is the moon/sun icon toggle (dual-trigger swap) in admin flavors and demos, replacing the text button
+- [X] T028 Login page brandmark visible: the span-based mark needs block display outside flex contexts; docs and demo screenshots retaken with lockup headers and icon toggles; mobile header rules added after the new header overflowed 375px (suffix hides, endorsement steps to 20px per the two-mark rule)
+- [X] T029 Login redirect hardened to Nav.BaseUri (absolute to the app's own base) in flavor and demo
