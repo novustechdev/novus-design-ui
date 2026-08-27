@@ -39,3 +39,4 @@
 - [X] T031 Animated nav links and native radio-based tabs component (animated indicator, panel fade, :has panel switching with stacked JS-off fallback) in shared admin.css per FR-010/FR-011
 - [X] T032 Settings rebuilt as a tabbed screen (Profile, Appearance, Notifications, API access) with parity in both flavors and the WASM demo per FR-011; settings screenshots added to the docs grids
 - [X] T033 Getting started section on the Admin Kit docs page: clone/ZIP + copy-a-flavor path and npm-install-into-existing-app path per FR-012
+- [X] T034 Favicons from official assets only: docs site tab icon and manifest icon are a square pixel crop of the master logo's leading N glyph (assets/novus-favicon.png, no redraw); demo consoles use the official novapay pictograph PNG (logos/icons/png) as favicon in both flavors and the WASM demo

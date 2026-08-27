@@ -169,6 +169,8 @@ function shell({ title, content, depth, active, sidebar }) {
 <title>${esc(title)} · Novus Design Kit</title>
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B1620">
+<link rel="icon" type="image/png" sizes="512x512" href="${rel}assets/novus-favicon.png">
+<link rel="apple-touch-icon" href="${rel}assets/novus-favicon.png">
 <link rel="manifest" href="${rel}manifest.webmanifest">
 <link rel="stylesheet" href="${rel}tokens.css">
 <script src="${rel}js/novus-theme.js"></script>
