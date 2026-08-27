@@ -15,10 +15,17 @@ per constitution Principle VIII.</div>
 below, light and dark. These are reference renderings drawn entirely from
 <code>tokens.css</code> (the kit's own classes at device width), not device
 screenshots; the starter view further down reproduces them natively.</p>
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:44rem">
-  <figure style="margin:0"><img src="../assets/mobile/ios-dashboard-light.png" alt="iOS reference dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, light</figcaption></figure>
-  <figure style="margin:0"><img src="../assets/mobile/ios-dashboard-dark.png" alt="iOS reference dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, dark (dynamic colors)</figcaption></figure>
+<div class="row" style="margin-bottom:var(--space-4)">
+  <a class="btn btn--primary" href="../demos/mobile/ios/">Open the live prototype</a>
 </div>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:44rem">
+  <figure style="margin:0"><a href="../demos/mobile/ios/"><img src="../assets/mobile/ios-dashboard-light.png" alt="iOS reference dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, light</figcaption></figure>
+  <figure style="margin:0"><a href="../demos/mobile/ios/"><img src="../assets/mobile/ios-dashboard-dark.png" alt="iOS reference dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, dark (dynamic colors)</figcaption></figure>
+</div>
+<p class="muted">The prototype is the mapping made tappable: four screens with the large
+title following the tab, a working segmented control (Today, Week, Month),
+transaction filter chips, and the persisted theme toggle in Settings; navigation
+on native radio inputs so it works with JavaScript off.</p>
 
 <h2>Colors: dynamic light and dark from one definition</h2>
 <p>Define each semantic colour once with both appearances; the system switches
