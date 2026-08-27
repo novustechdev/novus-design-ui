@@ -99,6 +99,17 @@ certificate, and the old github.io URL redirects.
 - **FR-009**: The site MUST be served at https://ui-kit.novustech.dev (Cloudflare
   CNAME to GitHub Pages, HTTPS enforced); documented absolute URLs (README, guides,
   release notes going forward) switch to the custom domain.
+- **FR-010**: Admin flavors provide calm functional motion (owner request,
+  2026-08-27; constitution 1.6.0): animated nav-link hover/active transitions and
+  a tabs component with an animated active indicator and panel fade, all 0.2s or
+  less and disabled under prefers-reduced-motion.
+- **FR-011**: Settings is a tabbed screen (Profile, Appearance, Notifications,
+  API access) with strict parity across flavors; tabs are native radio inputs so
+  they work with JavaScript off (all panels stack as the no-support fallback).
+- **FR-012**: The Admin Kit docs page MUST carry a Getting started section
+  covering both adoption paths in copyable detail: cloning or downloading the
+  repository and copying a flavor folder, and installing novus-design-kit from
+  npm into an existing application.
 
 ## Success Criteria
 
