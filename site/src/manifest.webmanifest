@@ -1,0 +1,12 @@
+{
+  "name": "Novus Design Kit",
+  "short_name": "Novus Kit",
+  "description": "Novus Technologies design system: tokens, components, guides, and the Admin Kit.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0070C0",
+  "icons": [
+    { "src": "logos/Novus_Logo_Colour_transparent.png", "sizes": "1619x501", "type": "image/png", "purpose": "any" }
+  ]
+}

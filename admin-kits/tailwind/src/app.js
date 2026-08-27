@@ -44,3 +44,56 @@ if (table) {
     dialog.showModal();
   });
 }
+
+/* Analytics: chart loaded only where the canvas exists */
+const volCanvas = document.getElementById("volumechart");
+if (volCanvas) {
+  Promise.all([import("./novus-chart.js"), import("./data.js")]).then(([m, d]) => {
+    m.themeAware(() => m.volumeChart(volCanvas, d.hourly));
+  });
+}
+
+/* Data grid: progressive sort + search + pagination over the static rows */
+const grid = document.getElementById("gridtable");
+if (grid) {
+  const PAGE = 10;
+  const body = grid.querySelector("tbody");
+  const all = [...body.querySelectorAll("tr")];
+  const cellVal = (tr, key) => {
+    const i = { id: 0, ts: 1, terminal: 2, product: 3, amount: 4, status: 5 }[key];
+    const txt = tr.cells[i].textContent.trim();
+    return key === "amount" ? parseFloat(txt) : txt.toLowerCase();
+  };
+  let rows = all, page = 0, sortKey = null, sortDir = 1;
+  const search = document.getElementById("gridsearch");
+  const count = document.getElementById("gridcount");
+  const label = document.getElementById("gridpage");
+  const render = () => {
+    const pages = Math.max(1, Math.ceil(rows.length / PAGE));
+    page = Math.min(page, pages - 1);
+    body.replaceChildren(...rows.slice(page * PAGE, page * PAGE + PAGE));
+    count.textContent = `${rows.length} of ${all.length} rows`;
+    label.textContent = `Page ${page + 1} of ${pages}`;
+  };
+  const apply = () => {
+    const q = search.value.trim().toLowerCase();
+    rows = all.filter((r) => !q || r.textContent.toLowerCase().includes(q));
+    if (sortKey) rows = [...rows].sort((a, b) => (cellVal(a, sortKey) > cellVal(b, sortKey) ? sortDir : -sortDir));
+    page = 0;
+    render();
+  };
+  search.addEventListener("input", apply);
+  document.getElementById("gridprev").addEventListener("click", () => { page--; render(); });
+  document.getElementById("gridnext").addEventListener("click", () => { page++; render(); });
+  grid.querySelectorAll(".gridsort").forEach((b) =>
+    b.addEventListener("click", () => {
+      const k = b.dataset.key;
+      sortDir = sortKey === k ? -sortDir : 1;
+      sortKey = k;
+      grid.querySelectorAll(".gridsort").forEach((x) => x.removeAttribute("data-dir"));
+      b.dataset.dir = sortDir > 0 ? "asc" : "desc";
+      apply();
+    })
+  );
+  apply();
+}

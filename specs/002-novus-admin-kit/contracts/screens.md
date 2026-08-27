@@ -21,6 +21,8 @@ change edits this contract first, then both flavors in the same change.
 | Transactions | `transactions.html` / `/transactions` | Full table (24 rows): id, time, terminal, product, amount (num, right), status chip; status filter (All/Settled/Pending/Failed); row action opens native dialog with details; empty state = text + reset button |
 | Terminals | `terminals.html` / `/terminals` | Fleet table (12): id, location, product, uptime (num), health chip, last seen; degraded/offline sorted first |
 | Settings | `settings.html` / `/settings` | Profile form (name, email, role select: does not persist, states so) + Appearance card with the kit theme toggle |
+| Analytics | `analytics.html` / `/analytics` | Hourly volume by product: stacked composition bars + total trajectory line, locked Novus chart rules, token-fed at runtime (feature 003) |
+| Data grid | `datagrid.html` / `/datagrid` | All 24 transactions: column sorting, search, 10-per-page pagination; Blazor QuickGrid, Tailwind progressive enhanced table (static full table with JS off) (feature 003) |
 
 ## Conventions demonstrated (and asserted in review)
 

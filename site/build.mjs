@@ -90,10 +90,24 @@ const SITE_CSS = `
   .sidenav a:hover{color:var(--text);background:var(--bg-subtle);text-decoration:none;}
   .sidenav a[aria-current="page"]{color:var(--accent-text);background:var(--accent-subtle);border-left-color:var(--accent);font-weight:var(--weight-medium);}
   @media (min-width:900px){
-    .docwrap{grid-template-columns:224px minmax(0,1fr);gap:var(--space-6);}
+    .docwrap{gap:var(--space-6);}
     .sidenav{position:sticky;top:var(--space-4);max-height:calc(100vh - var(--space-6));overflow-y:auto;border:0;background:transparent;}
     .sidenav > summary{display:none;}
   }
+
+  /* Full-width fluid layout on desktop: gutters only, no fixed page column */
+  .appbar__inner, .appnav__inner, .appmain { max-width: none; }
+  @media (min-width: 900px) { .docwrap { grid-template-columns: 240px minmax(0, 1fr); } }
+  /* Vertical rhythm: token-scale breathing room between blocks */
+  .site-main h2 { margin-top: var(--space-7); }
+  .site-main h3 { margin-top: var(--space-6); }
+  .site-main > pre.demo__code, .doccontent > pre.demo__code { margin: var(--space-4) 0 var(--space-6); border: 1px solid var(--border); border-radius: var(--radius-md); }
+  .demo pre.demo__code { margin: 0; border: 0; border-top: 1px solid var(--border); border-radius: 0; }
+  .site-main figure { margin: 0 0 var(--space-5); }
+  .site-main figcaption { margin-top: var(--space-2); }
+  .site-main .doccontent > .table, .site-main .doccontent > .tablewrap { margin-bottom: var(--space-6); }
+  .site-main .bullets { margin-bottom: var(--space-6); }
+  .site-main p > code, .site-main li > code { padding: 0 var(--space-1); background: var(--bg-subtle); border-radius: var(--radius-sm); }
 `;
 
 const COPY_JS = `
@@ -132,6 +146,9 @@ function shell({ title, content, depth, active, sidebar }) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)} · Novus Design Kit</title>
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B1620">
+<link rel="manifest" href="${rel}manifest.webmanifest">
 <link rel="stylesheet" href="${rel}tokens.css">
 <script src="${rel}js/novus-theme.js"></script>
 <style>${SITE_CSS}</style>
@@ -167,6 +184,13 @@ cpSync(join(ROOT, "tokens.css"), join(DIST, "tokens.css"));
 for (const dir of ["fonts", "logos", "photos", "js"]) cpSync(join(ROOT, dir), join(DIST, dir), { recursive: true });
 /* Site-only assets (verified-sample screenshots); not part of the npm package */
 if (existsSync(join(SRC, "assets"))) cpSync(join(SRC, "assets"), join(DIST, "assets"), { recursive: true });
+if (existsSync(join(SRC, "manifest.webmanifest"))) cpSync(join(SRC, "manifest.webmanifest"), join(DIST, "manifest.webmanifest"));
+/* Live demos (feature 003): copy when their build output exists; CI always builds them */
+const DEMOS = [
+  [join(ROOT, "admin-kits/tailwind/dist"), join(DIST, "demos/tailwind")],
+  [join(ROOT, "admin-kits/blazor-demo/bin/Release/net10.0/publish/wwwroot"), join(DIST, "demos/blazor")],
+];
+for (const [from, to] of DEMOS) if (existsSync(from)) { cpSync(from, to, { recursive: true }); console.log("demo copied:", to.slice(DIST.length + 1)); }
 
 const built = [];
 
@@ -328,7 +352,7 @@ function walk(dir) {
   );
 }
 const broken = [];
-for (const p of walk(DIST).filter((p) => p.endsWith(".html"))) {
+for (const p of walk(DIST).filter((p) => p.endsWith(".html") && !p.includes("/demos/"))) {
   const html = read(p).replace(/<pre[\s\S]*?<\/pre>/g, ""); // code samples aren't links
   for (const m of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     const u = m.group?.(1) ?? m[1];

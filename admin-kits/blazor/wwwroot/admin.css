@@ -1,7 +1,7 @@
 /* Novus Admin Kit app layout. Composed from tokens only (constitution I, III, VII). */
 .adminwrap { min-height: 100vh; display: flex; flex-direction: column; }
 .adminbody {
-  width: 100%; max-width: var(--container); margin-inline: auto;
+  width: 100%; max-width: none; margin-inline: auto;
   padding: var(--space-5) var(--gutter) var(--space-8); flex: 1;
 }
 @media (min-width: 900px) {
@@ -42,3 +42,23 @@
 .emptystate { padding: var(--space-6); text-align: center; color: var(--text-secondary); }
 .toggle44 { min-height: 2.75rem; min-width: 2.75rem; }
 .appname { font-weight: var(--weight-bold); font-size: var(--text-lg); color: var(--text); }
+
+/* QuickGrid themed with kit tokens (library supplies behaviour, kit supplies identity) */
+.quickgrid { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+.quickgrid th, .quickgrid td { text-align: left; padding: var(--space-2) var(--space-3); border-bottom: 1px solid var(--border); }
+.quickgrid thead th { background: var(--bg-subtle); color: var(--text-secondary); font-weight: var(--weight-medium); }
+.quickgrid tbody tr:hover { background: var(--bg-subtle); }
+.quickgrid .col-header-content button, .quickgrid button.col-title { font: inherit; font-weight: var(--weight-medium); color: var(--text-secondary); background: none; border: 0; padding: 0; cursor: pointer; min-height: 2.75rem; display: inline-flex; align-items: center; gap: var(--space-1); }
+.quickgrid .col-header-content button:hover, .quickgrid button.col-title:hover { color: var(--text); }
+.quickgrid td[align="right"], .quickgrid .grid-cell-align-right { text-align: right; font-variant-numeric: tabular-nums; }
+.paginator { display: flex; align-items: center; gap: var(--space-3); font-size: var(--text-sm); color: var(--text-secondary); }
+.paginator button { font: inherit; color: var(--accent-text); background: transparent; border: 1px solid var(--border-strong); border-radius: var(--radius-md); padding: var(--space-1) var(--space-2); cursor: pointer; min-height: 2.75rem; min-width: 2.75rem; }
+.paginator button:hover:not(:disabled) { background: var(--accent-subtle); border-color: var(--accent); }
+.paginator button:disabled { opacity: var(--opacity-disabled); cursor: default; }
+
+/* Blazor (unbundled CSS): url() inside a custom property resolves against the
+   document base, so place the endorsement asset with stylesheet-relative urls. */
+.brandmark { background-image: url("lib/novus-design-kit/logos/Novus_Logo_Colour_transparent.png"); }
+[data-theme="dark"] .brandmark { background-image: url("lib/novus-design-kit/logos/Novus_Logo_White_transparent.png"); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme]) .brandmark { background-image: url("lib/novus-design-kit/logos/Novus_Logo_White_transparent.png"); } }
+[data-theme="light"] .brandmark { background-image: url("lib/novus-design-kit/logos/Novus_Logo_Colour_transparent.png"); }

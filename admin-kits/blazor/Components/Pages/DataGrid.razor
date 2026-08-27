@@ -1,0 +1,46 @@
+@page "/datagrid"
+@rendermode InteractiveServer
+@using Microsoft.AspNetCore.Components.QuickGrid
+
+<PageTitle>Data grid · Novus Admin Kit</PageTitle>
+
+<div class="pagehead"><h1>Data grid</h1><span class="muted">QuickGrid: sortable columns, search, 10 rows per page</span></div>
+
+<div class="filterrow">
+    <label for="gridsearch" class="muted">Search</label>
+    <input class="input" id="gridsearch" type="search" style="max-width:20rem"
+           placeholder="id, terminal, product, status" @bind="Search" @bind:event="oninput">
+    <span class="muted">@Filtered.Count() of @SeedData.Transactions.Length rows</span>
+</div>
+
+<div class="card" style="padding:0;overflow:hidden">
+    <div class="tablewrap">
+        <QuickGrid Items="Filtered" Pagination="pagination">
+            <PropertyColumn Property="@(t => t.Id)" Sortable="true" />
+            <PropertyColumn Title="Time" Property="@(t => t.Ts.Substring(11, 5))" Sortable="true" />
+            <PropertyColumn Property="@(t => t.Terminal)" Sortable="true" />
+            <PropertyColumn Property="@(t => t.Product)" Sortable="true" />
+            <PropertyColumn Title="Amount (USD)" Property="@(t => t.Amount)" Format="F2" Sortable="true" Align="Align.Right" />
+            <TemplateColumn Title="Status" SortBy="@(GridSort<Transaction>.ByAscending(t => t.Status))">
+                <span class="badge badge--@StatusTone(context.Status)"><span class="badge__dot"></span> Status · @Cap(context.Status)</span>
+            </TemplateColumn>
+        </QuickGrid>
+    </div>
+    <div class="filterrow" style="padding:var(--space-3) var(--space-4);border-top:1px solid var(--border);margin:0">
+        <Paginator State="pagination" />
+    </div>
+</div>
+
+@code {
+    readonly PaginationState pagination = new() { ItemsPerPage = 10 };
+    string Search = "";
+
+    IQueryable<Transaction> Filtered =>
+        SeedData.Transactions
+            .Where(t => string.IsNullOrWhiteSpace(Search)
+                || (t.Id + " " + t.Terminal + " " + t.Product + " " + t.Status).Contains(Search, StringComparison.OrdinalIgnoreCase))
+            .AsQueryable();
+
+    static string StatusTone(string s) => s switch { "settled" => "success", "pending" => "warning", _ => "danger" };
+    static string Cap(string s) => char.ToUpper(s[0]) + s[1..];
+}

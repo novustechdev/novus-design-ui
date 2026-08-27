@@ -1,6 +1,19 @@
 <!--
 Sync Impact Report
-- Version change: 1.3.0 → 1.4.0 (MINOR: Principle VII added)
+- Version change: 1.4.0 → 1.5.0 (MINOR: Principle VII expanded; presentation standards added)
+- Modified: VII. Reference Applications now also requires an Analytics screen (charts
+  following the locked Novus dashboard-chart rules: token-fed Chart.js defaults, soft
+  dashed gridlines, rounded bars, no axis borders, composition plus trajectory reads,
+  colours read from tokens at runtime) and a Data Grid screen (sortable, paginated,
+  searchable; native framework grid where one exists, e.g. Blazor QuickGrid), plus a
+  LIVE, clickable demo of each flavor hosted with the docs site; docs screenshots link
+  to the running demos.
+- Added to Design Standards: the docs site and admin consoles use full-width fluid
+  layout on desktop (gutters only, no fixed max-width container), remain mobile-first
+  responsive, and the docs site ships PWA basics (manifest, theme-color). Vertical
+  rhythm: headings, code blocks, figures, and tables carry token-scale block spacing.
+  Canonical host: https://ui-kit.novustech.dev (Cloudflare DNS to GitHub Pages).
+- Prior amendment (1.3.0 -> 1.4.0): Principle VII added
 - Added: VII. Reference Applications (Admin Kits) — enterprise demo apps (Novus Admin
   Kit, Blazor and Tailwind flavors) must consume the PUBLISHED npm package, keep screen
   parity across flavors, follow every kit principle and the app-interface conventions
@@ -131,7 +144,16 @@ with the persisted pre-paint toggle. Layout CSS specific to an app is composed
 from tokens; re-implementing a shipped component is a defect. An admin kit
 flavor ships only after a verified build-and-run with rendered screenshots
 published on the docs site (the Principle VI verification discipline applied
-to applications).
+to applications). The screen set includes an Analytics screen and a Data Grid
+screen: charts follow the locked Novus dashboard-chart rules (Chart.js
+defaults fed from tokens at runtime: Carlito, soft dashed gridlines at low
+alpha, rounded bars with constrained thickness, no axis borders or tick
+marks, dark rounded tooltips, and a composition read plus a trajectory read
+on the primary series; series colours are the product accents, read from
+tokens, never literals). Data grids are sortable, paginated, and searchable,
+using the framework's native grid where one exists and kit-token styling
+always. Each flavor MUST have a live demo hosted with the docs site, and the
+docs page's screenshots MUST link to the running demos.
 
 **Rationale**: A design kit is judged by its first real application; an
 unverified or off-convention demo teaches every consumer the wrong patterns.
@@ -146,6 +168,13 @@ unverified or off-convention demo teaches every consumer the wrong patterns.
   `#534AB7`; platform layers deep blue. Dark-mode lockups always drop identity color.
 - Offline/single-file output inlines `tokens.css` and embeds woff2 fonts as base64;
   never `<link>` a stylesheet on a `file://` page.
+- Docs site and admin consoles: full-width fluid layout on desktop (side gutters
+  only, no fixed max-width page container); prose keeps a readable measure;
+  mobile-first responsive throughout; the docs site ships PWA basics (web app
+  manifest and theme-color). Vertical rhythm on docs pages: headings, standalone
+  code blocks, figures, and tables carry token-scale top/bottom spacing.
+- Canonical docs host: https://ui-kit.novustech.dev (Cloudflare DNS CNAME to
+  GitHub Pages; HTTPS enforced). Demo apps live under /demos/ on the same host.
 - Kit source order: project copy of `tokens.css` first, skill snapshot second, the
   SharePoint master (`novaAI1.0program` → `Novus Design System/`) as living source.
   Drift is flagged to the design-system owner, never patched in one file alone.
@@ -184,4 +213,4 @@ in the PR description against Principle III.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
   MUST NOT ship with a known gate failure.
 
-**Version**: 1.4.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26
+**Version**: 1.5.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26

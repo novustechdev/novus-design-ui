@@ -1,2 +1,8 @@
-{ "name": "novus-admin-kit-blazor", "private": true,
-  "dependencies": { "novus-design-kit": "^0.2.0" } }
+{
+  "name": "novus-admin-kit-blazor",
+  "private": true,
+  "dependencies": {
+    "novus-design-kit": "^0.2.0",
+    "chart.js": "^4"
+  }
+}

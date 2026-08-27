@@ -2,7 +2,18 @@
   "name": "novus-admin-kit-tailwind",
   "private": true,
   "type": "module",
-  "scripts": { "dev": "vite", "build": "vite build", "preview": "vite preview" },
-  "dependencies": { "novus-design-kit": "^0.2.0" },
-  "devDependencies": { "@tailwindcss/vite": "^4", "tailwindcss": "^4", "vite": "^8" }
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "novus-design-kit": "^0.2.0",
+    "chart.js": "^4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4",
+    "tailwindcss": "^4",
+    "vite": "^8"
+  }
 }
