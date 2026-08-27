@@ -60,8 +60,10 @@ export const transactions = ${JSON.stringify(d.transactions, null, 1)};
 export const terminals = ${JSON.stringify(d.terminals, null, 1)};
 `;
 const jsHourly = `export const hourly = ${JSON.stringify(d.hourly, null, 1)};\n`;
-const jsOut = join(HERE, "../tailwind/src/data.js");
-if (existsSync(dirname(jsOut))) { writeFileSync(jsOut, js + jsHourly); console.log("wrote", jsOut); }
+for (const flavor of ["tailwind", "material"]) {
+  const jsOut = join(HERE, `../${flavor}/src/data.js`);
+  if (existsSync(dirname(jsOut))) { writeFileSync(jsOut, js + jsHourly); console.log("wrote", jsOut); }
+}
 
 /* ---- Blazor + WASM demo: chart-data.json for the analytics interop ---- */
 for (const rel of ["../blazor/wwwroot", "../blazor-demo/wwwroot"]) {
@@ -101,8 +103,9 @@ const blocks = {
   terminals: [...d.terminals].sort((a, b) => (a.health === "healthy") - (b.health === "healthy")).map(termRow).join("\n"),
 };
 
-for (const page of ["index.html", "transactions.html", "terminals.html", "settings.html", "analytics.html", "datagrid.html"]) {
-  const p = join(HERE, "../tailwind", page);
+for (const [flavor, page] of ["tailwind", "material"].flatMap((f) =>
+  ["index.html", "transactions.html", "terminals.html", "settings.html", "analytics.html", "datagrid.html"].map((pg) => [f, pg]))) {
+  const p = join(HERE, `../${flavor}`, page);
   if (!existsSync(p)) continue;
   let html = readFileSync(p, "utf8");
   let touched = false;

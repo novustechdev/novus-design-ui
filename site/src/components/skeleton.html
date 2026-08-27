@@ -1,0 +1,22 @@
+<section class="demo" data-title="Skeleton (calm loading placeholder)">
+  <div class="card" style="max-width:24rem">
+    <div style="display:flex;gap:var(--space-3);align-items:center;margin-bottom:var(--space-4)">
+      <span style="width:2.75rem;height:2.75rem;border-radius:var(--radius-pill);background:var(--bg-muted)"></span>
+      <span style="flex:1;display:flex;flex-direction:column;gap:var(--space-2)">
+        <span style="height:var(--space-3);width:60%;border-radius:var(--radius-sm);background:var(--bg-muted)"></span>
+        <span style="height:var(--space-3);width:35%;border-radius:var(--radius-sm);background:var(--bg-subtle)"></span>
+      </span>
+    </div>
+    <span style="display:block;height:var(--space-3);border-radius:var(--radius-sm);background:var(--bg-muted);margin-bottom:var(--space-2)"></span>
+    <span style="display:block;height:var(--space-3);width:85%;border-radius:var(--radius-sm);background:var(--bg-muted);margin-bottom:var(--space-2)"></span>
+    <span style="display:block;height:var(--space-3);width:70%;border-radius:var(--radius-sm);background:var(--bg-subtle)"></span>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Skeletons are static grey blocks from the neutral tokens: no shimmer, no pulse. Decorative animation is banned; a calm placeholder is the Novus loading state.</li>
+  <li>Match the skeleton's shape to the content that will replace it (rows for a table, a card for a card), so nothing jumps on arrival.</li>
+  <li>Show a skeleton only for loads long enough to notice; flashing one for a fast response is worse than nothing.</li>
+  <li>Mark the loading region with <code>aria-busy="true"</code> until the real content lands.</li>
+</ul>
