@@ -1,6 +1,6 @@
 <!-- title: Novus Admin Kit -->
 <h1>Novus Admin Kit</h1>
-<p style="max-width:68ch">A complete, realistic enterprise starting point built on the design kit: a novapay
+<p>A complete, realistic enterprise starting point built on the design kit: a novapay
 operations console with a dashboard, a filterable transactions table, a terminal
 fleet view, and settings. It ships in two flavors with strict screen parity, both
 consuming the published <code>novus-design-kit</code> package. Copy a flavor folder
@@ -13,7 +13,7 @@ from the repository and start from a working, on-brand application.</p>
 </div>
 
 <h2>Screens and conventions</h2>
-<ul class="bullets" style="max-width:68ch">
+<ul class="bullets">
   <li><b>Dashboard</b>: KPI stat row, signal cards (risk always red, watch amber), recent transactions.</li>
   <li><b>Transactions</b>: data-dense table, status filter, native detail dialog, plain empty state.</li>
   <li><b>Terminals</b>: fleet health with degraded and offline devices sorted first.</li>
@@ -24,7 +24,7 @@ from the repository and start from a working, on-brand application.</p>
 </ul>
 
 <h2>Novus Admin Kit with Blazor</h2>
-<p style="max-width:68ch">Blazor Web App (.NET 10): server-rendered pages, InteractiveServer only on the
+<p>Blazor Web App (.NET 10): server-rendered pages, InteractiveServer only on the
 transactions filter and detail dialog. Verified 2026-08-27; screenshots below are from the verified run, and every image opens the live demo. The hosted demo is a WebAssembly build (requires JavaScript); the copyable flavor is server-rendered and works without it.</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/blazor from the repository, then
 npm install     # pulls novus-design-kit; the build copies it to wwwroot/lib
@@ -42,7 +42,7 @@ dotnet run</code></pre>
 </div>
 
 <h2>Novus Admin Kit with Tailwind</h2>
-<p style="max-width:68ch">Vite multi-page app with Tailwind utilities mapped to the Novus tokens
+<p>Vite multi-page app with Tailwind utilities mapped to the Novus tokens
 (the verified theme-guide pattern); vanilla JS only for the filter, dialog, and
 toggle. Verified 2026-08-27.</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/tailwind from the repository, then
@@ -61,7 +61,7 @@ npm run dev     # or: npm run build && npm run preview</code></pre>
 </div>
 
 <h2>Parity and data</h2>
-<ul class="bullets" style="max-width:68ch">
+<ul class="bullets">
   <li>One dataset (<code>admin-kits/data/dataset.json</code>) generates both flavors' data; regenerate and diff to prove parity.</li>
   <li>Figures are illustrative; no client names appear in the demo data.</li>
   <li>Dashboards use stat rows and signal cards, the kit's own convention, instead of a charting library.</li>

@@ -1,13 +1,26 @@
 <!-- title: Novus Design for Blazor -->
 <p class="eyebrow">Frameworks</p>
 <h1>Novus Design for Blazor</h1>
-<p style="max-width:68ch">The kit is plain CSS + static assets, so Blazor (Server and WebAssembly) consumes it
+<p>The kit is plain CSS + static assets, so Blazor (Server and WebAssembly) consumes it
 with no wrapper library: serve the package from <code>wwwroot</code>, link one
 stylesheet, and use the component classes in your Razor markup.</p>
 
 <h2>1. Get the package into wwwroot</h2>
-<p style="max-width:68ch">Install with npm as usual, then copy the package into <code>wwwroot/lib</code> at
-build time with an MSBuild target in your <code>.csproj</code>:</p>
+<p>The MSBuild target below copies from <code>node_modules/novus-design-kit</code>.
+That folder is created by running <code>npm install novus-design-kit</code> in your
+project folder (the tokenless public npm package): add a minimal
+<code>package.json</code> next to your <code>.csproj</code> if you don't have one.
+No Node at all? Two alternatives: download the exact release tarball from the
+<a href="https://github.com/sgultom99/novus-design-ui/releases">GitHub releases</a>
+(the .tgz attached to each version) and extract it to a folder of your choice, or
+clone the repository and copy the kit files; then point the target's
+<code>Include</code> path at that folder instead of node_modules. npm is the
+recommended route because <code>npm update</code> then handles upgrades.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># in the Blazor project folder (next to the .csproj)
+npm install novus-design-kit</code></pre>
+<p>Then copy the package into <code>wwwroot/lib</code> at build time with an MSBuild
+target in your <code>.csproj</code> (note <code>BeforeTargets="PrepareForBuild"</code>:
+copying into wwwroot later than that breaks asset fingerprinting on clean builds):</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;Target Name="CopyNovusKit" BeforeTargets="PrepareForBuild"&gt;
   &lt;ItemGroup&gt;
     &lt;NovusKit Include="node_modules/novus-design-kit/**/*" /&gt;
@@ -18,7 +31,7 @@ build time with an MSBuild target in your <code>.csproj</code>:</p>
 &lt;/Target&gt;</code></pre>
 
 <h2>2. Link it once</h2>
-<p style="max-width:68ch">In <code>Components/App.razor</code> (.NET 8+) or <code>wwwroot/index.html</code>
+<p>In <code>Components/App.razor</code> (.NET 8+) or <code>wwwroot/index.html</code>
 (WebAssembly), inside <code>&lt;head&gt;</code>:</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;link rel="stylesheet" href="lib/novus-design-kit/tokens.css" /&gt;
 &lt;script src="lib/novus-design-kit/js/novus-theme.js"&gt;&lt;/script&gt;</code></pre>
@@ -43,7 +56,7 @@ build time with an MSBuild target in your <code>.csproj</code>:</p>
 }</code></pre>
 
 <h2>Verified result</h2>
-<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against the .NET SDK 10.0 Blazor Web App template.</p>
+<p>Rendered from this guide's own sample project, executed and verified on 2026-08-26 against the .NET SDK 10.0 Blazor Web App template.</p>
 <img src="../assets/samples/blazor.png" alt="Rendered sample: the kit styling Blazor components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
 
 <h2>Rules of the road</h2>

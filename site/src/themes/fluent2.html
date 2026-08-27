@@ -1,7 +1,7 @@
 <!-- title: Novus Design with Fluent 2 -->
 <p class="eyebrow">Themes</p>
 <h1>Novus Design with Fluent 2</h1>
-<p style="max-width:68ch">Teams building on Microsoft's Fluent 2 (Fluent UI React v9, or Fluent UI Blazor)
+<p>Teams building on Microsoft's Fluent 2 (Fluent UI React v9, or Fluent UI Blazor)
 keep Fluent's component behaviour and accessibility, and re-skin it with Novus
 tokens so everything renders on-brand. The rule is one-directional:
 <b>tokens.css is the source of truth; Fluent's theme is derived from it</b>, never
@@ -12,7 +12,7 @@ the other way around.</p>
 import "novus-design-kit/js/novus-theme.js";</code></pre>
 
 <h2>2. Derive the Fluent theme from Novus tokens (React v9)</h2>
-<p style="max-width:68ch">Fluent v9 theme values land in CSS custom properties, so you can point them straight
+<p>Fluent v9 theme values land in CSS custom properties, so you can point them straight
 at the Novus variables, no hex duplication, and dark mode stays in sync:</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import { FluentProvider, webLightTheme } from "@fluentui/react-components";
 
@@ -37,7 +37,7 @@ const novusFluent = {
 &lt;/FluentProvider&gt;</code></pre>
 
 <h2>3. Keep the theme switch on the kit's toggle</h2>
-<p style="max-width:68ch">Because the mapped values are variables, most of the theme re-tunes automatically
+<p>Because the mapped values are variables, most of the theme re-tunes automatically
 when <code>novusTheme.toggle()</code> flips <code>data-theme</code>. For Fluent's own
 neutrals, swap the base theme on the same event:</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>const base = novusTheme.current() === "dark" ? webDarkTheme : webLightTheme;
@@ -51,7 +51,7 @@ neutrals, swap the base theme on the same event:</p>
 </ul>
 
 <h2>Verified result</h2>
-<p style="max-width:68ch">Rendered from this guide's own sample project, executed and verified on 2026-08-26 against @fluentui/react-components 9.74.</p>
+<p>Rendered from this guide's own sample project, executed and verified on 2026-08-26 against @fluentui/react-components 9.74.</p>
 <img src="../assets/samples/fluent2.png" alt="Rendered sample: the kit styling Fluent 2 components" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:var(--space-6)">
 
 <h2>Rules of the road</h2>

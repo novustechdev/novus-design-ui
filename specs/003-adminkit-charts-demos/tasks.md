@@ -10,3 +10,12 @@
 - [X] T008 Docs Admin Kit page: screenshots clickable → /demos/...; per-flavor "Open live demo" buttons; add analytics + datagrid screenshots (both flavors); update contract screens.md to 6 screens; verification record rows for new screens + demos
 - [X] T009 Verify: run flavors, capture new screenshots, parity check, full build + gates (link gate now covers demo entries), commit, push, deploy, click-through demos on the live site
 - [X] T010 Custom domain: Cloudflare CNAME ui-kit.novustech.dev → sgultom99.github.io (DNS-only), Pages cname + HTTPS enforced, sweep documented URLs to https://ui-kit.novustech.dev, redeploy, verify cert + redirect (needs owner CF token)
+
+## Phase 2: Owner feedback round (2026-08-27)
+
+- [X] T011 Content width: remove ch-measure caps from docs prose (inline max-width:NNch styles and the tokens p measure, site pages only); content follows the container full width on desktop, responsive unchanged
+- [X] T012 Landing page: add a live component sampler section and an Admin Kit overview section (screenshot, links to the page and both demos)
+- [X] T013 Blazor guide: explain where node_modules/novus-design-kit comes from (npm install in the project folder; alternatives: GitHub repo or the release tarball)
+- [X] T014 Demo URLs shown and linked as clean directory URLs everywhere (no index.html)
+- [X] T015 Fix WASM demo QuickGrid paginator (empty rectangle buttons, broken alignment): link the scoped styles bundle in the demo host page; generalize the build repair to fix any fingerprint-mismatched reference
+- [X] T016 Repo authorship: commits authored as sgultom99 with no assistant trailers; speckit artifacts updated (constitution presentation note, spec wording, verification record)
