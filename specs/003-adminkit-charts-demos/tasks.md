@@ -29,3 +29,4 @@
 - [X] T021 Demo provenance bar on admin pages linking back to the docs (README notes it is removable)
 - [X] T022 Landing rebuilt in the ant.design homepage structure on Novus bands: hero with product shot and CTAs, feature trio band, live component sampler band, Admin Kit showcase band (analytics + data grid shots linking the demos), stack chip band, columned footer
 - [X] T023 Footer credit line renders on one row: the tokens p measure (68ch) applied outside .site-main; override extended to .sitefoot p
+- [X] T024 WASM demo login redirect: NavigateTo("/") escapes the app under base "./" (lands on the docs root); use the empty relative URI to reach the dashboard
