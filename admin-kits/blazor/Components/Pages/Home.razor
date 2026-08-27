@@ -1,0 +1,47 @@
+@page "/"
+
+<PageTitle>Dashboard · Novus Admin Kit</PageTitle>
+
+<div class="pagehead"><h1>Today</h1><a class="btn btn--secondary btn--sm" href="transactions">All transactions</a></div>
+
+<div class="statrow statrow--wide statpanel">
+    @foreach (var k in SeedData.Kpis)
+    {
+        <div class="stat"><span class="stat__value">@k.Value</span><span class="stat__label">@k.Label</span></div>
+    }
+</div>
+
+<div class="signalgrid">
+    @foreach (var s in SeedData.Signals)
+    {
+        <div class="card signal signal--@s.Tone">
+            <p class="eyebrow">@s.Eyebrow</p>
+            <h3>@s.Headline</h3>
+            <p class="muted">@s.Detail</p>
+        </div>
+    }
+</div>
+
+<div class="card" style="padding:0;overflow:hidden">
+    <div class="pagehead" style="padding:var(--space-4) var(--space-4) 0;margin-bottom:var(--space-3)"><h2 style="margin:0;font-size:var(--text-lg)">Recent transactions</h2></div>
+    <div class="tablewrap">
+        <table class="table">
+            <thead><tr><th>Id</th><th>Time</th><th>Terminal</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th></tr></thead>
+            <tbody>
+                @foreach (var t in SeedData.Transactions.Take(6))
+                {
+                    <tr>
+                        <td><code>@t.Id</code></td><td>@t.Ts.Substring(11, 5)</td><td>@t.Terminal</td>
+                        <td>@t.Product</td><td class="num">@t.Amount.ToString("F2")</td>
+                        <td><span class="badge badge--@StatusTone(t.Status)"><span class="badge__dot"></span> Status · @Cap(t.Status)</span></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    static string StatusTone(string s) => s switch { "settled" => "success", "pending" => "warning", _ => "danger" };
+    static string Cap(string s) => char.ToUpper(s[0]) + s[1..];
+}

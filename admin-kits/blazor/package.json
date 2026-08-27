@@ -1,0 +1,2 @@
+{ "name": "novus-admin-kit-blazor", "private": true,
+  "dependencies": { "novus-design-kit": "^0.2.0" } }

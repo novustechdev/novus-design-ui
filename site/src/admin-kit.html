@@ -1,0 +1,57 @@
+<!-- title: Novus Admin Kit -->
+<h1>Novus Admin Kit</h1>
+<p style="max-width:68ch">A complete, realistic enterprise starting point built on the design kit: a novapay
+operations console with a dashboard, a filterable transactions table, a terminal
+fleet view, and settings. It ships in two flavors with strict screen parity, both
+consuming the published <code>novus-design-kit</code> package. Copy a flavor folder
+from the repository and start from a working, on-brand application.</p>
+
+<div class="statrow statrow--wide" style="margin-bottom:var(--space-6)">
+  <div class="stat"><span class="stat__value">4</span><span class="stat__label">screens per flavor</span></div>
+  <div class="stat"><span class="stat__value">2</span><span class="stat__label">flavors, one dataset</span></div>
+  <div class="stat"><span class="stat__value">0</span><span class="stat__label">tokens or logins to run</span></div>
+</div>
+
+<h2>Screens and conventions</h2>
+<ul class="bullets" style="max-width:68ch">
+  <li><b>Dashboard</b>: KPI stat row, signal cards (risk always red, watch amber), recent transactions.</li>
+  <li><b>Transactions</b>: data-dense table, status filter, native detail dialog, plain empty state.</li>
+  <li><b>Terminals</b>: fleet health with degraded and offline devices sorted first.</li>
+  <li><b>Settings</b>: profile form (demo only, says so) and the persisted theme toggle.</li>
+  <li>Internal-tool header (app identity left, Novus endorsement right), sidebar that collapses to a native menu on mobile, traffic-light colour only on judgement chips, amounts always neutral, self-describing chips, dual-trigger dark mode, JS-off navigation.</li>
+</ul>
+
+<h2>Novus Admin Kit with Blazor</h2>
+<p style="max-width:68ch">Blazor Web App (.NET 10): server-rendered pages, InteractiveServer only on the
+transactions filter and detail dialog. Verified 2026-08-27; screenshots below are
+from the verified run.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/blazor from the repository, then
+npm install     # pulls novus-design-kit; the build copies it to wwwroot/lib
+dotnet run</code></pre>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+  <figure style="margin:0"><img src="assets/admin-kit/blazor-dashboard-light.png" alt="Blazor flavor dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, light</figcaption></figure>
+  <figure style="margin:0"><img src="assets/admin-kit/blazor-dashboard-dark.png" alt="Blazor flavor dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, dark</figcaption></figure>
+  <figure style="margin:0"><img src="assets/admin-kit/blazor-transactions.png" alt="Blazor flavor transactions" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
+  <figure style="margin:0"><img src="assets/admin-kit/blazor-mobile.png" alt="Blazor flavor at 375px" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
+</div>
+
+<h2>Novus Admin Kit with Tailwind</h2>
+<p style="max-width:68ch">Vite multi-page app with Tailwind utilities mapped to the Novus tokens
+(the verified theme-guide pattern); vanilla JS only for the filter, dialog, and
+toggle. Verified 2026-08-27.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/tailwind from the repository, then
+npm install
+npm run dev     # or: npm run build && npm run preview</code></pre>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+  <figure style="margin:0"><img src="assets/admin-kit/tailwind-dashboard-light.png" alt="Tailwind flavor dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, light</figcaption></figure>
+  <figure style="margin:0"><img src="assets/admin-kit/tailwind-dashboard-dark.png" alt="Tailwind flavor dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, dark</figcaption></figure>
+  <figure style="margin:0"><img src="assets/admin-kit/tailwind-transactions.png" alt="Tailwind flavor transactions" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
+  <figure style="margin:0"><img src="assets/admin-kit/tailwind-mobile.png" alt="Tailwind flavor at 375px" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
+</div>
+
+<h2>Parity and data</h2>
+<ul class="bullets" style="max-width:68ch">
+  <li>One dataset (<code>admin-kits/data/dataset.json</code>) generates both flavors' data; regenerate and diff to prove parity.</li>
+  <li>Figures are illustrative; no client names appear in the demo data.</li>
+  <li>Dashboards use stat rows and signal cards, the kit's own convention, instead of a charting library.</li>
+</ul>

@@ -1,0 +1,350 @@
+{
+ "kpis": [
+  {
+   "value": "4.2M",
+   "label": "transactions today"
+  },
+  {
+   "value": "99.8%",
+   "label": "platform uptime"
+  },
+  {
+   "value": "312",
+   "label": "active terminals"
+  },
+  {
+   "value": "USD 18.4M",
+   "label": "settlement value"
+  }
+ ],
+ "signals": [
+  {
+   "tone": "danger",
+   "eyebrow": "Settlement risk",
+   "headline": "2 failed settlements on TRM-0128",
+   "detail": "Both failures in the last hour on the same terminal. Review the device before the next batch window."
+  },
+  {
+   "tone": "warning",
+   "eyebrow": "Certificate",
+   "headline": "Gateway certificate expires in 14 days",
+   "detail": "Renew before 2026-09-10 to avoid an acceptance outage."
+  }
+ ],
+ "transactions": [
+  {
+   "id": "TXN-241099",
+   "ts": "2026-08-27T18:31:00+08:00",
+   "terminal": "TRM-0177",
+   "product": "novapay",
+   "amount": 151.17,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-241086",
+   "ts": "2026-08-27T18:14:00+08:00",
+   "terminal": "TRM-0170",
+   "product": "novapay",
+   "amount": 721.23,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-241073",
+   "ts": "2026-08-27T17:57:00+08:00",
+   "terminal": "TRM-0163",
+   "product": "novastore",
+   "amount": 401.87,
+   "currency": "USD",
+   "status": "pending"
+  },
+  {
+   "id": "TXN-241060",
+   "ts": "2026-08-27T17:40:00+08:00",
+   "terminal": "TRM-0156",
+   "product": "novabank",
+   "amount": 119.22,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-241047",
+   "ts": "2026-08-27T16:23:00+08:00",
+   "terminal": "TRM-0149",
+   "product": "novapay",
+   "amount": 931.32,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-241034",
+   "ts": "2026-08-27T16:06:00+08:00",
+   "terminal": "TRM-0142",
+   "product": "novapay",
+   "amount": 279.24,
+   "currency": "USD",
+   "status": "pending"
+  },
+  {
+   "id": "TXN-241021",
+   "ts": "2026-08-27T15:49:00+08:00",
+   "terminal": "TRM-0135",
+   "product": "novapay",
+   "amount": 695.14,
+   "currency": "USD",
+   "status": "failed"
+  },
+  {
+   "id": "TXN-241008",
+   "ts": "2026-08-27T15:32:00+08:00",
+   "terminal": "TRM-0128",
+   "product": "novastore",
+   "amount": 832.38,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240982",
+   "ts": "2026-08-27T14:58:00+08:00",
+   "terminal": "TRM-0114",
+   "product": "novapay",
+   "amount": 549.11,
+   "currency": "USD",
+   "status": "pending"
+  },
+  {
+   "id": "TXN-240995",
+   "ts": "2026-08-27T14:15:00+08:00",
+   "terminal": "TRM-0121",
+   "product": "novabank",
+   "amount": 502.74,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240969",
+   "ts": "2026-08-27T13:41:00+08:00",
+   "terminal": "TRM-0107",
+   "product": "novapay",
+   "amount": 237.94,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240956",
+   "ts": "2026-08-27T13:24:00+08:00",
+   "terminal": "TRM-0100",
+   "product": "novapay",
+   "amount": 666.45,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240930",
+   "ts": "2026-08-27T12:50:00+08:00",
+   "terminal": "TRM-0170",
+   "product": "novapay",
+   "amount": 290.38,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240943",
+   "ts": "2026-08-27T12:07:00+08:00",
+   "terminal": "TRM-0177",
+   "product": "novapay",
+   "amount": 756.31,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240917",
+   "ts": "2026-08-27T11:33:00+08:00",
+   "terminal": "TRM-0163",
+   "product": "novastore",
+   "amount": 434.9,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240904",
+   "ts": "2026-08-27T11:16:00+08:00",
+   "terminal": "TRM-0156",
+   "product": "novabank",
+   "amount": 559.6,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240891",
+   "ts": "2026-08-27T10:59:00+08:00",
+   "terminal": "TRM-0149",
+   "product": "novapay",
+   "amount": 303.93,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240878",
+   "ts": "2026-08-27T10:42:00+08:00",
+   "terminal": "TRM-0142",
+   "product": "novapay",
+   "amount": 410.79,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240865",
+   "ts": "2026-08-27T09:25:00+08:00",
+   "terminal": "TRM-0135",
+   "product": "novapay",
+   "amount": 648.94,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240852",
+   "ts": "2026-08-27T09:08:00+08:00",
+   "terminal": "TRM-0128",
+   "product": "novastore",
+   "amount": 202.01,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240839",
+   "ts": "2026-08-27T08:51:00+08:00",
+   "terminal": "TRM-0121",
+   "product": "novabank",
+   "amount": 64.14,
+   "currency": "USD",
+   "status": "pending"
+  },
+  {
+   "id": "TXN-240826",
+   "ts": "2026-08-27T08:34:00+08:00",
+   "terminal": "TRM-0114",
+   "product": "novapay",
+   "amount": 67.15,
+   "currency": "USD",
+   "status": "failed"
+  },
+  {
+   "id": "TXN-240813",
+   "ts": "2026-08-27T07:17:00+08:00",
+   "terminal": "TRM-0107",
+   "product": "novapay",
+   "amount": 523.98,
+   "currency": "USD",
+   "status": "settled"
+  },
+  {
+   "id": "TXN-240800",
+   "ts": "2026-08-27T07:00:00+08:00",
+   "terminal": "TRM-0100",
+   "product": "novapay",
+   "amount": 358.8,
+   "currency": "USD",
+   "status": "settled"
+  }
+ ],
+ "terminals": [
+  {
+   "id": "TRM-0100",
+   "location": "Makati flagship",
+   "product": "novapay",
+   "uptime": 99.5,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T06:00:00+08:00"
+  },
+  {
+   "id": "TRM-0107",
+   "location": "Cebu IT Park",
+   "product": "novapay",
+   "uptime": 99.3,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T07:11:00+08:00"
+  },
+  {
+   "id": "TRM-0114",
+   "location": "Quezon Ave",
+   "product": "novapay",
+   "uptime": 99.7,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T08:22:00+08:00"
+  },
+  {
+   "id": "TRM-0121",
+   "location": "Colombo Fort",
+   "product": "novabank",
+   "uptime": 99.3,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T09:33:00+08:00"
+  },
+  {
+   "id": "TRM-0128",
+   "location": "Kandy City Centre",
+   "product": "novastore",
+   "uptime": 96.4,
+   "health": "degraded",
+   "lastSeen": "2026-08-27T10:44:00+08:00"
+  },
+  {
+   "id": "TRM-0135",
+   "location": "Jakarta Sudirman",
+   "product": "novapay",
+   "uptime": 99.5,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T11:55:00+08:00"
+  },
+  {
+   "id": "TRM-0142",
+   "location": "Bandung Dago",
+   "product": "novapay",
+   "uptime": 99.2,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T12:06:00+08:00"
+  },
+  {
+   "id": "TRM-0149",
+   "location": "Phnom Penh Central",
+   "product": "novapay",
+   "uptime": 99.6,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T13:17:00+08:00"
+  },
+  {
+   "id": "TRM-0156",
+   "location": "Gaborone Main Mall",
+   "product": "novabank",
+   "uptime": 99.2,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T14:28:00+08:00"
+  },
+  {
+   "id": "TRM-0163",
+   "location": "Singapore Raffles",
+   "product": "novastore",
+   "uptime": 0.0,
+   "health": "offline",
+   "lastSeen": "2026-08-27T15:39:00+08:00"
+  },
+  {
+   "id": "TRM-0170",
+   "location": "Penang Georgetown",
+   "product": "novapay",
+   "uptime": 99.3,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T16:50:00+08:00"
+  },
+  {
+   "id": "TRM-0177",
+   "location": "Davao Abreeza",
+   "product": "novapay",
+   "uptime": 99.3,
+   "health": "healthy",
+   "lastSeen": "2026-08-27T17:01:00+08:00"
+  }
+ ]
+}

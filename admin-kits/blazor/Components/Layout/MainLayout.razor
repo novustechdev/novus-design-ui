@@ -1,0 +1,30 @@
+@inherits LayoutComponentBase
+
+<div class="adminwrap">
+    <header class="appbar">
+        <div class="appbar__inner appheader">
+            <div class="appheader__left">
+                <span class="appname">novapay operations · admin</span>
+            </div>
+            <div class="appheader__right">
+                <button class="btn btn--ghost btn--sm toggle44" data-theme-toggle>Theme</button>
+                <span class="appheader__sep"></span>
+                <span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span>
+            </div>
+        </div>
+    </header>
+    <div class="adminbody">
+        <details class="adminnav" open>
+            <summary>Menu</summary>
+            <nav aria-label="Admin">
+                <NavLink href="" Match="NavLinkMatch.All">Dashboard</NavLink>
+                <NavLink href="transactions">Transactions</NavLink>
+                <NavLink href="terminals">Terminals</NavLink>
+                <NavLink href="settings">Settings</NavLink>
+            </nav>
+        </details>
+        <main>
+            @Body
+        </main>
+    </div>
+</div>

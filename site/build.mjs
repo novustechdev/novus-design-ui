@@ -120,7 +120,7 @@ const footer = read(join(SRC, "partials/footer.html")).replaceAll("{{VERSION}}",
 function shell({ title, content, depth, active, sidebar }) {
   const rel = "../".repeat(depth);
   let hdr = header.replaceAll("{{REL}}", rel);
-  for (const k of ["home", "foundations", "components", "frameworks", "themes", "install"]) {
+  for (const k of ["home", "foundations", "components", "frameworks", "themes", "admin", "install"]) {
     hdr = hdr.replace(`{{CUR_${k}}}`, k === active ? ' aria-current="page"' : "");
   }
   const main = sidebar
@@ -203,12 +203,12 @@ const FW_FIRST = publishedGuides.frameworks?.[0]?.[0] ?? "blazor.html";
 const TH_FIRST = publishedGuides.themes?.[0]?.[0] ?? "tailwind.html";
 
 /* Root pages (landing, install) */
-for (const name of ["index.html", "install.html"]) {
+for (const name of ["index.html", "install.html", "admin-kit.html"]) {
   const p = join(SRC, name);
   if (!existsSync(p)) continue;
   const raw = read(p);
   const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, basename(name, ".html")])[1];
-  writePage(join(DIST, name), shell({ title, content: transformDemos(raw), depth: 0, active: name === "index.html" ? "home" : "install" }));
+  writePage(join(DIST, name), shell({ title, content: transformDemos(raw), depth: 0, active: name === "index.html" ? "home" : name === "admin-kit.html" ? "admin" : "install" }));
   built.push(name);
 }
 

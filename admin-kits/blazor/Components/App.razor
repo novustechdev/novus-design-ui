@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <script>
+        try {
+            var t = localStorage.getItem("novus-theme");
+            if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+        } catch (e) { }
+    </script>
+    <link rel="stylesheet" href="lib/novus-design-kit/tokens.css" />
+    <link rel="stylesheet" href="admin.css" />
+    <link rel="stylesheet" href="@Assets["NovusAdminKit.styles.css"]" />
+    <script src="lib/novus-design-kit/js/novus-theme.js"></script>
+    <ImportMap />
+    <HeadOutlet />
+</head>
+
+<body>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
