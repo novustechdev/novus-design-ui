@@ -82,6 +82,14 @@
       "summary": "Data-dense table with tinted header and right-aligned tabular numerals."
     },
     {
+      "id": "calendar",
+      "name": "Calendar",
+      "category": "Data Display",
+      "classes": ["composes .table", "accent day via .badge--accent"],
+      "fragment": "src/components/calendar.html",
+      "summary": "Month view composed from the table component; the highlighted day is the single accent."
+    },
+    {
       "id": "stats",
       "name": "Stats",
       "category": "Data Display",
@@ -127,7 +135,7 @@
       "category": "Data Display",
       "classes": [".vchain-strip", ".vchain", ".vchain-arrow"],
       "fragment": "src/components/value-chain.html",
-      "summary": "Labelled steps joined by › arrows, informational, no hover."
+      "summary": "Labelled steps joined by \u203a arrows, informational, no hover."
     },
     {
       "id": "alert",
@@ -154,6 +162,14 @@
       "summary": "Labelled text input, select, and textarea with help and error states."
     },
     {
+      "id": "dropdown",
+      "name": "Dropdown",
+      "category": "Forms",
+      "classes": [".selectwrap", "composes .select", "native details menu"],
+      "fragment": "src/components/dropdown.html",
+      "summary": "Native select with an inset chevron, and a details-based action menu that works with JavaScript off."
+    },
+    {
       "id": "lead-form",
       "name": "Lead form & CTA row",
       "category": "Forms",
@@ -162,12 +178,28 @@
       "summary": "Lead-capture form grid, and the one-row contact CTA."
     },
     {
+      "id": "date-picker",
+      "name": "Date picker",
+      "category": "Forms",
+      "classes": ["native input type=date", "composes .input and .field"],
+      "fragment": "src/components/date-picker.html",
+      "summary": "The platform's own date control styled by the kit: calendar popup, locale, and mobile wheels for free."
+    },
+    {
       "id": "nav",
       "name": "Nav",
       "category": "Navigation",
       "classes": [".nav"],
       "fragment": "src/components/nav.html",
       "summary": "Horizontal link bar; the current page carries aria-current."
+    },
+    {
+      "id": "stepper",
+      "name": "Stepper",
+      "category": "Navigation",
+      "classes": ["composes .badge and .row", "aria-current=step"],
+      "fragment": "src/components/stepper.html",
+      "summary": "Numbered progress steps from badge and row primitives, horizontal or vertical, with aria-current."
     },
     {
       "id": "product-themes",

@@ -53,7 +53,7 @@ two flavors (Blazor Server + Vite/Tailwind) with a WASM demo twin hosted at
    https://ui-kit.novustech.dev with cache-busting (?cb=) before changing code:
    Pages CDN caches around 10 minutes and browsers cache the WASM bundle.
 3. Commits are authored as sgultom99 with NO assistant trailers; deploy via
-   `gh workflow run pages.yml --repo sgultom99/novus-design-ui --ref main` and watch
+   `gh workflow run pages.yml --repo novustechdev/novus-design-ui --ref main` and watch
    the run selected by headSha.
 
 ## Addendum, same day: v0.3.0 release + favicons

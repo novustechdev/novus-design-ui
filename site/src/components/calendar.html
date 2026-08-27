@@ -1,0 +1,30 @@
+<section class="demo" data-title="Month view (composed from the table component)">
+  <div style="max-width:32rem">
+    <div class="row" style="justify-content:space-between;margin-bottom:var(--space-2)">
+      <b>August 2026</b>
+      <span class="row" style="gap:var(--space-2)">
+        <button class="btn btn--ghost btn--sm" aria-label="Previous month">‹</button>
+        <button class="btn btn--ghost btn--sm" aria-label="Next month">›</button>
+      </span>
+    </div>
+    <table class="table" style="text-align:center">
+      <thead><tr><th style="text-align:center">Mon</th><th style="text-align:center">Tue</th><th style="text-align:center">Wed</th><th style="text-align:center">Thu</th><th style="text-align:center">Fri</th><th style="text-align:center">Sat</th><th style="text-align:center">Sun</th></tr></thead>
+      <tbody>
+        <tr><td class="muted">27</td><td class="muted">28</td><td class="muted">29</td><td class="muted">30</td><td class="muted">31</td><td>1</td><td>2</td></tr>
+        <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+        <tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
+        <tr><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td></tr>
+        <tr><td>24</td><td>25</td><td>26</td><td><span class="badge badge--accent">27</span></td><td>28</td><td>29</td><td>30</td></tr>
+        <tr><td>31</td><td class="muted">1</td><td class="muted">2</td><td class="muted">3</td><td class="muted">4</td><td class="muted">5</td><td class="muted">6</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>The calendar is a presentation pattern composed from the shipped <code>.table</code>: week rows, muted days from adjacent months, the highlighted day as an accent badge.</li>
+  <li>Use it to display schedules and availability; for date entry, use the <a href="date-picker.html">Date picker</a> (the native control) instead.</li>
+  <li>One accent per view: the highlighted day is the only accent-colored element in the grid.</li>
+  <li>Month navigation is a pair of ghost buttons on the header row; wire them to your data layer.</li>
+</ul>

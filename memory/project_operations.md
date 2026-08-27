@@ -15,7 +15,7 @@ them avoids rediscovery.
   flow).
 - Deploy docs: push normally, but this repo drops push-event triggers
   sometimes; fallback `gh workflow run pages.yml --repo
-  sgultom99/novus-design-ui --ref 001-novus-design-kit`, then
+  novustechdev/novus-design-ui --ref 001-novus-design-kit`, then
   `gh run watch <id>` (select the run by matching headSha, not `--limit 1`).
 - Browser verification: puppeteer-core driving snap Chromium
   (`executablePath: /snap/bin/chromium`, `userDataDir:

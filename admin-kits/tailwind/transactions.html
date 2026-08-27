@@ -50,12 +50,12 @@ try { var t = localStorage.getItem("novus-theme");
     <div class="pagehead"><h1>Transactions</h1></div>
     <div class="filterrow">
       <label for="statusfilter" class="muted">Status</label>
-      <select class="select" id="statusfilter">
+      <span class="selectwrap"><select class="select" id="statusfilter">
         <option value="all">All</option>
         <option value="settled">Settled</option>
         <option value="pending">Pending</option>
         <option value="failed">Failed</option>
-      </select>
+      </select></span>
       <span class="muted" id="txcount"></span>
     </div>
     <div class="card" style="padding:0;overflow:hidden">

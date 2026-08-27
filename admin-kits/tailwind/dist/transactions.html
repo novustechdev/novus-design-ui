@@ -10,8 +10,8 @@ try { var t = localStorage.getItem("novus-theme");
   if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
 } catch (e) {}
 </script>
-  <script type="module" crossorigin src="./assets/app-D1zThnml.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/app-Dt8Es32X.css">
+  <script type="module" crossorigin src="./assets/app-DU2z-SDJ.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/app-Q4OUYT9L.css">
 </head>
 <body>
 <div class="adminwrap">
@@ -52,12 +52,12 @@ try { var t = localStorage.getItem("novus-theme");
     <div class="pagehead"><h1>Transactions</h1></div>
     <div class="filterrow">
       <label for="statusfilter" class="muted">Status</label>
-      <select class="select" id="statusfilter">
+      <span class="selectwrap"><select class="select" id="statusfilter">
         <option value="all">All</option>
         <option value="settled">Settled</option>
         <option value="pending">Pending</option>
         <option value="failed">Failed</option>
-      </select>
+      </select></span>
       <span class="muted" id="txcount"></span>
     </div>
     <div class="card" style="padding:0;overflow:hidden">

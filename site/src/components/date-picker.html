@@ -1,0 +1,28 @@
+<section class="demo" data-title="Date input (native picker)">
+  <div class="field" style="max-width:20rem">
+    <label for="dp-date">Settlement date</label>
+    <input type="date" class="input" id="dp-date" value="2026-08-27">
+  </div>
+</section>
+
+<section class="demo" data-title="Date range">
+  <div class="row" style="align-items:end">
+    <div class="field" style="margin-bottom:0">
+      <label for="dp-from">From</label>
+      <input type="date" class="input" id="dp-from" value="2026-08-01">
+    </div>
+    <div class="field" style="margin-bottom:0">
+      <label for="dp-to">To</label>
+      <input type="date" class="input" id="dp-to" value="2026-08-27">
+    </div>
+    <button class="btn btn--primary">Apply</button>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>The date picker is the platform's own: <code>&lt;input type="date" class="input"&gt;</code>. The browser supplies the calendar popup, locale formatting, keyboard entry, and mobile wheels; the kit supplies the field styling.</li>
+  <li>Never re-implement a calendar popup in JavaScript: the native control is more accessible and better localized than any custom widget.</li>
+  <li>For ranges, pair two date fields on one <code>.row</code> and validate that the end is not before the start.</li>
+  <li>Constrain input with <code>min</code>/<code>max</code> attributes instead of error messages when the valid window is known.</li>
+</ul>
