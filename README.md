@@ -5,7 +5,7 @@ typeface, dark mode, and the official brand assets, as one installable package.
 It is framework-agnostic CSS: you import one stylesheet and use documented HTML
 class patterns, so it works the same in Blazor, React, Vite, Vue, or plain HTML.
 
-**Documentation site**: https://sgultom99.github.io/novus-design-ui/
+**Documentation site**: https://ui-kit.novustech.dev/
 (foundations, all 22 components with live examples and copyable snippets,
 verified framework and theme guides, and the full asset index)
 
@@ -86,7 +86,7 @@ first: `--bg`, `--surface`, `--text`, `--text-secondary`, `--border`,
 Every guide below was executed in a real sample project before publication;
 each page shows the rendered result and the verified library version.
 
-**Blazor** ([verified guide](https://sgultom99.github.io/novus-design-ui/frameworks/blazor.html)):
+**Blazor** ([verified guide](https://ui-kit.novustech.dev/frameworks/blazor.html)):
 copy the package into `wwwroot/lib` with an MSBuild target, link the stylesheet
 in `App.razor`, use the classes in Razor markup, and toggle the theme through
 `IJSRuntime`. Remove the template's Bootstrap and app.css: Bootstrap's `.btn`
@@ -96,7 +96,7 @@ collides with the kit's.
 <button class="btn btn--primary" @onclick="Submit">Talk to us</button>
 ```
 
-**React** ([verified guide](https://sgultom99.github.io/novus-design-ui/frameworks/react.html)):
+**React** ([verified guide](https://ui-kit.novustech.dev/frameworks/react.html)):
 no wrapper library, the classes are the API. Import once in `main.tsx`, then:
 
 ```jsx
@@ -104,7 +104,7 @@ no wrapper library, the classes are the API. Import once in `main.tsx`, then:
 <button className="btn btn--ghost btn--sm" onClick={() => window.novusTheme.toggle()}>Theme</button>
 ```
 
-**Vite** ([verified guide](https://sgultom99.github.io/novus-design-ui/frameworks/vite.html)):
+**Vite** ([verified guide](https://ui-kit.novustech.dev/frameworks/vite.html)):
 zero configuration. Import in the entry module and Vite bundles the fonts and
 assets with hashed URLs:
 
@@ -113,7 +113,7 @@ import "novus-design-kit/tokens.css";
 import lockup from "novus-design-kit/logos/lockups/novapay.png";
 ```
 
-**Vue.js** ([verified guide](https://sgultom99.github.io/novus-design-ui/frameworks/vue.html)):
+**Vue.js** ([verified guide](https://ui-kit.novustech.dev/frameworks/vue.html)):
 import in `main.js`, use the classes in templates; scoped styles keep
 referencing `var(--…)` tokens:
 
@@ -128,7 +128,7 @@ library's theme is derived from it, by `var(--…)` reference where the library
 accepts CSS values, or by runtime `getComputedStyle` reads where it must
 compute derived colours. Never paste token values into a config.
 
-**Tailwind CSS** ([verified guide](https://sgultom99.github.io/novus-design-ui/themes/tailwind.html)):
+**Tailwind CSS** ([verified guide](https://ui-kit.novustech.dev/themes/tailwind.html)):
 map tokens in CSS and utilities resolve to them, dark mode included:
 
 ```css
@@ -136,7 +136,7 @@ map tokens in CSS and utilities resolve to them, dark mode included:
 @theme inline { --color-accent: var(--accent); --font-sans: var(--font-sans); }
 ```
 
-**Fluent 2** ([verified guide](https://sgultom99.github.io/novus-design-ui/themes/fluent2.html)):
+**Fluent 2** ([verified guide](https://ui-kit.novustech.dev/themes/fluent2.html)):
 Fluent UI React v9 theme values land in CSS custom properties, so point them at
 the Novus variables directly:
 
@@ -144,7 +144,7 @@ the Novus variables directly:
 const novusFluent = { ...webLightTheme, colorBrandBackground: "var(--accent)", fontFamilyBase: "var(--font-sans)" };
 ```
 
-**Material** ([verified guide](https://sgultom99.github.io/novus-design-ui/themes/material.html)):
+**Material** ([verified guide](https://ui-kit.novustech.dev/themes/material.html)):
 MUI decomposes palette colours, so read the computed values at runtime (a
 `var()` string in the palette throws MUI error #9):
 
@@ -153,7 +153,7 @@ const t = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).
 const theme = () => createTheme({ palette: { primary: { main: t("--accent") } } });
 ```
 
-**Ant Design** ([verified guide](https://sgultom99.github.io/novus-design-ui/themes/antd.html)):
+**Ant Design** ([verified guide](https://ui-kit.novustech.dev/themes/antd.html)):
 same runtime-read pattern feeding `ConfigProvider`, with antd's dark algorithm
 keyed off the kit's toggle.
 
@@ -168,7 +168,7 @@ first paint. Logos swap to their dark treatments automatically when you use the
 ## Brand assets
 
 Reference logos, lockups, and photos by package path (the
-[asset index](https://sgultom99.github.io/novus-design-ui/foundations/assets.html)
+[asset index](https://ui-kit.novustech.dev/foundations/assets.html)
 lists every file):
 
 ```jsx

@@ -16,7 +16,7 @@
   Package visibility: owner decided PUBLIC for now (override recorded in spec
   Clarifications); flip is web-UI only, and GH Packages npm installs need a
   token even when public.
-- **Docs site**: https://sgultom99.github.io/novus-design-ui/ via GitHub Pages
+- **Docs site**: https://ui-kit.novustech.dev/ via GitHub Pages
   (workflow `.github/workflows/pages.yml`: build → 14 gates → deploy).
 - **Speckit**: feature `specs/001-novus-design-kit/`, all 35 tasks [X], spec
   Status: Shipped, constitution `.specify/memory/constitution.md` at v1.3.0
