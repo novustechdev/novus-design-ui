@@ -27,3 +27,4 @@
 - [X] T019 Sample login page in both flavors and the WASM demo (admin/admin, error state red, nothing stored); Sign out link in the header
 - [X] T020 Header identity follows the logo rules: novapay lockup (inline official pictograph + two-tone solid-set wordmark, dark-mode swap via tokens) instead of typed text
 - [X] T021 Demo provenance bar on admin pages linking back to the docs (README notes it is removable)
+- [X] T022 Landing rebuilt in the ant.design homepage structure on Novus bands: hero with product shot and CTAs, feature trio band, live component sampler band, Admin Kit showcase band (analytics + data grid shots linking the demos), stack chip band, columned footer
