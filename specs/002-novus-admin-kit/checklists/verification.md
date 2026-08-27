@@ -17,3 +17,10 @@ Feature 003 finding folded back: url() inside an unregistered CSS custom
 property resolves against the document base, not the defining stylesheet, so
 the Blazor flavors place the endorsement asset with stylesheet-relative urls
 (bundlers hide this in the Tailwind flavor).
+
+Feature 003 second finding folded back: an MSBuild copy into wwwroot must run
+BeforeTargets="PrepareForBuild", not "Build". Mutating wwwroot after the static
+web asset scan silently breaks .NET's importmap and fingerprint substitution on
+clean builds (CI), while incremental local builds mask it. The Blazor guide and
+both csproj files updated; build.mjs additionally repairs a stale boot-script
+reference defensively.

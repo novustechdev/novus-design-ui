@@ -8,7 +8,7 @@ stylesheet, and use the component classes in your Razor markup.</p>
 <h2>1. Get the package into wwwroot</h2>
 <p style="max-width:68ch">Install with npm as usual, then copy the package into <code>wwwroot/lib</code> at
 build time with an MSBuild target in your <code>.csproj</code>:</p>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;Target Name="CopyNovusKit" BeforeTargets="Build"&gt;
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;Target Name="CopyNovusKit" BeforeTargets="PrepareForBuild"&gt;
   &lt;ItemGroup&gt;
     &lt;NovusKit Include="node_modules/novus-design-kit/**/*" /&gt;
   &lt;/ItemGroup&gt;

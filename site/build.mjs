@@ -191,6 +191,24 @@ const DEMOS = [
   [join(ROOT, "admin-kits/blazor-demo/bin/Release/net10.0/publish/wwwroot"), join(DIST, "demos/blazor")],
 ];
 for (const [from, to] of DEMOS) if (existsSync(from)) { cpSync(from, to, { recursive: true }); console.log("demo copied:", to.slice(DIST.length + 1)); }
+/* .NET publish sometimes leaves the boot-script reference unfingerprinted while the
+   file itself is fingerprinted (environment-dependent). Repair the reference to
+   whatever blazor.webassembly*.js actually shipped. */
+{
+  const bIndex = join(DIST, "demos/blazor/index.html");
+  const bFw = join(DIST, "demos/blazor/_framework");
+  if (existsSync(bIndex) && existsSync(bFw)) {
+    let html = read(bIndex);
+    const m = html.match(/_framework\/(blazor\.webassembly[^"]*\.js)/);
+    if (m && !existsSync(join(bFw, m[1]))) {
+      const real = readdirSync(bFw).find((f) => /^blazor\.webassembly.*\.js$/.test(f) && !f.endsWith(".br") && !f.endsWith(".gz"));
+      if (real) {
+        writeFileSync(bIndex, html.replace(m[0], `_framework/${real}`));
+        console.log("blazor demo boot ref repaired ->", real);
+      }
+    }
+  }
+}
 
 const built = [];
 
