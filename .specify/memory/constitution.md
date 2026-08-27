@@ -1,8 +1,11 @@
 <!--
 Sync Impact Report
-- Version change: 1.7.0 → 1.8.0 (MINOR: Principle VIII added — Mobile Foundation
-  Parity for native Android (Material 3 / Compose) and iOS (SwiftUI / HIG), with a
-  token-parity gate; owner decision 2026-08-27)
+- Version change: 1.8.0 → 1.8.1 (PATCH: Principle VIII Android target corrected to
+  the team's actual stack — Material Components for Android / View system per
+  m3.material.io, not Jetpack Compose; Android tech lead via owner, 2026-08-27)
+- Prior amendment (1.7.0 -> 1.8.0): Principle VIII added — Mobile Foundation
+  Parity for native Android and iOS (SwiftUI / HIG), with a token-parity gate;
+  owner decision 2026-08-27
 - Prior amendment (1.6.0 -> 1.7.0): Governance gains a release rule — changelog
   and all version references updated with every tagged release; owner decision
   2026-08-27
@@ -177,8 +180,10 @@ unverified or off-convention demo teaches every consumer the wrong patterns.
 
 The design system extends to native mobile as FOUNDATION MAPPINGS: guidance
 that maps tokens.css onto each platform's dominant native system: Material 3
-with Jetpack Compose on Android, SwiftUI with the Human Interface Guidelines
-on iOS. Mobile foundation pages MUST derive every colour, radius, spacing,
+as published at m3.material.io on Android, delivered through Material
+Components for Android (the View system: XML themes, styles, and resources;
+the Android team's standard, owner decision 2026-08-27), and SwiftUI with the
+Human Interface Guidelines on iOS. Mobile foundation pages MUST derive every colour, radius, spacing,
 and type value from tokens.css (rem values map at 16px per rem to dp/pt) and
 MUST NOT invent platform-only values; a build gate verifies that every hex
 literal on a mobile foundation page exists verbatim in tokens.css. Carlito
@@ -262,4 +267,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.8.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
+**Version**: 1.8.1 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
