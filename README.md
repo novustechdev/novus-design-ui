@@ -6,7 +6,7 @@ It is framework-agnostic CSS: you import one stylesheet and use documented HTML
 class patterns, so it works the same in Blazor, React, Vite, Vue, or plain HTML.
 
 **Documentation site**: https://ui-kit.novustech.dev/
-(foundations, all 26 components with live examples and copyable snippets,
+(foundations, all 34 components with live examples and copyable snippets,
 verified framework and theme guides, and the full asset index)
 
 > The package installs tokenless from public npm. Third-party marks (client
@@ -171,7 +171,7 @@ The system extends to native mobile as token mappings for each platform's
 standard stack, machine-checked against tokens.css by the build
 (every colour on those pages must be a token value):
 
-- **Android**, Jetpack Compose + Material 3: [Android foundations](https://ui-kit.novustech.dev/foundations/mobile-android.html)
+- **Android**, Material 3 (m3.material.io, Material Components for Android): [Android foundations](https://ui-kit.novustech.dev/foundations/mobile-android.html)
 - **iOS**, SwiftUI + HIG: [iOS foundations](https://ui-kit.novustech.dev/foundations/mobile-ios.html)
 
 These are design mappings, not run-verified guides: the pages are labelled

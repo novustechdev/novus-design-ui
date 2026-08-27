@@ -1,0 +1,19 @@
+<section class="demo" data-title="Breadcrumb">
+  <nav aria-label="Breadcrumb">
+    <ol style="list-style:none;display:flex;flex-wrap:wrap;gap:var(--space-2);margin:0;padding:0;font-size:var(--text-sm)">
+      <li><a href="overview.html">Merchants</a></li>
+      <li aria-hidden="true" style="color:var(--text-muted)">›</li>
+      <li><a href="overview.html">Hillcrest Grocers</a></li>
+      <li aria-hidden="true" style="color:var(--text-muted)">›</li>
+      <li aria-current="page" style="color:var(--text-secondary)">Terminals</li>
+    </ol>
+  </nav>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>An ordered list in a labelled <code>nav</code>; the current page is plain text with <code>aria-current="page"</code>, never a link.</li>
+  <li>The separator is the kit's <code>›</code> glyph (the same one the bullets component uses), muted and hidden from assistive technology.</li>
+  <li>Three levels is the comfortable maximum; collapse deeper paths from the middle.</li>
+  <li>Breadcrumbs state location; they do not replace the section navigation.</li>
+</ul>

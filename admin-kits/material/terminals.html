@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="./favicon.png">
+<title>Terminals · Novus Admin Kit</title>
+<script>
+try { var t = localStorage.getItem("novus-theme");
+  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+} catch (e) {}
+</script>
+</head>
+<body>
+<div class="adminwrap">
+<div class="demobar">Built with the Novus Design Kit · <a href="https://ui-kit.novustech.dev/admin-kit.html">back to the docs</a></div>
+<header class="appbar">
+  <div class="appbar__inner appheader">
+    <div class="appheader__left">
+      <span class="theme-novapay vlogo">
+        <svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+        <span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span>
+      </span>
+      <span class="muted appsuffix">operations · admin</span>
+    </div>
+    <div class="appheader__right">
+      <a class="btn btn--ghost btn--sm toggle44" href="login.html">Sign out</a>
+      <button class="btn btn--ghost btn--sm toggle44 themetoggle" data-theme-toggle aria-label="Toggle light and dark theme">
+        <svg class="ic-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+        <svg class="ic-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M13 3l-1.4 1.4M4.4 11.6 3 13"/></svg>
+      </button>
+      <span class="appheader__sep"></span>
+      <span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span>
+    </div>
+  </div>
+</header>
+<div class="adminbody">
+  <details class="adminnav" open>
+    <summary>Menu</summary>
+    <nav aria-label="Admin">
+      <a href="index.html">Dashboard</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="datagrid.html">Data grid</a>
+      <a href="terminals.html" aria-current="page">Terminals</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </details>
+  <main>
+    <div class="pagehead"><h1>Terminals</h1><span class="muted">Degraded and offline devices sort first</span></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="tablewrap">
+        <table class="table">
+          <thead><tr><th>Id</th><th>Location</th><th>Product</th><th class="num">Uptime</th><th>Health</th><th>Last seen</th></tr></thead>
+          <tbody>
+<!--DATA:terminals-->
+<tr>
+  <td><code>TRM-0128</code></td><td>Kandy City Centre</td><td>novastore</td>
+  <td class="num">96.4%</td>
+  <td><span class="badge badge--warning"><span class="badge__dot"></span> Health · Degraded</span></td><td>10:44</td>
+</tr>
+<tr>
+  <td><code>TRM-0163</code></td><td>Singapore Raffles</td><td>novastore</td>
+  <td class="num">0.0%</td>
+  <td><span class="badge badge--danger"><span class="badge__dot"></span> Health · Offline</span></td><td>15:39</td>
+</tr>
+<tr>
+  <td><code>TRM-0100</code></td><td>Makati flagship</td><td>novapay</td>
+  <td class="num">99.5%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>06:00</td>
+</tr>
+<tr>
+  <td><code>TRM-0107</code></td><td>Cebu IT Park</td><td>novapay</td>
+  <td class="num">99.3%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>07:11</td>
+</tr>
+<tr>
+  <td><code>TRM-0114</code></td><td>Quezon Ave</td><td>novapay</td>
+  <td class="num">99.7%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>08:22</td>
+</tr>
+<tr>
+  <td><code>TRM-0121</code></td><td>Colombo Fort</td><td>novabank</td>
+  <td class="num">99.3%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>09:33</td>
+</tr>
+<tr>
+  <td><code>TRM-0135</code></td><td>Jakarta Sudirman</td><td>novapay</td>
+  <td class="num">99.5%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>11:55</td>
+</tr>
+<tr>
+  <td><code>TRM-0142</code></td><td>Bandung Dago</td><td>novapay</td>
+  <td class="num">99.2%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>12:06</td>
+</tr>
+<tr>
+  <td><code>TRM-0149</code></td><td>Phnom Penh Central</td><td>novapay</td>
+  <td class="num">99.6%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>13:17</td>
+</tr>
+<tr>
+  <td><code>TRM-0156</code></td><td>Gaborone Main Mall</td><td>novabank</td>
+  <td class="num">99.2%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>14:28</td>
+</tr>
+<tr>
+  <td><code>TRM-0170</code></td><td>Penang Georgetown</td><td>novapay</td>
+  <td class="num">99.3%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>16:50</td>
+</tr>
+<tr>
+  <td><code>TRM-0177</code></td><td>Davao Abreeza</td><td>novapay</td>
+  <td class="num">99.3%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>17:01</td>
+</tr>
+<!--/DATA:terminals-->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+<script type="module" src="/src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<section class="demo" data-title="Empty state">
+  <div class="card" style="max-width:28rem;text-align:center;padding:var(--space-7) var(--space-5)">
+    <p style="margin:0 0 var(--space-1);font-weight:var(--weight-medium)">No transactions match this filter</p>
+    <p class="muted" style="margin:0 0 var(--space-4);font-size:var(--text-sm)">Risk holds from the last 24 hours will appear here.</p>
+    <button class="btn btn--secondary">Clear filter</button>
+  </div>
+</section>
+
+<section class="demo" data-title="First-run empty state">
+  <div class="card" style="max-width:28rem;text-align:center;padding:var(--space-7) var(--space-5)">
+    <p style="margin:0 0 var(--space-1);font-weight:var(--weight-medium)">No terminals yet</p>
+    <p class="muted" style="margin:0 0 var(--space-4);font-size:var(--text-sm)">Provision the first terminal to start seeing fleet health.</p>
+    <button class="btn btn--primary">Provision a terminal</button>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Plain text plus one action button: no illustration, no emoji, no decoration. The empty state is information, not a mascot moment.</li>
+  <li>First line says what is empty; second line says when content will appear or what to do; the button does it.</li>
+  <li>A filter-produced empty state offers to clear the filter (secondary); a first-run empty state offers the creating action (primary, if it is the view's one primary).</li>
+  <li>Never show an empty state while loading; that is the skeleton's job.</li>
+</ul>

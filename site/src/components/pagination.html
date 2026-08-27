@@ -1,0 +1,29 @@
+<section class="demo" data-title="Pagination">
+  <nav aria-label="Pagination" class="row" style="gap:var(--space-1)">
+    <button class="btn btn--ghost btn--sm" aria-label="Previous page">‹</button>
+    <button class="btn btn--ghost btn--sm">1</button>
+    <button class="btn btn--secondary btn--sm" aria-current="page" style="border-color:var(--accent);color:var(--accent-text)">2</button>
+    <button class="btn btn--ghost btn--sm">3</button>
+    <span class="muted" style="padding:0 var(--space-1)">…</span>
+    <button class="btn btn--ghost btn--sm">12</button>
+    <button class="btn btn--ghost btn--sm" aria-label="Next page">›</button>
+  </nav>
+</section>
+
+<section class="demo" data-title="Compact: count plus prev/next (the data grid pattern)">
+  <div class="row" style="justify-content:space-between">
+    <span class="muted" style="font-size:var(--text-sm)">Page 2 of 12, 118 rows</span>
+    <span class="row" style="gap:var(--space-2)">
+      <button class="btn btn--secondary btn--sm">‹ Previous</button>
+      <button class="btn btn--secondary btn--sm">Next ›</button>
+    </span>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Page buttons are ghost buttons; the current page carries the accent border and <code>aria-current="page"</code>: the one accent in the control.</li>
+  <li>For dense tables prefer the compact form (count plus Previous/Next), the same pattern the Admin Kit data grid uses.</li>
+  <li>State the total ("Page 2 of 12") so users know the size of what they are paging through.</li>
+  <li>Ten rows per page is the kit default for data tables.</li>
+</ul>

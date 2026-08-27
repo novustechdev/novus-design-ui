@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="./favicon.png">
+<title>Transactions · Novus Admin Kit</title>
+<script>
+try { var t = localStorage.getItem("novus-theme");
+  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+} catch (e) {}
+</script>
+  <script type="module" crossorigin src="./assets/app-DkCGKXKm.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/app-B0-9YTtN.css">
+</head>
+<body>
+<div class="adminwrap">
+<div class="demobar">Built with the Novus Design Kit · <a href="https://ui-kit.novustech.dev/admin-kit.html">back to the docs</a></div>
+<header class="appbar">
+  <div class="appbar__inner appheader">
+    <div class="appheader__left">
+      <span class="theme-novapay vlogo">
+        <svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+        <span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span>
+      </span>
+      <span class="muted appsuffix">operations · admin</span>
+    </div>
+    <div class="appheader__right">
+      <a class="btn btn--ghost btn--sm toggle44" href="login.html">Sign out</a>
+      <button class="btn btn--ghost btn--sm toggle44 themetoggle" data-theme-toggle aria-label="Toggle light and dark theme">
+        <svg class="ic-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z"/></svg>
+        <svg class="ic-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="8" r="3.2"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M13 3l-1.4 1.4M4.4 11.6 3 13"/></svg>
+      </button>
+      <span class="appheader__sep"></span>
+      <span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span>
+    </div>
+  </div>
+</header>
+<div class="adminbody">
+  <details class="adminnav" open>
+    <summary>Menu</summary>
+    <nav aria-label="Admin">
+      <a href="index.html">Dashboard</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="transactions.html" aria-current="page">Transactions</a>
+      <a href="datagrid.html">Data grid</a>
+      <a href="terminals.html">Terminals</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </details>
+  <main>
+    <div class="pagehead"><h1>Transactions</h1></div>
+    <div class="filterrow">
+      <label for="statusfilter" class="muted">Status</label>
+      <span class="selectwrap"><select class="select" id="statusfilter">
+        <option value="all">All</option>
+        <option value="settled">Settled</option>
+        <option value="pending">Pending</option>
+        <option value="failed">Failed</option>
+      </select></span>
+      <span class="muted" id="txcount"></span>
+    </div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="tablewrap">
+        <table class="table" id="txtable">
+          <thead><tr><th>Id</th><th>Time</th><th>Terminal</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+<!--DATA:transactions-->
+<tr data-status="settled" data-id="TXN-241099">
+  <td><code>TXN-241099</code></td><td>18:31</td><td>TRM-0177</td>
+  <td>novapay</td><td class="num">151.17</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-241099">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-241086">
+  <td><code>TXN-241086</code></td><td>18:14</td><td>TRM-0170</td>
+  <td>novapay</td><td class="num">721.23</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-241086">Detail</button></td>
+</tr>
+<tr data-status="pending" data-id="TXN-241073">
+  <td><code>TXN-241073</code></td><td>17:57</td><td>TRM-0163</td>
+  <td>novastore</td><td class="num">401.87</td>
+  <td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-241073">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-241060">
+  <td><code>TXN-241060</code></td><td>17:40</td><td>TRM-0156</td>
+  <td>novabank</td><td class="num">119.22</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-241060">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-241047">
+  <td><code>TXN-241047</code></td><td>16:23</td><td>TRM-0149</td>
+  <td>novapay</td><td class="num">931.32</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-241047">Detail</button></td>
+</tr>
+<tr data-status="pending" data-id="TXN-241034">
+  <td><code>TXN-241034</code></td><td>16:06</td><td>TRM-0142</td>
+  <td>novapay</td><td class="num">279.24</td>
+  <td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-241034">Detail</button></td>
+</tr>
+<tr data-status="failed" data-id="TXN-241021">
+  <td><code>TXN-241021</code></td><td>15:49</td><td>TRM-0135</td>
+  <td>novapay</td><td class="num">695.14</td>
+  <td><span class="badge badge--danger"><span class="badge__dot"></span> Status · Failed</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-241021">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-241008">
+  <td><code>TXN-241008</code></td><td>15:32</td><td>TRM-0128</td>
+  <td>novastore</td><td class="num">832.38</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-241008">Detail</button></td>
+</tr>
+<tr data-status="pending" data-id="TXN-240982">
+  <td><code>TXN-240982</code></td><td>14:58</td><td>TRM-0114</td>
+  <td>novapay</td><td class="num">549.11</td>
+  <td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240982">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240995">
+  <td><code>TXN-240995</code></td><td>14:15</td><td>TRM-0121</td>
+  <td>novabank</td><td class="num">502.74</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240995">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240969">
+  <td><code>TXN-240969</code></td><td>13:41</td><td>TRM-0107</td>
+  <td>novapay</td><td class="num">237.94</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240969">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240956">
+  <td><code>TXN-240956</code></td><td>13:24</td><td>TRM-0100</td>
+  <td>novapay</td><td class="num">666.45</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240956">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240930">
+  <td><code>TXN-240930</code></td><td>12:50</td><td>TRM-0170</td>
+  <td>novapay</td><td class="num">290.38</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240930">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240943">
+  <td><code>TXN-240943</code></td><td>12:07</td><td>TRM-0177</td>
+  <td>novapay</td><td class="num">756.31</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240943">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240917">
+  <td><code>TXN-240917</code></td><td>11:33</td><td>TRM-0163</td>
+  <td>novastore</td><td class="num">434.90</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240917">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240904">
+  <td><code>TXN-240904</code></td><td>11:16</td><td>TRM-0156</td>
+  <td>novabank</td><td class="num">559.60</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240904">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240891">
+  <td><code>TXN-240891</code></td><td>10:59</td><td>TRM-0149</td>
+  <td>novapay</td><td class="num">303.93</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240891">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240878">
+  <td><code>TXN-240878</code></td><td>10:42</td><td>TRM-0142</td>
+  <td>novapay</td><td class="num">410.79</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240878">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240865">
+  <td><code>TXN-240865</code></td><td>09:25</td><td>TRM-0135</td>
+  <td>novapay</td><td class="num">648.94</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240865">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240852">
+  <td><code>TXN-240852</code></td><td>09:08</td><td>TRM-0128</td>
+  <td>novastore</td><td class="num">202.01</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240852">Detail</button></td>
+</tr>
+<tr data-status="pending" data-id="TXN-240839">
+  <td><code>TXN-240839</code></td><td>08:51</td><td>TRM-0121</td>
+  <td>novabank</td><td class="num">64.14</td>
+  <td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240839">Detail</button></td>
+</tr>
+<tr data-status="failed" data-id="TXN-240826">
+  <td><code>TXN-240826</code></td><td>08:34</td><td>TRM-0114</td>
+  <td>novapay</td><td class="num">67.15</td>
+  <td><span class="badge badge--danger"><span class="badge__dot"></span> Status · Failed</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240826">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240813">
+  <td><code>TXN-240813</code></td><td>07:17</td><td>TRM-0107</td>
+  <td>novapay</td><td class="num">523.98</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240813">Detail</button></td>
+</tr>
+<tr data-status="settled" data-id="TXN-240800">
+  <td><code>TXN-240800</code></td><td>07:00</td><td>TRM-0100</td>
+  <td>novapay</td><td class="num">358.80</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
+  <td><button class="btn btn--ghost btn--sm" data-detail="TXN-240800">Detail</button></td>
+</tr>
+<!--/DATA:transactions-->
+          </tbody>
+        </table>
+      </div>
+      <div class="emptystate" id="txempty" hidden>
+        <p>No transactions match this filter.</p>
+        <md-outlined-button id="txreset">Reset filter</md-outlined-button>
+      </div>
+    </div>
+    <dialog class="vdialog" id="txdialog">
+      <div class="vdialog__head">
+        <h3 style="margin:0" id="d-id">Transaction</h3>
+        <button class="modal-close" aria-label="Close" id="d-close">×</button>
+      </div>
+      <div class="vdialog__body">
+        <h4>Details</h4>
+        <table class="table">
+          <tbody>
+            <tr><td>Terminal</td><td id="d-terminal"></td></tr>
+            <tr><td>Product</td><td id="d-product"></td></tr>
+            <tr><td>Amount</td><td class="num" id="d-amount"></td></tr>
+            <tr><td>Time</td><td id="d-ts"></td></tr>
+            <tr><td>Status</td><td id="d-status"></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </dialog>
+  </main>
+</div>
+</div>
+</body>
+</html>

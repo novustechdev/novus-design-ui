@@ -130,12 +130,28 @@
       "summary": "Progressive disclosure behind a click toggle; native details works with JS off."
     },
     {
+      "id": "timeline",
+      "name": "Timeline",
+      "category": "Data Display",
+      "classes": ["ordered list on a token spine"],
+      "fragment": "src/components/timeline.html",
+      "summary": "Event feed on a border spine; dots take judgement colours only where a judgement exists."
+    },
+    {
       "id": "value-chain",
       "name": "Value chain",
       "category": "Data Display",
       "classes": [".vchain-strip", ".vchain", ".vchain-arrow"],
       "fragment": "src/components/value-chain.html",
       "summary": "Labelled steps joined by \u203a arrows, informational, no hover."
+    },
+    {
+      "id": "descriptions",
+      "name": "Descriptions",
+      "category": "Data Display",
+      "classes": ["native dl on a grid"],
+      "fragment": "src/components/descriptions.html",
+      "summary": "Key-value record detail: muted terms, neutral values, judgements as chips."
     },
     {
       "id": "alert",
@@ -146,6 +162,14 @@
       "summary": "Inline banner in the four semantic tones; risk messages are always red."
     },
     {
+      "id": "progress",
+      "name": "Progress",
+      "category": "Feedback",
+      "classes": ["role=progressbar", "token track and fill"],
+      "fragment": "src/components/progress.html",
+      "summary": "Token-built progress bar: muted track, accent fill, judgement colour only when the bar judges."
+    },
+    {
       "id": "modal",
       "name": "Modal",
       "category": "Feedback",
@@ -154,12 +178,28 @@
       "summary": "In-page detail dialog, native dialog gives focus trap, Esc, and inert background."
     },
     {
+      "id": "skeleton",
+      "name": "Skeleton",
+      "category": "Feedback",
+      "classes": ["neutral token blocks", "aria-busy"],
+      "fragment": "src/components/skeleton.html",
+      "summary": "Calm loading placeholder from neutral tokens: static blocks shaped like the content, no shimmer."
+    },
+    {
       "id": "field-input",
       "name": "Field & Input",
       "category": "Forms",
       "classes": [".field", ".field--error", ".field__help", ".field__error", ".input", ".select", ".textarea"],
       "fragment": "src/components/field-input.html",
       "summary": "Labelled text input, select, and textarea with help and error states."
+    },
+    {
+      "id": "empty",
+      "name": "Empty state",
+      "category": "Feedback",
+      "classes": ["composes .card and .btn"],
+      "fragment": "src/components/empty.html",
+      "summary": "Plain text plus one action: what is empty, when content appears, and the button that fixes it."
     },
     {
       "id": "dropdown",
@@ -202,12 +242,36 @@
       "summary": "Numbered progress steps from badge and row primitives, horizontal or vertical, with aria-current."
     },
     {
+      "id": "tabs",
+      "name": "Tabs",
+      "category": "Navigation",
+      "classes": ["native radio + :has pattern", "animated accent indicator"],
+      "fragment": "src/components/tabs.html",
+      "summary": "Facet switcher on native radio inputs with an animated accent underline; works with JavaScript off."
+    },
+    {
       "id": "product-themes",
       "name": "Product themes",
       "category": "Theming",
       "classes": [".theme-novus", ".theme-novapay", ".theme-novabank", ".theme-novastore", ".theme-novatrust", ".theme-novaboost", ".theme-novaai"],
       "fragment": "src/components/product-themes.html",
       "summary": "Scope classes that re-skin the accent role to a product identity, one accent per view."
+    },
+    {
+      "id": "breadcrumb",
+      "name": "Breadcrumb",
+      "category": "Navigation",
+      "classes": ["nav + ordered list", "kit glyph separator"],
+      "fragment": "src/components/breadcrumb.html",
+      "summary": "Location trail with the kit's glyph separator; the current page is text, not a link."
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "category": "Navigation",
+      "classes": ["composes .btn", "aria-current=page"],
+      "fragment": "src/components/pagination.html",
+      "summary": "Page controls from ghost buttons with the accent on the current page; compact form for data tables."
     }
   ]
 }

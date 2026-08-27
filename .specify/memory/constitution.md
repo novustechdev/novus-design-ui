@@ -1,8 +1,11 @@
 <!--
 Sync Impact Report
-- Version change: 1.8.1 → 1.9.0 (MINOR: Governance gains the branch-and-PR rule —
+- Version change: 1.9.0 → 1.10.0 (MINOR: Principle VII expanded — the Admin Kit
+  gains a third flavor on Material Web under the Novus tokens; owner decision
+  2026-08-27)
+- Prior amendment (1.8.1 -> 1.9.0): Governance gains the branch-and-PR rule —
   no direct commits to main, all changes via feature branch + pull request; owner
-  decision 2026-08-27)
+  decision 2026-08-27
 - Prior amendment (1.8.0 -> 1.8.1): Principle VIII Android target corrected to
   the team's actual stack — Material Components for Android / View system per
   m3.material.io, not Jetpack Compose; Android tech lead via owner, 2026-08-27
@@ -152,11 +155,13 @@ moment tokens change.
 
 ### VII. Reference Applications (Admin Kits)
 
-Reference applications (the Novus Admin Kit, in Blazor and Tailwind flavors)
-are governed deliverables, not throwaway demos. Each flavor MUST consume the
-PUBLISHED `novus-design-kit` npm package, never repo-relative kit files, so the
-demo proves the real developer path. The flavors MUST keep screen parity: the
-same screens, domain, and mock dataset, differing only in stack. All kit
+Reference applications (the Novus Admin Kit, in Blazor, Tailwind, and Material
+flavors; the Material flavor uses Material Web, the m3.material.io web
+components, whose components require JavaScript and say so) are governed
+deliverables, not throwaway demos. Each flavor MUST consume the PUBLISHED
+`novus-design-kit` npm package, never repo-relative kit files, so the demo
+proves the real developer path. The flavors MUST keep screen parity: the same
+screens, domain, and mock dataset, differing only in stack. All kit
 principles apply in full, plus the app-interface conventions: white page
 ground, one accent per view, traffic-light status colour only on judgement
 metrics (never pure data), risk and alert messages always red, self-describing
@@ -275,4 +280,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.9.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
+**Version**: 1.10.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
