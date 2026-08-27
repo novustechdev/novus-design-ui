@@ -25,6 +25,10 @@ repository around it; when the packaged kit files are unchanged, the entry says 
   pages with widget-for-widget starter code (activity_dashboard.xml; SwiftUI
   DashboardView) and default component themes (Widget.Novus.* styles; SwiftUI
   view modifiers).
+- Live mobile HTML prototypes at /demos/mobile/android/ and /demos/mobile/ios/:
+  four tappable screens per platform on native radio navigation (JS-off safe),
+  filter chips, working segmented control, theme toggle, and a native detail
+  sheet; linked from the foundation pages.
 - Process: no direct commits to main; feature branch + PR with the new PR
   gates workflow (constitution 1.9.0).
 - Repository migrated to github.com/novustechdev/novus-design-ui (public,

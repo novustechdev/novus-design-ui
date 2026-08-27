@@ -34,3 +34,9 @@
 - [X] T013 Mobile reference screens: token-pure phone mockups (site/mockups/, consuming tokens.css and kit classes only) rendered light + dark at device sizes into site/src/assets/mobile/ and embedded on both foundation pages with the honest reference-rendering label
 - [X] T014 Starter code reproducing the reference screens: Android activity_dashboard.xml + Widget.Novus.* component themes; iOS DashboardView + NovusCard/NovusChip modifiers
 - [X] T015 Gates green, PR opened and merged, live verify both pages
+
+## Phase 7: Live HTML prototypes (owner request, 2026-08-27)
+
+- [X] T016 Mockups grown into full 4-screen interactive prototypes (Dashboard, Transactions with filter chips, Terminals, Settings): navigation and filters on native radio inputs + :has (works with JavaScript off), persisted dual-trigger theme toggle via novus-theme.js, native dialog bottom-sheet/detail card, iOS segmented control switching KPI values and large title following the tab
+- [X] T017 Hosted at /demos/mobile/android/ and /demos/mobile/ios/ (build.mjs copies from site/mockups/ with depth-adjusted paths); foundation pages link them via an Open-the-live-prototype button and clickable reference screenshots
+- [X] T018 Headless verification: screen switching, hold-filter row counts, sheet open with correct data, dark toggle persistence, iOS segment values, JS-off navigation; gates green
