@@ -10,6 +10,16 @@ SwiftUI and names its targets (iOS 18+, Swift 6, SwiftUI). Xcode cannot run in
 the docs build environment, so verification is the token-parity gate plus review,
 per constitution Principle VIII.</div>
 
+<h2>Reference screens</h2>
+<p>The target, before any code: a novapay operations dashboard on the mapping
+below, light and dark. These are reference renderings drawn entirely from
+<code>tokens.css</code> (the kit's own classes at device width), not device
+screenshots; the starter view further down reproduces them natively.</p>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:44rem">
+  <figure style="margin:0"><img src="../assets/mobile/ios-dashboard-light.png" alt="iOS reference dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, light</figcaption></figure>
+  <figure style="margin:0"><img src="../assets/mobile/ios-dashboard-dark.png" alt="iOS reference dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, dark (dynamic colors)</figcaption></figure>
+</div>
+
 <h2>Colors: dynamic light and dark from one definition</h2>
 <p>Define each semantic colour once with both appearances; the system switches
 them with the appearance, exactly like the web tokens' dark block.</p>
@@ -85,6 +95,98 @@ enum NovusRadius { // --radius-sm/md/lg/xl
 }</code></pre>
 <ul class="bullets">
   <li><code>nil</code> follows the system appearance; the persisted override is the second trigger, matching the web kit's <code>novus-theme.js</code> behaviour (same storage key, even).</li>
+</ul>
+
+<h2>Component themes: reusable modifiers</h2>
+<p>Wrap the kit's component forms as view modifiers once, so screens stay
+declarative and on-brand:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>struct NovusCard: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(NovusSpace.s4)
+            .background(Color.novusSurface)
+            .clipShape(RoundedRectangle(cornerRadius: NovusRadius.lg))
+            .overlay(RoundedRectangle(cornerRadius: NovusRadius.lg)
+                .stroke(Color.novusBorder, lineWidth: 1)) // border over shadow
+    }
+}
+
+struct NovusChip: View { // self-describing judgement chip
+    let label: String
+    var tone: Color = .novusTextSecondary // judgement colours only on judgements
+    var body: some View {
+        HStack(spacing: NovusSpace.s1) {
+            Circle().fill(tone).frame(width: 6, height: 6)
+            Text(label).font(.novusSm)
+        }
+        .padding(.horizontal, NovusSpace.s3).padding(.vertical, NovusSpace.s1)
+        .background(Capsule().stroke(Color.novusBorder, lineWidth: 1))
+    }
+}
+
+extension View { func novusCard() -> some View { modifier(NovusCard()) } }</code></pre>
+
+<h2>Starter view: the reference dashboard</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>struct DashboardView: View {
+    var body: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: NovusSpace.s4) {
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())],
+                              spacing: NovusSpace.s3) {
+                        Kpi(value: "1,284", label: "transactions today")
+                        Kpi(value: "98.6%", label: "auth rate")
+                        Kpi(value: "296",   label: "terminals online")
+                        Kpi(value: "3",     label: "risk holds", tone: .novusDanger)
+                    }
+                    VStack(spacing: 0) {
+                        Row(id: "TX-88412", sub: "T-0117, 10:24", amt: "84.50",
+                            chip: NovusChip(label: "Settled", tone: .novusSuccess))
+                        Row(id: "TX-88409", sub: "T-0117, 10:19", amt: "45.90",
+                            chip: NovusChip(label: "Risk hold", tone: .novusDanger))
+                    }.novusCard()
+                    Button("Review risk holds") {}
+                        .buttonStyle(.borderedProminent)
+                        .tint(.novusAccent) // the one accent on this view
+                }
+                .padding(NovusSpace.s4)
+            }
+            .background(Color.novusBg)
+            .navigationTitle("Dashboard")
+        }
+    }
+}
+
+private struct Kpi: View {
+    let value: String; let label: String; var tone: Color = .novusText
+    var body: some View {
+        VStack(alignment: .leading, spacing: NovusSpace.s1) {
+            Text(value).font(.novusXl).foregroundStyle(tone)
+            Text(label).font(.novusSm).foregroundStyle(Color.novusTextSecondary)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .novusCard()
+    }
+}
+
+private struct Row&lt;Chip: View&gt;: View {
+    let id: String; let sub: String; let amt: String; let chip: Chip
+    var body: some View {
+        HStack(spacing: NovusSpace.s3) {
+            VStack(alignment: .leading) {
+                Text(id).font(.novusBase).fontWeight(.bold)
+                Text(sub).font(.novusSm).foregroundStyle(Color.novusTextMuted)
+            }
+            Spacer()
+            Text(amt).monospacedDigit() // amounts stay neutral
+            chip
+        }
+        .padding(.vertical, NovusSpace.s3)
+    }
+}</code></pre>
+<ul class="bullets">
+  <li>Amounts stay neutral text; the chip carries the judgement colour, exactly like the reference screens.</li>
+  <li>The navigation bar's product identity is the placed novapay lockup image asset, never typed text.</li>
 </ul>
 
 <h2>Component correspondence</h2>

@@ -27,3 +27,10 @@
 - [X] T009 Verified Material Web theme guide: real sample (@material/web 2.5.0 + kit 0.3.0 from npm, Vite build, rendered light and dark, headless-verified), themes/material-web.html, verification record row, sample screenshot per FR-008
 - [X] T010 Registration and reachability: GUIDE_SECTIONS entry, landing themes chip, README section, CHANGELOG updated; constitution 1.8.1 records the Android stack correction
 - [X] T011 Gates green (mobile token parity covers the XML hex values), deploy, live verify
+
+## Phase 6: Owner revision 2 (reference screens, starters, PR flow)
+
+- [X] T012 Constitution 1.9.0: Governance branch-and-PR rule (no direct commits to main); PR gates workflow .github/workflows/pr-gates.yml runs build + gates on every PR; CONTRIBUTING updated; this change itself shipped via the first PR
+- [X] T013 Mobile reference screens: token-pure phone mockups (site/mockups/, consuming tokens.css and kit classes only) rendered light + dark at device sizes into site/src/assets/mobile/ and embedded on both foundation pages with the honest reference-rendering label
+- [X] T014 Starter code reproducing the reference screens: Android activity_dashboard.xml + Widget.Novus.* component themes; iOS DashboardView + NovusCard/NovusChip modifiers
+- [X] T015 Gates green, PR opened and merged, live verify both pages

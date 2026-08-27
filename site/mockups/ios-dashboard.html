@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>novapay iOS reference</title>
+<link rel="stylesheet" href="../../tokens.css">
+<style>
+  /* Reference rendering of the iOS foundations mapping, drawn entirely from
+     tokens.css. Not a device screenshot; the starter SwiftUI reproduces it. */
+  html, body { margin: 0; background: var(--bg-subtle); font-family: var(--font-sans); color: var(--text); }
+  .phone { width: 390px; min-height: 844px; display: flex; flex-direction: column; }
+  .statusbar { display: flex; justify-content: space-between; align-items: center;
+    padding: var(--space-2) var(--space-5) var(--space-1); font-size: var(--text-sm);
+    font-weight: var(--weight-medium); }
+  .statusbar svg { display: block; }
+  .largetitle { padding: var(--space-2) var(--space-4) var(--space-3); }
+  .largetitle .row1 { display: flex; align-items: center; justify-content: space-between; }
+  .largetitle h1 { margin: 0; font-size: var(--text-2xl); font-weight: var(--weight-bold); }
+  .seg { display: flex; background: var(--bg-muted); border-radius: var(--radius-md);
+    padding: 2px; margin: 0 var(--space-4) var(--space-3); }
+  .seg span { flex: 1; text-align: center; padding: var(--space-1) 0; font-size: var(--text-sm);
+    color: var(--text-secondary); border-radius: var(--radius-sm); }
+  .seg .on { background: var(--surface); color: var(--text); box-shadow: var(--shadow-sm);
+    font-weight: var(--weight-medium); }
+  .content { flex: 1; padding: 0 var(--space-4); display: flex; flex-direction: column; gap: var(--space-4); }
+  .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+  .kpi { padding: var(--space-3) var(--space-4); }
+  .kpi .v { font-size: var(--text-xl); font-weight: var(--weight-bold); }
+  .kpi .l { font-size: var(--text-sm); color: var(--text-secondary); }
+  .group { background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); overflow: hidden; }
+  .group h3 { margin: 0; padding: var(--space-3) var(--space-4) var(--space-2);
+    font-size: var(--text-sm); font-weight: var(--weight-medium); color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 0.04em; }
+  .rowi { display: flex; align-items: center; gap: var(--space-3);
+    padding: var(--space-3) var(--space-4); border-top: 1px solid var(--border); }
+  .rowi .meta { flex: 1; min-width: 0; }
+  .rowi .id { font-weight: var(--weight-medium); }
+  .rowi .sub { font-size: var(--text-sm); color: var(--text-muted); }
+  .rowi .amt { font-variant-numeric: tabular-nums; }
+  .chev { color: var(--text-muted); }
+  .tabbar { border-top: 1px solid var(--border); background: var(--surface); padding-bottom: var(--space-2); }
+  .tabbar .items { display: flex; }
+  .tabbar a { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: var(--space-2) 0 0; text-decoration: none; color: var(--text-muted); font-size: var(--text-xs); }
+  .tabbar a.on { color: var(--accent-text); }
+  .tabbar svg { display: block; }
+  .homebar { width: 134px; height: 5px; border-radius: var(--radius-pill);
+    background: var(--text); opacity: 0.35; margin: var(--space-2) auto 0; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="statusbar">
+    <span>9:41</span>
+    <span style="display:flex;gap:6px;align-items:center">
+      <svg width="16" height="11" viewBox="0 0 16 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.8"/><rect x="4.3" y="5" width="3" height="6" rx="0.8"/><rect x="8.6" y="2.7" width="3" height="8.3" rx="0.8"/><rect x="12.9" y="0.5" width="3" height="10.5" rx="0.8"/></svg>
+      <svg width="14" height="11" viewBox="0 0 14 11" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 4.7C4.3 1.6 9.7 1.6 13 4.7M3.3 7c2-1.8 5.4-1.8 7.4 0M6 9.2l1 1 1-1"/></svg>
+      <svg width="22" height="11" viewBox="0 0 22 11" fill="none" stroke="currentColor" stroke-width="1"><rect x="0.5" y="0.5" width="18" height="10" rx="3"/><rect x="2" y="2" width="13" height="7" rx="1.6" fill="currentColor" stroke="none"/><path d="M20.5 3.8v3.4"/></svg>
+    </span>
+  </div>
+  <div class="largetitle">
+    <div class="row1">
+      <h1>Dashboard</h1>
+      <span class="theme-novapay vlogo" style="--logo-height:20px">
+        <svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+        <span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span>
+      </span>
+    </div>
+  </div>
+  <div class="seg"><span class="on">Today</span><span>Week</span><span>Month</span></div>
+  <main class="content">
+    <div class="kpis">
+      <div class="card kpi"><div class="v">1,284</div><div class="l">transactions today</div></div>
+      <div class="card kpi"><div class="v">98.6%</div><div class="l">auth rate</div></div>
+      <div class="card kpi"><div class="v">296</div><div class="l">terminals online</div></div>
+      <div class="card kpi"><div class="v" style="color:var(--danger-text)">3</div><div class="l">risk holds</div></div>
+    </div>
+    <div class="group">
+      <h3>Recent transactions</h3>
+      <div class="rowi"><div class="meta"><div class="id">TX-88412</div><div class="sub">T-0117, 10:24</div></div><span class="amt">84.50</span><span class="badge badge--success"><span class="badge__dot"></span> Settled</span><svg class="chev" width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 1.5 6.5 7l-5 5.5"/></svg></div>
+      <div class="rowi"><div class="meta"><div class="id">TX-88411</div><div class="sub">T-0093, 10:22</div></div><span class="amt">312.00</span><span class="badge badge--success"><span class="badge__dot"></span> Settled</span><svg class="chev" width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 1.5 6.5 7l-5 5.5"/></svg></div>
+      <div class="rowi"><div class="meta"><div class="id">TX-88409</div><div class="sub">T-0117, 10:19</div></div><span class="amt">45.90</span><span class="badge badge--danger"><span class="badge__dot"></span> Risk hold</span><svg class="chev" width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 1.5 6.5 7l-5 5.5"/></svg></div>
+      <div class="rowi"><div class="meta"><div class="id">TX-88408</div><div class="sub">T-0204, 10:15</div></div><span class="amt">129.75</span><span class="badge">Pending</span><svg class="chev" width="8" height="14" viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1.5 1.5 6.5 7l-5 5.5"/></svg></div>
+    </div>
+    <button class="btn btn--primary">Review risk holds</button>
+  </main>
+  <nav class="tabbar">
+    <div class="items">
+      <a class="on" href="#"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="6" height="6" rx="1"/><rect x="11.5" y="2.5" width="6" height="6" rx="1"/><rect x="2.5" y="11.5" width="6" height="6" rx="1"/><rect x="11.5" y="11.5" width="6" height="6" rx="1"/></svg>Dashboard</a>
+      <a href="#"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 6h14M3 10h14M3 14h9"/></svg>Transactions</a>
+      <a href="#"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="2.5" width="12" height="15" rx="2"/><path d="M8 15h4"/></svg>Terminals</a>
+      <a href="#"><svg width="22" height="22" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="3"/><path d="M10 2v3M10 15v3M2 10h3M15 10h3"/></svg>Settings</a>
+    </div>
+    <div class="homebar"></div>
+  </nav>
+</div>
+</body>
+</html>

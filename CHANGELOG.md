@@ -20,6 +20,13 @@ repository around it; when the packaged kit files are unchanged, the entry says 
   gate (every colour on those pages must exist in tokens.css).
 - New verified web theme guide: Material Web (@material/web 2.5.0), mapping
   MD3 system tokens to Novus variables in one CSS file.
+- Mobile reference screens: novapay dashboard renderings (light and dark)
+  for Android and iOS built purely from tokens.css, embedded on the foundation
+  pages with widget-for-widget starter code (activity_dashboard.xml; SwiftUI
+  DashboardView) and default component themes (Widget.Novus.* styles; SwiftUI
+  view modifiers).
+- Process: no direct commits to main; feature branch + PR with the new PR
+  gates workflow (constitution 1.9.0).
 - Repository migrated to github.com/novustechdev/novus-design-ui (public,
   protected main, releases restored); CONTRIBUTING.md added.
 
