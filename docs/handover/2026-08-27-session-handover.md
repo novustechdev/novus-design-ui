@@ -55,3 +55,16 @@ two flavors (Blazor Server + Vite/Tailwind) with a WASM demo twin hosted at
 3. Commits are authored as sgultom99 with NO assistant trailers; deploy via
    `gh workflow run pages.yml --repo sgultom99/novus-design-ui --ref main` and watch
    the run selected by headSha.
+
+## Addendum, same day: v0.3.0 release + favicons
+
+- Favicons shipped from official assets (docs: master-logo N-glyph crop at
+  assets/novus-favicon.png, also the manifest icon; demos: novapay pictograph).
+- CHANGELOG.md brought current; Changelog link in the site footer.
+- Constitution 1.7.0: Governance release rule (changelog + all version references
+  updated with every tagged release; tarball attached; npm publish recorded as
+  pending until the owner runs it).
+- v0.3.0 tagged and released with the tarball attached; package.json at 0.3.0.
+- OPEN: npm publish of 0.3.0 needs the owner (passkey): `npm publish` from the
+  repo root. npm currently serves 0.2.0 (kit files identical, README/CHANGELOG
+  only differences).
