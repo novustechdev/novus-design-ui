@@ -18,10 +18,18 @@ below, light and dark. These are reference renderings drawn entirely from
 <code>tokens.css</code> (the kit's own classes at device width), not device
 screenshots; the starter layout further down reproduces them natively, widget
 for widget.</p>
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:44rem">
-  <figure style="margin:0"><img src="../assets/mobile/android-dashboard-light.png" alt="Android reference dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, light</figcaption></figure>
-  <figure style="margin:0"><img src="../assets/mobile/android-dashboard-dark.png" alt="Android reference dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, dark (values-night)</figcaption></figure>
+<div class="row" style="margin-bottom:var(--space-4)">
+  <a class="btn btn--primary" href="../demos/mobile/android/">Open the live prototype</a>
 </div>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:44rem">
+  <figure style="margin:0"><a href="../demos/mobile/android/"><img src="../assets/mobile/android-dashboard-light.png" alt="Android reference dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, light</figcaption></figure>
+  <figure style="margin:0"><a href="../demos/mobile/android/"><img src="../assets/mobile/android-dashboard-dark.png" alt="Android reference dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, dark (values-night)</figcaption></figure>
+</div>
+<p class="muted">The prototype is the mapping made tappable: four screens (Dashboard,
+Transactions with filter chips, Terminals, Settings with the persisted theme
+toggle), navigation on native radio inputs so it works with JavaScript off, and
+a native bottom-sheet detail dialog. Open it at phone width, or install-free on
+an actual phone.</p>
 
 <h2>Color resources</h2>
 <p>Define the palette once in <code>res/values/colors.xml</code>, override in

@@ -260,6 +260,20 @@ for (const [from, to] of DEMOS) if (existsSync(from)) { cpSync(from, to, { recur
 
 const built = [];
 
+/* Mobile HTML prototypes (feature 005): the token-pure mockups, hosted like demos.
+   Source references ../../ (repo root from site/mockups/); hosted depth adds one level. */
+for (const [src, out] of [
+  ["android-dashboard.html", "demos/mobile/android"],
+  ["ios-dashboard.html", "demos/mobile/ios"],
+]) {
+  const p = join(SITE, "mockups", src);
+  if (!existsSync(p)) continue;
+  mkdirSync(join(DIST, out), { recursive: true });
+  writeFileSync(join(DIST, out, "index.html"), read(p).replaceAll("../../", "../../../"));
+  built.push(`${out}/index.html`);
+}
+
+
 /* FR-017: a guide that has not passed verification does not ship.
    Publication is driven by the verification record. */
 const VERIFY_REC = join(ROOT, "specs/001-novus-design-kit/checklists/guide-verification.md");
