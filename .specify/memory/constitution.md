@@ -1,7 +1,10 @@
 <!--
 Sync Impact Report
-- Version change: 1.5.1 → 1.6.0 (MINOR: Principle II motion rule expanded to allow
-  functional state-change motion, reduced-motion aware; owner decision 2026-08-27)
+- Version change: 1.6.0 → 1.7.0 (MINOR: Governance gains a release rule — changelog
+  and all version references updated with every tagged release; owner decision
+  2026-08-27)
+- Prior amendment (1.5.1 -> 1.6.0): Principle II motion rule expanded to allow
+  functional state-change motion, reduced-motion aware; owner decision 2026-08-27
 - Prior amendment (1.5.0 -> 1.5.1): presentation wording; owner decision
 - Changed: docs prose follows the container full width on desktop; no fixed
   ch-measure caps on documentation text (supersedes "prose keeps a readable
@@ -221,5 +224,12 @@ in the PR description against Principle III.
   or materially expanded principles/sections, PATCH for clarifications.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
   MUST NOT ship with a known gate failure.
+- Releases: every tagged release MUST, in the same change set, update CHANGELOG.md
+  (Keep a Changelog format; state explicitly when packaged kit files are unchanged)
+  and every version reference (package.json, README, release notes; the site
+  version stamp derives from package.json at build time). A GitHub Release with
+  the npm tarball attached accompanies every tag; publishing to npm requires the
+  owner (passkey) and is recorded as pending in the release notes until done
+  (owner decision, 2026-08-27).
 
-**Version**: 1.6.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
+**Version**: 1.7.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27

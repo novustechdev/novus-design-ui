@@ -40,3 +40,5 @@
 - [X] T032 Settings rebuilt as a tabbed screen (Profile, Appearance, Notifications, API access) with parity in both flavors and the WASM demo per FR-011; settings screenshots added to the docs grids
 - [X] T033 Getting started section on the Admin Kit docs page: clone/ZIP + copy-a-flavor path and npm-install-into-existing-app path per FR-012
 - [X] T034 Favicons from official assets only: docs site tab icon and manifest icon are a square pixel crop of the master logo's leading N glyph (assets/novus-favicon.png, no redraw); demo consoles use the official novapay pictograph PNG (logos/icons/png) as favicon in both flavors and the WASM demo
+- [X] T035 CHANGELOG.md brought current (0.1.0, 0.2.0, 0.3.0 with packaged-files-unchanged note); Changelog link added to the site footer
+- [X] T036 Constitution 1.7.0: Governance release rule — every tagged release updates changelog and all version references in the same change set; release-gates checklist extended; v0.3.0 tagged with tarball attached, npm publish pending owner passkey

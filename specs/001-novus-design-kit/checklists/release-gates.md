@@ -35,3 +35,10 @@
 
 - [x] Registry finalized: GitHub Packages (npm.pkg.github.com), publishConfig set; v0.1.0 published 2026-08-26
 - [x] Published: novus-design-kit@0.1.0 (private visibility), install verified from a fresh project
+
+## Release process (constitution 1.7.0, applies to every tag)
+
+- [x] CHANGELOG.md updated in the same change set (packaged-files-unchanged stated when true)
+- [x] All version references updated: package.json (site stamp derives from it), README, release notes
+- [x] GitHub Release created with the npm tarball attached
+- [x] npm publish done by the owner, or recorded as pending in the release notes

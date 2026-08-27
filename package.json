@@ -1,6 +1,6 @@
 {
   "name": "novus-design-kit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Novus Technologies design kit: tokens, component styles, Carlito fonts, and official brand assets. Framework-agnostic CSS; import tokens.css and build.",
   "license": "UNLICENSED",
   "author": "Novus Technologies Pte Ltd",
