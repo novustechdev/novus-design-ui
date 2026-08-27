@@ -12,6 +12,17 @@ Material 3 color roles and names its targets (com.google.android.material:materi
 1.14.x, Theme.Material3, AppCompat 1.7.x). Verification is the token-parity gate
 plus review, per constitution Principle VIII.</div>
 
+<h2>Reference screens</h2>
+<p>The target, before any code: a novapay operations dashboard on the mapping
+below, light and dark. These are reference renderings drawn entirely from
+<code>tokens.css</code> (the kit's own classes at device width), not device
+screenshots; the starter layout further down reproduces them natively, widget
+for widget.</p>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));max-width:44rem">
+  <figure style="margin:0"><img src="../assets/mobile/android-dashboard-light.png" alt="Android reference dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, light</figcaption></figure>
+  <figure style="margin:0"><img src="../assets/mobile/android-dashboard-dark.png" alt="Android reference dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"><figcaption class="muted">Dashboard, dark (values-night)</figcaption></figure>
+</div>
+
 <h2>Color resources</h2>
 <p>Define the palette once in <code>res/values/colors.xml</code>, override in
 <code>res/values-night/colors.xml</code>: the resource system is the platform's
@@ -130,6 +141,94 @@ fun applyThemePref(pref: String) = AppCompatDelegate.setDefaultNightMode(
         else    -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     }
 )</code></pre>
+
+<h2>Component themes</h2>
+<p>Give every widget its Novus form once, in the theme, so screens stay clean:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;!-- default widget styles, referenced from Theme.Novus --&gt;
+&lt;style name="Widget.Novus.Button" parent="Widget.Material3.Button"&gt;
+    &lt;item name="shapeAppearance"&gt;@style/Shape.Novus.Medium&lt;/item&gt;
+    &lt;item name="android:textAppearance"&gt;@style/TextAppearance.Novus.Body&lt;/item&gt;
+&lt;/style&gt;
+
+&lt;style name="Widget.Novus.Card" parent="Widget.Material3.CardView.Outlined"&gt;
+    &lt;item name="strokeColor"&gt;?attr/colorOutline&lt;/item&gt;
+    &lt;item name="strokeWidth"&gt;1dp&lt;/item&gt;
+    &lt;item name="cardElevation"&gt;0dp&lt;/item&gt;
+    &lt;item name="shapeAppearance"&gt;@style/Shape.Novus.Large&lt;/item&gt;
+&lt;/style&gt;
+
+&lt;style name="Widget.Novus.Chip" parent="Widget.Material3.Chip.Assist"&gt;
+    &lt;item name="chipStrokeColor"&gt;?attr/colorOutline&lt;/item&gt;
+    &lt;item name="android:textAppearance"&gt;@style/TextAppearance.Novus.Body&lt;/item&gt;
+&lt;/style&gt;
+
+&lt;!-- hook them into the theme --&gt;
+&lt;style name="Theme.Novus" parent="Theme.Material3.DayNight.NoActionBar"&gt;
+    &lt;item name="materialButtonStyle"&gt;@style/Widget.Novus.Button&lt;/item&gt;
+    &lt;item name="materialCardViewStyle"&gt;@style/Widget.Novus.Card&lt;/item&gt;
+    &lt;item name="chipStyle"&gt;@style/Widget.Novus.Chip&lt;/item&gt;
+    &lt;!-- plus the color/shape items shown above --&gt;
+&lt;/style&gt;</code></pre>
+
+<h2>Starter layout: the reference dashboard</h2>
+<p>Reproduces the reference screens with stock Material Components under
+<code>Theme.Novus</code>: KPI cards, a transaction list, and bottom navigation.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;!-- res/layout/activity_dashboard.xml (abridged: one KPI card, one list row) --&gt;
+&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"&gt;
+
+  &lt;com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/topBar"
+      android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
+      app:logo="@drawable/novapay_lockup" /&gt;  &lt;!-- placed asset, never typed text --&gt;
+
+  &lt;androidx.core.widget.NestedScrollView
+      android:layout_width="match_parent" android:layout_height="match_parent"
+      android:padding="@dimen/novus_space_4"&gt;
+    &lt;LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent" android:layout_height="wrap_content"&gt;
+
+      &lt;com.google.android.material.card.MaterialCardView
+          android:layout_width="match_parent" android:layout_height="wrap_content"&gt;
+        &lt;LinearLayout android:orientation="vertical"
+            android:padding="@dimen/novus_space_4"
+            android:layout_width="match_parent" android:layout_height="wrap_content"&gt;
+          &lt;TextView android:text="1,284"
+              android:textAppearance="@style/TextAppearance.Novus.Headline"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/&gt;
+          &lt;TextView android:text="transactions today"
+              android:textColor="?attr/colorOnSurfaceVariant"
+              android:layout_width="wrap_content" android:layout_height="wrap_content"/&gt;
+        &lt;/LinearLayout&gt;
+      &lt;/com.google.android.material.card.MaterialCardView&gt;
+
+      &lt;!-- transaction row: RecyclerView item with a judgement chip --&gt;
+      &lt;LinearLayout android:orientation="horizontal" android:gravity="center_vertical"
+          android:padding="@dimen/novus_space_3"
+          android:layout_width="match_parent" android:layout_height="wrap_content"&gt;
+        &lt;TextView android:text="TX-88412" style="@style/TextAppearance.Novus.Body"
+            android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content"/&gt;
+        &lt;TextView android:text="84.50"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/&gt;
+        &lt;com.google.android.material.chip.Chip android:text="Settled"
+            android:layout_marginStart="@dimen/novus_space_3"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"/&gt;
+      &lt;/LinearLayout&gt;
+    &lt;/LinearLayout&gt;
+  &lt;/androidx.core.widget.NestedScrollView&gt;
+
+  &lt;com.google.android.material.bottomnavigation.BottomNavigationView
+      android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_gravity="bottom"
+      app:menu="@menu/dashboard_nav" /&gt;
+&lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
+<ul class="bullets">
+  <li>Amounts stay neutral text; the chip carries the judgement colour (Settled green, Risk hold red), exactly like the reference screens.</li>
+  <li>The toolbar logo is the placed novapay lockup drawable from <code>logos/lockups/</code>; typing the name is a defect.</li>
+</ul>
 
 <h2>Component correspondence</h2>
 <div class="tablewrap"><table class="table">

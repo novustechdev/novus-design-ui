@@ -1,8 +1,11 @@
 <!--
 Sync Impact Report
-- Version change: 1.8.0 → 1.8.1 (PATCH: Principle VIII Android target corrected to
+- Version change: 1.8.1 → 1.9.0 (MINOR: Governance gains the branch-and-PR rule —
+  no direct commits to main, all changes via feature branch + pull request; owner
+  decision 2026-08-27)
+- Prior amendment (1.8.0 -> 1.8.1): Principle VIII Android target corrected to
   the team's actual stack — Material Components for Android / View system per
-  m3.material.io, not Jetpack Compose; Android tech lead via owner, 2026-08-27)
+  m3.material.io, not Jetpack Compose; Android tech lead via owner, 2026-08-27
 - Prior amendment (1.7.0 -> 1.8.0): Principle VIII added — Mobile Foundation
   Parity for native Android and iOS (SwiftUI / HIG), with a token-parity gate;
   owner decision 2026-08-27
@@ -255,6 +258,11 @@ in the PR description against Principle III.
 
 - Amendments: proposed as a PR to this file with a Sync Impact Report, approved by
   the design-system owner, and applied with a migration note for affected consumers.
+- Branching: `main` is protected and NEVER receives direct commits (owner decision,
+  2026-08-27). Every change, maintainer work included, lands via a feature branch
+  and a pull request whose checks (the gates workflow) are green; the PR merges
+  only after conversation resolution. Feature branches are named for the speckit
+  feature or fix they carry.
 - Versioning: semantic — MAJOR for principle removals/redefinitions, MINOR for new
   or materially expanded principles/sections, PATCH for clarifications.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
@@ -267,4 +275,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.8.1 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
+**Version**: 1.9.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
