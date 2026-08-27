@@ -12,12 +12,48 @@ from the repository and start from a working, on-brand application.</p>
   <div class="stat"><span class="stat__value">0</span><span class="stat__label">tokens or logins to run</span></div>
 </div>
 
+<h2>Getting started</h2>
+<p>Two ways in, depending on where you are starting from. Both flavors pull
+<code>novus-design-kit</code> from the public npm registry: no tokens, no registry
+configuration.</p>
+
+<h3>Path A: copy a working flavor (recommended)</h3>
+<p>Each flavor folder is a complete, runnable application. Get the repository,
+copy the folder you want, and it becomes your project.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># get the repository (any of these)
+git clone https://github.com/sgultom99/novus-design-ui.git
+gh repo clone sgultom99/novus-design-ui
+# or download the ZIP from https://github.com/sgultom99/novus-design-ui
+#   (Code button, then Download ZIP) and unpack it
+
+# take a flavor folder as your starting point
+cp -r novus-design-ui/admin-kits/tailwind my-console    # Vite + Tailwind flavor
+cp -r novus-design-ui/admin-kits/blazor   my-console    # Blazor Server flavor
+cp -r novus-design-ui/admin-kits/data     my-console-data   # optional: the shared dataset generator</code></pre>
+<p>Then run it. Tailwind flavor:</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>cd my-console
+npm install     # pulls novus-design-kit and chart.js
+npm run dev     # develop; npm run build for the production bundle</code></pre>
+<p>Blazor flavor (.NET 10 SDK required):</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>cd my-console
+npm install     # pulls novus-design-kit; the build copies it to wwwroot/lib
+dotnet run</code></pre>
+
+<h3>Path B: add the kit to an existing app</h3>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install novus-design-kit chart.js</code></pre>
+<ul class="bullets">
+  <li>Import <code>novus-design-kit/tokens.css</code> and the pre-paint theme script <code>novus-design-kit/js/novus-theme.js</code> first, exactly as your <a href="frameworks/blazor.html">framework guide</a> shows.</li>
+  <li>Copy the pieces you need from a flavor: the shared console layout lives in <code>src/admin.css</code> (Tailwind) or <code>wwwroot/admin.css</code> (Blazor), the token-fed chart wiring in <code>novus-chart.js</code>, and the screens are self-contained pages you can lift one at a time.</li>
+  <li>The demo dataset and its generator live in <code>admin-kits/data/</code>; run <code>node generate.mjs</code> there to re-emit the per-flavor data files from <code>dataset.json</code>.</li>
+</ul>
+
 <h2>Screens and conventions</h2>
 <ul class="bullets">
   <li><b>Dashboard</b>: KPI stat row, signal cards (risk always red, watch amber), recent transactions.</li>
   <li><b>Transactions</b>: data-dense table, status filter, native detail dialog, plain empty state.</li>
   <li><b>Terminals</b>: fleet health with degraded and offline devices sorted first.</li>
-  <li><b>Settings</b>: profile form (demo only, says so) and the persisted theme toggle.</li>
+  <li><b>Settings</b>: tabbed screen (Profile, Appearance, Notifications, API access) with an animated active-tab indicator; the tabs are native radio inputs, so they work with JavaScript off.</li>
+  <li><b>Menu and tabs motion</b>: nav links and tab switches use brief functional transitions (0.2s or less), disabled under reduced-motion preferences.</li>
   <li><b>Analytics</b>: hourly volume by product, stacked composition bars with a total trajectory line, styled by the locked Novus chart rules (token-fed at runtime).</li>
   <li><b>Data grid</b>: all transactions with column sorting, search, and 10-per-page pagination (Blazor QuickGrid; progressive enhanced table in the Tailwind flavor).</li>
   <li>Internal-tool header (app identity left, Novus endorsement right), sidebar that collapses to a native menu on mobile, traffic-light colour only on judgement chips, amounts always neutral, self-describing chips, dual-trigger dark mode, JS-off navigation.</li>
@@ -38,6 +74,7 @@ dotnet run</code></pre>
   <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-analytics.png" alt="blazor flavor: Analytics: token-fed chart" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Analytics: token-fed chart</figcaption></figure>
   <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-datagrid.png" alt="blazor flavor: Data grid: sort, search, pages" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, pages</figcaption></figure>
   <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-transactions.png" alt="blazor flavor: Transactions with filter and dialog" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-settings.png" alt="blazor flavor: Tabbed settings with animated indicator" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Tabbed settings with animated indicator</figcaption></figure>
   <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-mobile.png" alt="blazor flavor: 375px, no horizontal scroll" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
 </div>
 
@@ -57,6 +94,7 @@ npm run dev     # or: npm run build && npm run preview</code></pre>
   <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-analytics.png" alt="tailwind flavor: Analytics: token-fed chart" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Analytics: token-fed chart</figcaption></figure>
   <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-datagrid.png" alt="tailwind flavor: Data grid: sort, search, pages" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, pages</figcaption></figure>
   <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-transactions.png" alt="tailwind flavor: Transactions with filter and dialog" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-settings.png" alt="tailwind flavor: Tabbed settings with animated indicator" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Tabbed settings with animated indicator</figcaption></figure>
   <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-mobile.png" alt="tailwind flavor: 375px, no horizontal scroll" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
 </div>
 

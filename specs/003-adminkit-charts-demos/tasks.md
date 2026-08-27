@@ -35,3 +35,7 @@
 - [X] T027 Theme control is the moon/sun icon toggle (dual-trigger swap) in admin flavors and demos, replacing the text button
 - [X] T028 Login page brandmark visible: the span-based mark needs block display outside flex contexts; docs and demo screenshots retaken with lockup headers and icon toggles; mobile header rules added after the new header overflowed 375px (suffix hides, endorsement steps to 20px per the two-mark rule)
 - [X] T029 Login redirect hardened to Nav.BaseUri (absolute to the app's own base) in flavor and demo
+- [X] T030 Constitution 1.6.0: Principle II motion rule expanded to functional state-change motion (reduced-motion aware) per owner request 2026-08-27
+- [X] T031 Animated nav links and native radio-based tabs component (animated indicator, panel fade, :has panel switching with stacked JS-off fallback) in shared admin.css per FR-010/FR-011
+- [X] T032 Settings rebuilt as a tabbed screen (Profile, Appearance, Notifications, API access) with parity in both flavors and the WASM demo per FR-011; settings screenshots added to the docs grids
+- [X] T033 Getting started section on the Admin Kit docs page: clone/ZIP + copy-a-flavor path and npm-install-into-existing-app path per FR-012

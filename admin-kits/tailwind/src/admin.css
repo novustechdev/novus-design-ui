@@ -94,3 +94,29 @@
   .brandmark { height: 20px; width: 65px; }
   .appbar__inner { gap: var(--space-2); }
 }
+
+/* Functional motion (constitution 1.6.0): nav transitions + animated tabs, reduced-motion aware */
+.adminnav a { transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, padding-left 0.15s ease; }
+.adminnav a:hover { padding-left: calc(var(--space-3) + 4px); }
+
+.tablist { display: flex; flex-wrap: wrap; gap: var(--space-1); border-bottom: 1px solid var(--border); margin-bottom: var(--space-4); }
+.tablist input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+.tablist label { position: relative; cursor: pointer; padding: var(--space-2) var(--space-3); min-height: 2.75rem; display: inline-flex; align-items: center; color: var(--text-secondary); font-size: var(--text-sm); font-weight: var(--weight-medium); transition: color 0.15s ease; }
+.tablist label::after { content: ""; position: absolute; left: var(--space-3); right: var(--space-3); bottom: -1px; height: 2px; background: var(--accent); transform: scaleX(0); transition: transform 0.18s ease; }
+.tablist label:hover { color: var(--text); }
+.tablist input:checked + label { color: var(--accent-text); }
+.tablist input:checked + label::after { transform: scaleX(1); }
+.tablist input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius-sm); }
+.tabpanel { animation: tabfade 0.18s ease; }
+/* JS-off and no-:has fallback: all panels stay visible stacked */
+.tabs:has(input:checked) .tabpanel { display: none; }
+.tabs:has(#tab-profile:checked) #panel-profile,
+.tabs:has(#tab-appearance:checked) #panel-appearance,
+.tabs:has(#tab-notifications:checked) #panel-notifications,
+.tabs:has(#tab-api:checked) #panel-api { display: block; }
+@keyframes tabfade { from { opacity: 0; transform: translateY(4px); } }
+.chk { display: flex; gap: var(--space-2); align-items: center; min-height: 2.75rem; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) {
+  .adminnav a, .tablist label, .tablist label::after { transition: none; }
+  .tabpanel { animation: none; }
+}

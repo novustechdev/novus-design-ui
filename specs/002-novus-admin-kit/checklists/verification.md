@@ -36,3 +36,4 @@ sample login verified in the Tailwind build (wrong creds show the red error,
 admin/admin routes to the dashboard); demo provenance bar links back to the
 docs; header inner and footer are full width; body type stepped to the sm
 token for density.
+- 2026-08-27: Tabbed settings verified in both flavors (headless Chromium): Profile visible by default, API access panel switches on tab click, panels swap via :has, 375px scrollWidth 375 in both. Gates all green after site rebuild.

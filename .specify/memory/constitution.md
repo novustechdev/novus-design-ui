@@ -1,6 +1,8 @@
 <!--
 Sync Impact Report
-- Version change: 1.5.0 → 1.5.1 (PATCH: presentation wording; owner decision)
+- Version change: 1.5.1 → 1.6.0 (MINOR: Principle II motion rule expanded to allow
+  functional state-change motion, reduced-motion aware; owner decision 2026-08-27)
+- Prior amendment (1.5.0 -> 1.5.1): presentation wording; owner decision
 - Changed: docs prose follows the container full width on desktop; no fixed
   ch-measure caps on documentation text (supersedes "prose keeps a readable
   measure"). Commit authorship: repository commits are authored by the owner
@@ -61,9 +63,11 @@ The kit targets Ant Design-grade enterprise UI: solid neutral grounds (white `--
 never gradients or tinted page grounds), border radius only from the tokens.css
 radius scale (`--radius-*`; no ad-hoc radius values), 1px solid borders over
 box-shadows (any shadow subtle, no glows), monochrome grays plus the single accent,
-font weights 400/600 only, motion limited to 0.15s color/border transitions, and
-compact information-dense layouts. Decorative illustration, entrance animation, and
-"AI-bot look" styling MUST NOT ship.
+font weights 400/600 only, and compact information-dense layouts. Motion is
+functional only: brief transitions (0.2s or less) on interactive state changes
+(hover, active navigation, tab switches, opening panels), always disabled under
+`prefers-reduced-motion` (owner decision, 2026-08-27). Decorative illustration,
+page entrance animation, and "AI-bot look" styling MUST NOT ship.
 
 **Rationale**: Enterprise and back-office buyers reject gradient/glow aesthetics on
 sight; the product's data is the design.
@@ -218,4 +222,4 @@ in the PR description against Principle III.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
   MUST NOT ship with a known gate failure.
 
-**Version**: 1.5.1 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26
+**Version**: 1.6.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27

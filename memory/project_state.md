@@ -1,4 +1,15 @@
-# Project state (as of 2026-08-26)
+# Project state (as of 2026-08-27)
+
+- **Admin Kit**: two flavors (`admin-kits/blazor` Server, `admin-kits/tailwind`
+  Vite MPA) + WASM demo twin (`admin-kits/blazor-demo`) hosted at
+  /demos/blazor/ and /demos/tailwind/ on the docs site; one dataset
+  (`admin-kits/data`, `node generate.mjs` for parity). 6 screens + login
+  (admin/admin). Settings is tabbed (radio + `:has`, JS-off safe); functional
+  motion allowed since constitution 1.6.0 (0.2s max, reduced-motion aware).
+  Header = novapay lockup + icon theme toggle; below 520px the suffix hides and
+  the endorsement mark steps to 20px (375px overflow guard).
+- **Speckit (current)**: active feature `specs/003-adminkit-charts-demos`
+  (tasks through T033 done); constitution v1.6.0.
 
 - **Package**: `novus-design-kit@0.2.0` on PUBLIC npm, tokenless install
   (`npm install novus-design-kit`); third-party marks (logos/clients,

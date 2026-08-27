@@ -4,22 +4,58 @@
 
 <div class="pagehead"><h1>Settings</h1></div>
 
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start">
-    <div class="card">
-        <h3>Profile</h3>
-        <p class="muted">Demo only: this form does not persist.</p>
-        <form onsubmit="return false">
-            <div class="field"><label for="s-name">Name</label><input class="input" id="s-name" value="Operations Admin"></div>
-            <div class="field"><label for="s-mail">Email</label><input class="input" id="s-mail" type="email" value="ops.admin@novustech.com.sg"></div>
-            <div class="field"><label for="s-role">Role</label>
-                <select class="select" id="s-role"><option>Operations</option><option>Finance</option><option>Support</option></select>
-            </div>
-            <button class="btn btn--primary">Save</button>
-        </form>
+<div class="tabs">
+    <div class="tablist" role="tablist" aria-label="Settings sections">
+        <input type="radio" name="settings-tab" id="tab-profile" checked><label for="tab-profile">Profile</label>
+        <input type="radio" name="settings-tab" id="tab-appearance"><label for="tab-appearance">Appearance</label>
+        <input type="radio" name="settings-tab" id="tab-notifications"><label for="tab-notifications">Notifications</label>
+        <input type="radio" name="settings-tab" id="tab-api"><label for="tab-api">API access</label>
     </div>
-    <div class="card">
-        <h3>Appearance</h3>
-        <p class="muted">Light follows the OS unless you choose. The choice persists on this device.</p>
-        <button class="btn btn--secondary toggle44" data-theme-toggle>Toggle light / dark</button>
-    </div>
+    <section class="tabpanel" id="panel-profile">
+        <div class="card">
+            <h3>Profile</h3>
+            <p class="muted">Demo only: this form does not persist.</p>
+            <form onsubmit="return false">
+                <div class="field"><label for="s-name">Name</label><input class="input" id="s-name" value="Operations Admin"></div>
+                <div class="field"><label for="s-mail">Email</label><input class="input" id="s-mail" type="email" value="ops.admin@novustech.com.sg"></div>
+                <div class="field"><label for="s-role">Role</label>
+                    <select class="select" id="s-role"><option>Operations</option><option>Finance</option><option>Support</option></select>
+                </div>
+                <button class="btn btn--primary">Save</button>
+            </form>
+        </div>
+    </section>
+    <section class="tabpanel" id="panel-appearance">
+        <div class="card">
+            <h3>Appearance</h3>
+            <p class="muted">Light follows the OS unless you choose. The choice persists on this device.</p>
+            <button class="btn btn--secondary toggle44" data-theme-toggle>Toggle light / dark</button>
+        </div>
+    </section>
+    <section class="tabpanel" id="panel-notifications">
+        <div class="card">
+            <h3>Notifications</h3>
+            <p class="muted">Demo only: choices do not persist.</p>
+            <label class="chk"><input type="checkbox" checked> Terminal offline alerts</label>
+            <label class="chk"><input type="checkbox" checked> Risk holds requiring review</label>
+            <label class="chk"><input type="checkbox"> Daily settlement report</label>
+            <label class="chk"><input type="checkbox"> Weekly operations digest</label>
+            <button class="btn btn--primary" style="margin-top:var(--space-3)">Save</button>
+        </div>
+    </section>
+    <section class="tabpanel" id="panel-api">
+        <div class="card">
+            <h3>API access</h3>
+            <p class="muted">Demo only: keys shown are illustrative and not usable.</p>
+            <table class="table">
+                <thead><tr><th>Key name</th><th>Prefix</th><th>Created</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>Settlement export</td><td><code>np_live_4f2c</code></td><td>2026-05-14</td><td><span class="badge badge--success"><span class="badge__dot"></span> Status · Active</span></td></tr>
+                    <tr><td>Terminal telemetry</td><td><code>np_live_9a71</code></td><td>2026-03-02</td><td><span class="badge badge--success"><span class="badge__dot"></span> Status · Active</span></td></tr>
+                    <tr><td>Legacy reporting</td><td><code>np_live_1e08</code></td><td>2025-11-20</td><td><span class="badge">Status · Revoked</span></td></tr>
+                </tbody>
+            </table>
+            <button class="btn btn--secondary" style="margin-top:var(--space-3)">Generate key</button>
+        </div>
+    </section>
 </div>
