@@ -13,24 +13,29 @@ gate() { # gate <name> <exit-code> [detail]
 AUTHORED="site/src js README.md CHANGELOG.md"
 [ -d site/dist ] && AUTHORED="$AUTHORED site/dist"
 
+# Admin-kit authored sources (constitution VII): Razor/HTML/CSS/JS we wrote,
+# excluding dependencies, build output, and the copied kit itself.
+ADMIN_SRC=$(find admin-kits -type f \( -name '*.razor' -o -name '*.html' -o -name '*.css' -o -name '*.js' -o -name '*.mjs' \) \
+  ! -path '*/node_modules/*' ! -path '*/bin/*' ! -path '*/obj/*' ! -path '*/dist/*' ! -path '*/wwwroot/lib/*' 2>/dev/null)
+
 # 1. No gradients anywhere in authored output (dist/tokens.css is the upstream copy)
-HITS=$(grep -rn --exclude=tokens.css "gradient" $AUTHORED 2>/dev/null | grep -v "no gradients")
+HITS=$( { grep -rn --exclude=tokens.css "gradient" $AUTHORED 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -n "gradient" $ADMIN_SRC 2>/dev/null; } | grep -v "no gradients")
 gate "gradient grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 2. No ad-hoc hex colours (tokens define every colour)
-HITS=$(grep -rnE '#[0-9a-fA-F]{3,8}\b' site/src js 2>/dev/null | grep -vE 'href="#|url\(#|&#')
+HITS=$( { grep -rnE '#[0-9a-fA-F]{3,8}\b' site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE '#[0-9a-fA-F]{3,8}\b' $ADMIN_SRC 2>/dev/null; } | grep -vE 'href="#|url\(#|&#')
 gate "ad-hoc hex audit" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 3. No radius outside the token scale (border-radius must use var(--radius-*))
-HITS=$(grep -rnE 'border-radius:[^;}]*(px|rem|em|%)' site/src js 2>/dev/null | grep -v 'var(--radius')
+HITS=$( { grep -rnE 'border-radius:[^;}]*(px|rem|em|%)' site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE 'border-radius:[^;}]*(px|rem|em|%)' $ADMIN_SRC 2>/dev/null; } | grep -v 'var(--radius')
 gate "radius-outside-token-scale" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 4. No ad-hoc font sizes (type scale is tokenised)
-HITS=$(grep -rnE 'font-size:\s*[0-9]' site/src js 2>/dev/null | grep -v 'var(--text')
+HITS=$( { grep -rnE 'font-size:\s*[0-9]' site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE 'font-size:\s*[0-9]' $ADMIN_SRC 2>/dev/null; } | grep -v 'var(--text')
 gate "ad-hoc font-size audit" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 5. Prohibited positioning strings (negations count; "Service as Software" is the model)
-HITS=$(grep -rniE '\bsaas\b|software as a service' $AUTHORED 2>/dev/null)
+HITS=$( { grep -rniE '\bsaas\b|software as a service' $AUTHORED 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -niE '\bsaas\b|software as a service' $ADMIN_SRC 2>/dev/null; } )
 gate "SaaS-string grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 6. No CJK template leaks
@@ -38,7 +43,7 @@ HITS=$(grep -rnP '[\x{4E00}-\x{9FFF}]' site/src site/dist 2>/dev/null)
 gate "CJK leak grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 6b. Copy style: no em dashes in AUTHORED copy (upstream kit docs in logos/ are excluded authority)
-HITS=$(grep -rn "—" site/src README.md CHANGELOG.md 2>/dev/null; grep -rn --include="*.html" "—" site/dist 2>/dev/null)
+HITS=$(grep -rn "—" site/src README.md CHANGELOG.md 2>/dev/null; grep -rn --include="*.html" "—" site/dist 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -n "—" $ADMIN_SRC 2>/dev/null)
 gate "em-dash copy-style" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 7. Manifest ↔ detail-page completeness + orphan-class check

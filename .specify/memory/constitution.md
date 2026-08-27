@@ -1,6 +1,12 @@
 <!--
 Sync Impact Report
-- Version change: 1.2.0 → 1.3.0 (MINOR: two principles materially expanded)
+- Version change: 1.3.0 → 1.4.0 (MINOR: Principle VII added)
+- Added: VII. Reference Applications (Admin Kits) — enterprise demo apps (Novus Admin
+  Kit, Blazor and Tailwind flavors) must consume the PUBLISHED npm package, keep screen
+  parity across flavors, follow every kit principle and the app-interface conventions
+  (traffic-light status, risk messages red, self-describing chips, one accent per
+  view), and ship only after a verified run with rendered screenshots on the docs site.
+- Prior amendment (1.2.0 -> 1.3.0): two principles materially expanded
 - Modified principles:
   V. Brand & Copy Fidelity: house copy style added: published site and README copy
   avoids em-dash punctuation (reads as machine-generated); enforced by a quality gate.
@@ -110,6 +116,26 @@ ship (enforced by a build-time publication filter and a release gate).
 framework stops being the company standard, and duplicated values drift the
 moment tokens change.
 
+### VII. Reference Applications (Admin Kits)
+
+Reference applications (the Novus Admin Kit, in Blazor and Tailwind flavors)
+are governed deliverables, not throwaway demos. Each flavor MUST consume the
+PUBLISHED `novus-design-kit` npm package, never repo-relative kit files, so the
+demo proves the real developer path. The flavors MUST keep screen parity: the
+same screens, domain, and mock dataset, differing only in stack. All kit
+principles apply in full, plus the app-interface conventions: white page
+ground, one accent per view, traffic-light status colour only on judgement
+metrics (never pure data), risk and alert messages always red, self-describing
+chips, hover only on clickables, mobile-first at 375px, dual-trigger dark mode
+with the persisted pre-paint toggle. Layout CSS specific to an app is composed
+from tokens; re-implementing a shipped component is a defect. An admin kit
+flavor ships only after a verified build-and-run with rendered screenshots
+published on the docs site (the Principle VI verification discipline applied
+to applications).
+
+**Rationale**: A design kit is judged by its first real application; an
+unverified or off-convention demo teaches every consumer the wrong patterns.
+
 ## Design Standards & Constraints
 
 - Typeface: Carlito via `var(--font-sans)` only; no other font, no raw font-family.
@@ -158,4 +184,4 @@ in the PR description against Principle III.
 - Compliance: every PR review verifies the Quality Gates above; a release of the kit
   MUST NOT ship with a known gate failure.
 
-**Version**: 1.3.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26
+**Version**: 1.4.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-26

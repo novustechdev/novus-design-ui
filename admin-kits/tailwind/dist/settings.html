@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Settings · Novus Admin Kit</title>
+<script>
+try { var t = localStorage.getItem("novus-theme");
+  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+} catch (e) {}
+</script>
+  <script type="module" crossorigin src="/assets/app-5fnddfEH.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/app-DHjdDTxA.css">
+</head>
+<body>
+<div class="adminwrap">
+<header class="appbar">
+  <div class="appbar__inner appheader">
+    <div class="appheader__left">
+      <span class="appname">novapay operations · admin</span>
+    </div>
+    <div class="appheader__right">
+      <button class="btn btn--ghost btn--sm toggle44" data-theme-toggle>Theme</button>
+      <span class="appheader__sep"></span>
+      <span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span>
+    </div>
+  </div>
+</header>
+<div class="adminbody">
+  <details class="adminnav" open>
+    <summary>Menu</summary>
+    <nav aria-label="Admin">
+      <a href="index.html">Dashboard</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="terminals.html">Terminals</a>
+      <a href="settings.html" aria-current="page">Settings</a>
+    </nav>
+  </details>
+  <main>
+    <div class="pagehead"><h1>Settings</h1></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start">
+      <div class="card">
+        <h3>Profile</h3>
+        <p class="muted">Demo only: this form does not persist.</p>
+        <form onsubmit="return false">
+          <div class="field"><label for="s-name">Name</label><input class="input" id="s-name" value="Operations Admin"></div>
+          <div class="field"><label for="s-mail">Email</label><input class="input" id="s-mail" type="email" value="ops.admin@novustech.com.sg"></div>
+          <div class="field"><label for="s-role">Role</label>
+            <select class="select" id="s-role"><option>Operations</option><option>Finance</option><option>Support</option></select>
+          </div>
+          <button class="btn btn--primary">Save</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Appearance</h3>
+        <p class="muted">Light follows the OS unless you choose. The choice persists on this device.</p>
+        <button class="btn btn--secondary toggle44" data-theme-toggle>Toggle light / dark</button>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+</body>
+</html>

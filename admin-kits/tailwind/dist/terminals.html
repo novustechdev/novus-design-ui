@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminals · Novus Admin Kit</title>
+<script>
+try { var t = localStorage.getItem("novus-theme");
+  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+} catch (e) {}
+</script>
+  <script type="module" crossorigin src="/assets/app-5fnddfEH.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/app-DHjdDTxA.css">
+</head>
+<body>
+<div class="adminwrap">
+<header class="appbar">
+  <div class="appbar__inner appheader">
+    <div class="appheader__left">
+      <span class="appname">novapay operations · admin</span>
+    </div>
+    <div class="appheader__right">
+      <button class="btn btn--ghost btn--sm toggle44" data-theme-toggle>Theme</button>
+      <span class="appheader__sep"></span>
+      <span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span>
+    </div>
+  </div>
+</header>
+<div class="adminbody">
+  <details class="adminnav" open>
+    <summary>Menu</summary>
+    <nav aria-label="Admin">
+      <a href="index.html">Dashboard</a>
+      <a href="transactions.html">Transactions</a>
+      <a href="terminals.html" aria-current="page">Terminals</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+  </details>
+  <main>
+    <div class="pagehead"><h1>Terminals</h1><span class="muted">Degraded and offline devices sort first</span></div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="tablewrap">
+        <table class="table">
+          <thead><tr><th>Id</th><th>Location</th><th>Product</th><th class="num">Uptime</th><th>Health</th><th>Last seen</th></tr></thead>
+          <tbody>
+<!--DATA:terminals-->
+<tr>
+  <td><code>TRM-0128</code></td><td>Kandy City Centre</td><td>novastore</td>
+  <td class="num">96.4%</td>
+  <td><span class="badge badge--warning"><span class="badge__dot"></span> Health · Degraded</span></td><td>10:44</td>
+</tr>
+<tr>
+  <td><code>TRM-0163</code></td><td>Singapore Raffles</td><td>novastore</td>
+  <td class="num">0.0%</td>
+  <td><span class="badge badge--danger"><span class="badge__dot"></span> Health · Offline</span></td><td>15:39</td>
+</tr>
+<tr>
+  <td><code>TRM-0100</code></td><td>Makati flagship</td><td>novapay</td>
+  <td class="num">99.5%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>06:00</td>
+</tr>
+<tr>
+  <td><code>TRM-0107</code></td><td>Cebu IT Park</td><td>novapay</td>
+  <td class="num">99.3%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>07:11</td>
+</tr>
+<tr>
+  <td><code>TRM-0114</code></td><td>Quezon Ave</td><td>novapay</td>
+  <td class="num">99.7%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>08:22</td>
+</tr>
+<tr>
+  <td><code>TRM-0121</code></td><td>Colombo Fort</td><td>novabank</td>
+  <td class="num">99.3%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>09:33</td>
+</tr>
+<tr>
+  <td><code>TRM-0135</code></td><td>Jakarta Sudirman</td><td>novapay</td>
+  <td class="num">99.5%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>11:55</td>
+</tr>
+<tr>
+  <td><code>TRM-0142</code></td><td>Bandung Dago</td><td>novapay</td>
+  <td class="num">99.2%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>12:06</td>
+</tr>
+<tr>
+  <td><code>TRM-0149</code></td><td>Phnom Penh Central</td><td>novapay</td>
+  <td class="num">99.6%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>13:17</td>
+</tr>
+<tr>
+  <td><code>TRM-0156</code></td><td>Gaborone Main Mall</td><td>novabank</td>
+  <td class="num">99.2%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>14:28</td>
+</tr>
+<tr>
+  <td><code>TRM-0170</code></td><td>Penang Georgetown</td><td>novapay</td>
+  <td class="num">99.3%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>16:50</td>
+</tr>
+<tr>
+  <td><code>TRM-0177</code></td><td>Davao Abreeza</td><td>novapay</td>
+  <td class="num">99.3%</td>
+  <td><span class="badge badge--success"><span class="badge__dot"></span> Health · Healthy</span></td><td>17:01</td>
+</tr>
+<!--/DATA:terminals-->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+</div>
+</body>
+</html>
