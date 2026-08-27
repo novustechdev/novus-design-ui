@@ -18,8 +18,9 @@ fails a gate cannot merge, so read this first.
 
 ## Workflow
 
-1. Fork and branch from `main` (direct pushes to `main` are for maintainers;
-   `main` forbids force pushes and deletions).
+1. Fork and branch from `main`. Nobody commits to `main` directly, maintainers
+   included (constitution v1.9.0): every change lands through a pull request
+   with green checks. `main` also forbids force pushes and deletions.
 2. Make the change. Docs live in `site/src/`, the generator is `site/build.mjs`,
    the Admin Kit flavors are under `admin-kits/` (keep the two flavors and the
    WASM demo in strict parity; `admin-kits/data/generate.mjs` re-emits shared data).
@@ -33,7 +34,8 @@ fails a gate cannot merge, so read this first.
 4. Update the speckit record: the active feature's `tasks.md` under `specs/`
    gets a task line for your change, and `CHANGELOG.md` gets an entry when the
    change is user-visible.
-5. Open a PR against `main`. Reviews verify the gates and the constitution;
+5. Open a PR against `main`; the PR gates workflow runs the same build and
+   gate suite automatically. Reviews verify the gates and the constitution;
    conversation resolution is required before merge.
 
 ## Releases (maintainers)
