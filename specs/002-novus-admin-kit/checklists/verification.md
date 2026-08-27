@@ -29,3 +29,10 @@ Feature 003 third finding folded back: a standalone WASM host page must link the
 app's scoped styles bundle (NovusAdminDemo.styles.css); QuickGrid's Paginator
 icons and layout live in it, and without it the pager renders as empty buttons.
 The generic build repair also covers its fingerprint reference.
+
+Feature 003 round 3 (2026-08-27): header identity corrected to the novapay
+lockup (official pictograph inlined, two-tone wordmark, token dark swap);
+sample login verified in the Tailwind build (wrong creds show the red error,
+admin/admin routes to the dashboard); demo provenance bar links back to the
+docs; header inner and footer are full width; body type stepped to the sm
+token for density.

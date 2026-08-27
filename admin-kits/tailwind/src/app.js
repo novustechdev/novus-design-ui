@@ -97,3 +97,15 @@ if (grid) {
   );
   apply();
 }
+
+/* Sample login (demo only): admin / admin */
+const loginForm = document.getElementById("loginform");
+if (loginForm) {
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ok = document.getElementById("l-user").value === "admin"
+            && document.getElementById("l-pass").value === "admin";
+    document.getElementById("loginerror").hidden = ok;
+    if (ok) location.href = "index.html";
+  });
+}

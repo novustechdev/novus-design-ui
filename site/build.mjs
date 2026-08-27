@@ -78,6 +78,8 @@ const SITE_CSS = `
   .assetgrid .clogo--photo img{max-height:96px;max-width:100%;border-radius:var(--radius-sm);object-fit:cover;}
   .typerow td:first-child{white-space:nowrap;}
   .sitefoot{margin-top:var(--space-8);}
+  .sitefoot .container{max-width:none;}
+  .site-main{font-size:var(--text-sm);line-height:var(--lh-sm);}
   @media (max-width:520px){ .pagenav{flex-direction:column;} }
   /* ant.design-style docs layout: mobile-first collapsible menu, sticky sidebar from 900px */
   .docwrap{display:grid;gap:var(--space-5);align-items:start;}

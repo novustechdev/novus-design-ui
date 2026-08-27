@@ -19,3 +19,11 @@
 - [X] T014 Demo URLs shown and linked as clean directory URLs everywhere (no index.html)
 - [X] T015 Fix WASM demo QuickGrid paginator (empty rectangle buttons, broken alignment): link the scoped styles bundle in the demo host page; generalize the build repair to fix any fingerprint-mismatched reference
 - [X] T016 Repo authorship: commits authored as sgultom99 with no assistant trailers; speckit artifacts updated (constitution presentation note, spec wording, verification record)
+
+## Phase 3: Owner feedback round 2 (2026-08-27)
+
+- [X] T017 Site: footer spans the content width (no container cap); docs body type stepped down to the sm token for density
+- [X] T018 Admin apps: header inner edge to edge; body type stepped to sm token
+- [X] T019 Sample login page in both flavors and the WASM demo (admin/admin, error state red, nothing stored); Sign out link in the header
+- [X] T020 Header identity follows the logo rules: novapay lockup (inline official pictograph + two-tone solid-set wordmark, dark-mode swap via tokens) instead of typed text
+- [X] T021 Demo provenance bar on admin pages linking back to the docs (README notes it is removable)

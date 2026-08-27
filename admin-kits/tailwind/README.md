@@ -24,3 +24,6 @@ npm run dev        # or: npm run build && npm run preview
 Conventions demonstrated: traffic-light status only on judgement chips, risk
 messages red, self-describing chips, one accent per view, dual-trigger dark
 mode with the persisted toggle.
+
+The slim bar at the top links back to the design kit docs: remove it in your
+own application. The login page is a sample (admin / admin) and stores nothing.

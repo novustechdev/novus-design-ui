@@ -22,6 +22,7 @@ change edits this contract first, then both flavors in the same change.
 | Terminals | `terminals.html` / `/terminals` | Fleet table (12): id, location, product, uptime (num), health chip, last seen; degraded/offline sorted first |
 | Settings | `settings.html` / `/settings` | Profile form (name, email, role select: does not persist, states so) + Appearance card with the kit theme toggle |
 | Analytics | `analytics.html` / `/analytics` | Hourly volume by product: stacked composition bars + total trajectory line, locked Novus chart rules, token-fed at runtime (feature 003) |
+| Login (sample) | `login.html` / `/login` | Centered card: master brandmark, demo credentials admin/admin stated in copy, wrong-credentials error in red, success routes to Dashboard; nothing persists (feature 003) |
 | Data grid | `datagrid.html` / `/datagrid` | All 24 transactions: column sorting, search, 10-per-page pagination; Blazor QuickGrid, Tailwind progressive enhanced table (static full table with JS off) (feature 003) |
 
 ## Conventions demonstrated (and asserted in review)

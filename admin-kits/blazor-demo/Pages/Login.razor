@@ -1,0 +1,31 @@
+@page "/login"
+@layout NovusAdminDemo.Layout.EmptyLayout
+@inject NavigationManager Nav
+
+<PageTitle>Sign in · Novus Admin Kit</PageTitle>
+
+<main class="loginwrap">
+    <form class="card logincard" @onsubmit="Submit" @onsubmit:preventDefault>
+        <span class="brandmark" role="img" aria-label="Novus Technologies"></span>
+        <h2 style="text-align:center">novapay operations · admin</h2>
+        <p class="muted" style="text-align:center">Sample login. Demo credentials: admin / admin. Nothing is stored.</p>
+        @if (Error)
+        {
+            <div class="alert alert--danger">Wrong username or password. Use admin / admin.</div>
+        }
+        <div class="field"><label for="l-user">Username</label><input class="input" id="l-user" @bind="User" autocomplete="username"></div>
+        <div class="field"><label for="l-pass">Password</label><input class="input" id="l-pass" type="password" @bind="Pass" autocomplete="current-password"></div>
+        <button class="btn btn--primary" style="width:100%">Sign in</button>
+    </form>
+</main>
+
+@code {
+    string User = "", Pass = "";
+    bool Error;
+
+    void Submit()
+    {
+        if (User == "admin" && Pass == "admin") Nav.NavigateTo("/");
+        else Error = true;
+    }
+}
