@@ -30,3 +30,5 @@
 - [X] T022 Landing rebuilt in the ant.design homepage structure on Novus bands: hero with product shot and CTAs, feature trio band, live component sampler band, Admin Kit showcase band (analytics + data grid shots linking the demos), stack chip band, columned footer
 - [X] T023 Footer credit line renders on one row: the tokens p measure (68ch) applied outside .site-main; override extended to .sitefoot p
 - [X] T024 WASM demo login redirect: NavigateTo("/") escapes the app under base "./" (lands on the docs root); use the empty relative URI to reach the dashboard
+- [X] T025 Grid & Row page demonstrates rows: added a grid demo wrapping into two rows and constrained the action-row demo so the wrap is visible; usage copy explains both
+- [X] T026 Footer carries the copyright: (c) + build-time year before the company name and kit version line

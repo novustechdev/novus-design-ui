@@ -1,4 +1,4 @@
-<section class="demo" data-title="Grid">
+<section class="demo" data-title="Grid columns">
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
     <div class="card">One</div>
     <div class="card">Two</div>
@@ -6,16 +6,31 @@
   </div>
 </section>
 
-<section class="demo" data-title="Row (wrapping action line)">
-  <div class="row">
+<section class="demo" data-title="Grid wrapping into rows">
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));max-width:40rem">
+    <div class="card">Row 1 · A</div>
+    <div class="card">Row 1 · B</div>
+    <div class="card">Row 1 · C</div>
+    <div class="card">Row 2 · A</div>
+    <div class="card">Row 2 · B</div>
+    <div class="card">Row 2 · C</div>
+  </div>
+</section>
+
+<section class="demo" data-title="Row: a wrapping action line (constrained here to show the wrap)">
+  <div class="row" style="max-width:22rem">
     <button class="btn btn--primary">Talk to us</button>
     <button class="btn btn--secondary">Download</button>
-    <span class="badge badge--success">99.8% uptime</span>
+    <button class="btn btn--ghost">Ghost</button>
+    <span class="badge badge--success"><span class="badge__dot"></span> 99.8% uptime</span>
+    <span class="badge badge--accent">novapay</span>
   </div>
 </section>
 
 <h2>Usage</h2>
 <ul class="bullets">
+  <li>The grid wraps items into new rows on its own: more items than columns simply continue on the next row, and narrower screens get fewer columns.</li>
   <li>Mobile-first: use <code>auto-fit/minmax()</code> columns so layouts stack on phones instead of squeezing.</li>
+  <li><code>.row</code> is a wrapping flex line for buttons, badges, and chips: when space runs out it flows onto the next row (the demo is width-constrained so you can see it happen).</li>
   <li>Gaps come from the spacing scale (<code>--space-*</code>), never ad-hoc pixel values.</li>
 </ul>

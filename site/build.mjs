@@ -150,7 +150,7 @@ function sideNav(groups, currentFile) {
 
 const KIT_VERSION = JSON.parse(read(join(ROOT, "package.json"))).version;
 const header = read(join(SRC, "partials/header.html")).replaceAll("{{VERSION}}", KIT_VERSION);
-const footer = read(join(SRC, "partials/footer.html")).replaceAll("{{VERSION}}", KIT_VERSION);
+const footer = read(join(SRC, "partials/footer.html")).replaceAll("{{VERSION}}", KIT_VERSION).replaceAll("{{YEAR}}", String(new Date().getFullYear()));
 
 function shell({ title, content, depth, active, sidebar }) {
   const rel = "../".repeat(depth);
