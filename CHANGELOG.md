@@ -5,6 +5,17 @@ Novus Admin Kit). Format follows [Keep a Changelog](https://keepachangelog.com/)
 versioning is semantic. Each release records both the npm artifact and the
 repository around it; when the packaged kit files are unchanged, the entry says so.
 
+## [Unreleased]
+
+- Product-team feedback round (feature 004): four new catalog components
+  (Dropdown, Date picker, Calendar, Stepper: compositions over the frozen
+  tokens), components search bar and a choose-by-function module on the
+  overview, Actions and placement foundations page, Web/Mobile preview toggle
+  on component pages, tab hover tint, enlarged disclosure chevrons, inset
+  select arrows, standard button gaps, and placeholder copy cleanup.
+- Repository migrated to github.com/novustechdev/novus-design-ui (public,
+  protected main, releases restored); CONTRIBUTING.md added.
+
 ## [0.3.0], 2026-08-27
 
 Packaged kit files (tokens.css, fonts, logos, photos, js) are unchanged from
