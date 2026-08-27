@@ -312,6 +312,8 @@ const FOUNDATIONS = [
   ["logos.html", "Logos"],
   ["photography.html", "Photography"],
   ["dark-mode.html", "Dark mode"],
+  ["mobile-android.html", "Android foundations"],
+  ["mobile-ios.html", "iOS foundations"],
   ["assets.html", "Asset index"],
 ];
 const foundDir = join(SRC, "foundations");

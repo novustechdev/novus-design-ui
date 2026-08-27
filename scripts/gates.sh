@@ -23,8 +23,20 @@ HITS=$( { grep -rn --exclude=tokens.css "gradient" $AUTHORED 2>/dev/null; [ -n "
 gate "gradient grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 2. No ad-hoc hex colours (tokens define every colour)
-HITS=$( { grep -rnE '#[0-9a-fA-F]{3,8}\b' --exclude=manifest.webmanifest site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE '#[0-9a-fA-F]{3,8}\b' $ADMIN_SRC 2>/dev/null; } | grep -vE 'href="#|url\(#|&#')
+# Mobile foundation pages are excluded here and covered by the stricter parity gate below.
+HITS=$( { grep -rnE '#[0-9a-fA-F]{3,8}\b' --exclude=manifest.webmanifest --exclude='mobile-*.html' site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE '#[0-9a-fA-F]{3,8}\b' $ADMIN_SRC 2>/dev/null; } | grep -vE 'href="#|url\(#|&#')
 gate "ad-hoc hex audit" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
+
+# 2b. Mobile token parity (constitution VIII): every colour literal on a mobile
+# foundation page must exist verbatim in tokens.css (hex or Kotlin 0xFF form).
+MOBILE_PAGES=$(ls site/src/foundations/mobile-*.html 2>/dev/null)
+if [ -n "$MOBILE_PAGES" ]; then
+  MISSING=""
+  for h in $(grep -ohE '#[0-9a-fA-F]{6}\b|0xFF[0-9a-fA-F]{6}\b|0x[0-9a-fA-F]{6}\b' $MOBILE_PAGES | sed -E 's/^0xFF([0-9a-fA-F]{6})$/#\1/; s/^0x/#/' | tr 'a-f' 'A-F' | sort -u); do
+    grep -qi -- "$h" tokens.css || MISSING="$MISSING $h"
+  done
+  gate "mobile token parity" $([ -z "$MISSING" ]; echo $?) "$MISSING"
+fi
 
 # 3. No radius outside the token scale (border-radius must use var(--radius-*))
 HITS=$( { grep -rnE 'border-radius:[^;}]*(px|rem|em|%)' site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE 'border-radius:[^;}]*(px|rem|em|%)' $ADMIN_SRC 2>/dev/null; } | grep -v 'var(--radius')

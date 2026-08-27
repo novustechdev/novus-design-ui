@@ -13,6 +13,10 @@ repository around it; when the packaged kit files are unchanged, the entry says 
   overview, Actions and placement foundations page, Web/Mobile preview toggle
   on component pages, tab hover tint, enlarged disclosure chevrons, inset
   select arrows, standard button gaps, and placeholder copy cleanup.
+- Mobile foundations (feature 005, constitution 1.8.0): token mappings for
+  native Android (Jetpack Compose + Material 3) and iOS (SwiftUI + HIG) as
+  foundations pages, enforced by a new mobile token-parity gate (every colour
+  on those pages must exist in tokens.css).
 - Repository migrated to github.com/novustechdev/novus-design-ui (public,
   protected main, releases restored); CONTRIBUTING.md added.
 

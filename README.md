@@ -157,6 +157,20 @@ const theme = () => createTheme({ palette: { primary: { main: t("--accent") } } 
 same runtime-read pattern feeding `ConfigProvider`, with antd's dark algorithm
 keyed off the kit's toggle.
 
+## Native mobile foundations
+
+The system extends to native mobile as token mappings for each platform's
+standard stack, machine-checked against tokens.css by the build
+(every colour on those pages must be a token value):
+
+- **Android**, Jetpack Compose + Material 3: [Android foundations](https://ui-kit.novustech.dev/foundations/mobile-android.html)
+- **iOS**, SwiftUI + HIG: [iOS foundations](https://ui-kit.novustech.dev/foundations/mobile-ios.html)
+
+These are design mappings, not run-verified guides: the pages are labelled
+accordingly and name the platform versions they target. Carlito ships per
+platform as TTF (from the design system master or Google Fonts; this package
+carries woff2 for the web).
+
 ## Dark mode
 
 Built in and dual-triggered: an explicit `<html data-theme="dark">`, or the OS
