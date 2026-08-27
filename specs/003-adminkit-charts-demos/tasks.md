@@ -9,4 +9,4 @@
 - [X] T007 Demo hosting: tailwind vite base "./"; build.mjs copies admin-kits/tailwind/dist → dist/demos/tailwind and blazor-demo publish wwwroot → dist/demos/blazor when present; pages.yml gains setup-dotnet + demo build steps before site build
 - [X] T008 Docs Admin Kit page: screenshots clickable → /demos/...; per-flavor "Open live demo" buttons; add analytics + datagrid screenshots (both flavors); update contract screens.md to 6 screens; verification record rows for new screens + demos
 - [X] T009 Verify: run flavors, capture new screenshots, parity check, full build + gates (link gate now covers demo entries), commit, push, deploy, click-through demos on the live site
-- [ ] T010 Custom domain: Cloudflare CNAME ui-kit.novustech.dev → sgultom99.github.io (DNS-only), Pages cname + HTTPS enforced, sweep documented URLs to https://ui-kit.novustech.dev, redeploy, verify cert + redirect (needs owner CF token)
+- [X] T010 Custom domain: Cloudflare CNAME ui-kit.novustech.dev → sgultom99.github.io (DNS-only), Pages cname + HTTPS enforced, sweep documented URLs to https://ui-kit.novustech.dev, redeploy, verify cert + redirect (needs owner CF token)
