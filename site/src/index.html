@@ -1,85 +1,128 @@
 <!-- title: Overview -->
-<h1>Build on the Novus design system</h1>
-<p>One package carries the whole visual system: design tokens, component
+<section class="hero">
+  <div>
+    <p class="eyebrow">Novus Design System</p>
+    <h1>Build on the Novus design system</h1>
+    <p class="lead">One package carries the whole visual system: design tokens, component
 styles, the Carlito typeface, dark mode, and the official brand assets. Install it,
 import one stylesheet, and every screen you build is on-brand by construction.</p>
-<div class="row" style="margin-bottom:var(--space-7)">
-  <a class="btn btn--primary btn--lg" href="install.html">Install the kit</a>
-  <a class="btn btn--secondary btn--lg" href="components/overview.html">Browse components</a>
-</div>
-
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-  <div class="card card--interactive" style="position:relative">
-    <h3>Foundations</h3>
-    <p class="muted" style="margin:0">Principles, color, typography, layout, logos, photography, and dark mode, with live examples rendered from the kit itself.</p>
-    <a class="card-trigger" href="foundations/principles.html" aria-label="Foundations"></a>
-  </div>
-  <div class="card card--interactive" style="position:relative">
-    <h3>Components</h3>
-    <p class="muted" style="margin:0">Every component the kit ships, by category, each with live variants and a copyable snippet.</p>
-    <a class="card-trigger" href="components/overview.html" aria-label="Components"></a>
-  </div>
-  <div class="card card--interactive" style="position:relative">
-    <h3>Frameworks</h3>
-    <p class="muted" style="margin:0">Use the kit from any stack, verified integration guides for the frameworks Novus builds on.</p>
-    <a class="card-trigger" href="{{NAV_FW}}" aria-label="Framework guides"></a>
-  </div>
-  <div class="card card--interactive" style="position:relative">
-    <h3>Themes</h3>
-    <p class="muted" style="margin:0">Re-skin UI component libraries with Novus tokens, verified theming guides.</p>
-    <a class="card-trigger" href="{{NAV_TH}}" aria-label="Theme guides"></a>
-  </div>
-  <div class="card card--interactive" style="position:relative">
-    <h3>Assets</h3>
-    <p class="muted" style="margin:0">The official logos, lockups, pictographs, proof marks, and photography, with the package path for each file.</p>
-    <a class="card-trigger" href="foundations/assets.html" aria-label="Asset index"></a>
-  </div>
-</div>
-
-<h2>Components at a glance</h2>
-<p>Everything below is rendered live by the kit on this page: buttons, badges, cards, stats, and alerts, all from one stylesheet.</p>
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start">
-  <div class="card">
-    <h3>Actions</h3>
-    <div class="row" style="margin-bottom:var(--space-3)">
-      <button class="btn btn--primary">Talk to us</button>
-      <button class="btn btn--secondary">Secondary</button>
-      <button class="btn btn--ghost">Ghost</button>
+    <div class="row" style="margin-block:var(--space-5)">
+      <a class="btn btn--primary btn--lg" href="install.html">Install the kit</a>
+      <a class="btn btn--secondary btn--lg" href="components/overview.html">Browse components</a>
     </div>
     <div class="row">
-      <span class="badge badge--success"><span class="badge__dot"></span> Live</span>
-      <span class="badge badge--warning"><span class="badge__dot"></span> At risk</span>
-      <span class="badge badge--accent">Accent</span>
+      <span class="badge badge--accent">npm install novus-design-kit</span>
+      <span class="badge">tokenless, no registry setup</span>
     </div>
   </div>
-  <div class="card">
-    <h3>Stats</h3>
-    <div class="statrow">
-      <div class="stat"><span class="stat__value">99.8%</span><span class="stat__label">uptime</span></div>
-      <div class="stat"><span class="stat__value">312</span><span class="stat__label">terminals</span></div>
-      <div class="stat"><span class="stat__value">7</span><span class="stat__label">countries</span></div>
-    </div>
-    <div class="alert alert--warning" style="margin-top:var(--space-4)">Certificate expires in 14 days.</div>
-  </div>
-  <div class="card card--interactive" style="position:relative">
-    <h3>Interactive card</h3>
-    <p class="muted" style="margin:0">Hover means clickable: lift, raised shadow, accent border. This one opens the full catalog.</p>
-    <span class="badge badge--accent" style="margin-top:var(--space-3)">22 components</span>
-    <a class="card-trigger" href="components/overview.html" aria-label="Open the component catalog"></a>
-  </div>
-</div>
+  <figure class="hero__shot" style="margin:0">
+    <a href="admin-kit.html"><img src="assets/admin-kit/tailwind-dashboard-light.png" alt="Novus Admin Kit dashboard built with the design kit"></a>
+    <figcaption class="muted" style="margin-top:var(--space-2)">The Novus Admin Kit, built entirely from this kit. Click for the live demos.</figcaption>
+  </figure>
+</section>
 
-<h2>Novus Admin Kit</h2>
-<p>A complete enterprise operations console built on the kit: six screens including
-analytics with token-fed charts and a data grid, in Blazor and Tailwind flavors with
-strict parity. Copy a flavor folder and start from a working application, or click
-straight into the live demos.</p>
-<div class="row" style="margin-bottom:var(--space-4)">
-  <a class="btn btn--primary" href="admin-kit.html">Explore the Admin Kit</a>
-  <a class="btn btn--secondary" href="demos/blazor/">Live demo: Blazor</a>
-  <a class="btn btn--secondary" href="demos/tailwind/">Live demo: Tailwind</a>
-</div>
-<figure style="margin:0">
-  <a href="admin-kit.html"><img src="assets/admin-kit/tailwind-dashboard-light.png" alt="Novus Admin Kit dashboard" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a>
-  <figcaption class="muted">The Admin Kit dashboard: KPI stats, signal cards, and live transaction data.</figcaption>
-</figure>
+<section class="band band--tint">
+  <div class="bandhead">
+    <h2>Designed for the operations floor</h2>
+    <p>Trusted, precise, inclusive, enduring: a calm visual language for enterprise
+products, delivered as Service as Software across banking, payments, and retail.</p>
+  </div>
+  <div class="featgrid">
+    <div class="card">
+      <h3>Enterprise visual language</h3>
+      <p class="muted" style="margin:0">Monochrome near-flat surfaces, one accent per view, data-dense layouts, AA
+contrast in both themes. The product's data is the design: no gradients, no decoration.</p>
+    </div>
+    <div class="card">
+      <h3>Token-first components</h3>
+      <p class="muted" style="margin:0">22 component families from one stylesheet, every value a token. Dark mode is
+dual-triggered and built in; the persisted toggle ships with the package.</p>
+    </div>
+    <div class="card">
+      <h3>Verified, not promised</h3>
+      <p class="muted" style="margin:0">Every framework and theme guide is executed in a real project before it ships,
+with the rendered result on its page. Unverified guides are excluded by the build itself.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="bandhead">
+    <h2>Components at a glance</h2>
+    <p>Everything below is rendered live by the kit on this page: buttons, badges, cards, stats, and alerts, all from one stylesheet.</p>
+  </div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start">
+    <div class="card">
+      <h3>Actions</h3>
+      <div class="row" style="margin-bottom:var(--space-3)">
+        <button class="btn btn--primary">Talk to us</button>
+        <button class="btn btn--secondary">Secondary</button>
+        <button class="btn btn--ghost">Ghost</button>
+      </div>
+      <div class="row">
+        <span class="badge badge--success"><span class="badge__dot"></span> Live</span>
+        <span class="badge badge--warning"><span class="badge__dot"></span> At risk</span>
+        <span class="badge badge--accent">Accent</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Stats</h3>
+      <div class="statrow">
+        <div class="stat"><span class="stat__value">99.8%</span><span class="stat__label">uptime</span></div>
+        <div class="stat"><span class="stat__value">312</span><span class="stat__label">terminals</span></div>
+        <div class="stat"><span class="stat__value">7</span><span class="stat__label">countries</span></div>
+      </div>
+      <div class="alert alert--warning" style="margin-top:var(--space-4)">Certificate expires in 14 days.</div>
+    </div>
+    <div class="card card--interactive" style="position:relative">
+      <h3>Interactive card</h3>
+      <p class="muted" style="margin:0">Hover means clickable: lift, raised shadow, accent border. This one opens the full catalog.</p>
+      <span class="badge badge--accent" style="margin-top:var(--space-3)">22 components</span>
+      <a class="card-trigger" href="components/overview.html" aria-label="Open the component catalog"></a>
+    </div>
+  </div>
+</section>
+
+<section class="band band--tint">
+  <div class="bandhead">
+    <h2>Novus Admin Kit</h2>
+    <p>A complete enterprise operations console built on the kit: six screens including
+analytics with token-fed charts, a data grid, and a sample login, in Blazor and
+Tailwind flavors with strict parity. Copy a flavor folder and start from a working
+application, or click straight into the live demos.</p>
+  </div>
+  <div class="row" style="margin-bottom:var(--space-4)">
+    <a class="btn btn--primary" href="admin-kit.html">Explore the Admin Kit</a>
+    <a class="btn btn--secondary" href="demos/blazor/">Live demo: Blazor</a>
+    <a class="btn btn--secondary" href="demos/tailwind/">Live demo: Tailwind</a>
+  </div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+    <figure style="margin:0">
+      <a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-analytics.png" alt="Admin Kit analytics with token-fed charts" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a>
+      <figcaption class="muted">Analytics: composition and trajectory, styled by the locked chart rules.</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <a href="demos/blazor/"><img src="assets/admin-kit/blazor-datagrid.png" alt="Admin Kit data grid" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a>
+      <figcaption class="muted">Data grid: sorting, search, and pagination on QuickGrid.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="band">
+  <div class="bandhead">
+    <h2>Use it with your stack</h2>
+    <p>Framework guides and UI theme guides, each verified in a real sample project with the library version named on the page.</p>
+  </div>
+  <div class="chiprow" style="margin-bottom:var(--space-4)">
+    <a href="frameworks/blazor.html">Blazor</a>
+    <a href="frameworks/react.html">React</a>
+    <a href="frameworks/vite.html">Vite</a>
+    <a href="frameworks/vue.html">Vue.js</a>
+  </div>
+  <div class="chiprow">
+    <a href="themes/tailwind.html">Tailwind CSS</a>
+    <a href="themes/fluent2.html">Fluent 2</a>
+    <a href="themes/material.html">Material</a>
+    <a href="themes/antd.html">Ant Design</a>
+  </div>
+</section>

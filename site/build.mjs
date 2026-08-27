@@ -77,7 +77,25 @@ const SITE_CSS = `
   .assetgrid .clogo--photo{background:var(--surface);}
   .assetgrid .clogo--photo img{max-height:96px;max-width:100%;border-radius:var(--radius-sm);object-fit:cover;}
   .typerow td:first-child{white-space:nowrap;}
+  /* ant.design-style landing structure on Novus bands (locked alternation pattern) */
+  .band{margin-inline:calc(-1 * var(--gutter));padding:var(--space-8) var(--gutter);}
+  .band--tint{background:var(--bg-subtle);}
+  .hero{display:grid;gap:var(--space-7);align-items:center;padding-block:var(--space-7);}
+  @media (min-width:1000px){.hero{grid-template-columns:minmax(0,5fr) minmax(0,6fr);}}
+  .hero h1{font-size:var(--text-4xl);line-height:var(--lh-4xl);}
+  .hero .lead{font-size:var(--text-md);line-height:var(--lh-md);color:var(--text-secondary);}
+  .hero__shot img{width:100%;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-3);display:block;}
+  .featgrid{display:grid;gap:var(--space-5);grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+  .chiprow{display:flex;flex-wrap:wrap;gap:var(--space-3);}
+  .chiprow a{display:inline-flex;align-items:center;min-height:2.75rem;padding:var(--space-1) var(--space-4);border:1px solid var(--border-strong);border-radius:var(--radius-pill);color:var(--accent-text);text-decoration:none;font-weight:var(--weight-medium);}
+  .chiprow a:hover{border-color:var(--accent);background:var(--accent-subtle);text-decoration:none;}
+  .bandhead{margin-bottom:var(--space-5);}
+  .bandhead h2{margin-top:0;}
   .sitefoot{margin-top:var(--space-8);}
+  .footcols{display:grid;gap:var(--space-6);grid-template-columns:repeat(auto-fit,minmax(180px,1fr));padding-block:var(--space-6);}
+  .footcols b{display:block;margin-bottom:var(--space-2);font-size:var(--text-sm);}
+  .footcols a{display:block;color:var(--text-secondary);text-decoration:none;font-size:var(--text-sm);padding-block:var(--space-1);}
+  .footcols a:hover{color:var(--accent-text);}
   .sitefoot .container{max-width:none;}
   .site-main{font-size:var(--text-sm);line-height:var(--lh-sm);}
   @media (max-width:520px){ .pagenav{flex-direction:column;} }
