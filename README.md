@@ -153,6 +153,14 @@ const t = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).
 const theme = () => createTheme({ palette: { primary: { main: t("--accent") } } });
 ```
 
+**Material Web** ([verified guide](https://ui-kit.novustech.dev/themes/material-web.html)):
+the m3.material.io web components consume CSS custom properties directly, so the
+mapping is one CSS file and dark mode is free:
+
+```css
+:root { --md-sys-color-primary: var(--accent); --md-ref-typeface-plain: var(--font-sans); }
+```
+
 **Ant Design** ([verified guide](https://ui-kit.novustech.dev/themes/antd.html)):
 same runtime-read pattern feeding `ConfigProvider`, with antd's dark algorithm
 keyed off the kit's toggle.

@@ -21,6 +21,7 @@ theme guides in one app), `vue-app/` (Vue guide) — session scratchpad, 2026-08
 | fluent2 | @fluentui/react-components 9.74.7 | react-libs | 2026-08-26 | pass |
 | material | @mui/material 9.3.1 | react-libs | 2026-08-26 | pass |
 | antd | antd 6.6.1 | react-libs | 2026-08-26 | pass |
+| material-web | @material/web 2.5.0 | mwc-sample (Vite 8, kit 0.3.0 from npm) | 2026-08-27 | pass |
 
 ## Findings folded back into the guides this round
 

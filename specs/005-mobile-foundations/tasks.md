@@ -20,3 +20,10 @@
 ## Phase 4: Verification
 
 - [X] T007 Negative test: an invented hex on a mobile page fails the parity gate; then all gates green, deploy, live verify both pages and landing chips
+
+## Phase 5: Owner revision (Android stack + Material Web guide)
+
+- [X] T008 Rework mobile-android.html from Compose to Material Components for Android (colors.xml light/night, Theme.Material3 roles, shape appearances, Carlito font-family XML, dimens, AppCompatDelegate dual trigger, MDC correspondence table) per revised FR-001
+- [X] T009 Verified Material Web theme guide: real sample (@material/web 2.5.0 + kit 0.3.0 from npm, Vite build, rendered light and dark, headless-verified), themes/material-web.html, verification record row, sample screenshot per FR-008
+- [X] T010 Registration and reachability: GUIDE_SECTIONS entry, landing themes chip, README section, CHANGELOG updated; constitution 1.8.1 records the Android stack correction
+- [X] T011 Gates green (mobile token parity covers the XML hex values), deploy, live verify

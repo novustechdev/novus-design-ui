@@ -1,144 +1,157 @@
 <!-- title: Android foundations -->
 <h1>Android foundations</h1>
-<p>The Novus design system mapped onto native Android: <b>Jetpack Compose with
-Material 3</b>, the platform's standard stack. Every value below is taken from
-<code>tokens.css</code> (rem converts at 16px per rem to dp), so web and mobile
-share one source of truth; the build rejects any colour on this page that is
-not a token value.</p>
+<p>The Novus design system mapped onto native Android the way the Android team
+builds: <b>Material 3 as published at m3.material.io, through Material
+Components for Android</b> (the View system: XML themes, styles, and resources).
+Every value below is taken from <code>tokens.css</code> (rem converts at 16px
+per rem to dp/sp), so web and mobile share one source of truth; the build
+rejects any colour on this page that is not a token value.</p>
 
-<div class="alert">Design mapping, not a run-verified guide: this page maps tokens to
-Material 3 roles and names its targets (Compose BOM 2026.x, Material 3 1.5.x,
-Kotlin 2.x). The framework guides' build-and-run verification does not apply here;
-values are machine-checked against tokens.css instead.</div>
+<div class="alert">Design mapping, not a run-verified guide: this page maps tokens onto
+Material 3 color roles and names its targets (com.google.android.material:material
+1.14.x, Theme.Material3, AppCompat 1.7.x). Verification is the token-parity gate
+plus review, per constitution Principle VIII.</div>
 
-<h2>Color scheme</h2>
-<p>Material 3 wants roles, not raw colours. The mapping keeps the kit's rules:
-white ground, one accent (Novus Blue), status colour only on judgements.</p>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
-import androidx.compose.ui.graphics.Color
+<h2>Color resources</h2>
+<p>Define the palette once in <code>res/values/colors.xml</code>, override in
+<code>res/values-night/colors.xml</code>: the resource system is the platform's
+own light/dark switch, mirroring the web tokens' dark block.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;!-- res/values/colors.xml (light) --&gt;
+&lt;resources&gt;
+    &lt;color name="novus_accent"&gt;#0070C0&lt;/color&gt;         &lt;!-- accent (blue-500) --&gt;
+    &lt;color name="novus_on_accent"&gt;#FFFFFF&lt;/color&gt;      &lt;!-- text-on-accent --&gt;
+    &lt;color name="novus_accent_subtle"&gt;#EAF3FB&lt;/color&gt;  &lt;!-- blue-50 --&gt;
+    &lt;color name="novus_accent_text"&gt;#00457A&lt;/color&gt;    &lt;!-- blue-700 --&gt;
+    &lt;color name="novus_bg"&gt;#FFFFFF&lt;/color&gt;             &lt;!-- bg: white ground, always --&gt;
+    &lt;color name="novus_surface"&gt;#FFFFFF&lt;/color&gt;
+    &lt;color name="novus_surface_variant"&gt;#F4F7FA&lt;/color&gt;&lt;!-- bg-subtle (neutral-50) --&gt;
+    &lt;color name="novus_text"&gt;#0E2336&lt;/color&gt;           &lt;!-- neutral-900 --&gt;
+    &lt;color name="novus_text_secondary"&gt;#51606F&lt;/color&gt; &lt;!-- neutral-600 --&gt;
+    &lt;color name="novus_border"&gt;#DCE3EB&lt;/color&gt;         &lt;!-- neutral-200 --&gt;
+    &lt;color name="novus_danger"&gt;#C0473F&lt;/color&gt;         &lt;!-- red-400 --&gt;
+    &lt;color name="novus_danger_text"&gt;#8A2823&lt;/color&gt;    &lt;!-- red-600 --&gt;
+    &lt;color name="novus_success"&gt;#00A04A&lt;/color&gt;        &lt;!-- green-500: judgements only --&gt;
+    &lt;color name="novus_warning"&gt;#E8A300&lt;/color&gt;        &lt;!-- amber-400: judgements only --&gt;
+&lt;/resources&gt;
 
-val NovusLight = lightColorScheme(
-    primary            = Color(0xFF0070C0), // --accent (blue-500)
-    onPrimary          = Color(0xFFFFFFFF), // --text-on-accent
-    primaryContainer   = Color(0xFFEAF3FB), // --accent-subtle (blue-50)
-    onPrimaryContainer = Color(0xFF00457A), // --accent-text (blue-700)
-    secondary          = Color(0xFF51606F), // --neutral-600 (text-secondary)
-    background         = Color(0xFFFFFFFF), // --bg (white ground, always)
-    onBackground       = Color(0xFF0E2336), // --text (neutral-900)
-    surface            = Color(0xFFFFFFFF), // --surface
-    onSurface          = Color(0xFF0E2336),
-    surfaceVariant     = Color(0xFFF4F7FA), // --bg-subtle (neutral-50)
-    onSurfaceVariant   = Color(0xFF51606F),
-    outline            = Color(0xFFDCE3EB), // --border (neutral-200)
-    error              = Color(0xFFC0473F), // --danger (red-400)
-    onError            = Color(0xFFFFFFFF),
-    errorContainer     = Color(0xFFFBEAE9), // --danger-subtle (red-50)
-    onErrorContainer   = Color(0xFF8A2823), // --danger-text (red-600)
-)
+&lt;!-- res/values-night/colors.xml (the web tokens' dark block) --&gt;
+&lt;resources&gt;
+    &lt;color name="novus_accent"&gt;#0070C0&lt;/color&gt;         &lt;!-- accent holds in dark --&gt;
+    &lt;color name="novus_accent_subtle"&gt;#073355&lt;/color&gt;  &lt;!-- blue-800 --&gt;
+    &lt;color name="novus_accent_text"&gt;#7CC0EE&lt;/color&gt;    &lt;!-- dark accent-text --&gt;
+    &lt;color name="novus_bg"&gt;#0B1620&lt;/color&gt;             &lt;!-- neutral-950 --&gt;
+    &lt;color name="novus_surface"&gt;#122131&lt;/color&gt;
+    &lt;color name="novus_surface_variant"&gt;#18293B&lt;/color&gt;&lt;!-- surface-raised --&gt;
+    &lt;color name="novus_text"&gt;#E7EDF3&lt;/color&gt;
+    &lt;color name="novus_text_secondary"&gt;#AEBCC9&lt;/color&gt;
+    &lt;color name="novus_border"&gt;#2A3B4D&lt;/color&gt;
+    &lt;color name="novus_danger"&gt;#D56A61&lt;/color&gt;         &lt;!-- red-300 --&gt;
+    &lt;color name="novus_danger_text"&gt;#F0A39C&lt;/color&gt;
+    &lt;color name="novus_success"&gt;#2BB266&lt;/color&gt;
+    &lt;color name="novus_warning"&gt;#E8A300&lt;/color&gt;
+&lt;/resources&gt;</code></pre>
 
-val NovusDark = darkColorScheme(
-    primary            = Color(0xFF0070C0), // accent holds in dark; white text stays AA
-    onPrimary          = Color(0xFFFFFFFF),
-    primaryContainer   = Color(0xFF073355), // blue-800
-    onPrimaryContainer = Color(0xFFA6CCEC), // blue-200 (the dark-lockup blue)
-    secondary          = Color(0xFFAEBCC9), // dark --text-secondary
-    background         = Color(0xFF0B1620), // dark --bg (neutral-950)
-    onBackground       = Color(0xFFE7EDF3), // dark --text
-    surface            = Color(0xFF122131), // dark --surface
-    onSurface          = Color(0xFFE7EDF3),
-    surfaceVariant     = Color(0xFF18293B), // dark --surface-raised
-    onSurfaceVariant   = Color(0xFFAEBCC9),
-    outline            = Color(0xFF2A3B4D), // dark --border
-    error              = Color(0xFFD56A61), // dark --danger (red-300)
-    onError            = Color(0xFF0B1620),
-    errorContainer     = Color(0xFF6E201C), // red-700
-    onErrorContainer   = Color(0xFFF0A39C), // dark --danger-text
-)</code></pre>
+<h2>Theme: Material 3 color roles</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;!-- res/values/themes.xml --&gt;
+&lt;style name="Theme.Novus" parent="Theme.Material3.DayNight.NoActionBar"&gt;
+    &lt;item name="colorPrimary"&gt;@color/novus_accent&lt;/item&gt;
+    &lt;item name="colorOnPrimary"&gt;@color/novus_on_accent&lt;/item&gt;
+    &lt;item name="colorPrimaryContainer"&gt;@color/novus_accent_subtle&lt;/item&gt;
+    &lt;item name="colorOnPrimaryContainer"&gt;@color/novus_accent_text&lt;/item&gt;
+    &lt;item name="colorSecondary"&gt;@color/novus_text_secondary&lt;/item&gt;
+    &lt;item name="android:colorBackground"&gt;@color/novus_bg&lt;/item&gt;
+    &lt;item name="colorOnBackground"&gt;@color/novus_text&lt;/item&gt;
+    &lt;item name="colorSurface"&gt;@color/novus_surface&lt;/item&gt;
+    &lt;item name="colorOnSurface"&gt;@color/novus_text&lt;/item&gt;
+    &lt;item name="colorSurfaceVariant"&gt;@color/novus_surface_variant&lt;/item&gt;
+    &lt;item name="colorOnSurfaceVariant"&gt;@color/novus_text_secondary&lt;/item&gt;
+    &lt;item name="colorOutline"&gt;@color/novus_border&lt;/item&gt;
+    &lt;item name="colorError"&gt;@color/novus_danger&lt;/item&gt;
+    &lt;item name="colorOnError"&gt;@color/novus_on_accent&lt;/item&gt;
+    &lt;!-- kit shape scale: radius-sm/md/lg --&gt;
+    &lt;item name="shapeAppearanceCornerSmall"&gt;@style/Shape.Novus.Small&lt;/item&gt;
+    &lt;item name="shapeAppearanceCornerMedium"&gt;@style/Shape.Novus.Medium&lt;/item&gt;
+    &lt;item name="shapeAppearanceCornerLarge"&gt;@style/Shape.Novus.Large&lt;/item&gt;
+&lt;/style&gt;
+
+&lt;style name="Shape.Novus.Small" parent="ShapeAppearance.Material3.Corner.Small"&gt;
+    &lt;item name="cornerSize"&gt;6dp&lt;/item&gt;   &lt;!-- radius-sm --&gt;
+&lt;/style&gt;
+&lt;style name="Shape.Novus.Medium" parent="ShapeAppearance.Material3.Corner.Medium"&gt;
+    &lt;item name="cornerSize"&gt;8dp&lt;/item&gt;   &lt;!-- radius-md --&gt;
+&lt;/style&gt;
+&lt;style name="Shape.Novus.Large" parent="ShapeAppearance.Material3.Corner.Large"&gt;
+    &lt;item name="cornerSize"&gt;12dp&lt;/item&gt;  &lt;!-- radius-lg --&gt;
+&lt;/style&gt;</code></pre>
 <ul class="bullets">
-  <li>Success and warning are judgement colours, never decoration: light <code>0xFF00A04A</code> / <code>0xFFE8A300</code>, dark <code>0xFF2BB266</code> / <code>0xFFE8A300</code> (the token values). Define them as semantic extension colours, not Material roles, so they only appear where a judgement exists.</li>
-  <li>Do not enable dynamic colour (Material You): the brand palette is the palette.</li>
+  <li>Do not enable dynamic color (<code>DynamicColors.applyToActivitiesIfAvailable</code> stays out): the brand palette is the palette.</li>
+  <li>Success and warning never enter the theme roles: reference them directly, and only where a judgement exists.</li>
 </ul>
 
 <h2>Typography: Carlito only</h2>
-<p>Bundle Carlito (400 and 700) as font resources. The TTF comes from the design
-system master or Google Fonts (Carlito is an open font there); this npm package
-ships woff2 for the web only.</p>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>val Carlito = FontFamily(
-    Font(R.font.carlito_regular, FontWeight.Normal),
-    Font(R.font.carlito_bold, FontWeight.Bold),
-)
+<p>Bundle Carlito 400 and 700 in <code>res/font/</code> (TTF from the design
+system master or Google Fonts; this npm package ships woff2 for the web only),
+declare the family, and map the kit type scale (sp respects platform font
+scaling; never disable it).</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;!-- res/font/carlito.xml --&gt;
+&lt;font-family xmlns:app="http://schemas.android.com/apk/res-auto"&gt;
+    &lt;font app:fontStyle="normal" app:fontWeight="400" app:font="@font/carlito_regular"/&gt;
+    &lt;font app:fontStyle="normal" app:fontWeight="700" app:font="@font/carlito_bold"/&gt;
+&lt;/font-family&gt;
 
-// The kit type scale, rem times 16 = sp
-val NovusTypography = Typography(
-    displaySmall  = TextStyle(Carlito, fontSize = 30.sp, lineHeight = 36.sp), // --text-2xl
-    headlineSmall = TextStyle(Carlito, fontSize = 24.sp, lineHeight = 32.sp), // --text-xl
-    titleLarge    = TextStyle(Carlito, fontSize = 20.sp, lineHeight = 28.sp, fontWeight = FontWeight.Bold), // --text-lg
-    titleMedium   = TextStyle(Carlito, fontSize = 18.sp, lineHeight = 28.sp, fontWeight = FontWeight.Bold), // --text-md
-    bodyLarge     = TextStyle(Carlito, fontSize = 16.sp, lineHeight = 24.sp), // --text-base
-    bodyMedium    = TextStyle(Carlito, fontSize = 14.sp, lineHeight = 20.sp), // --text-sm
-    labelSmall    = TextStyle(Carlito, fontSize = 12.sp, lineHeight = 16.sp), // --text-xs
-)</code></pre>
-<ul class="bullets">
-  <li>Two weights only, regular and bold, exactly like the web kit.</li>
-  <li>Sizes are sp so platform font scaling keeps working; never disable it.</li>
-</ul>
+&lt;!-- the kit type scale, rem times 16 = sp: 2xl 30, xl 24, lg 20, md 18, base 16, sm 14, xs 12 --&gt;
+&lt;style name="TextAppearance.Novus.Headline" parent="TextAppearance.Material3.HeadlineSmall"&gt;
+    &lt;item name="fontFamily"&gt;@font/carlito&lt;/item&gt;
+    &lt;item name="android:textSize"&gt;24sp&lt;/item&gt;   &lt;!-- text-xl --&gt;
+    &lt;item name="android:textStyle"&gt;bold&lt;/item&gt;
+&lt;/style&gt;
+&lt;style name="TextAppearance.Novus.Body" parent="TextAppearance.Material3.BodyLarge"&gt;
+    &lt;item name="fontFamily"&gt;@font/carlito&lt;/item&gt;
+    &lt;item name="android:textSize"&gt;16sp&lt;/item&gt;   &lt;!-- text-base --&gt;
+&lt;/style&gt;</code></pre>
 
-<h2>Shape and spacing</h2>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>val NovusShapes = Shapes(
-    extraSmall = RoundedCornerShape(6.dp),   // --radius-sm
-    small      = RoundedCornerShape(6.dp),
-    medium     = RoundedCornerShape(8.dp),   // --radius-md
-    large      = RoundedCornerShape(12.dp),  // --radius-lg
-    extraLarge = RoundedCornerShape(16.dp),  // --radius-xl
-)
-
-object NovusSpace { // --space-1 .. --space-8, rem times 16 = dp
-    val s1 = 4.dp;  val s2 = 8.dp;  val s3 = 12.dp; val s4 = 16.dp
-    val s5 = 24.dp; val s6 = 32.dp; val s7 = 48.dp; val s8 = 64.dp
-}</code></pre>
+<h2>Spacing</h2>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;!-- res/values/dimens.xml: --space-1 .. --space-8, rem times 16 = dp --&gt;
+&lt;resources&gt;
+    &lt;dimen name="novus_space_1"&gt;4dp&lt;/dimen&gt;  &lt;dimen name="novus_space_2"&gt;8dp&lt;/dimen&gt;
+    &lt;dimen name="novus_space_3"&gt;12dp&lt;/dimen&gt; &lt;dimen name="novus_space_4"&gt;16dp&lt;/dimen&gt;
+    &lt;dimen name="novus_space_5"&gt;24dp&lt;/dimen&gt; &lt;dimen name="novus_space_6"&gt;32dp&lt;/dimen&gt;
+    &lt;dimen name="novus_space_7"&gt;48dp&lt;/dimen&gt; &lt;dimen name="novus_space_8"&gt;64dp&lt;/dimen&gt;
+&lt;/resources&gt;</code></pre>
 
 <h2>Dark mode: dual trigger, same as the web</h2>
-<p>Follow the system AND offer a persisted in-app override, the mobile analog of
-the kit's dual-trigger rule.</p>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>enum class ThemePref { System, Light, Dark } // persist with DataStore
-
-@Composable
-fun NovusTheme(pref: ThemePref, content: @Composable () -> Unit) {
-    val dark = when (pref) {
-        ThemePref.System -> isSystemInDarkTheme()
-        ThemePref.Light  -> false
-        ThemePref.Dark   -> true
+<p><code>DayNight</code> plus the resource system follows the OS; a persisted
+in-app override is the second trigger, matching the web kit's toggle.</p>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>// persist "system" | "light" | "dark" (SharedPreferences or DataStore)
+fun applyThemePref(pref: String) = AppCompatDelegate.setDefaultNightMode(
+    when (pref) {
+        "light" -> AppCompatDelegate.MODE_NIGHT_NO
+        "dark"  -> AppCompatDelegate.MODE_NIGHT_YES
+        else    -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
     }
-    MaterialTheme(
-        colorScheme = if (dark) NovusDark else NovusLight,
-        typography  = NovusTypography,
-        shapes      = NovusShapes,
-        content     = content,
-    )
-}</code></pre>
+)</code></pre>
 
 <h2>Component correspondence</h2>
 <div class="tablewrap"><table class="table">
-  <thead><tr><th>Kit component</th><th>Material 3 composable</th><th>Notes</th></tr></thead>
+  <thead><tr><th>Kit component</th><th>Material Components (View system)</th><th>Notes</th></tr></thead>
   <tbody>
-    <tr><td>.btn --primary</td><td>Button</td><td>One filled button per screen (one accent per view)</td></tr>
-    <tr><td>.btn --secondary</td><td>OutlinedButton</td><td>1dp outline, no tonal fill</td></tr>
-    <tr><td>.btn --ghost</td><td>TextButton</td><td></td></tr>
-    <tr><td>.card</td><td>OutlinedCard</td><td>Border over shadow, per the near-flat rule</td></tr>
-    <tr><td>.badge / chips</td><td>AssistChip / SuggestionChip</td><td>Self-describing labels ("Status: Active")</td></tr>
-    <tr><td>.table</td><td>LazyColumn rows</td><td>Dense list rows with outline dividers</td></tr>
-    <tr><td>.alert</td><td>Snackbar / inline Surface</td><td>Risk messages always the danger colour</td></tr>
-    <tr><td>.modal</td><td>AlertDialog / ModalBottomSheet</td><td>Confirm far-right per Actions &amp; placement</td></tr>
-    <tr><td>.field / .input</td><td>OutlinedTextField</td><td></td></tr>
-    <tr><td>Stepper</td><td>Row of numbered badges</td><td>Compose the pattern; current step is the only accent</td></tr>
+    <tr><td>.btn --primary</td><td>MaterialButton (filled)</td><td>One per screen (one accent per view)</td></tr>
+    <tr><td>.btn --secondary</td><td>MaterialButton, Widget.Material3.Button.OutlinedButton</td><td>1dp outline, no tonal fill</td></tr>
+    <tr><td>.btn --ghost</td><td>MaterialButton, Widget.Material3.Button.TextButton</td><td></td></tr>
+    <tr><td>.card</td><td>MaterialCardView with strokeWidth 1dp, strokeColor colorOutline, cardElevation 0</td><td>Border over shadow, near-flat</td></tr>
+    <tr><td>.badge / chips</td><td>Chip (Widget.Material3.Chip.Assist)</td><td>Self-describing labels; judgement colours only on judgements</td></tr>
+    <tr><td>.table</td><td>RecyclerView rows with outline dividers</td><td>Dense rows</td></tr>
+    <tr><td>.alert</td><td>Snackbar / inline MaterialCardView</td><td>Risk messages always the danger colour</td></tr>
+    <tr><td>.modal</td><td>MaterialAlertDialogBuilder / BottomSheetDialogFragment</td><td>Confirm far-right per Actions &amp; placement</td></tr>
+    <tr><td>.field / .input</td><td>TextInputLayout (OutlinedBox)</td><td></td></tr>
+    <tr><td>Stepper (progress)</td><td>LinearLayout of numbered chips</td><td>Compose the pattern; current step is the only accent</td></tr>
   </tbody>
 </table></div>
 
 <h2>Rules that carry over unchanged</h2>
 <ul class="bullets">
-  <li>White (or near-black) ground, no gradients, elevation as outline over shadow.</li>
+  <li>White (or near-black) ground, no gradients, elevation as a 1dp outline over shadow.</li>
   <li>One accent per view; success and warning only where a judgement exists; risk messages always red; amounts always neutral.</li>
-  <li>Product names lowercase and solid-set (novapay); logos are placed assets from <code>logos/</code>, never redrawn or typed.</li>
+  <li>Product names lowercase and solid-set (novapay); logos are placed assets from <code>logos/</code> (drawable imports), never redrawn or typed.</li>
   <li>Touch targets 44dp minimum; test at small-phone width first.</li>
 </ul>

@@ -278,6 +278,7 @@ const GUIDE_SECTIONS = [
     ["tailwind.html", "Tailwind CSS"],
     ["fluent2.html", "Fluent 2"],
     ["material.html", "Material"],
+    ["material-web.html", "Material Web"],
     ["antd.html", "Ant Design"],
   ]],
 ];
