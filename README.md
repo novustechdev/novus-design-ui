@@ -6,7 +6,7 @@ It is framework-agnostic CSS: you import one stylesheet and use documented HTML
 class patterns, so it works the same in Blazor, React, Vite, Vue, or plain HTML.
 
 **Documentation site**: https://ui-kit.novustech.dev/
-(foundations, all 22 components with live examples and copyable snippets,
+(foundations, all 26 components with live examples and copyable snippets,
 verified framework and theme guides, and the full asset index)
 
 > The package installs tokenless from public npm. Third-party marks (client

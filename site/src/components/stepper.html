@@ -1,0 +1,27 @@
+<section class="demo" data-title="Progress stepper (horizontal)">
+  <ol class="row" style="list-style:none;padding:0;margin:0;gap:var(--space-3)">
+    <li class="row" style="gap:var(--space-2)"><span class="badge">✓</span><span class="muted">Details</span></li>
+    <li style="width:2rem;border-top:1px solid var(--border-strong)" aria-hidden="true"></li>
+    <li class="row" style="gap:var(--space-2)"><span class="badge">✓</span><span class="muted">Documents</span></li>
+    <li style="width:2rem;border-top:1px solid var(--border-strong)" aria-hidden="true"></li>
+    <li class="row" style="gap:var(--space-2)" aria-current="step"><span class="badge badge--accent">3</span><b>Review</b></li>
+    <li style="width:2rem;border-top:1px solid var(--border)" aria-hidden="true"></li>
+    <li class="row" style="gap:var(--space-2)"><span class="badge">4</span><span class="muted">Submit</span></li>
+  </ol>
+</section>
+
+<section class="demo" data-title="Vertical stepper">
+  <ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--space-3);max-width:24rem">
+    <li class="row" style="gap:var(--space-2)"><span class="badge">✓</span><span class="muted">Merchant verified</span></li>
+    <li class="row" style="gap:var(--space-2)" aria-current="step"><span class="badge badge--accent">2</span><b>Terminal provisioning</b></li>
+    <li class="row" style="gap:var(--space-2)"><span class="badge">3</span><span class="muted">First settlement</span></li>
+  </ol>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>The stepper is composed from shipped primitives: numbered <code>.badge</code> markers on a <code>.row</code>, connectors drawn with a token border.</li>
+  <li>The current step is the only accent element (<code>.badge--accent</code> plus bold label) and carries <code>aria-current="step"</code>; completed steps show a check, upcoming steps stay neutral.</li>
+  <li>Use an ordered list so the sequence reads correctly to assistive technology.</li>
+  <li>Keep it to five steps or fewer; longer flows should collapse into stages.</li>
+</ul>

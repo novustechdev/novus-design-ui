@@ -1,0 +1,55 @@
+<!-- title: Actions & placement -->
+<h1>Actions &amp; placement</h1>
+<p>Where an action sits tells the user what it does before they read it. These rules
+make placement predictable across every Novus product: progression anchors right,
+context anchors left, danger stands apart, and there is only ever one primary.</p>
+
+<h2>The rules</h2>
+<ul class="bullets">
+  <li><b>One primary per view.</b> A single accent-filled button carries the main intent; everything else is secondary or ghost. Two primaries compete and both lose.</li>
+  <li><b>Forms lead with the primary on the left.</b> At the end of a page-level form, the primary sits first (left-aligned with the fields the eye just travelled down), with secondary actions after it. The eye lands on it naturally at the end of the fill-in path.</li>
+  <li><b>Dialogs and wizards anchor the primary far-right.</b> In a modal footer or wizard bar, the confirming action sits far-right (the direction of progression), Cancel directly to its left, and Back far-left. Users hit the corner without reading.</li>
+  <li><b>Destructive actions stand apart.</b> Use the danger variant, place it far-left in a footer (opposite the safe path), and never adjacent to the confirm button: distance prevents misclicks that words cannot.</li>
+  <li><b>Toolbars: work on the left, view on the right.</b> Bulk and creation actions start the row; filters, density, and export controls end it.</li>
+</ul>
+
+<h2>Form footer</h2>
+<section class="demo" data-title="Primary first, aligned with the fields">
+  <div style="max-width:24rem">
+    <div class="field"><label for="ap-name">Merchant name</label><input class="input" id="ap-name" value="Hillcrest Grocers"></div>
+    <div class="row">
+      <button class="btn btn--primary">Save merchant</button>
+      <button class="btn btn--ghost">Cancel</button>
+    </div>
+  </div>
+</section>
+
+<h2>Dialog footer</h2>
+<section class="demo" data-title="Progression far-right, danger far-left">
+  <div class="card" style="max-width:32rem">
+    <h3>Close terminal T-0311?</h3>
+    <p class="muted">Open transactions will settle before shutdown.</p>
+    <div class="row" style="justify-content:space-between">
+      <button class="btn btn--danger">Decommission</button>
+      <span class="row">
+        <button class="btn btn--ghost">Cancel</button>
+        <button class="btn btn--primary">Close terminal</button>
+      </span>
+    </div>
+  </div>
+</section>
+
+<h2>Wizard bar</h2>
+<section class="demo" data-title="Back far-left, Next far-right">
+  <div class="row" style="justify-content:space-between;max-width:32rem">
+    <button class="btn btn--ghost">‹ Back</button>
+    <button class="btn btn--primary">Next: Review ›</button>
+  </div>
+</section>
+
+<h2>Spacing between actions</h2>
+<ul class="bullets">
+  <li>Actions sit on a <code>.row</code>, which spaces them with <code>var(--space-3)</code>: that is the standard button gap.</li>
+  <li>Bare sibling buttons outside a <code>.row</code> still get an automatic <code>var(--space-2)</code> gap from the kit's fallback rule, so buttons never touch, but reach for <code>.row</code> first.</li>
+  <li>Never add ad-hoc pixel margins between buttons; the two gaps above are the whole system.</li>
+</ul>

@@ -129,6 +129,21 @@ const SITE_CSS = `
   .site-main .doccontent > .table, .site-main .doccontent > .tablewrap { margin-bottom: var(--space-6); }
   .site-main .bullets { margin-bottom: var(--space-6); }
   .site-main p > code, .site-main li > code { padding: 0 var(--space-1); background: var(--bg-subtle); border-radius: var(--radius-sm); }
+  /* Feedback round (feature 004) */
+  :where(:not(.row):not(.tablist):not(.pvtoggle)) > .btn + .btn { margin-inline-start: var(--space-2); }
+  details > summary::marker { font-size: var(--text-lg); }
+  .disclosure-ic { font-size: var(--text-lg); line-height: 1; }
+  .selectwrap { position: relative; display: block; }
+  .selectwrap .select { appearance: none; padding-right: calc(var(--space-4) * 2); }
+  .selectwrap::after { content: ""; position: absolute; right: var(--space-4); top: 50%; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--text-secondary); border-bottom: 2px solid var(--text-secondary); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+  .pvtoggle { display: inline-flex; gap: var(--space-1); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-1); margin-bottom: var(--space-4); }
+  .pvtoggle input { position: absolute; opacity: 0; pointer-events: none; }
+  .pvtoggle label { cursor: pointer; padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm); color: var(--text-secondary); font-size: var(--text-sm); transition: color 0.15s ease, background-color 0.15s ease; }
+  .pvtoggle label:hover { color: var(--text); background: var(--bg-subtle); }
+  .pvtoggle input:checked + label { background: var(--accent-subtle); color: var(--accent-text); }
+  .pvtoggle input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -2px; }
+  body:has(#pv-mobile:checked) .demo__canvas { max-width: 375px; border-inline-end: 1px dashed var(--border-strong); }
+  @media (prefers-reduced-motion: reduce) { .pvtoggle label { transition: none; } }
 `;
 
 const COPY_JS = `
@@ -293,6 +308,7 @@ const FOUNDATIONS = [
   ["color.html", "Color"],
   ["typography.html", "Typography"],
   ["layout.html", "Spacing & layout"],
+  ["actions.html", "Actions & placement"],
   ["logos.html", "Logos"],
   ["photography.html", "Photography"],
   ["dark-mode.html", "Dark mode"],
@@ -355,6 +371,10 @@ if (existsSync(manifestPath)) {
 <h1>${esc(c.name)}</h1>
 <p>${esc(c.summary)}</p>
 <p class="classlist">${c.classes.map((k) => `<code>${esc(k)}</code>`).join(" · ")}</p>
+<div class="pvtoggle" role="group" aria-label="Preview width">
+  <input type="radio" name="pv" id="pv-web" checked><label for="pv-web">Web</label>
+  <input type="radio" name="pv" id="pv-mobile"><label for="pv-mobile">Mobile 375px</label>
+</div>
 ${frag}
 <div class="pagenav">
   <span>${prev ? `<a href="${prev.id}.html">‹ ${esc(prev.name)}</a>` : ""}</span>
@@ -369,14 +389,46 @@ ${frag}
      index.html at "/components" (no trailing slash), which breaks every relative link
      on the page (root cause of the detail-page 404s). */
   let ov = `<h1>Components</h1>\n<p>All ${comps.length} components the kit ships, by category. Each page carries live examples, a copyable snippet per example, and usage guidance.</p>`;
+
+  /* Search (progressive: with JS off the input stays inert and the full catalog shows) */
+  ov += `
+<div class="field" style="max-width:28rem">
+  <label for="compsearch">Search components</label>
+  <input class="input" id="compsearch" type="search" placeholder="button, table, date" autocomplete="off">
+</div>
+<p class="muted" id="compempty" hidden>No components match. Clear the search to see the full catalog.</p>`;
+
+  /* Choose by function: suggested component sets per job */
+  const FUNCTIONS = [
+    ["Dashboards", "KPI rows, signal cards, and dense tables over one accent.", ["stats", "card", "table", "badge", "grid-row", "app-shell"]],
+    ["Forms", "Labelled fields with native pickers and one primary action.", ["field-input", "dropdown", "date-picker", "button", "alert"]],
+    ["Data display", "Tables, month views, and progressive disclosure for dense records.", ["table", "calendar", "stats", "bullets", "collapse"]],
+    ["Navigation", "Shells, section menus, and staged flows.", ["nav", "stepper", "app-shell", "button"]],
+    ["Feedback and status", "Judgement colors only where a judgement exists.", ["alert", "modal", "badge"]],
+  ];
+  const byId = Object.fromEntries(comps.map((c) => [c.id, c]));
+  for (const [, , ids] of FUNCTIONS) for (const id of ids)
+    if (!byId[id]) throw new Error(`overview functions: unknown component id "${id}"`);
+  ov += `\n<h2>Choose by function</h2>\n<p>Start from the job; each set links the components that do it.</p>\n<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-bottom:var(--space-6)">`;
+  for (const [job, blurb, ids] of FUNCTIONS) {
+    ov += `
+<div class="card">
+  <h3>${esc(job)}</h3>
+  <p class="muted">${esc(blurb)}</p>
+  <div class="chiprow">${ids.map((id) => `<a href="${id}.html">${esc(byId[id].name)}</a>`).join("")}</div>
+</div>`;
+  }
+  ov += `\n</div>`;
+
   for (const cat of manifest.categories) {
     const inCat = comps.filter((c) => c.category === cat);
     if (!inCat.length) continue;
-    ov += `\n<h2 id="${cat.toLowerCase().replace(/[^a-z]+/g, "-")}">${esc(cat)}</h2>\n<div class="ovgrid">`;
+    ov += `\n<h2 class="ovhead" id="${cat.toLowerCase().replace(/[^a-z]+/g, "-")}">${esc(cat)}</h2>\n<div class="ovgrid">`;
     for (const c of inCat) {
       const first = read(join(SITE, c.fragment)).match(/<section class="demo"[^>]*>([\s\S]*?)<\/section>/);
+      const hay = esc(`${c.name} ${c.summary} ${c.classes.join(" ")}`.toLowerCase());
       ov += `
-<div class="card card--interactive ovcard">
+<div class="card card--interactive ovcard" data-search="${hay}">
   <div class="ovcard__preview" aria-hidden="true">${first ? first[1] : ""}</div>
   <div class="ovcard__meta"><b>${esc(c.name)}</b><span>${esc(c.summary)}</span></div>
   <a class="card-trigger" href="${c.id}.html" aria-label="${esc(c.name)}"></a>
@@ -384,6 +436,26 @@ ${frag}
     }
     ov += `\n</div>`;
   }
+  ov += `
+<script>
+(function () {
+  var q = document.getElementById("compsearch");
+  if (!q) return;
+  var cards = [].slice.call(document.querySelectorAll(".ovcard"));
+  var heads = [].slice.call(document.querySelectorAll(".ovhead"));
+  var empty = document.getElementById("compempty");
+  q.addEventListener("input", function () {
+    var v = q.value.trim().toLowerCase();
+    cards.forEach(function (c) { c.hidden = !!v && c.getAttribute("data-search").indexOf(v) === -1; });
+    heads.forEach(function (h) {
+      var grid = h.nextElementSibling;
+      var any = [].slice.call(grid.children).some(function (c) { return !c.hidden; });
+      h.hidden = !any; grid.hidden = !any;
+    });
+    empty.hidden = cards.some(function (c) { return !c.hidden; });
+  });
+})();
+</script>`;
   writePage(join(DIST, "components", "overview.html"), shell({ title: "Components", content: ov, depth: 1, active: "components", sidebar: sideNav(compGroups, "overview.html") }));
   built.push("components/overview.html");
 

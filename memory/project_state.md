@@ -17,13 +17,13 @@
   sgultom99, 2FA via passkey: publishing needs the owner in a real terminal.
   Historical: `@sgultom99/novus-design-kit@0.1.0` on GitHub Packages (private,
   auth-gated), kept as an artifact only.
-- **Repo**: github.com/sgultom99/novus-design-ui, default branch **main**
+- **Repo**: github.com/novustechdev/novus-design-ui, default branch **main**
   (protected: no force pushes or deletions, conversation resolution required;
   direct pushes allowed). Branch 001-novus-design-kit frozen at the same
   commit. SSH auth works; gh CLI authed as sgultom99 with repo +
   write:packages scopes; repo-local git identity is configured.
 - **Releases**: semantic tags + GitHub Releases with the npm tarball attached;
-  v0.1.0: https://github.com/sgultom99/novus-design-ui/releases/tag/v0.1.0.
+  v0.1.0: https://github.com/novustechdev/novus-design-ui/releases/tag/v0.1.0.
   Package visibility: owner decided PUBLIC for now (override recorded in spec
   Clarifications); flip is web-UI only, and GH Packages npm installs need a
   token even when public.
