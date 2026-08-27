@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Novus Admin Kit demo</title>
     <base href="./" />
+    <script type="importmap"></script>
     <script>
         try {
             var t = localStorage.getItem("novus-theme");
@@ -23,7 +24,7 @@
             <p class="muted">Loading the Novus Admin Kit demo (WebAssembly). This demo requires JavaScript; the copyable Blazor flavor renders server-side and works without it.</p>
         </main>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_framework/blazor.webassembly#[.{fingerprint}].js"></script>
     <script src="admin.js"></script>
     <script src="lib/chartjs/chart.umd.js"></script>
     <script src="novus-chart.js"></script>
