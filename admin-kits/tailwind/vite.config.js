@@ -14,6 +14,7 @@ export default defineConfig({
         settings: resolve(import.meta.dirname, "settings.html"),
         analytics: resolve(import.meta.dirname, "analytics.html"),
         datagrid: resolve(import.meta.dirname, "datagrid.html"),
+        login: resolve(import.meta.dirname, "login.html"),
       },
     },
   },
