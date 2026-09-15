@@ -1,0 +1,71 @@
+<section class="demo" data-title="Sign-in page: brand panel beside the credential card">
+  <div class="authpage">
+    <div class="authsplit">
+      <aside class="authbrand">
+        <div class="authbrand__inner">
+          <span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span>
+          <p class="authbrand__tagline">Digital payments, full stack: switching and routing, card acquiring, QR and NFC, reconciliation and settlement.</p>
+          <ul class="authbrand__modules" aria-label="novapay capabilities"><li>Switching &amp; routing</li><li>Card acquiring</li><li>QR / NFC</li></ul>
+        </div>
+      </aside>
+      <div class="authmain">
+        <form class="card authcard" action="sign-in-page.html">
+          <svg class="authcard__mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+          <h2 class="authcard__title">Sign in to your console</h2>
+          <p class="muted authcard__sub">Use the account your administrator issued you.</p>
+          <div class="field">
+            <label for="si-user">Username<span class="field__req" aria-hidden="true">*</span></label>
+            <input class="input" id="si-user" name="username" autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label for="si-pass">Password<span class="field__req" aria-hidden="true">*</span></label>
+            <div class="pwgroup">
+              <input class="input" id="si-pass" name="password" type="password" autocomplete="current-password" required>
+              <button type="button" class="pwtoggle" data-password-toggle aria-controls="si-pass" aria-pressed="false" aria-label="Show password"><svg class="icon pwtoggle__show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon pwtoggle__hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 5.7A9.9 9.9 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.4 3.2M6.5 6.6A16.6 16.6 0 0 0 2.5 12s3.5 6.5 9.5 6.5a9.4 9.4 0 0 0 5.5-1.7"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M3 3l18 18"/></svg></button>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg authcard__submit">Sign in</button>
+          <details class="authcard__forgot"><summary>Forgot password?</summary><p class="muted">Password resets are handled by your administrator.</p></details>
+          <div class="authcard__foot"><span class="muted">Managed by</span><span class="brandmark" role="img" aria-label="Novus Technologies"></span></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="Wrong credentials: one inline error, the username kept">
+  <div class="authpage">
+    <div class="authmain">
+        <form class="card authcard" action="sign-in-page.html">
+          <svg class="authcard__mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+          <h2 class="authcard__title">Sign in to your console</h2>
+          <p class="muted authcard__sub">Use the account your administrator issued you.</p>
+          <div class="field field--error">
+            <label for="si-user-e">Username<span class="field__req" aria-hidden="true">*</span></label>
+            <input class="input" id="si-user-e" name="username" autocomplete="username" required value="ops.admin" aria-describedby="si-error">
+            <p class="field__error" id="si-error" role="alert">Wrong username or password.</p>
+          </div>
+          <div class="field">
+            <label for="si-pass-e">Password<span class="field__req" aria-hidden="true">*</span></label>
+            <div class="pwgroup">
+              <input class="input" id="si-pass-e" name="password" type="password" autocomplete="current-password" required>
+              <button type="button" class="pwtoggle" data-password-toggle aria-controls="si-pass-e" aria-pressed="false" aria-label="Show password"><svg class="icon pwtoggle__show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon pwtoggle__hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 5.7A9.9 9.9 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.4 3.2M6.5 6.6A16.6 16.6 0 0 0 2.5 12s3.5 6.5 9.5 6.5a9.4 9.4 0 0 0 5.5-1.7"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M3 3l18 18"/></svg></button>
+            </div>
+          </div>
+          <button class="btn btn--primary btn--lg authcard__submit">Sign in</button>
+          <details class="authcard__forgot"><summary>Forgot password?</summary><p class="muted">Password resets are handled by your administrator.</p></details>
+          <div class="authcard__foot"><span class="muted">Managed by</span><span class="brandmark" role="img" aria-label="Novus Technologies"></span></div>
+        </form>
+    </div>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Authentication is the only place the page ground may be tinted: the solid deep brand ground <code>--blue-900</code> in both themes, as flat colour with no gradients (constitution Principle II).</li>
+  <li>The brand panel carries the product lockup in the dark-lockup treatment, one line of promise, and at most five capability chips. Below 900px it stacks above the card.</li>
+  <li>The title names what is being signed in to, followed by one line of sub-copy. Labels are small caps with a red required marker; inputs are filled so they read as places to type.</li>
+  <li>One full-width primary action. The reset link sits centred under it, and the Novus endorsement signs the card off.</li>
+  <li>Wrong credentials show one inline error under the username and keep what was typed. Never clear the form.</li>
+  <li>The password toggle is a real button named "Show password" or "Hide password"; the console layer hides it when scripting is unavailable, so a page never shows a dead control.</li>
+</ul>

@@ -1,29 +1,48 @@
-<section class="demo" data-title="Pagination">
+<section class="demo" data-title="List footer (every paged data list)">
+  <div class="listfooter">
+    <span class="listfooter__range">Showing 11-20 of 24</span>
+    <div class="listfooter__controls">
+      <div class="paginator">
+        <button type="button" aria-label="Previous page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+        <span class="paginator__label">Page 2 of 3</span>
+        <button type="button" aria-label="Next page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+      </div>
+      <span class="selectwrap"><select class="select" aria-label="Rows per page"><option>10 / page</option><option>20 / page</option><option>50 / page</option></select></span>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="Nothing to page: zero results">
+  <div class="listfooter">
+    <span class="listfooter__range">Showing 0 of 0</span>
+    <div class="listfooter__controls">
+      <div class="paginator">
+        <button type="button" aria-label="Previous page" disabled><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+        <span class="paginator__label">Page 1 of 1</span>
+        <button type="button" aria-label="Next page" disabled><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+      </div>
+      <span class="selectwrap"><select class="select" aria-label="Rows per page"><option>10 / page</option><option>20 / page</option><option>50 / page</option></select></span>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="Numbered pages (long documents and search results)">
   <nav aria-label="Pagination" class="row" style="gap:var(--space-1)">
-    <button class="btn btn--ghost btn--sm" aria-label="Previous page">‹</button>
+    <button class="btn btn--ghost btn--sm" aria-label="Previous page"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
     <button class="btn btn--ghost btn--sm">1</button>
     <button class="btn btn--secondary btn--sm" aria-current="page" style="border-color:var(--accent);color:var(--accent-text)">2</button>
     <button class="btn btn--ghost btn--sm">3</button>
     <span class="muted" style="padding:0 var(--space-1)">…</span>
     <button class="btn btn--ghost btn--sm">12</button>
-    <button class="btn btn--ghost btn--sm" aria-label="Next page">›</button>
+    <button class="btn btn--ghost btn--sm" aria-label="Next page"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
   </nav>
-</section>
-
-<section class="demo" data-title="Compact: count plus prev/next (the data grid pattern)">
-  <div class="row" style="justify-content:space-between">
-    <span class="muted" style="font-size:var(--text-sm)">Page 2 of 12, 118 rows</span>
-    <span class="row" style="gap:var(--space-2)">
-      <button class="btn btn--secondary btn--sm">‹ Previous</button>
-      <button class="btn btn--secondary btn--sm">Next ›</button>
-    </span>
-  </div>
 </section>
 
 <h2>Usage</h2>
 <ul class="bullets">
-  <li>Page buttons are ghost buttons; the current page carries the accent border and <code>aria-current="page"</code>: the one accent in the control.</li>
-  <li>For dense tables prefer the compact form (count plus Previous/Next), the same pattern the Admin Kit data grid uses.</li>
-  <li>State the total ("Page 2 of 12") so users know the size of what they are paging through.</li>
-  <li>Ten rows per page is the kit default for data tables.</li>
+  <li>Every paged data list ends with the list footer: the range at the start; previous, the page label, next, and rows per page at the end.</li>
+  <li>Rows per page offers 10, 20, and 50, defaulting to 10. Changing it returns to page 1.</li>
+  <li>Previous is disabled on the first page and next on the last; both are 44px icon buttons with names.</li>
+  <li>The range always states the total: "Showing 21-24 of 24" on a short last page, "Showing 0 of 0" when nothing matches.</li>
+  <li>Numbered pages suit long documents and search results where jumping matters; the current page carries the accent border and <code>aria-current="page"</code>.</li>
 </ul>

@@ -1,4 +1,15 @@
-# Project state (as of 2026-08-27)
+# Project state (as of 2026-09-15)
+
+- **Feature 007 (console patterns, constitution 1.11.0)**: novalending console
+  (v2.1nflow.co) is the admin pattern reference; its short-content wrapping is a
+  recorded defect. Console patterns have ONE source, `admin-kits/shared/`
+  (novus-admin.css with @pattern sections, novus-admin.js, console-pages.js,
+  icons.mjs); `admin-kits/data/generate.mjs` emits every flavor copy, the static
+  SHELL markup, Razor shell components, and the WASM demo mirrors; `--check` is
+  Quality Gate 10. `scripts/layout-audit.mjs` is Gate 11 (playwright-core
+  installed --no-save at repo root; Chromium from ~/.cache/ms-playwright or
+  CHROME_PATH). Catalog 40 components (Templates category). Eight screens per
+  flavor (signed-out page added). Handover: docs/handover/2026-09-15-session-handover.md.
 
 - **Admin Kit**: two flavors (`admin-kits/blazor` Server, `admin-kits/tailwind`
   Vite MPA) + WASM demo twin (`admin-kits/blazor-demo`) hosted at
@@ -8,7 +19,7 @@
   motion allowed since constitution 1.6.0 (0.2s max, reduced-motion aware).
   Header = novapay lockup + icon theme toggle; below 520px the suffix hides and
   the endorsement mark steps to 20px (375px overflow guard).
-- **Speckit (current)**: active feature `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
+- **Speckit (current)**: active feature `specs/007-novalending-admin-patterns` (T001-T042 done, shipped via PR); earlier `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
   (tasks through T036 done); constitution v1.8.0.
 
 - **Package**: `novus-design-kit` on PUBLIC npm (0.3.0 on npm, dist-tag latest, repository field novustechdev), tokenless install

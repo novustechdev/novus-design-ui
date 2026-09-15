@@ -112,6 +112,22 @@ if [ -d site/dist/frameworks ] || [ -d site/dist/themes ]; then
   gate "guide verification record" $([ -z "$UNVERIFIED" ]; echo $?) "unverified:$UNVERIFIED"
 fi
 
+# 10. Admin pattern parity (constitution 1.11.0, Quality Gate 10): every generated copy of the
+# shared console layer, shell, icons, WASM mirrors, and data matches its source.
+OUT=$(node admin-kits/data/generate.mjs --check 2>&1); RC=$?
+gate "admin pattern parity" $RC "$(echo "$OUT" | sed -n 2,4p | tr '\n' ' ')"
+
+# 11. Layout audit (Quality Gate 11): short content stays on one line and no page scrolls
+# horizontally at 375px, rendered in headless Chromium over site/dist (docs and demos).
+if [ -d site/dist ]; then
+  OUT=$(node scripts/layout-audit.mjs 2>&1); RC=$?
+  if [ $RC -eq 2 ]; then
+    echo "SKIP  layout audit: $(echo "$OUT" | tail -1)"
+  else
+    gate "layout audit" $RC "$(echo "$OUT" | grep -E '^(WRAP|OVERFLOW|ERROR|FAIL)' | head -3 | tr '\n' ' ')"
+  fi
+fi
+
 echo
 [ $FAIL -eq 0 ] && echo "ALL GATES PASS" || echo "GATE FAILURES — release blocked"
 exit $FAIL

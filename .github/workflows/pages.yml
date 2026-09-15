@@ -32,6 +32,8 @@ jobs:
           (cd admin-kits/blazor-demo && npm ci --no-audit --no-fund && dotnet publish -c Release -v q)
       - name: Build reference site
         run: node site/build.mjs
+      - name: Install layout audit tooling
+        run: npm install --no-save --no-package-lock playwright-core@1.55.0
       - name: Run quality gates
         run: scripts/gates.sh
       - uses: actions/configure-pages@v5

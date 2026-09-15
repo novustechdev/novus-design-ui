@@ -1,5 +1,5 @@
 {
-  "categories": ["General", "Layout", "Data Display", "Feedback", "Forms", "Navigation", "Theming"],
+  "categories": ["General", "Layout", "Data Display", "Feedback", "Forms", "Navigation", "Templates", "Theming"],
   "components": [
     {
       "id": "button",
@@ -63,7 +63,17 @@
       "category": "Layout",
       "classes": [".appbar", ".appbar__inner", ".appnav", ".appnav__inner", ".appmain", ".appheader"],
       "fragment": "src/components/app-shell.html",
-      "summary": "Full-bleed header and nav whose content aligns to the shared 1200px column."
+      "summary": "Full-bleed header and nav whose content aligns to the shared 1200px column.",
+      "css": ["console-shell"]
+    },
+    {
+      "id": "page-header",
+      "name": "Page header",
+      "category": "Layout",
+      "classes": [".pagehead", ".pagehead__row", ".pagehead__actions", ".pagehead__desc"],
+      "fragment": "src/components/page-header.html",
+      "summary": "Breadcrumb, title, end-aligned actions, and one line of description at the top of every console screen.",
+      "css": ["page-header"]
     },
     {
       "id": "card",
@@ -77,9 +87,10 @@
       "id": "table",
       "name": "Table",
       "category": "Data Display",
-      "classes": [".table"],
+      "classes": [".table", ".tablewrap", ".cell--wrap", ".cell--actions", ".cell-stack"],
       "fragment": "src/components/table.html",
-      "summary": "Data-dense table with tinted header and right-aligned tabular numerals."
+      "summary": "Data-dense table: single-line cells in a scroll container, right-aligned numerals, end-aligned actions.",
+      "css": ["content-fit"]
     },
     {
       "id": "calendar",
@@ -143,7 +154,7 @@
       "category": "Data Display",
       "classes": [".vchain-strip", ".vchain", ".vchain-arrow"],
       "fragment": "src/components/value-chain.html",
-      "summary": "Labelled steps joined by \u203a arrows, informational, no hover."
+      "summary": "Labelled steps joined by › arrows, informational, no hover."
     },
     {
       "id": "descriptions",
@@ -226,12 +237,39 @@
       "summary": "The platform's own date control styled by the kit: calendar popup, locale, and mobile wheels for free."
     },
     {
+      "id": "filter-bar",
+      "name": "Filter bar",
+      "category": "Forms",
+      "classes": [".filterbar", ".quickchips", ".filtermenu", ".filteropt", ".filterchip", ".filterrow--nowrap"],
+      "fragment": "src/components/filter-bar.html",
+      "summary": "Search with a two-pane sub-filter sheet, removable active chips, and quick filter chips with live counts.",
+      "css": ["filter-bar"]
+    },
+    {
       "id": "nav",
       "name": "Nav",
       "category": "Navigation",
       "classes": [".nav"],
       "fragment": "src/components/nav.html",
       "summary": "Horizontal link bar; the current page carries aria-current."
+    },
+    {
+      "id": "side-navigation",
+      "name": "Side navigation",
+      "category": "Navigation",
+      "classes": [".adminnav", ".navgroup", ".navlink", ".navtoggle__input", ".navscrim"],
+      "fragment": "src/components/side-navigation.html",
+      "summary": "Grouped console navigation with line icons that collapses on desktop and opens as a drawer on phones, without JavaScript.",
+      "css": ["console-shell", "side-navigation"]
+    },
+    {
+      "id": "user-menu",
+      "name": "User menu",
+      "category": "Navigation",
+      "classes": [".userdd", ".userdd__trigger", ".userdd__menu"],
+      "fragment": "src/components/user-menu.html",
+      "summary": "Header account menu on native details: identity, theme, and Sign out at its foot.",
+      "css": ["user-menu"]
     },
     {
       "id": "stepper",
@@ -261,17 +299,36 @@
       "id": "breadcrumb",
       "name": "Breadcrumb",
       "category": "Navigation",
-      "classes": ["nav + ordered list", "kit glyph separator"],
+      "classes": [".crumbs", "nav + ordered list"],
       "fragment": "src/components/breadcrumb.html",
-      "summary": "Location trail with the kit's glyph separator; the current page is text, not a link."
+      "summary": "Location trail with a drawn slash separator; the current page is text, not a link."
     },
     {
       "id": "pagination",
       "name": "Pagination",
       "category": "Navigation",
-      "classes": ["composes .btn", "aria-current=page"],
+      "classes": [".listfooter", ".paginator", "composes .btn", "aria-current=page"],
       "fragment": "src/components/pagination.html",
-      "summary": "Page controls from ghost buttons with the accent on the current page; compact form for data tables."
+      "summary": "List footer for data lists (range, previous and next, page label, rows per page), plus numbered pages for long documents.",
+      "css": ["list-footer"]
+    },
+    {
+      "id": "sign-in-page",
+      "name": "Sign-in page",
+      "category": "Templates",
+      "classes": [".authpage", ".authsplit", ".authbrand", ".authcard", ".pwgroup", ".pwtoggle", ".field__req"],
+      "fragment": "src/components/sign-in-page.html",
+      "summary": "Split sign-in on the deep brand ground: brand panel beside a credential card with small-caps fields and a password toggle.",
+      "css": ["sign-in"]
+    },
+    {
+      "id": "signed-out-page",
+      "name": "Signed-out page",
+      "category": "Templates",
+      "classes": [".signedout", ".signedout__card"],
+      "fragment": "src/components/signed-out-page.html",
+      "summary": "Centred signed-out card that confirms the session ended and offers to sign in again.",
+      "css": ["signed-out"]
     }
   ]
 }

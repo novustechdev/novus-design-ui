@@ -7,6 +7,32 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+- Console patterns from the novalending reference (feature 007, constitution
+  1.11.0). One shared, token-only pattern layer (`admin-kits/shared/`:
+  `novus-admin.css`, `novus-admin.js`, `icons.mjs`) consumed by every Admin Kit
+  flavor and by the docs: split sign-in on the deep brand ground, header user
+  menu with Sign out and a signed-out page, grouped side navigation with a
+  JS-free collapse and phone drawer, page header with breadcrumb and
+  end-aligned actions, filter bar with a two-pane sub-filter sheet, active
+  chips and quick chips with live counts, list footer pagination with rows
+  per page, and an in-house line icon set.
+- Single-line content rule: identifiers, names, chips, dates, amounts, and
+  headers never wrap; data tables scroll inside `.tablewrap` instead of
+  squeezing (`.cell--wrap`, `.cell-stack`, `.cell--actions`, `.truncate`).
+  Enforced by a new layout audit gate (`scripts/layout-audit.mjs`, headless
+  Chromium at 1440px and 375px over the docs and hosted demos) and a pattern
+  parity gate (`node admin-kits/data/generate.mjs --check`).
+- Admin Kit: all flavors gain the signed-out page (eight screens), the new
+  shell and patterns, and the list footer on Transactions and Data grid; the
+  Blazor Server sign-in is now a static form post that works with JavaScript
+  off; the WebAssembly demo mirrors the Blazor Server screens by generation.
+- Component catalog grows 34 to 40: Sign-in page, Signed-out page (new
+  Templates category), User menu, Side navigation, Page header, Filter bar;
+  Pagination, Table, Breadcrumb, and App shell updated; component pages show
+  their CSS from the shared layer. New foundations: Icons, Alignment and
+  content fit. Existing docs pages no longer scroll sideways at 375px.
+- Packaged kit files (tokens.css, fonts, logos, photos, js) are unchanged.
+
 - Third Admin Kit flavor: Material (Vite + @material/web 2.x under the Novus
   tokens, the verified Material Web mapping), same screens and dataset as the
   other flavors, hosted at /demos/material/. Material Web components require
