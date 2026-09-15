@@ -5,6 +5,7 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, existsSync, readdirSync } from "node:fs";
 import { dirname, join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
+import { icons as ICONS, svg as iconSvg } from "../admin-kits/shared/icons.mjs";
 
 const SITE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(SITE, "..");
@@ -12,6 +13,13 @@ const SRC = join(SITE, "src");
 const DIST = join(SITE, "dist");
 
 const read = (p) => readFileSync(p, "utf8");
+/* Console pattern layer (feature 007): ONE source shared with the Admin Kit. */
+const PATTERN_CSS_PATH = join(ROOT, "admin-kits/shared/novus-admin.css");
+function patternSection(name) {
+  const m = readFileSync(PATTERN_CSS_PATH, "utf8").match(new RegExp(`/\\* @pattern ${name} \\*/\\n([\\s\\S]*?)/\\* @end \\*/`));
+  if (!m) throw new Error(`components.json: unknown css pattern "${name}" (no @pattern section in admin-kits/shared/novus-admin.css)`);
+  return m[1].trim();
+}
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
 function dedent(s) {
@@ -128,6 +136,7 @@ const SITE_CSS = `
   .site-main figcaption { margin-top: var(--space-2); }
   .site-main .doccontent > .table, .site-main .doccontent > .tablewrap { margin-bottom: var(--space-6); }
   .site-main .bullets { margin-bottom: var(--space-6); }
+  .site-main .bullets li, .site-main p { overflow-wrap: anywhere; }
   .site-main p > code, .site-main li > code { padding: 0 var(--space-1); background: var(--bg-subtle); border-radius: var(--radius-sm); }
   /* Feedback round (feature 004) */
   :where(:not(.row):not(.tablist):not(.pvtoggle)) > .btn + .btn { margin-inline-start: var(--space-2); }
@@ -138,16 +147,23 @@ const SITE_CSS = `
   .selectwrap::after { content: ""; position: absolute; right: var(--space-4); top: 50%; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--text-secondary); border-bottom: 2px solid var(--text-secondary); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
   .pvtoggle { display: inline-flex; gap: var(--space-1); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--space-1); margin-bottom: var(--space-4); }
   .pvtoggle input { position: absolute; opacity: 0; pointer-events: none; }
+  /* Feature 007: icon index grid and pattern CSS blocks */
+  .icongrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:var(--space-3);margin-bottom:var(--space-6);}
+  .icongrid .demo{margin:0;}
+  .iconcell__canvas{display:flex;align-items:center;gap:var(--space-4);color:var(--text);}
+  .patterncss .demo__code{max-height:28rem;}
   .pvtoggle label { cursor: pointer; padding: var(--space-1) var(--space-3); border-radius: var(--radius-sm); color: var(--text-secondary); font-size: var(--text-sm); transition: color 0.15s ease, background-color 0.15s ease; }
   .pvtoggle label:hover { color: var(--text); background: var(--bg-subtle); }
   .pvtoggle input:checked + label { background: var(--accent-subtle); color: var(--accent-text); }
   .pvtoggle input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -2px; }
+  .demo__canvas .authpage, .demo__canvas .signedout, .demo__canvas .adminwrap { min-height: 0; }
+  .demo:has(details[open]) { overflow: visible; }
   body:has(#pv-mobile:checked) .demo__canvas { max-width: 375px; border-inline-end: 1px dashed var(--border-strong); }
   @media (prefers-reduced-motion: reduce) { .pvtoggle label { transition: none; } }
 `;
 
 const COPY_JS = `
-  document.querySelectorAll("[data-theme-toggle]").forEach(b=>{b.hidden=false;b.addEventListener("click",()=>window.novusTheme&&window.novusTheme.toggle());});
+  document.querySelectorAll("[data-theme-toggle]").forEach(b=>{b.hidden=false;if(!window.novusAdmin)b.addEventListener("click",()=>window.novusTheme&&window.novusTheme.toggle());});
   if(navigator.clipboard)document.querySelectorAll(".demo__copy").forEach(b=>{b.hidden=false;b.addEventListener("click",()=>{navigator.clipboard.writeText(b.closest(".demo").querySelector("code").textContent);b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1200);});});
   var sn=document.querySelector(".sidenav");if(sn&&matchMedia("(min-width:900px)").matches)sn.open=true;
 `;
@@ -188,7 +204,10 @@ function shell({ title, content, depth, active, sidebar }) {
 <link rel="apple-touch-icon" href="${rel}assets/novus-favicon.png">
 <link rel="manifest" href="${rel}manifest.webmanifest">
 <link rel="stylesheet" href="${rel}tokens.css">
+<link rel="stylesheet" href="${rel}assets/novus-admin.css">
+<style>.brandmark{background-image:url("${rel}logos/Novus_Logo_Colour_transparent.png")}[data-theme="dark"] .brandmark{background-image:url("${rel}logos/Novus_Logo_White_transparent.png")}@media (prefers-color-scheme:dark){:root:not([data-theme]) .brandmark{background-image:url("${rel}logos/Novus_Logo_White_transparent.png")}}[data-theme="light"] .brandmark{background-image:url("${rel}logos/Novus_Logo_Colour_transparent.png")}</style>
 <script src="${rel}js/novus-theme.js"></script>
+<script src="${rel}assets/novus-admin.js" defer></script>
 <style>${SITE_CSS}</style>
 </head>
 <body>
@@ -223,6 +242,9 @@ for (const dir of ["fonts", "logos", "photos", "js"]) cpSync(join(ROOT, dir), jo
 /* Site-only assets (verified-sample screenshots); not part of the npm package */
 if (existsSync(join(SRC, "assets"))) cpSync(join(SRC, "assets"), join(DIST, "assets"), { recursive: true });
 if (existsSync(join(SRC, "manifest.webmanifest"))) cpSync(join(SRC, "manifest.webmanifest"), join(DIST, "manifest.webmanifest"));
+mkdirSync(join(DIST, "assets"), { recursive: true });
+cpSync(PATTERN_CSS_PATH, join(DIST, "assets/novus-admin.css"));
+cpSync(join(ROOT, "admin-kits/shared/novus-admin.js"), join(DIST, "assets/novus-admin.js"));
 /* Live demos (feature 003): copy when their build output exists; CI always builds them */
 const DEMOS = [
   [join(ROOT, "admin-kits/tailwind/dist"), join(DIST, "demos/tailwind")],
@@ -324,7 +346,9 @@ const FOUNDATIONS = [
   ["color.html", "Color"],
   ["typography.html", "Typography"],
   ["layout.html", "Spacing & layout"],
+  ["alignment.html", "Alignment & content fit"],
   ["actions.html", "Actions & placement"],
+  ["icons.html", "Icons"],
   ["logos.html", "Logos"],
   ["photography.html", "Photography"],
   ["dark-mode.html", "Dark mode"],
@@ -340,6 +364,7 @@ if (existsSync(foundDir)) {
   for (const [f, label] of present) {
     let raw = read(join(foundDir, f));
     if (raw.includes("<!--ASSET-INDEX-->")) raw = raw.replace("<!--ASSET-INDEX-->", assetIndex());
+    if (raw.includes("<!--ICON-INDEX-->")) raw = raw.replace("<!--ICON-INDEX-->", iconIndex());
     const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, label])[1];
     const sidebar = sideNav([["Foundations", present.map(([g, l]) => [g, l])]], f);
     writePage(join(DIST, "foundations", f), shell({ title, content: transformDemos(raw), depth: 1, active: "foundations", sidebar }));
@@ -394,6 +419,7 @@ if (existsSync(manifestPath)) {
   <input type="radio" name="pv" id="pv-mobile"><label for="pv-mobile">Mobile 375px</label>
 </div>
 ${frag}
+${c.css ? patternCss(c.css) : ""}
 <div class="pagenav">
   <span>${prev ? `<a href="${prev.id}.html">‹ ${esc(prev.name)}</a>` : ""}</span>
   <span>${next ? `<a href="${next.id}.html">${esc(next.name)} ›</a>` : ""}</span>
@@ -423,6 +449,7 @@ ${frag}
     ["Data display", "Tables, month views, and progressive disclosure for dense records.", ["table", "calendar", "stats", "bullets", "collapse"]],
     ["Navigation", "Shells, section menus, and staged flows.", ["nav", "stepper", "app-shell", "button"]],
     ["Feedback and status", "Judgement colors only where a judgement exists.", ["alert", "modal", "badge"]],
+    ["Admin consoles", "Sign-in, navigation, filters, and paged lists from the console reference.", ["sign-in-page", "side-navigation", "page-header", "filter-bar", "pagination", "user-menu", "signed-out-page"]],
   ];
   const byId = Object.fromEntries(comps.map((c) => [c.id, c]));
   for (const [, , ids] of FUNCTIONS) for (const id of ids)
@@ -506,6 +533,24 @@ for (const p of walk(DIST).filter((p) => p.endsWith(".html") && !p.includes("/de
 }
 if (broken.length) throw new Error(`Link gate failed:\n  ${broken.join("\n  ")}`);
 console.log("Link gate: all internal links resolve; no subdirectory content index pages.");
+
+/* Pattern CSS blocks for component pages (manifest "css"), read from the shared layer */
+function patternCss(names) {
+  let html = `<h2>CSS</h2>\n<p>These rules ship in the console pattern layer, <code>admin-kits/shared/novus-admin.css</code>, which this site and every Admin Kit flavor load after <code>tokens.css</code>. Copy the whole layer, or only the sections below; every value is a token.</p>`;
+  for (const name of names) {
+    html += `\n<figure class="demo patterncss"><div class="demo__bar"><span class="demo__title">@pattern ${esc(name)}</span><button class="demo__copy btn btn--ghost btn--sm" hidden>Copy</button></div><pre class="demo__code"><code>${esc(patternSection(name))}</code></pre></figure>`;
+  }
+  return html;
+}
+
+/* Icon index: the console icon set, from admin-kits/shared/icons.mjs */
+function iconIndex() {
+  let html = `<div class="icongrid">`;
+  for (const [name, label] of ICONS) {
+    html += `\n<figure class="demo"><div class="demo__canvas iconcell__canvas">${iconSvg(name, "icon--sm")}${iconSvg(name)}${iconSvg(name, "icon--lg")}</div><div class="demo__bar"><span class="demo__title">${esc(label)} <code>${name}</code></span><button class="demo__copy btn btn--ghost btn--sm" hidden>Copy</button></div><pre class="demo__code" hidden><code>${esc(iconSvg(name))}</code></pre></figure>`;
+  }
+  return html + `\n</div>`;
+}
 
 /* Asset index — enumerated from the package's real asset trees at build time */
 function assetIndex() {

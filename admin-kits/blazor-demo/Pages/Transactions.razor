@@ -1,62 +1,107 @@
+@* GENERATED mirror of admin-kits/blazor/Components/Pages/Transactions.razor by admin-kits/data/generate.mjs. Edit the Blazor Server source, then regenerate. *@
 @page "/transactions"
 
 <PageTitle>Transactions · Novus Admin Kit</PageTitle>
 
-<div class="pagehead"><h1>Transactions</h1></div>
-
-<div class="filterrow">
-    <label for="statusfilter" class="muted">Status</label>
-    <span class="selectwrap"><select class="select" id="statusfilter" @onchange="OnFilter">
-        <option value="all">All</option>
-        <option value="settled">Settled</option>
-        <option value="pending">Pending</option>
-        <option value="failed">Failed</option>
-    </select></span>
-    <span class="muted">@Filtered.Count() of @SeedData.Transactions.Length</span>
+<div class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="">Operations</a></li><li aria-current="page">Transactions</li></ol></nav>
+    <div class="pagehead__row">
+        <h1>Transactions</h1>
+        <div class="pagehead__actions"><a class="btn btn--secondary btn--sm" href="datagrid">Open in data grid</a></div>
+    </div>
+    <p class="muted pagehead__desc">Card and wallet payments across the terminal fleet, newest first.</p>
 </div>
 
-<div class="card" style="padding:0;overflow:hidden">
+<div class="filterbar">
+    <div class="quickchips" role="radiogroup" aria-label="Status">
+        @foreach (var (value, label) in Quick)
+        {
+            <label class="quickchip"><input type="radio" name="quickstatus" value="@value" checked="@(Status == value)" @onchange="() => SetStatus(value)"><span>@label</span><span class="quickchip__count">@StatusCount(value)</span></label>
+        }
+    </div>
+    <div class="filterbar__top">
+        <label class="filterbar__search"><Icon Name="search" Class="icon--sm" /><input class="input" id="txsearch" type="search" placeholder="Search id, terminal, or product" aria-label="Search transactions" @bind="Query" @bind:event="oninput" @bind:after="ResetPage"></label>
+        <details class="filtermenu" data-dismiss>
+            <summary class="filtermenu__trigger@(ActiveCount > 0 ? " filtermenu__trigger--on" : "")"><Icon Name="filter" Class="icon--sm" /><span>Filters</span><span class="filtermenu__count" hidden="@(ActiveCount == 0)">@ActiveCount</span><Icon Name="chevron-down" Class="icon--sm" /></summary>
+            <div class="filtermenu__sheet" role="group" aria-label="Filters">
+                <div class="filtermenu__tabs" role="radiogroup" aria-label="Filter category">
+                    @for (var i = 0; i < Categories.Length; i++)
+                    {
+                        var cat = Categories[i];
+                        <label class="filtermenu__tab"><input type="radio" name="filtercat" value="@cat.Key" checked="@(i == 0)"><span class="truncate">@cat.Label</span><span class="filtermenu__tabcount" hidden="@(Selected[cat.Key].Count == 0)">@Selected[cat.Key].Count</span><Icon Name="chevron-right" Class="icon--sm filtermenu__chev" /></label>
+                    }
+                </div>
+                <div class="filtermenu__panels">
+                    @foreach (var cat in Categories)
+                    {
+                        <fieldset class="filtermenu__panel">
+                            <legend class="filtermenu__head">@cat.Label</legend>
+                            @foreach (var (value, label) in cat.Options)
+                            {
+                                <label class="filteropt"><input type="checkbox" name="@cat.Key" value="@value" checked="@(Selected[cat.Key].Contains(value))" @onchange="e => Toggle(cat.Key, value, e)"><span class="truncate">@label</span></label>
+                            }
+                        </fieldset>
+                    }
+                </div>
+            </div>
+        </details>
+    </div>
+    <div class="filterchips" aria-label="Active filters" hidden="@(ActiveCount == 0)">
+        @foreach (var cat in Categories)
+        {
+            @foreach (var (value, label) in cat.Options.Where(o => Selected[cat.Key].Contains(o.Value)))
+            {
+                <span class="filterchip"><span class="filterchip__group">@cat.Label</span> <span class="filterchip__label">@label</span><button type="button" class="filterchip__remove" aria-label="@($"Remove {cat.Label} {label}")" @onclick="() => Remove(cat.Key, value)"><Icon Name="close" Class="icon--sm" /></button></span>
+            }
+        }
+        <button type="button" class="linkbtn" @onclick="ClearSheet">Clear all</button>
+    </div>
+</div>
+
+<div class="card card--flush">
     <div class="tablewrap">
         <table class="table">
-            <thead><tr><th>Id</th><th>Time</th><th>Terminal</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th></th></tr></thead>
+            <thead><tr><th>Id</th><th>Time</th><th>Terminal</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th class="cell--actions">Actions</th></tr></thead>
             <tbody>
-                @foreach (var t in Filtered)
+                @foreach (var t in PageRows)
                 {
                     <tr>
                         <td><code>@t.Id</code></td><td>@t.Ts.Substring(11, 5)</td><td>@t.Terminal</td>
                         <td>@t.Product</td><td class="num">@t.Amount.ToString("F2")</td>
                         <td><span class="badge badge--@StatusTone(t.Status)"><span class="badge__dot"></span> Status · @Cap(t.Status)</span></td>
-                        <td><button class="btn btn--ghost btn--sm" @onclick="() => Selected = t">Detail</button></td>
+                        <td class="cell--actions"><button class="btn btn--ghost btn--sm" @onclick="() => Selected_ = t">Detail</button></td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
-    @if (!Filtered.Any())
+    @if (Rows.Count == 0)
     {
         <div class="emptystate">
-            <p>No transactions match this filter.</p>
-            <button class="btn btn--secondary btn--sm" @onclick="Reset">Reset filter</button>
+            <p>No transactions match this search and these filters.</p>
+            <button type="button" class="btn btn--secondary btn--sm" @onclick="ClearEverything">Clear search and filters</button>
         </div>
     }
 </div>
 
-@if (Selected is not null)
+<ListFooter Total="Rows.Count" @bind-Page="Page" @bind-PageSize="PageSize" />
+
+@if (Selected_ is not null)
 {
     <dialog class="vdialog" open>
         <div class="vdialog__head">
-            <h3 style="margin:0">@Selected.Id</h3>
-            <button class="modal-close" aria-label="Close" @onclick="() => Selected = null">×</button>
+            <h3 style="margin:0">@Selected_.Id</h3>
+            <button class="modal-close" aria-label="Close" @onclick="() => Selected_ = null">×</button>
         </div>
         <div class="vdialog__body">
             <h4>Details</h4>
             <table class="table">
                 <tbody>
-                    <tr><td>Terminal</td><td>@Selected.Terminal</td></tr>
-                    <tr><td>Product</td><td>@Selected.Product</td></tr>
-                    <tr><td>Amount</td><td class="num">@Selected.Amount.ToString("F2") @Selected.Currency</td></tr>
-                    <tr><td>Time</td><td>@Selected.Ts.Replace("T", " ").Substring(0, 16)</td></tr>
-                    <tr><td>Status</td><td>Status · @Cap(Selected.Status)</td></tr>
+                    <tr><td>Terminal</td><td>@Selected_.Terminal</td></tr>
+                    <tr><td>Product</td><td>@Selected_.Product</td></tr>
+                    <tr><td>Amount</td><td class="num">@Selected_.Amount.ToString("F2") @Selected_.Currency</td></tr>
+                    <tr><td>Time</td><td>@Selected_.Ts.Replace("T", " ").Substring(0, 16)</td></tr>
+                    <tr><td>Status</td><td>Status · @Cap(Selected_.Status)</td></tr>
                 </tbody>
             </table>
         </div>
@@ -64,14 +109,66 @@
 }
 
 @code {
-    string Filter = "all";
-    Transaction? Selected;
+    sealed record Category(string Key, string Label, (string Value, string Label)[] Options);
 
-    IEnumerable<Transaction> Filtered =>
-        Filter == "all" ? SeedData.Transactions : SeedData.Transactions.Where(t => t.Status == Filter);
+    static readonly (string Value, string Label)[] Quick = { ("all", "All"), ("settled", "Settled"), ("pending", "Pending"), ("failed", "Failed") };
 
-    void OnFilter(ChangeEventArgs e) { Filter = e.Value?.ToString() ?? "all"; Selected = null; }
-    void Reset() => Filter = "all";
+    static (string, string)[] Distinct(Func<Transaction, string> key) =>
+        SeedData.Transactions.Select(key).Distinct().Order(StringComparer.Ordinal).Select(v => (v, v)).ToArray();
+
+    static readonly Category[] Categories =
+    {
+        new("product", "Product", Distinct(t => t.Product)),
+        new("terminal", "Terminal", Distinct(t => t.Terminal)),
+        new("amount", "Amount", new[] { ("lt200", "Under 200.00"), ("200to500", "200.00 to 499.99"), ("gte500", "500.00 and above") }),
+    };
+
+    readonly Dictionary<string, HashSet<string>> Selected = Categories.ToDictionary(c => c.Key, _ => new HashSet<string>());
+    string Query = "", Status = "all";
+    int Page = 1, PageSize = 10;
+    Transaction? Selected_;
+
+    int ActiveCount => Selected.Values.Sum(s => s.Count);
+
+    static bool InAmount(decimal amount, string bucket) => bucket switch
+    {
+        "lt200" => amount < 200m,
+        "200to500" => amount >= 200m && amount < 500m,
+        _ => amount >= 500m,
+    };
+
+    static string RowText(Transaction t) =>
+        $"{t.Id} {t.Ts.Substring(11, 5)} {t.Terminal} {t.Product} {t.Amount:F2} Status · {Cap(t.Status)} Detail";
+
+    IEnumerable<Transaction> Base => SeedData.Transactions.Where(t =>
+        (string.IsNullOrWhiteSpace(Query) || RowText(t).Contains(Query.Trim(), StringComparison.OrdinalIgnoreCase)) &&
+        (Selected["product"].Count == 0 || Selected["product"].Contains(t.Product)) &&
+        (Selected["terminal"].Count == 0 || Selected["terminal"].Contains(t.Terminal)) &&
+        (Selected["amount"].Count == 0 || Selected["amount"].Any(b => InAmount(t.Amount, b))));
+
+    List<Transaction> Rows => Base.Where(t => Status == "all" || t.Status == Status).ToList();
+
+    IEnumerable<Transaction> PageRows
+    {
+        get
+        {
+            var pages = Math.Max(1, (int)Math.Ceiling(Rows.Count / (double)PageSize));
+            return Rows.Skip((Math.Clamp(Page, 1, pages) - 1) * PageSize).Take(PageSize);
+        }
+    }
+
+    int StatusCount(string status) => Base.Count(t => status == "all" || t.Status == status);
+
+    void SetStatus(string status) { Status = status; Page = 1; }
+    void ResetPage() => Page = 1;
+    void Toggle(string cat, string value, ChangeEventArgs e)
+    {
+        if (e.Value is true) Selected[cat].Add(value); else Selected[cat].Remove(value);
+        Page = 1;
+    }
+    void Remove(string cat, string value) { Selected[cat].Remove(value); Page = 1; }
+    void ClearSheet() { foreach (var s in Selected.Values) s.Clear(); Page = 1; }
+    void ClearEverything() { ClearSheet(); Query = ""; Status = "all"; }
 
     static string StatusTone(string s) => s switch { "settled" => "success", "pending" => "warning", _ => "danger" };
     static string Cap(string s) => char.ToUpper(s[0]) + s[1..];

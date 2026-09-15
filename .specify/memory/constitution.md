@@ -1,8 +1,29 @@
 <!--
 Sync Impact Report
-- Version change: 1.9.0 → 1.10.0 (MINOR: Principle VII expanded — the Admin Kit
+- Version change: 1.10.0 -> 1.11.0 (MINOR: Principles II, IV and VII materially
+  expanded, Design Standards and Quality Gates extended; owner decision
+  2026-09-15, feature 007)
+- Modified principles:
+  II. Enterprise Monochrome, Near-Flat: authentication screens (sign-in) may sit
+  on the solid deep brand ground (--blue-900) in both themes; no other page
+  ground may be tinted.
+  IV. Accessibility & Responsive Baseline: content-fit rule added. Short content
+  renders on one line; data tables scroll inside their container instead of
+  squeezing; free text wraps only by explicit opt-in at a readable width;
+  truncation keeps the full value available.
+  VII. Reference Applications: the novalending console (v2.1nflow.co) is the
+  console pattern reference; required console patterns listed; one shared
+  pattern layer (admin-kits/shared) consumed by every flavor, parity checked.
+- Added to Design Standards: one line icon style (24-unit grid, 2-unit stroke,
+  round caps and joins, currentColor, 16/20/24px).
+- Quality Gates: 10 (admin pattern parity) and 11 (automated layout audit at
+  1440px and 375px) added.
+- Templates requiring updates: none (spec/plan/tasks templates unchanged).
+- Follow-up TODOs: propose upstreaming badge nowrap and the scroll-container
+  table rule to the tokens.css master (design-system owner).
+- Prior amendment (1.9.0 -> 1.10.0): Principle VII expanded, the Admin Kit
   gains a third flavor on Material Web under the Novus tokens; owner decision
-  2026-08-27)
+  2026-08-27
 - Prior amendment (1.8.1 -> 1.9.0): Governance gains the branch-and-PR rule —
   no direct commits to main, all changes via feature branch + pull request; owner
   decision 2026-08-27
@@ -75,7 +96,9 @@ is eliminated at the token layer or not at all.
 ### II. Enterprise Monochrome, Near-Flat (NON-NEGOTIABLE)
 
 The kit targets Ant Design-grade enterprise UI: solid neutral grounds (white `--bg`,
-never gradients or tinted page grounds), border radius only from the tokens.css
+never gradients or tinted page grounds; the single exception is authentication
+screens, which may sit on the solid deep brand ground `--blue-900` in both
+themes, flat, with no gradient or glow; owner decision 2026-09-15), border radius only from the tokens.css
 radius scale (`--radius-*`; no ad-hoc radius values), 1px solid borders over
 box-shadows (any shadow subtle, no glows), monochrome grays plus the single accent,
 font weights 400/600 only, and compact information-dense layouts. Motion is
@@ -109,6 +132,13 @@ pale ring). Dark mode is dual-trigger: every dark rule under BOTH
 `[data-theme="dark"]` and `@media (prefers-color-scheme: dark)`, with a persisted
 toggle applied before paint. Hover treatment is single and reserved for clickables:
 `translateY(-4px)` + raised shadow + accent border; static tiles get no hover.
+Content fit (owner decision 2026-09-15): short content (identifiers, names,
+chips and badges, dates, amounts and counts, button and link labels, column
+headers, filter and footer text) MUST render on one line at every width. Data
+tables sit in a horizontal scroll container and never shrink a column below its
+content; free text wraps only by explicit opt-in at a readable minimum width;
+a value truncated to fit a fixed slot keeps its full text available to the
+reader and to assistive technology.
 
 **Rationale**: Accessibility and responsiveness are trust boundaries, not polish;
 retrofitting them costs more than building on them.
@@ -179,7 +209,18 @@ on the primary series; series colours are the product accents, read from
 tokens, never literals). Data grids are sortable, paginated, and searchable,
 using the framework's native grid where one exists and kit-token styling
 always. Each flavor MUST have a live demo hosted with the docs site, and the
-docs page's screenshots MUST link to the running demos.
+docs page's screenshots MUST link to the running demos. The console pattern
+reference is the novalending console (v2.1nflow.co, captured 2026-09-15; owner
+decision): every flavor ships its split sign-in page, header user menu with
+sign out and a signed-out page, grouped side navigation that collapses on
+desktop and opens as a drawer on small screens without JavaScript, page header
+with breadcrumb and end-aligned actions, filter bar with a sub-filter sheet,
+active chips and quick filter chips, and list footer pagination (range,
+previous and next, page label, rows per page). The reference's wrapping of short
+content is a recorded defect and MUST NOT be reproduced. Console pattern CSS,
+its progressive JavaScript and the icon set have ONE source
+(`admin-kits/shared/`), copied into each flavor by the parity generator and
+read by the docs build; a hand-edited copy is a defect caught by the gates.
 
 **Rationale**: A design kit is judged by its first real application; an
 unverified or off-convention demo teaches every consumer the wrong patterns.
@@ -230,6 +271,10 @@ run-verified guides.
   code blocks, figures, and tables carry token-scale top/bottom spacing.
 - Canonical docs host: https://ui-kit.novustech.dev (Cloudflare DNS CNAME to
   GitHub Pages; HTTPS enforced). Demo apps live under /demos/ on the same host.
+- Icons: one line style on a 24-unit square grid, 2-unit stroke, round caps and
+  joins, `currentColor`, rendered at 16, 20, or 24px; drawn in-house and shipped
+  as inline markup (no icon font, no third-party request); decorative icons are
+  hidden from assistive technology and icon-only controls carry a name.
 - Kit source order: project copy of `tokens.css` first, skill snapshot second, the
   SharePoint master (`novaAI1.0program` → `Novus Design System/`) as living source.
   Drift is flagged to the design-system owner, never patched in one file alone.
@@ -252,6 +297,12 @@ Every change to the kit MUST pass these gates before merge:
 8. Copy style: `grep -r "—"` on published site copy and README → zero matches.
 9. Guide verification: every published framework/theme guide has a passing row
    in the verification record; unverified guides are excluded from the build.
+10. Admin pattern parity: `node admin-kits/data/generate.mjs --check` passes (no
+    generated copy of the shared console layer, JavaScript, icons, shell, or
+    data differs from its source).
+11. Layout audit: the rendered docs site and hosted demos show no short content
+    on more than one line and no page-level horizontal scroll at 375px, checked
+    in a headless browser at 1440px and 375px; the audit must run in CI.
 
 Reviews reject on any gate failure; gates are not advisory.
 
@@ -280,4 +331,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.10.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-08-27
+**Version**: 1.11.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-15

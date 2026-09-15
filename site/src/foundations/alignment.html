@@ -1,0 +1,72 @@
+<!-- title: Alignment & content fit -->
+<p class="eyebrow">Foundations</p>
+<h1>Alignment &amp; content fit</h1>
+<p>One short value, one line. Identifiers, names, chips, dates, amounts, button labels, and column headers never break across lines, at any width. Layouts make room, scroll, or truncate; they never squeeze a value into two or three rows. The rule is part of constitution Principle IV and an automated layout audit enforces it on every change.</p>
+
+<h2>Tables scroll, content stays whole</h2>
+<section class="demo" data-title="Right: single-line cells in a scroll container">
+  <div class="card card--flush">
+    <div class="tablewrap">
+      <table class="table">
+        <thead><tr><th>Reference</th><th>Merchant</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th>Submitted</th><th class="cell--actions">Actions</th></tr></thead>
+        <tbody>
+          <tr><td><code>TXN-241099</code></td><td>Hillcrest Grocers Makati</td><td>novapay</td><td class="num">151.17</td><td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td><td>27 Aug 2026, 18:31</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr>
+          <tr><td><code>TXN-241073</code></td><td>Riverside Fuel Station 12</td><td>novastore</td><td class="num">401.87</td><td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td><td>27 Aug 2026, 17:57</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr>
+          <tr><td><code>TXN-240981</code></td><td>Harbourfront Pharmacy</td><td>novabank</td><td class="num">96.40</td><td><span class="badge badge--danger"><span class="badge__dot"></span> Status · Failed</span></td><td>27 Aug 2026, 15:12</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<div data-audit="skip">
+<section class="demo" data-title="Wrong: the same table squeezed to fit">
+  <div style="max-width:26rem">
+    <table class="table">
+      <thead><tr><th>Reference</th><th>Merchant</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th>Submitted</th></tr></thead>
+      <tbody>
+        <tr><td><code>TXN-241099</code></td><td>Hillcrest Grocers Makati</td><td>novapay</td><td class="num">151.17</td><td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td><td>27 Aug 2026, 18:31</td></tr>
+        <tr><td><code>TXN-241073</code></td><td>Riverside Fuel Station 12</td><td>novastore</td><td class="num">401.87</td><td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td><td>27 Aug 2026, 17:57</td></tr>
+        <tr><td><code>TXN-240981</code></td><td>Harbourfront Pharmacy</td><td>novabank</td><td class="num">96.40</td><td><span class="badge badge--danger"><span class="badge__dot"></span> Status · Failed</span></td><td>27 Aug 2026, 15:12</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</div>
+<p>The squeezed table breaks the reference at its hyphen and stacks merchant names and dates onto several lines, so every row has a different height and nothing can be scanned. Wrap the table in <code>.tablewrap</code> instead.</p>
+
+<h2>Wrap only free text</h2>
+<p>Descriptions, notes, and messages are the only content that wraps. In tables they opt in with <code>.cell--wrap</code>, which keeps a readable minimum width; everywhere else paragraphs wrap as normal text.</p>
+
+<h2>Truncate fixed slots</h2>
+<section class="demo" data-title="One line with an ellipsis; the full value stays available">
+  <div class="card" style="max-width:15rem;display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3)">
+    <svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.75"/><path d="M4.75 20a7.25 7.25 0 0 1 14.5 0"/></svg><span class="truncate" title="operations.administrator@novustech.com.sg">operations.administrator@novustech.com.sg</span>
+  </div>
+</section>
+<p>When a value must fit a slot it cannot grow, such as a user name in the header, <code>.truncate</code> keeps it on one line with an ellipsis. The full value must stay available: in <code>title</code>, in the opened menu, or nearby.</p>
+
+<h2>Numbers and actions align to the end</h2>
+<ul class="bullets">
+  <li>Amounts, counts, and percentages are right-aligned with tabular numerals (<code>class="num"</code> on the header and the cells), so digits line up.</li>
+  <li>Row actions sit in the last column, aligned to the end (<code>.cell--actions</code>); screen actions sit at the end of the title row in the <a href="../components/page-header.html">page header</a>.</li>
+  <li>Text, identifiers, and dates are left-aligned. Never centre data.</li>
+</ul>
+
+<h2>One control height per row</h2>
+<section class="demo" data-title="Search, filter trigger, select, and button share the 44px height">
+  <div class="filterrow filterrow--nowrap" style="margin:0">
+    <input class="input" type="search" placeholder="Search" aria-label="Search">
+    <button type="button" class="filtermenu__trigger"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.2 7.4V18l-3.6 2v-7.6Z"/></svg><span>Filters</span><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
+    <span class="selectwrap"><select class="select" aria-label="Rows per page"><option>10 / page</option><option>20 / page</option></select></span>
+    <button class="btn btn--secondary">Export</button>
+  </div>
+</section>
+
+<h2>Checklist</h2>
+<ul class="bullets">
+  <li>Every data table sits in <code>.tablewrap</code>; only free-text columns carry <code>.cell--wrap</code>.</li>
+  <li>Chips, badges, buttons, breadcrumb items, navigation labels, filter triggers, and footer text are single-line by construction in the console layer.</li>
+  <li>A value that must fit a fixed slot uses <code>.truncate</code> and keeps its full text available.</li>
+  <li>Toolbars keep one control height and one row; on narrow screens they move as whole groups or scroll, never breaking a label.</li>
+  <li>Check at 1440px and 375px. The layout audit (<code>scripts/layout-audit.mjs</code>) fails any page where short content wraps or the page scrolls sideways.</li>
+</ul>

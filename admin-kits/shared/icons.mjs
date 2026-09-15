@@ -1,0 +1,46 @@
+/* Novus console icon set (feature 007, constitution 1.11.0 Design Standards).
+   ONE source for the Admin Kit flavors (generate.mjs emits Icon.razor and the
+   static shell) and the docs Icons page (site/build.mjs ICON-INDEX).
+   Style: 24-unit square grid, 2-unit stroke, round caps and joins, no fill,
+   drawn in currentColor. Drawn in-house as plain geometry; no third-party set.
+   Rendered at 16px (.icon--sm), 20px (.icon), or 24px (.icon--lg). */
+
+export const icons = [
+  ["menu", "Menu", '<path d="M4 6h16M4 12h16M4 18h16"/>'],
+  ["close", "Close", '<path d="m6 6 12 12M18 6 6 18"/>'],
+  ["chevron-down", "Chevron down", '<path d="m6 9 6 6 6-6"/>'],
+  ["chevron-up", "Chevron up", '<path d="m6 15 6-6 6 6"/>'],
+  ["chevron-left", "Chevron left", '<path d="m15 6-6 6 6 6"/>'],
+  ["chevron-right", "Chevron right", '<path d="m9 6 6 6-6 6"/>'],
+  ["search", "Search", '<circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/>'],
+  ["filter", "Filter", '<path d="M4 5h16l-6.2 7.4V18l-3.6 2v-7.6Z"/>'],
+  ["user", "User", '<circle cx="12" cy="8" r="3.75"/><path d="M4.75 20a7.25 7.25 0 0 1 14.5 0"/>'],
+  ["sign-out", "Sign out", '<path d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h4"/><path d="m15 8 4 4-4 4M19 12H9"/>'],
+  ["sun", "Light theme", '<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/>'],
+  ["moon", "Dark theme", '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/>'],
+  ["eye", "Show", '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/>'],
+  ["eye-off", "Hide", '<path d="M9.9 5.7A9.9 9.9 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.4 3.2M6.5 6.6A16.6 16.6 0 0 0 2.5 12s3.5 6.5 9.5 6.5a9.4 9.4 0 0 0 5.5-1.7"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M3 3l18 18"/>'],
+  ["dashboard", "Dashboard", '<rect x="3.5" y="3.5" width="7" height="8" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="5" rx="1.5"/><rect x="13.5" y="11.5" width="7" height="9" rx="1.5"/><rect x="3.5" y="14.5" width="7" height="6" rx="1.5"/>'],
+  ["chart", "Analytics", '<path d="M4 4v16h16"/><path d="M8.5 16v-4M12.5 16V7.5M16.5 16v-6"/>'],
+  ["transactions", "Transactions", '<path d="M4 8h15m-4-4 4 4-4 4"/><path d="M20 16H5m4-4-4 4 4 4"/>'],
+  ["layers", "Operations", '<path d="m12 3.5 8.5 4.5-8.5 4.5L3.5 8Z"/><path d="m3.5 12.5 8.5 4.5 8.5-4.5"/>'],
+  ["grid", "Data grid", '<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/>'],
+  ["terminal", "Terminal", '<rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M9 6.5h6M9.5 11.5h.01M12 11.5h.01M14.5 11.5h.01M9.5 14.5h.01M12 14.5h.01M14.5 14.5h.01M9.5 18h5"/>'],
+  ["settings", "Settings", '<path d="M4 6h9m4 0h3M4 12h3m4 0h9M4 18h11m4 0h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/>'],
+  ["workspace", "Workspace", '<rect x="4.5" y="3.5" width="15" height="17" rx="1.5"/><path d="M9 7.5h1m4 0h1M9 11.5h1m4 0h1M9 15.5h1m4 0h1M10.5 20.5V18h3v2.5"/>'],
+  ["plus", "Add", '<path d="M12 5v14M5 12h14"/>'],
+  ["download", "Download", '<path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14"/>'],
+  ["check", "Check", '<path d="m5 12.5 4.5 4.5L19 7.5"/>'],
+  ["more", "More", '<path d="M5.5 12h.01M12 12h.01M18.5 12h.01"/>'],
+];
+
+const byName = new Map(icons.map(([name, , body]) => [name, body]));
+
+/* svg("menu") -> inline markup; cls adds classes after "icon" (e.g. "icon--sm ic-moon").
+   Decorative by default; pass a label to make the icon itself meaningful. */
+export function svg(name, cls = "", label = "") {
+  const body = byName.get(name);
+  if (!body) throw new Error(`icons.mjs: unknown icon "${name}"`);
+  const a11y = label ? `role="img" aria-label="${label}"` : `aria-hidden="true"`;
+  return `<svg class="icon${cls ? " " + cls : ""}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${a11y}>${body}</svg>`;
+}

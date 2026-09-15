@@ -1,0 +1,35 @@
+<!-- title: Icons -->
+<p class="eyebrow">Foundations</p>
+<h1>Icons</h1>
+<p>One line icon style for every Novus console: a 24-unit square grid, a 2-unit stroke with round caps and joins, no fill, drawn in the current text colour. The set is drawn in-house and ships as inline markup from <code>admin-kits/shared/icons.mjs</code>, so there is no icon font and no third-party request.</p>
+
+<h2>Sizes</h2>
+<section class="demo" data-title="16px beside small text, 20px in navigation and buttons, 24px standalone">
+  <div class="row" style="align-items:center;gap:var(--space-5)">
+    <span class="row" style="align-items:center;gap:var(--space-2)"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.2 7.4V18l-3.6 2v-7.6Z"/></svg><span style="font-size:var(--text-sm)">Filters</span></span>
+    <span class="row" style="align-items:center;gap:var(--space-2)"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h15m-4-4 4 4-4 4"/><path d="M20 16H5m4-4-4 4 4 4"/></svg><span>Transactions</span></span>
+    <svg class="icon icon--lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="2"/><path d="M9 6.5h6M9.5 11.5h.01M12 11.5h.01M14.5 11.5h.01M9.5 14.5h.01M12 14.5h.01M14.5 14.5h.01M9.5 18h5"/></svg>
+  </div>
+</section>
+
+<h2>In controls</h2>
+<section class="demo" data-title="Icon with a label, and an icon-only button with a name">
+  <div class="row" style="align-items:center">
+    <button class="btn btn--secondary btn--sm"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14"/></svg> Export CSV</button>
+    <button class="btn btn--ghost btn--sm toggle44" aria-label="Close"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+  </div>
+</section>
+
+<h2>Rules</h2>
+<ul class="bullets">
+  <li>Draw on the 24-unit grid with a 2-unit stroke, round caps and joins, and no fill. Colour comes from <code>currentColor</code>, so icons follow text, accent, and dark mode on their own.</li>
+  <li>Use 16px (<code>.icon--sm</code>) beside small text, 20px (<code>.icon</code>) in navigation and buttons, and 24px (<code>.icon--lg</code>) standalone.</li>
+  <li>An icon supports a label; it rarely replaces one. Icon-only controls carry an accessible name and a 44px target.</li>
+  <li>Decorative icons carry <code>aria-hidden="true"</code>; the markup below already does.</li>
+  <li>One style per view: never mix these with filled, duotone, or third-party icons, and never use an icon font.</li>
+  <li>Product and platform identity uses the official pictographs from <a href="logos.html">Logos</a>, not this set.</li>
+</ul>
+
+<h2>The set</h2>
+<p>Each tile shows the icon at 16, 20, and 24px; Copy takes the 20px markup.</p>
+<!--ICON-INDEX-->

@@ -1,32 +1,53 @@
 @page "/login"
-@rendermode InteractiveServer
-@layout NovusAdminKit.Components.Layout.EmptyLayout
+@layout AuthLayout
 @inject NavigationManager Nav
 
 <PageTitle>Sign in · Novus Admin Kit</PageTitle>
 
-<main class="loginwrap">
-    <form class="card logincard" @onsubmit="Submit" @onsubmit:preventDefault>
-        <span class="brandmark" role="img" aria-label="Novus Technologies"></span>
-        <h2 style="text-align:center">novapay operations · admin</h2>
-        <p class="muted" style="text-align:center">Sample login. Demo credentials: admin / admin. Nothing is stored.</p>
-        @if (Error)
-        {
-            <div class="alert alert--danger">Wrong username or password. Use admin / admin.</div>
-        }
-        <div class="field"><label for="l-user">Username</label><input class="input" id="l-user" @bind="User" autocomplete="username"></div>
-        <div class="field"><label for="l-pass">Password</label><input class="input" id="l-pass" type="password" @bind="Pass" autocomplete="current-password"></div>
-        <button class="btn btn--primary" style="width:100%">Sign in</button>
-    </form>
-</main>
+@* Static server-rendered form post: works with JavaScript off and keeps the
+   typed username when the sample credentials are wrong. *@
+<div class="authsplit">
+    <AuthBrand />
+    <main class="authmain">
+        <form class="card authcard" method="post" @formname="login" @onsubmit="Submit">
+            <AntiforgeryToken />
+            <svg class="authcard__mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+            <h1 class="authcard__title">Sign in to your console</h1>
+            <p class="muted authcard__sub">Sample console: sign in with admin / admin. Nothing is stored.</p>
+            <div class="field@(Error ? " field--error" : "")" id="userfield">
+                <label for="l-user">Username<span class="field__req" aria-hidden="true">*</span></label>
+                <input class="input" id="l-user" name="Form.Username" value="@Form!.Username" autocomplete="username" required aria-describedby="loginerror">
+                <p class="field__error" id="loginerror" role="alert" hidden="@(!Error)">Wrong username or password. Use admin / admin.</p>
+            </div>
+            <div class="field">
+                <label for="l-pass">Password<span class="field__req" aria-hidden="true">*</span></label>
+                <div class="pwgroup">
+                    <input class="input" id="l-pass" name="Form.Password" type="password" autocomplete="current-password" required>
+                    <PasswordToggle />
+                </div>
+            </div>
+            <button class="btn btn--primary btn--lg authcard__submit">Sign in</button>
+            <details class="authcard__forgot"><summary>Forgot password?</summary><p class="muted">In this sample, password resets are handled by your administrator.</p></details>
+            <div class="authcard__foot"><span class="muted">Managed by</span><span class="brandmark" role="img" aria-label="Novus Technologies"></span></div>
+        </form>
+    </main>
+</div>
 
 @code {
-    string User = "", Pass = "";
+    [SupplyParameterFromForm] LoginModel? Form { get; set; }
     bool Error;
+
+    protected override void OnInitialized() => Form ??= new();
 
     void Submit()
     {
-        if (User == "admin" && Pass == "admin") Nav.NavigateTo(Nav.BaseUri);
+        if (Form!.Username == "admin" && Form.Password == "admin") Nav.NavigateTo(Nav.BaseUri);
         else Error = true;
+    }
+
+    sealed class LoginModel
+    {
+        public string Username { get; set; } = "";
+        public string Password { get; set; } = "";
     }
 }

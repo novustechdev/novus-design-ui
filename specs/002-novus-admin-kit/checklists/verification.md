@@ -37,3 +37,18 @@ admin/admin routes to the dashboard); demo provenance bar links back to the
 docs; header inner and footer are full width; body type stepped to the sm
 token for density.
 - 2026-08-27: Tabbed settings verified in both flavors (headless Chromium): Profile visible by default, API access panel switches on tab click, panels swap via :has, 375px scrollWidth 375 in both. Gates all green after site rebuild.
+
+## Feature 007: console patterns from the novalending reference (2026-09-15)
+
+| deliverable | stack verified against | date | evidence | result |
+|---|---|---|---|---|
+| tailwind | vite 8, tailwindcss 4.3, novus-design-kit 0.3.x | 2026-09-15 | 27/27 flow checks (sign-in error keeps username, password toggle, admin/admin to dashboard, user menu, sign out, sign in again, Failed chip 2 rows, Failed + novapay 2 rows with chip and count, Clear all + All 24, 20 per page 2 pages, last page 21-24, grid search failed 2, desktop collapse, 375 no scroll, drawer opens and closes after navigation); JS off: toggle hidden, 24 static rows, drawer, filter sheet and radio tabs, user menu | pass |
+| material | vite 8, @material/web 2.x | 2026-09-15 | same 27/27 flow checks with Material Web filled and outlined fields and checkboxes | pass |
+| blazor (server) | .NET SDK 10.0.400, QuickGrid 10.0.11 | 2026-09-15 | same 27/27 flow checks; JS off: static form post shows the error and keeps the username, admin/admin redirects, 10 prerendered rows, drawer, filter sheet, user menu | pass |
+| blazor WASM demo (hosted) | .NET 10 WebAssembly publish | 2026-09-15 | same 27/27 flow checks; pages mirrored from the server flavor by generate.mjs | pass |
+| docs + demos layout audit | playwright-core 1.55 + Chromium | 2026-09-15 | 79 pages x 1440/375, 0 findings; negative test (content-fit table rule removed) 13 WRAP findings | pass |
+| pattern parity gate | node generate.mjs --check | 2026-09-15 | clean; negative test (hand edit of tailwind/src/novus-admin.css) exit 1 naming the file | pass |
+
+Cross-flavor parity: Failed quick chip = 2 and Failed + Product novapay = 2 in all
+four deliverables; default footer "Showing 1-10 of 24", "Page 1 of 3".
+

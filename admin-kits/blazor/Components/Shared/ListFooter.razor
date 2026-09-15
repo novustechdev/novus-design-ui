@@ -1,0 +1,43 @@
+@* List footer (feature 007): range, previous and next, page label, rows per page.
+   Mirrored into the WASM demo by admin-kits/data/generate.mjs. *@
+<div class="listfooter">
+    <span class="listfooter__range" aria-live="polite">@RangeText</span>
+    <div class="listfooter__controls">
+        <div class="paginator">
+            <button type="button" aria-label="Previous page" disabled="@(Page <= 1)" @onclick="() => Go(Page - 1)"><Icon Name="chevron-left" /></button>
+            <span class="paginator__label">Page @Page of @Pages</span>
+            <button type="button" aria-label="Next page" disabled="@(Page >= Pages)" @onclick="() => Go(Page + 1)"><Icon Name="chevron-right" /></button>
+        </div>
+        <span class="selectwrap"><select class="select" aria-label="Rows per page" @onchange="SizeChanged">
+            @foreach (var n in Sizes)
+            {
+                <option value="@n" selected="@(n == PageSize)">@n / page</option>
+            }
+        </select></span>
+    </div>
+</div>
+
+@code {
+    static readonly int[] Sizes = { 10, 20, 50 };
+
+    [Parameter] public int Total { get; set; }
+    [Parameter] public int Page { get; set; } = 1;
+    [Parameter] public int PageSize { get; set; } = 10;
+    [Parameter] public EventCallback<int> PageChanged { get; set; }
+    [Parameter] public EventCallback<int> PageSizeChanged { get; set; }
+
+    int Pages => Math.Max(1, (int)Math.Ceiling(Total / (double)PageSize));
+
+    string RangeText => Total == 0
+        ? "Showing 0 of 0"
+        : $"Showing {(Page - 1) * PageSize + 1}-{Math.Min(Page * PageSize, Total)} of {Total}";
+
+    Task Go(int page) => PageChanged.InvokeAsync(Math.Clamp(page, 1, Pages));
+
+    async Task SizeChanged(ChangeEventArgs e)
+    {
+        if (!int.TryParse(e.Value?.ToString(), out var size)) return;
+        await PageSizeChanged.InvokeAsync(size);
+        await PageChanged.InvokeAsync(1);
+    }
+}
