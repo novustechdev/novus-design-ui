@@ -2,7 +2,14 @@
 
 <PageTitle>Dashboard · Novus Admin Kit</PageTitle>
 
-<div class="pagehead"><h1>Today</h1><a class="btn btn--secondary btn--sm" href="transactions">All transactions</a></div>
+<div class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="">Operations</a></li><li aria-current="page">Dashboard</li></ol></nav>
+    <div class="pagehead__row">
+        <h1>Today</h1>
+        <div class="pagehead__actions"><a class="btn btn--secondary btn--sm" href="transactions">All transactions</a></div>
+    </div>
+    <p class="muted pagehead__desc">Live acceptance, uptime, and settlement across the novapay fleet.</p>
+</div>
 
 <div class="statrow statrow--wide statpanel">
     @foreach (var k in SeedData.Kpis)
@@ -22,11 +29,11 @@
     }
 </div>
 
-<div class="card" style="padding:0;overflow:hidden">
-    <div class="pagehead" style="padding:var(--space-4) var(--space-4) 0;margin-bottom:var(--space-3)"><h2 style="margin:0;font-size:var(--text-lg)">Recent transactions</h2></div>
+<div class="card card--flush">
+    <div class="cardhead"><h2>Recent transactions</h2><a class="btn btn--ghost btn--sm" href="transactions">View all</a></div>
     <div class="tablewrap">
         <table class="table">
-            <thead><tr><th>Id</th><th>Time</th><th>Terminal</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th></tr></thead>
+            <thead><tr><th>Id</th><th>Time</th><th>Terminal</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th class="cell--actions">Actions</th></tr></thead>
             <tbody>
                 @foreach (var t in SeedData.Transactions.Take(6))
                 {
@@ -34,6 +41,7 @@
                         <td><code>@t.Id</code></td><td>@t.Ts.Substring(11, 5)</td><td>@t.Terminal</td>
                         <td>@t.Product</td><td class="num">@t.Amount.ToString("F2")</td>
                         <td><span class="badge badge--@StatusTone(t.Status)"><span class="badge__dot"></span> Status · @Cap(t.Status)</span></td>
+                        <td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td>
                     </tr>
                 }
             </tbody>

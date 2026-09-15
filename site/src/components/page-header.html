@@ -1,0 +1,26 @@
+<section class="demo" data-title="Page header: breadcrumb, title, end-aligned actions, description">
+  <div class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="page-header.html">Operations</a></li><li aria-current="page">Transactions</li></ol></nav>
+    <div class="pagehead__row">
+      <h1>Transactions</h1>
+      <div class="pagehead__actions"><a class="btn btn--secondary btn--sm" href="page-header.html"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m-4.5-4.5L12 15l4.5-4.5M5 19.5h14"/></svg> Export CSV</a><a class="btn btn--primary btn--sm" href="page-header.html"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> New terminal</a></div>
+    </div>
+    <p class="muted pagehead__desc">Card and wallet payments across the terminal fleet, newest first.</p>
+  </div>
+</section>
+
+<section class="demo" data-title="Without actions">
+  <div class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="page-header.html">Configuration</a></li><li aria-current="page">Settings</li></ol></nav>
+    <div class="pagehead__row"><h1>Settings</h1></div>
+    <p class="muted pagehead__desc">Profile, appearance, notifications, and API access for this console.</p>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Every console screen opens with a page header: the breadcrumb (area, then screen), the title, and the screen's actions aligned to the end of the title row.</li>
+  <li>Actions stay in one row. On narrow screens the whole group moves under the title; buttons never wrap one by one.</li>
+  <li>At most one primary action; the rest are secondary or ghost.</li>
+  <li>The description is one sentence about what the screen holds.</li>
+</ul>

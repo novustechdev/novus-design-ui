@@ -1,13 +1,16 @@
 <!-- title: Novus Admin Kit -->
 <h1>Novus Admin Kit</h1>
 <p>A complete, realistic enterprise starting point built on the design kit: a novapay
-operations console with a dashboard, a filterable transactions table, a terminal
-fleet view, and settings. It ships in three flavors with strict screen parity (Blazor, Tailwind, and
+operations console with a sign-in page, a dashboard, a filterable transactions list,
+a data grid, a terminal fleet view, settings, and a signed-out page, built on the
+console patterns from the novalending reference: split sign-in, grouped side
+navigation with a drawer on phones, page headers with breadcrumbs, a filter bar with
+a sub-filter sheet, list footer pagination, and single-line content everywhere. It ships in three flavors with strict screen parity (Blazor, Tailwind, and
 Material Web), all consuming the published <code>novus-design-kit</code> package. Copy a flavor folder
 from the repository and start from a working, on-brand application.</p>
 
 <div class="statrow statrow--wide" style="margin-bottom:var(--space-6)">
-  <div class="stat"><span class="stat__value">6</span><span class="stat__label">screens per flavor</span></div>
+  <div class="stat"><span class="stat__value">8</span><span class="stat__label">screens per flavor</span></div>
   <div class="stat"><span class="stat__value">3</span><span class="stat__label">flavors, one dataset</span></div>
   <div class="stat"><span class="stat__value">0</span><span class="stat__label">tokens or logins to run</span></div>
 </div>
@@ -44,25 +47,28 @@ dotnet run</code></pre>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install novus-design-kit chart.js</code></pre>
 <ul class="bullets">
   <li>Import <code>novus-design-kit/tokens.css</code> and the pre-paint theme script <code>novus-design-kit/js/novus-theme.js</code> first, exactly as your <a href="frameworks/blazor.html">framework guide</a> shows.</li>
-  <li>Copy the pieces you need from a flavor: the shared console layout lives in <code>src/admin.css</code> (Tailwind) or <code>wwwroot/admin.css</code> (Blazor), the token-fed chart wiring in <code>novus-chart.js</code>, and the screens are self-contained pages you can lift one at a time.</li>
-  <li>The demo dataset and its generator live in <code>admin-kits/data/</code>; run <code>node generate.mjs</code> there to re-emit the per-flavor data files from <code>dataset.json</code>.</li>
+  <li>Copy the pieces you need: every console pattern (content fit, shell, side navigation, page header, user menu, sign-in, signed-out, filter bar, list footer) lives in one token-only stylesheet, <code>admin-kits/shared/novus-admin.css</code>, with its progressive script <code>novus-admin.js</code> and the icon set <code>icons.mjs</code>. Each flavor carries a generated copy; load it after <code>tokens.css</code>. The token-fed chart wiring is in <code>novus-chart.js</code>, and the screens are self-contained pages you can lift one at a time.</li>
+  <li>The demo dataset and the parity generator live in <code>admin-kits/data/</code>; <code>node generate.mjs</code> re-emits every flavor's data, shared layer copies, console shell, icons, and the WebAssembly demo mirrors, and <code>node generate.mjs --check</code> fails when any copy has drifted (a release gate).</li>
 </ul>
 
 <h2>Screens and conventions</h2>
 <ul class="bullets">
+  <li><b>Sign-in</b>: the deep brand ground with the novapay brand panel beside the credential card; small-caps labels, filled inputs, a show and hide password button, one inline error that keeps the username, a reset disclosure, and the Novus endorsement. Sample credentials: admin / admin.</li>
   <li><b>Dashboard</b>: KPI stat row, signal cards (risk always red, watch amber), recent transactions.</li>
-  <li><b>Transactions</b>: data-dense table, status filter, native detail dialog, plain empty state.</li>
+  <li><b>Transactions</b>: quick status chips with live counts, search, a Filters sheet with Product, Terminal, and Amount categories, removable active chips with Clear all, a native detail dialog, a plain empty state, and the list footer (range, previous and next, page label, rows per page).</li>
+  <li><b>Data grid</b>: every transaction with column sorting, search, and the same list footer (Blazor QuickGrid; progressive enhanced table in the static flavors).</li>
   <li><b>Terminals</b>: fleet health with degraded and offline devices sorted first.</li>
-  <li><b>Settings</b>: tabbed screen (Profile, Appearance, Notifications, API access) with an animated active-tab indicator; the tabs are native radio inputs, so they work with JavaScript off.</li>
-  <li><b>Menu and tabs motion</b>: nav links and tab switches use brief functional transitions (0.2s or less), disabled under reduced-motion preferences.</li>
   <li><b>Analytics</b>: hourly volume by product, stacked composition bars with a total trajectory line, styled by the locked Novus chart rules (token-fed at runtime).</li>
-  <li><b>Data grid</b>: all transactions with column sorting, search, and 10-per-page pagination (Blazor QuickGrid; progressive enhanced table in the Tailwind flavor).</li>
-  <li>Internal-tool header (app identity left, Novus endorsement right), sidebar that collapses to a native menu on mobile, traffic-light colour only on judgement chips, amounts always neutral, self-describing chips, dual-trigger dark mode, JS-off navigation.</li>
+  <li><b>Settings</b>: tabbed screen (Profile, Appearance, Notifications, API access) on native radio inputs, so the tabs work with JavaScript off.</li>
+  <li><b>Signed out</b>: the centred card that confirms the session ended and offers Sign in again.</li>
+  <li><b>Shell</b>: menu toggle, product lockup, Novus endorsement, and a user menu holding the theme toggle and Sign out; grouped side navigation with line icons that collapses at desktop width and opens as a drawer on phones, with no JavaScript required; a page header with breadcrumb and end-aligned actions on every screen.</li>
+  <li><b>Content fit</b>: identifiers, names, chips, dates, amounts, and headers stay on one line at every width; tables scroll inside their card instead of squeezing. The layout audit gate checks every screen at 1440px and 375px.</li>
+  <li>Traffic-light colour only on judgement chips, amounts always neutral, self-describing chips, dual-trigger dark mode, functional motion of 0.2s or less that is removed under reduced-motion preferences.</li>
 </ul>
 
 <h2>Novus Admin Kit with Blazor</h2>
 <p>Blazor Web App (.NET 10): server-rendered pages, InteractiveServer only on the
-transactions filter and detail dialog. Verified 2026-08-27; screenshots below are from the verified run, and every image opens the live demo. The hosted demo is a WebAssembly build (requires JavaScript); the copyable flavor is server-rendered and works without it.</p>
+transactions filters and data grid; the sign-in page is a static server-rendered form post that works with JavaScript off. Verified 2026-09-15; screenshots below are from the verified run, and every image opens the live demo. The hosted demo is a WebAssembly build (requires JavaScript); the copyable flavor is server-rendered and works without it.</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/blazor from the repository, then
 npm install     # pulls novus-design-kit; the build copies it to wwwroot/lib
 dotnet run</code></pre>
@@ -72,17 +78,19 @@ dotnet run</code></pre>
 <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
   <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-dashboard-light.png" alt="blazor flavor: Dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, light</figcaption></figure>
   <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-dashboard-dark.png" alt="blazor flavor: Dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, dark</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-transactions.png" alt="blazor flavor: Transactions: Filters sheet, active chip, quick chips" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions: Filters sheet, active chip, quick chips</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-datagrid.png" alt="blazor flavor: Data grid: sort, search, list footer" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, list footer</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-signin.png" alt="blazor flavor: Sign-in on the brand ground" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Sign-in on the brand ground</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-signedout.png" alt="blazor flavor: Signed out" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Signed out</figcaption></figure>
   <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-analytics.png" alt="blazor flavor: Analytics: token-fed chart" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Analytics: token-fed chart</figcaption></figure>
-  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-datagrid.png" alt="blazor flavor: Data grid: sort, search, pages" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, pages</figcaption></figure>
-  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-transactions.png" alt="blazor flavor: Transactions with filter and dialog" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
-  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-settings.png" alt="blazor flavor: Tabbed settings with animated indicator" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Tabbed settings with animated indicator</figcaption></figure>
-  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-mobile.png" alt="blazor flavor: 375px, no horizontal scroll" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-settings.png" alt="blazor flavor: Tabbed settings" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Tabbed settings</figcaption></figure>
+  <figure style="margin:0"><a href="demos/blazor/"><img src="assets/admin-kit/blazor-mobile.png" alt="blazor flavor: 375px: single-line cells, table scrolls in its card" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px: single-line cells, table scrolls in its card</figcaption></figure>
 </div>
 
 <h2>Novus Admin Kit with Tailwind</h2>
 <p>Vite multi-page app with Tailwind utilities mapped to the Novus tokens
 (the verified theme-guide pattern); vanilla JS only for the filter, dialog, and
-toggle. Verified 2026-08-27.</p>
+toggle. Verified 2026-09-15.</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/tailwind from the repository, then
 npm install
 npm run dev     # or: npm run build && npm run preview</code></pre>
@@ -92,11 +100,13 @@ npm run dev     # or: npm run build && npm run preview</code></pre>
 <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
   <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-dashboard-light.png" alt="tailwind flavor: Dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, light</figcaption></figure>
   <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-dashboard-dark.png" alt="tailwind flavor: Dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, dark</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-transactions.png" alt="tailwind flavor: Transactions: Filters sheet, active chip, quick chips" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions: Filters sheet, active chip, quick chips</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-datagrid.png" alt="tailwind flavor: Data grid: sort, search, list footer" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, list footer</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-signin.png" alt="tailwind flavor: Sign-in on the brand ground" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Sign-in on the brand ground</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-signedout.png" alt="tailwind flavor: Signed out" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Signed out</figcaption></figure>
   <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-analytics.png" alt="tailwind flavor: Analytics: token-fed chart" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Analytics: token-fed chart</figcaption></figure>
-  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-datagrid.png" alt="tailwind flavor: Data grid: sort, search, pages" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, pages</figcaption></figure>
-  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-transactions.png" alt="tailwind flavor: Transactions with filter and dialog" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions with filter and dialog</figcaption></figure>
-  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-settings.png" alt="tailwind flavor: Tabbed settings with animated indicator" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Tabbed settings with animated indicator</figcaption></figure>
-  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-mobile.png" alt="tailwind flavor: 375px, no horizontal scroll" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-settings.png" alt="tailwind flavor: Tabbed settings" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Tabbed settings</figcaption></figure>
+  <figure style="margin:0"><a href="demos/tailwind/"><img src="assets/admin-kit/tailwind-mobile.png" alt="tailwind flavor: 375px: single-line cells, table scrolls in its card" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px: single-line cells, table scrolls in its card</figcaption></figure>
 </div>
 
 <h2>Novus Admin Kit with Material</h2>
@@ -106,7 +116,7 @@ kit variables in one CSS file (the verified <a href="themes/material-web.html">M
 Web theme guide</a> pattern), so dark mode flips the whole component set with no
 extra code. Buttons, text fields, selects, and checkboxes are Material Web
 components; layout, chips, and charts are the kit's. Material Web components
-require JavaScript. Verified 2026-08-27.</p>
+require JavaScript. Verified 2026-09-15.</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code># copy admin-kits/material from the repository, then
 npm install
 npm run dev     # or: npm run build && npm run preview</code></pre>
@@ -116,15 +126,18 @@ npm run dev     # or: npm run build && npm run preview</code></pre>
 <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
   <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-dashboard-light.png" alt="material flavor: Dashboard, light" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, light</figcaption></figure>
   <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-dashboard-dark.png" alt="material flavor: Dashboard, dark" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Dashboard, dark</figcaption></figure>
+  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-transactions.png" alt="material flavor: Transactions: Filters sheet, active chip, quick chips" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Transactions: Filters sheet, active chip, quick chips</figcaption></figure>
+  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-datagrid.png" alt="material flavor: Data grid: sort, search, list footer" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid: sort, search, list footer</figcaption></figure>
+  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-signin.png" alt="material flavor: Sign-in on the brand ground" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Sign-in on the brand ground</figcaption></figure>
+  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-signedout.png" alt="material flavor: Signed out" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Signed out</figcaption></figure>
   <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-analytics.png" alt="material flavor: Analytics: token-fed chart" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Analytics: token-fed chart</figcaption></figure>
-  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-datagrid.png" alt="material flavor: Data grid with Material Web controls" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Data grid with Material Web controls</figcaption></figure>
-  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-login.png" alt="material flavor: Login with Material text fields" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Login with Material text fields</figcaption></figure>
-  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-mobile.png" alt="material flavor: 375px, no horizontal scroll" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px, no horizontal scroll</figcaption></figure>
+  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-settings.png" alt="material flavor: Tabbed settings" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Tabbed settings</figcaption></figure>
+  <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-mobile.png" alt="material flavor: 375px: single-line cells, table scrolls in its card" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">375px: single-line cells, table scrolls in its card</figcaption></figure>
 </div>
 
 <h2>Parity and data</h2>
 <ul class="bullets">
-  <li>One dataset (<code>admin-kits/data/dataset.json</code>) generates both flavors' data; regenerate and diff to prove parity.</li>
+  <li>One dataset (<code>admin-kits/data/dataset.json</code>) and one shared layer (<code>admin-kits/shared/</code>) generate every flavor's data, console shell, icons, and filter markup; <code>node admin-kits/data/generate.mjs --check</code> proves parity and runs as a release gate.</li>
   <li>Figures are illustrative; no client names appear in the demo data.</li>
   <li>Dashboards use stat rows and signal cards, the kit's own convention, instead of a charting library.</li>
 </ul>

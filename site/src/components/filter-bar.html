@@ -1,0 +1,101 @@
+<section class="demo" data-title="Filter bar: quick chips, search, Filters sheet, active chips">
+  <div class="filterbar">
+    <div class="quickchips" role="radiogroup" aria-label="Status">
+    <label class="quickchip"><input type="radio" name="fb-status" checked><span>All</span><span class="quickchip__count">24</span></label>
+    <label class="quickchip"><input type="radio" name="fb-status"><span>Settled</span><span class="quickchip__count">18</span></label>
+    <label class="quickchip"><input type="radio" name="fb-status"><span>Pending</span><span class="quickchip__count">4</span></label>
+    <label class="quickchip"><input type="radio" name="fb-status"><span>Failed</span><span class="quickchip__count">2</span></label>
+    </div>
+    <div class="filterbar__top">
+      <label class="filterbar__search"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg><input class="input" type="search" placeholder="Search id, terminal, or product" aria-label="Search transactions"></label>
+      <details class="filtermenu" data-dismiss>
+        <summary class="filtermenu__trigger filtermenu__trigger--on"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6.2 7.4V18l-3.6 2v-7.6Z"/></svg><span>Filters</span><span class="filtermenu__count">1</span><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <div class="filtermenu__sheet" role="group" aria-label="Filters">
+        <div class="filtermenu__tabs" role="radiogroup" aria-label="Filter category">
+          <label class="filtermenu__tab"><input type="radio" name="fb-cat" checked><span class="truncate">Product</span><span class="filtermenu__tabcount">1</span><svg class="icon icon--sm filtermenu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></label>
+          <label class="filtermenu__tab"><input type="radio" name="fb-cat"><span class="truncate">Terminal</span><span class="filtermenu__tabcount" hidden>0</span><svg class="icon icon--sm filtermenu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></label>
+          <label class="filtermenu__tab"><input type="radio" name="fb-cat"><span class="truncate">Amount</span><span class="filtermenu__tabcount" hidden>0</span><svg class="icon icon--sm filtermenu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></label>
+        </div>
+        <div class="filtermenu__panels">
+          <fieldset class="filtermenu__panel"><legend class="filtermenu__head">Product</legend>
+            <label class="filteropt"><input type="checkbox" name="fb-product"><span class="truncate">novabank</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-product" checked><span class="truncate">novapay</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-product"><span class="truncate">novastore</span></label>
+          </fieldset>
+          <fieldset class="filtermenu__panel"><legend class="filtermenu__head">Terminal</legend>
+            <label class="filteropt"><input type="checkbox" name="fb-terminal"><span class="truncate">TRM-0100</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-terminal"><span class="truncate">TRM-0107</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-terminal"><span class="truncate">TRM-0114</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-terminal"><span class="truncate">TRM-0121</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-terminal"><span class="truncate">TRM-0128</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-terminal"><span class="truncate">TRM-0135</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-terminal"><span class="truncate">TRM-0142</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-terminal"><span class="truncate">TRM-0149</span></label>
+          </fieldset>
+          <fieldset class="filtermenu__panel"><legend class="filtermenu__head">Amount</legend>
+            <label class="filteropt"><input type="checkbox" name="fb-amount"><span class="truncate">Under 200.00</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-amount"><span class="truncate">200.00 to 499.99</span></label>
+            <label class="filteropt"><input type="checkbox" name="fb-amount"><span class="truncate">500.00 and above</span></label>
+          </fieldset>
+        </div>
+      </div>
+      </details>
+    </div>
+    <div class="filterchips" aria-label="Active filters">
+      <span class="filterchip"><span class="filterchip__group">Product</span> <span class="filterchip__label">novapay</span><button type="button" class="filterchip__remove" aria-label="Remove Product novapay"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></span>
+      <button type="button" class="linkbtn">Clear all</button>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="The sub-filter sheet, open: categories beside options">
+  <div class="filtermenu__sheet" role="group" aria-label="Filters" style="position:static;width:auto;max-width:34rem">
+        <div class="filtermenu__tabs" role="radiogroup" aria-label="Filter category">
+          <label class="filtermenu__tab"><input type="radio" name="fs-cat" checked><span class="truncate">Product</span><span class="filtermenu__tabcount">1</span><svg class="icon icon--sm filtermenu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></label>
+          <label class="filtermenu__tab"><input type="radio" name="fs-cat"><span class="truncate">Terminal</span><span class="filtermenu__tabcount" hidden>0</span><svg class="icon icon--sm filtermenu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></label>
+          <label class="filtermenu__tab"><input type="radio" name="fs-cat"><span class="truncate">Amount</span><span class="filtermenu__tabcount" hidden>0</span><svg class="icon icon--sm filtermenu__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></label>
+        </div>
+        <div class="filtermenu__panels">
+          <fieldset class="filtermenu__panel"><legend class="filtermenu__head">Product</legend>
+            <label class="filteropt"><input type="checkbox" name="fs-product"><span class="truncate">novabank</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-product" checked><span class="truncate">novapay</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-product"><span class="truncate">novastore</span></label>
+          </fieldset>
+          <fieldset class="filtermenu__panel"><legend class="filtermenu__head">Terminal</legend>
+            <label class="filteropt"><input type="checkbox" name="fs-terminal"><span class="truncate">TRM-0100</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-terminal"><span class="truncate">TRM-0107</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-terminal"><span class="truncate">TRM-0114</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-terminal"><span class="truncate">TRM-0121</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-terminal"><span class="truncate">TRM-0128</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-terminal"><span class="truncate">TRM-0135</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-terminal"><span class="truncate">TRM-0142</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-terminal"><span class="truncate">TRM-0149</span></label>
+          </fieldset>
+          <fieldset class="filtermenu__panel"><legend class="filtermenu__head">Amount</legend>
+            <label class="filteropt"><input type="checkbox" name="fs-amount"><span class="truncate">Under 200.00</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-amount"><span class="truncate">200.00 to 499.99</span></label>
+            <label class="filteropt"><input type="checkbox" name="fs-amount"><span class="truncate">500.00 and above</span></label>
+          </fieldset>
+        </div>
+      </div>
+</section>
+
+<section class="demo" data-title="Compact row: a few plain filters that scroll instead of wrapping">
+  <div class="filterrow filterrow--nowrap">
+    <input class="input" type="search" placeholder="Account" aria-label="Account">
+    <span class="selectwrap"><select class="select" aria-label="Type"><option>All types</option><option>Settlement</option><option>Refund</option></select></span>
+    <span class="selectwrap"><select class="select" aria-label="Channel"><option>All channels</option><option>Card present</option><option>QR</option></select></span>
+    <input class="input" type="date" aria-label="From date">
+    <input class="input" type="date" aria-label="To date">
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Search takes the remaining width; the Filters trigger sits at the end of the same row and shows how many filters are on.</li>
+  <li>The sheet has two panes: categories on one side (native radio tabs), the chosen category's options on the other (checkboxes). Choosing a category never closes the sheet; long option lists scroll inside their pane; six categories at most. On phones the categories sit above the options.</li>
+  <li>Every ticked option appears as a removable chip naming its category and value, followed by Clear all. Options within a category combine with OR; categories combine with AND.</li>
+  <li>Quick chips with live counts sit above queue-style lists for the one dimension people switch most (status, bucket); exactly one is selected. Keep that dimension out of the sheet so the two controls never disagree.</li>
+  <li>Only a few filters? Use the compact row: plain controls on one line that scrolls sideways instead of wrapping.</li>
+  <li>Everything opens and closes with JavaScript off (native details, radios, checkboxes); applying the filters is the application's job, and an empty result offers to clear them.</li>
+</ul>
