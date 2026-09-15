@@ -4,16 +4,20 @@
 
 <PageTitle>Data grid · Novus Admin Kit</PageTitle>
 
-<div class="pagehead"><h1>Data grid</h1><span class="muted">QuickGrid: sortable columns, search, 10 rows per page</span></div>
-
-<div class="filterrow">
-    <label for="gridsearch" class="muted">Search</label>
-    <input class="input" id="gridsearch" type="search" style="max-width:20rem"
-           placeholder="id, terminal, product, status" @bind="Search" @bind:event="oninput">
-    <span class="muted">@Filtered.Count() of @SeedData.Transactions.Length rows</span>
+<div class="pagehead">
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="">Operations</a></li><li aria-current="page">Data grid</li></ol></nav>
+    <div class="pagehead__row"><h1>Data grid</h1></div>
+    <p class="muted pagehead__desc">Every transaction with sortable columns, search, and paging.</p>
 </div>
 
-<div class="card" style="padding:0;overflow:hidden">
+<div class="filterbar">
+    <div class="filterbar__top">
+        <label class="filterbar__search"><Icon Name="search" Class="icon--sm" /><input class="input" id="gridsearch" type="search" placeholder="Search id, terminal, product, or status" aria-label="Search rows" @bind="Search" @bind:event="oninput" @bind:after="ResetPage"></label>
+        <span class="muted nowrap">@Filtered.Count() of @SeedData.Transactions.Length rows</span>
+    </div>
+</div>
+
+<div class="card card--flush">
     <div class="tablewrap">
         <QuickGrid Items="Filtered" Pagination="pagination">
             <PropertyColumn Property="@(t => t.Id)" Sortable="true" />
@@ -24,22 +28,42 @@
             <TemplateColumn Title="Status" SortBy="@(GridSort<Transaction>.ByAscending(t => t.Status))">
                 <span class="badge badge--@StatusTone(context.Status)"><span class="badge__dot"></span> Status · @Cap(context.Status)</span>
             </TemplateColumn>
+            <TemplateColumn Title="Actions" Align="Align.Right">
+                <button class="btn btn--ghost btn--sm">Detail</button>
+            </TemplateColumn>
         </QuickGrid>
     </div>
-    <div class="filterrow" style="padding:var(--space-3) var(--space-4);border-top:1px solid var(--border);margin:0">
-        <Paginator State="pagination" />
-    </div>
+    @if (!Filtered.Any())
+    {
+        <div class="emptystate"><p>No rows match this search.</p></div>
+    }
 </div>
 
+<ListFooter Total="@(pagination.TotalItemCount ?? 0)" Page="@(pagination.CurrentPageIndex + 1)" PageChanged="GoTo" PageSize="@pagination.ItemsPerPage" PageSizeChanged="SetSize" />
+
 @code {
-    readonly PaginationState pagination = new() { ItemsPerPage = 10 };
+    PaginationState pagination = new() { ItemsPerPage = 10 };
     string Search = "";
 
     IQueryable<Transaction> Filtered =>
         SeedData.Transactions
             .Where(t => string.IsNullOrWhiteSpace(Search)
-                || (t.Id + " " + t.Terminal + " " + t.Product + " " + t.Status).Contains(Search, StringComparison.OrdinalIgnoreCase))
+                || (t.Id + " " + t.Terminal + " " + t.Product + " " + t.Status).Contains(Search.Trim(), StringComparison.OrdinalIgnoreCase))
             .AsQueryable();
+
+    protected override void OnInitialized() => Watch(pagination);
+
+    void Watch(PaginationState state) => state.TotalItemCountChanged += (_, _) => InvokeAsync(StateHasChanged);
+
+    Task GoTo(int page) => pagination.SetCurrentPageIndexAsync(page - 1);
+
+    void SetSize(int size)
+    {
+        pagination = new PaginationState { ItemsPerPage = size };
+        Watch(pagination);
+    }
+
+    Task ResetPage() => pagination.SetCurrentPageIndexAsync(0);
 
     static string StatusTone(string s) => s switch { "settled" => "success", "pending" => "warning", _ => "danger" };
     static string Cap(string s) => char.ToUpper(s[0]) + s[1..];

@@ -1,20 +1,35 @@
-<section class="demo" data-title="Data table">
-  <table class="table">
-    <thead>
-      <tr><th>Market</th><th>Entity</th><th class="num">Since</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Singapore (HQ)</td><td>Novus Technologies Pte Ltd</td><td class="num">2013</td></tr>
-      <tr><td>Philippines</td><td>Novus Transact Philippines Corporation</td><td class="num">-</td></tr>
-      <tr><td>Sri Lanka</td><td>NovusTech Transact Lanka (Pvt) Ltd</td><td class="num">-</td></tr>
-      <tr><td>Indonesia</td><td>PT Nova Digital Perkasa</td><td class="num">-</td></tr>
-    </tbody>
-  </table>
+<section class="demo" data-title="Data table in a scroll container: every cell on one line">
+  <div class="card card--flush">
+    <div class="tablewrap">
+      <table class="table">
+        <thead><tr><th>Reference</th><th>Merchant</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th>Submitted</th><th class="cell--actions">Actions</th></tr></thead>
+        <tbody>
+          <tr><td><code>TXN-241099</code></td><td>Hillcrest Grocers Makati</td><td>novapay</td><td class="num">151.17</td><td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td><td>27 Aug 2026, 18:31</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr>
+          <tr><td><code>TXN-241073</code></td><td>Riverside Fuel Station 12</td><td>novastore</td><td class="num">401.87</td><td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td><td>27 Aug 2026, 17:57</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr>
+          <tr><td><code>TXN-240981</code></td><td>Harbourfront Pharmacy</td><td>novabank</td><td class="num">96.40</td><td><span class="badge badge--danger"><span class="badge__dot"></span> Status · Failed</span></td><td>27 Aug 2026, 15:12</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="Two-line cells and a wrapping note column">
+  <div class="tablewrap">
+    <table class="table">
+      <thead><tr><th>Holder</th><th>Terminal</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td><div class="cell-stack"><span>Unclaimed</span><span class="cell-stack__meta">Credit analyst</span></div></td><td><code>TRM-0128</code></td><td class="cell--wrap">Two failed settlements in the last hour on the same terminal; review the device before the next batch window.</td></tr>
+        <tr><td><div class="cell-stack"><span>ops.admin</span><span class="cell-stack__meta">Operations</span></div></td><td><code>TRM-0177</code></td><td class="cell--wrap">Gateway certificate renewal scheduled.</td></tr>
+      </tbody>
+    </table>
+  </div>
 </section>
 
 <h2>Usage</h2>
 <ul class="bullets">
-  <li>Numeric columns take <code>class="num"</code>: right-aligned, tabular numerals.</li>
-  <li>Header cells sit on the subtle tint; rows highlight on hover for scanability.</li>
-  <li>Wide tables scroll inside their own container on small screens, the page never scrolls horizontally.</li>
+  <li>Put every data table in a <code>.tablewrap</code>: cells stay on one line and the table scrolls sideways inside its container instead of squeezing columns, so identifiers, names, chips, dates, and amounts never break across lines. The page itself never scrolls sideways.</li>
+  <li>Free-text columns opt back into wrapping with <code>.cell--wrap</code>, which keeps a readable minimum width.</li>
+  <li>A second fact in a cell goes in a <code>.cell-stack</code>: two single-line lines, the second one muted.</li>
+  <li>Numeric columns take <code>class="num"</code> on the header and the cells (right-aligned, tabular numerals); row actions take <code>.cell--actions</code>, aligned to the end.</li>
+  <li>Header cells sit on the subtle tint; rows highlight on hover for scanning. See <a href="../foundations/alignment.html">Alignment and content fit</a>.</li>
 </ul>

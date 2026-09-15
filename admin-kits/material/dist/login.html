@@ -10,21 +10,50 @@ try { var t = localStorage.getItem("novus-theme");
   if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
 } catch (e) {}
 </script>
-  <script type="module" crossorigin src="./assets/app-DkCGKXKm.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/app-B0-9YTtN.css">
+  <script type="module" crossorigin src="./assets/app-DLsivNDq.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/app-YbU9anTh.css">
 </head>
 <body>
+<div class="authpage">
 <div class="demobar">Built with the Novus Design Kit · <a href="https://ui-kit.novustech.dev/admin-kit.html">back to the docs</a></div>
-<main class="loginwrap">
-  <form class="card logincard" id="loginform">
-    <span class="brandmark" role="img" aria-label="Novus Technologies"></span>
-    <h2 style="text-align:center">novapay operations · admin</h2>
-    <p class="muted" style="text-align:center">Sample login. Demo credentials: admin / admin. Nothing is stored.</p>
-    <div class="alert alert--danger" id="loginerror" hidden>Wrong username or password. Use admin / admin.</div>
-    <md-outlined-text-field id="l-user" label="Username" autocomplete="username" style="width:100%;margin-bottom:var(--space-4)"></md-outlined-text-field>
-    <md-outlined-text-field id="l-pass" label="Password" type="password" autocomplete="current-password" style="width:100%;margin-bottom:var(--space-4)"></md-outlined-text-field>
-    <md-filled-button type="submit" style="width:100%">Sign in</md-filled-button>
+<div class="authsplit">
+<!--SHELL:auth-brand-->
+<aside class="authbrand">
+  <div class="authbrand__inner">
+    <span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span>
+    <p class="authbrand__tagline">Digital payments, full stack: switching and routing, card acquiring, QR and NFC, reconciliation and settlement.</p>
+    <ul class="authbrand__modules" aria-label="novapay capabilities">
+      <li>Switching &amp; routing</li>
+      <li>Card acquiring</li>
+      <li>QR / NFC</li>
+      <li>Payment gateway</li>
+      <li>Reconciliation &amp; settlement</li>
+    </ul>
+  </div>
+</aside>
+<!--/SHELL:auth-brand-->
+<main class="authmain">
+  <form class="card authcard" id="loginform" action="index.html" method="get">
+    <svg class="authcard__mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+    <h1 class="authcard__title">Sign in to your console</h1>
+    <p class="muted authcard__sub">Sample console: sign in with admin / admin. Nothing is stored.</p>
+    <div class="field" id="userfield">
+      <md-filled-text-field id="l-user" label="Username" name="username" autocomplete="username" required></md-filled-text-field>
+      <p class="field__error" id="loginerror" role="alert" hidden>Wrong username or password. Use admin / admin.</p>
+    </div>
+    <div class="field">
+      <md-filled-text-field id="l-pass" label="Password" name="password" type="password" autocomplete="current-password" required>
+<!--SHELL:pwtoggle-->
+<button type="button" class="pwtoggle" slot="trailing-icon" data-password-toggle aria-controls="l-pass" aria-pressed="false" aria-label="Show password"><svg class="icon pwtoggle__show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon pwtoggle__hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 5.7A9.9 9.9 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.4 3.2M6.5 6.6A16.6 16.6 0 0 0 2.5 12s3.5 6.5 9.5 6.5a9.4 9.4 0 0 0 5.5-1.7"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M3 3l18 18"/></svg></button>
+<!--/SHELL:pwtoggle-->
+      </md-filled-text-field>
+    </div>
+    <md-filled-button type="submit" class="authcard__submit">Sign in</md-filled-button>
+    <details class="authcard__forgot"><summary>Forgot password?</summary><p class="muted">In this sample, password resets are handled by your administrator.</p></details>
+    <div class="authcard__foot"><span class="muted">Managed by</span><span class="brandmark" role="img" aria-label="Novus Technologies"></span></div>
   </form>
 </main>
+</div>
+</div>
 </body>
 </html>
