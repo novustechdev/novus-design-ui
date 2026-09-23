@@ -7,8 +7,8 @@
 <title>Terminals · Novus Admin Kit</title>
 <script>
 try { var t = localStorage.getItem("novus-theme");
-  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
-} catch (e) {}
+  document.documentElement.setAttribute("data-theme", t === "dark" ? "dark" : "light");
+} catch (e) { document.documentElement.setAttribute("data-theme", "light"); }
 </script>
 </head>
 <body>

@@ -36,7 +36,7 @@ cp -r novus-design-ui/admin-kits/blazor   my-console    # Blazor Server flavor
 cp -r novus-design-ui/admin-kits/data     my-console-data   # optional: the shared dataset generator</code></pre>
 <p>Then run it. Tailwind flavor:</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>cd my-console
-npm install     # pulls novus-design-kit and chart.js
+npm install     # pulls novus-design-kit and d3
 npm run dev     # develop; npm run build for the production bundle</code></pre>
 <p>Blazor flavor (.NET 10 SDK required):</p>
 <pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>cd my-console
@@ -44,22 +44,23 @@ npm install     # pulls novus-design-kit; the build copies it to wwwroot/lib
 dotnet run</code></pre>
 
 <h3>Path B: add the kit to an existing app</h3>
-<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install novus-design-kit chart.js</code></pre>
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>npm install novus-design-kit d3</code></pre>
 <ul class="bullets">
   <li>Import <code>novus-design-kit/tokens.css</code> and the pre-paint theme script <code>novus-design-kit/js/novus-theme.js</code> first, exactly as your <a href="frameworks/blazor.html">framework guide</a> shows.</li>
-  <li>Copy the pieces you need: every console pattern (content fit, shell, side navigation, page header, user menu, sign-in, signed-out, filter bar, list footer) lives in one token-only stylesheet, <code>admin-kits/shared/novus-admin.css</code>, with its progressive script <code>novus-admin.js</code> and the icon set <code>icons.mjs</code>. Each flavor carries a generated copy; load it after <code>tokens.css</code>. The token-fed chart wiring is in <code>novus-chart.js</code>, and the screens are self-contained pages you can lift one at a time.</li>
+  <li>Since 0.4.0 you do not copy the console patterns at all: import <code>novus-design-kit/console.css</code> and <code>novus-design-kit/js/novus-console.js</code> and you have the sign-in page, shell, side navigation, page header, user menu, filter bar, list footer, settings layout, chart styling and the content-fit rules. See <a href="install.html">Install</a>.</li>
+  <li>The screens themselves are self-contained pages you can lift one at a time; the D3 chart source is <code>novus-chart.js</code> beside them.</li>
   <li>The demo dataset and the parity generator live in <code>admin-kits/data/</code>; <code>node generate.mjs</code> re-emits every flavor's data, shared layer copies, console shell, icons, and the WebAssembly demo mirrors, and <code>node generate.mjs --check</code> fails when any copy has drifted (a release gate).</li>
 </ul>
 
 <h2>Screens and conventions</h2>
 <ul class="bullets">
-  <li><b>Sign-in</b>: the deep brand ground with the novapay brand panel beside the credential card; small-caps labels, filled inputs, a show and hide password button, one inline error that keeps the username, a reset disclosure, and the Novus endorsement. Sample credentials: admin / admin.</li>
-  <li><b>Dashboard</b>: KPI stat row, signal cards (risk always red, watch amber), recent transactions.</li>
+  <li><b>Sign-in</b>: a 50/50 split on the deep brand ground with ambient line art on the panel and single sign-on beside the password form; small-caps labels, filled inputs, a show and hide password button, one inline error that keeps the username, a reset disclosure, and the Novus endorsement. Sample credentials: admin / admin.</li>
+  <li><b>Dashboard</b>: KPI stat row, signal cards (risk always red, watch amber), interactive D3 statistics (volume by hour, product mix) beside their table, and recent transactions.</li>
   <li><b>Transactions</b>: quick status chips with live counts, search, a Filters sheet with Product, Terminal, and Amount categories, removable active chips with Clear all, a native detail dialog, a plain empty state, and the list footer (range, previous and next, page label, rows per page).</li>
   <li><b>Data grid</b>: every transaction with column sorting, search, and the same list footer (Blazor QuickGrid; progressive enhanced table in the static flavors).</li>
   <li><b>Terminals</b>: fleet health with degraded and offline devices sorted first.</li>
-  <li><b>Analytics</b>: hourly volume by product, stacked composition bars with a total trajectory line, styled by the locked Novus chart rules (token-fed at runtime).</li>
-  <li><b>Settings</b>: tabbed screen (Profile, Appearance, Notifications, API access) on native radio inputs, so the tabs work with JavaScript off.</li>
+  <li><b>Analytics</b>: hourly volume by product drawn with D3 under the locked Novus chart rules, tokens read at render time, hover and keyboard tooltips, a redraw on theme change, and the same numbers as a table for pages without scripting.</li>
+  <li><b>Settings</b>: the settings layout, a section menu beside grouped sections (Profile, Appearance, Notifications, Security, API access) of labelled rows, one control per row, working with JavaScript off.</li>
   <li><b>Signed out</b>: the centred card that confirms the session ended and offers Sign in again.</li>
   <li><b>Shell</b>: menu toggle, product lockup, Novus endorsement, and a user menu holding the theme toggle and Sign out; grouped side navigation with line icons that collapses at desktop width and opens as a drawer on phones, with no JavaScript required; a page header with breadcrumb and end-aligned actions on every screen.</li>
   <li><b>Content fit</b>: identifiers, names, chips, dates, amounts, and headers stay on one line at every width; tables scroll inside their card instead of squeezing. The layout audit gate checks every screen at 1440px and 375px.</li>

@@ -9,7 +9,7 @@
     <script>
         try {
             var t = localStorage.getItem("novus-theme");
-            if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+            document.documentElement.setAttribute("data-theme", t === "dark" ? "dark" : "light");
         } catch (e) { }
     </script>
     <link rel="stylesheet" href="lib/novus-design-kit/tokens.css" />
@@ -25,8 +25,9 @@
     <Routes />
     <script src="_framework/blazor.web.js"></script>
     <script src="novus-admin.js"></script>
-    <script src="lib/chartjs/chart.umd.js"></script>
+    <script src="lib/d3/d3.min.js"></script>
     <script src="novus-chart.js"></script>
+    <script src="novus-chart-boot.js"></script>
 </body>
 
 </html>

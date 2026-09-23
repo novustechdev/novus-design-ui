@@ -1,0 +1,49 @@
+<section class="demo" data-title="Settings: a section menu beside grouped rows">
+  <div class="settings">
+    <nav class="settings__menu" aria-label="Settings sections">
+      <a class="settings__link" href="#sl-profile">Profile</a>
+      <a class="settings__link" href="#sl-appearance">Appearance</a>
+      <a class="settings__link" href="#sl-security">Security</a>
+    </nav>
+    <div class="settings__sections">
+      <section class="settingsec" id="sl-profile" aria-labelledby="sl-profile-h">
+        <div class="settingsec__head"><h2 id="sl-profile-h">Profile</h2><p class="muted">Who you are in this console.</p></div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Display name</span><span class="setting__desc">Shown on audit entries and approvals.</span></div>
+        <div class="setting__control"><input class="input" id="sl-name" value="Operations Admin"></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Role</span><span class="setting__desc">Set by your administrator; shown here for reference.</span></div>
+        <div class="setting__control"><span class="selectwrap"><select class="select" id="sl-role"><option>Operations</option><option>Finance</option></select></span></div>
+      </div>
+      </section>
+      <section class="settingsec" id="sl-appearance" aria-labelledby="sl-appearance-h">
+        <div class="settingsec__head"><h2 id="sl-appearance-h">Appearance</h2><p class="muted">How this console looks on this device.</p></div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Theme</span><span class="setting__desc">Light by default. Your choice is remembered on this device.</span></div>
+        <div class="setting__control"><button type="button" class="btn btn--secondary btn--sm toggle44" data-theme-toggle>Switch light and dark</button></div>
+      </div>
+      </section>
+      <section class="settingsec" id="sl-security" aria-labelledby="sl-security-h">
+        <div class="settingsec__head"><h2 id="sl-security-h">Security</h2><p class="muted">Session and access rules for this workspace.</p></div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Two-step verification</span><span class="setting__desc">Required for settlement and configuration changes.</span></div>
+        <div class="setting__control"><input type="checkbox" id="sl-2fa" checked></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Other sessions</span><span class="setting__desc">Sign out every other browser signed in as you.</span></div>
+        <div class="setting__control"><button type="button" class="btn btn--secondary btn--sm">Sign out other sessions</button></div>
+      </div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Configuration is a settings layout, never a grid of cards: a section menu beside grouped sections, each section a list of rows.</li>
+  <li>One row, one setting: the label says what it is, the description says what it affects, and a single control sits at the end of the row. On phones the control moves under its description.</li>
+  <li>The menu is plain anchors and every section stays on the page, so the screen works with JavaScript off and deep links survive.</li>
+  <li>Group by subject (profile, appearance, notifications, security, access), not by control type. Five to seven rows per section reads well; beyond that, split the section.</li>
+  <li>Destructive actions sit in their own row with a plain description of what they end, and use the danger button only when the action is irreversible.</li>
+</ul>

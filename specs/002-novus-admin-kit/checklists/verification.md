@@ -52,3 +52,18 @@ token for density.
 Cross-flavor parity: Failed quick chip = 2 and Failed + Product novapay = 2 in all
 four deliverables; default footer "Showing 1-10 of 24", "Page 1 of 3".
 
+## Feature 008: enterprise portal defaults (2026-09-23)
+
+| deliverable | stack verified against | date | evidence | result |
+|---|---|---|---|---|
+| tailwind | vite 8, tailwindcss 4.3, d3 7 | 2026-09-23 | 19/19 checks: light default on a dark OS (sign-in and console), 50/50 split, single sign-on, no theme toggle on sign-in, ambient art present and stopped under reduced motion, one type size across shell and content, title 1.71x body, no reading cap on portal text, landing charts with table, tooltip on hover and on keyboard focus, redraw and persistence on theme change, settings sections and rows, date range narrows and clears | pass |
+| material | vite 8, @material/web 2.x, d3 7 | 2026-09-23 | same 19/19 with Material Web controls in the settings rows and the filter sheet | pass |
+| blazor (server) | .NET SDK 10.0.400, d3 7 from wwwroot/lib | 2026-09-23 | same 20/20 including the server-rendered sign-in | pass |
+| blazor WASM demo (hosted) | .NET 10 WebAssembly publish | 2026-09-23 | same 19/19; pages mirrored from the server flavor by generate.mjs | pass |
+| JavaScript off (tailwind) | static build | 2026-09-23 | settings sections render; the analytics chart falls back to its table | pass |
+| packaged install | npm pack of 0.4.0 into a blank project | 2026-09-23 | importing tokens.css plus console.css renders sign-in (720/720 at 1440), console shell, settings rows and the icon sprite, and renders light on a dark OS, with nothing copied from the repository | pass |
+| gates 12 to 15 | negative tests | 2026-09-23 | element right of the account menu, a navbar smaller than content, a paragraph capped at 26ch, and a version mismatch each fail the suite and pass again after restore | pass |
+
+Total: 79/79 checks. Chart.js is gone from every flavor; D3 draws the
+composition bars, the trajectory line and the share donut from tokens.
+

@@ -1,0 +1,45 @@
+<section class="demo" data-title="Chart language: composition in the bars, trajectory on the line">
+  <div class="card chartcard">
+    <div class="chartcard__head"><h3>Volume by hour</h3><span class="muted">today, by product</span></div>
+    <svg class="chart" viewBox="0 0 420 170" role="img" aria-label="Example: stacked volume bars with a total trajectory line">
+      <g stroke="var(--border)" stroke-dasharray="4 4">
+        <line x1="30" x2="410" y1="40" y2="40"/><line x1="30" x2="410" y1="80" y2="80"/><line x1="30" x2="410" y1="120" y2="120"/>
+      </g>
+      <path d="M40,150 V100 a6,6 0 0 1 6,-6 h18 a6,6 0 0 1 6,6 V150 Z" fill="var(--blue-500)"/><path d="M40,150 V134 h30 V150 Z" fill="var(--green-500)"/>
+      <path d="M86,150 V82 a6,6 0 0 1 6,-6 h18 a6,6 0 0 1 6,6 V150 Z" fill="var(--blue-500)"/><path d="M86,150 V129 h30 V150 Z" fill="var(--green-500)"/>
+      <path d="M132,150 V95 a6,6 0 0 1 6,-6 h18 a6,6 0 0 1 6,6 V150 Z" fill="var(--blue-500)"/><path d="M132,150 V133 h30 V150 Z" fill="var(--green-500)"/>
+      <path d="M178,150 V68 a6,6 0 0 1 6,-6 h18 a6,6 0 0 1 6,6 V150 Z" fill="var(--blue-500)"/><path d="M178,150 V125 h30 V150 Z" fill="var(--green-500)"/>
+      <path d="M224,150 V60 a6,6 0 0 1 6,-6 h18 a6,6 0 0 1 6,6 V150 Z" fill="var(--blue-500)"/><path d="M224,150 V123 h30 V150 Z" fill="var(--green-500)"/>
+      <path d="M270,150 V84 a6,6 0 0 1 6,-6 h18 a6,6 0 0 1 6,6 V150 Z" fill="var(--blue-500)"/><path d="M270,150 V130 h30 V150 Z" fill="var(--green-500)"/>
+      <path d="M316,150 V92 a6,6 0 0 1 6,-6 h18 a6,6 0 0 1 6,6 V150 Z" fill="var(--blue-500)"/><path d="M316,150 V132 h30 V150 Z" fill="var(--green-500)"/>
+      <path d="M362,150 V73 a6,6 0 0 1 6,-6 h18 a6,6 0 0 1 6,6 V150 Z" fill="var(--blue-500)"/><path d="M362,150 V127 h30 V150 Z" fill="var(--green-500)"/>
+      <path d="M55,88 C110,70 160,96 210,58 S320,44 395,52" fill="none" stroke="var(--text-secondary)" stroke-width="2"/>
+    </svg>
+  </div>
+</section>
+
+<section class="demo" data-title="The markup: a frame for the chart, a table for the same numbers">
+  <div class="card chartcard">
+    <div class="chartcard__head"><h3>Product mix</h3><span class="muted">share of today's volume</span></div>
+    <p class="muted" style="margin:0"><code>&lt;div class="chartframe chartframe--short" id="mixchart"&gt;&lt;/div&gt;</code> is where <code>novusChart.donutChart</code> draws. The table below carries the same numbers.</p>
+    <div class="tablewrap">
+      <table class="table">
+        <thead><tr><th>Product</th><th class="num">Volume</th><th class="num">Share</th></tr></thead>
+        <tbody>
+          <tr><td>novapay</td><td class="num">2,480</td><td class="num">62%</td></tr>
+          <tr><td>novabank</td><td class="num">960</td><td class="num">24%</td></tr>
+          <tr><td>novastore</td><td class="num">560</td><td class="num">14%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>Charts are drawn with D3 (the kit's charting standard) through <code>novus-chart.js</code>: <code>volumeChart</code> for composition plus trajectory, <code>donutChart</code> for share. See them live in the <a href="../admin-kit.html">Admin Kit</a> demos.</li>
+  <li>Every colour and font is read from the tokens at render time, so a theme change redraws the chart correctly and no colour literal ever enters the code.</li>
+  <li>The locked rules: soft dashed gridlines at low alpha, rounded bars with constrained thickness, no axis borders or tick marks, a dark rounded tooltip, one composition read and one trajectory read on the primary series.</li>
+  <li>Give the chart a <code>.chartframe</code> to size it and a table of the same numbers beside or under it. The table is the answer for people without scripting, and for anyone who wants the figures.</li>
+  <li>Marks answer hover and keyboard focus with the same tooltip; series colours are the product accents, never traffic-light colours, because volume is data and not a judgement.</li>
+</ul>

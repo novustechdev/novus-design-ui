@@ -12,7 +12,7 @@
     <p class="muted pagehead__desc">Card and wallet payments across the terminal fleet, newest first.</p>
 </div>
 
-<div class="filterbar">
+<div class="filterbar" data-filterbar>
     <div class="quickchips" role="radiogroup" aria-label="Status">
         @foreach (var (value, label) in Quick)
         {
@@ -30,6 +30,7 @@
                         var cat = Categories[i];
                         <label class="filtermenu__tab"><input type="radio" name="filtercat" value="@cat.Key" checked="@(i == 0)"><span class="truncate">@cat.Label</span><span class="filtermenu__tabcount" hidden="@(Selected[cat.Key].Count == 0)">@Selected[cat.Key].Count</span><Icon Name="chevron-right" Class="icon--sm filtermenu__chev" /></label>
                     }
+                    <label class="filtermenu__tab"><input type="radio" name="filtercat" value="date"><span class="truncate">Date</span><span class="filtermenu__tabcount" hidden="@(DateCount == 0)">@DateCount</span><Icon Name="chevron-right" Class="icon--sm filtermenu__chev" /></label>
                 </div>
                 <div class="filtermenu__panels">
                     @foreach (var cat in Categories)
@@ -42,6 +43,11 @@
                             }
                         </fieldset>
                     }
+                    <fieldset class="filtermenu__panel">
+                        <legend class="filtermenu__head">Date</legend>
+                        <label class="filterdate"><span class="muted">From</span><input class="input" type="date" name="date-from" value="@DateFrom" @onchange="@(e => { DateFrom = e.Value?.ToString() ?? string.Empty; Page = 1; })"></label>
+                        <label class="filterdate"><span class="muted">To</span><input class="input" type="date" name="date-to" value="@DateTo" @onchange="@(e => { DateTo = e.Value?.ToString() ?? string.Empty; Page = 1; })"></label>
+                    </fieldset>
                 </div>
             </div>
         </details>
@@ -54,7 +60,15 @@
                 <span class="filterchip"><span class="filterchip__group">@cat.Label</span> <span class="filterchip__label">@label</span><button type="button" class="filterchip__remove" aria-label="@($"Remove {cat.Label} {label}")" @onclick="() => Remove(cat.Key, value)"><Icon Name="close" Class="icon--sm" /></button></span>
             }
         }
-        <button type="button" class="linkbtn" @onclick="ClearSheet">Clear all</button>
+        @if (!string.IsNullOrEmpty(DateFrom))
+        {
+            <span class="filterchip"><span class="filterchip__group">Date</span> <span class="filterchip__label">from @DateFrom</span><button type="button" class="filterchip__remove" aria-label="Remove date from" @onclick="@(() => { DateFrom = ""; Page = 1; })"><Icon Name="close" Class="icon--sm" /></button></span>
+        }
+        @if (!string.IsNullOrEmpty(DateTo))
+        {
+            <span class="filterchip"><span class="filterchip__group">Date</span> <span class="filterchip__label">to @DateTo</span><button type="button" class="filterchip__remove" aria-label="Remove date to" @onclick="@(() => { DateTo = ""; Page = 1; })"><Icon Name="close" Class="icon--sm" /></button></span>
+        }
+        <button type="button" class="linkbtn" data-filter-clear="sheet" @onclick="ClearSheet">Clear all</button>
     </div>
 </div>
 
@@ -79,7 +93,7 @@
     {
         <div class="emptystate">
             <p>No transactions match this search and these filters.</p>
-            <button type="button" class="btn btn--secondary btn--sm" @onclick="ClearEverything">Clear search and filters</button>
+            <button type="button" class="btn btn--secondary btn--sm" data-filter-clear="all" @onclick="ClearEverything">Clear search and filters</button>
         </div>
     }
 </div>
@@ -124,11 +138,12 @@
     };
 
     readonly Dictionary<string, HashSet<string>> Selected = Categories.ToDictionary(c => c.Key, _ => new HashSet<string>());
-    string Query = "", Status = "all";
+    string Query = "", Status = "all", DateFrom = "", DateTo = "";
     int Page = 1, PageSize = 10;
     Transaction? Selected_;
 
-    int ActiveCount => Selected.Values.Sum(s => s.Count);
+    int DateCount => (string.IsNullOrEmpty(DateFrom) ? 0 : 1) + (string.IsNullOrEmpty(DateTo) ? 0 : 1);
+    int ActiveCount => Selected.Values.Sum(s => s.Count) + DateCount;
 
     static bool InAmount(decimal amount, string bucket) => bucket switch
     {
@@ -144,7 +159,9 @@
         (string.IsNullOrWhiteSpace(Query) || RowText(t).Contains(Query.Trim(), StringComparison.OrdinalIgnoreCase)) &&
         (Selected["product"].Count == 0 || Selected["product"].Contains(t.Product)) &&
         (Selected["terminal"].Count == 0 || Selected["terminal"].Contains(t.Terminal)) &&
-        (Selected["amount"].Count == 0 || Selected["amount"].Any(b => InAmount(t.Amount, b))));
+        (Selected["amount"].Count == 0 || Selected["amount"].Any(b => InAmount(t.Amount, b))) &&
+        (string.IsNullOrEmpty(DateFrom) || string.CompareOrdinal(t.Ts.Substring(0, 10), DateFrom) >= 0) &&
+        (string.IsNullOrEmpty(DateTo) || string.CompareOrdinal(t.Ts.Substring(0, 10), DateTo) <= 0));
 
     List<Transaction> Rows => Base.Where(t => Status == "all" || t.Status == Status).ToList();
 
@@ -167,7 +184,7 @@
         Page = 1;
     }
     void Remove(string cat, string value) { Selected[cat].Remove(value); Page = 1; }
-    void ClearSheet() { foreach (var s in Selected.Values) s.Clear(); Page = 1; }
+    void ClearSheet() { foreach (var s in Selected.Values) s.Clear(); DateFrom = ""; DateTo = ""; Page = 1; }
     void ClearEverything() { ClearSheet(); Query = ""; Status = "all"; }
 
     static string StatusTone(string s) => s switch { "settled" => "success", "pending" => "warning", _ => "danger" };
