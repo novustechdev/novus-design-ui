@@ -1,0 +1,71 @@
+<!-- title: AI agents -->
+<h1>Adopt the kit with an AI coding agent</h1>
+
+<p>Most teams meet this kit through a coding agent. Told only to "use the Novus
+kit", an agent guesses, and a portal ends up with its own side navigation, its
+own filter bar and its own idea of what blue means. This page gives the agent
+the same rules the kit enforces on itself, and gives you prompts to copy.</p>
+
+<div class="alert alert--info" style="margin-bottom:var(--space-5);">
+  <span>Rules are context, not enforcement. An agent can still get it wrong, so
+  the last step of every prompt is a check you can read. The kit's own release
+  gates remain the thing that actually blocks a mistake.</span>
+</div>
+
+<h2>1. Give your agent the rules once</h2>
+
+<p>The package ships an instruction file for each agent, in the format that
+agent reads. Copy the one you use into your repository and your agent follows
+these rules in every session, without anyone restating them. Upgrading the
+package brings the updated rules with it.</p>
+
+<!--AGENT-FILES-->
+
+<p>The files are generated from one source in the kit, so they cannot disagree
+with each other or with this page. Do not hand edit them: upgrade the package
+instead, and keep your own project rules in a separate file.</p>
+
+<h2>2. Work in this order</h2>
+
+<ol class="bullets">
+  <li><b>Install and wire in.</b> The package installs from public npm with no
+  registry setup and no token. The theme script belongs in the document head so
+  the theme applies before first paint.</li>
+  <li><b>Convert one screen, not all of them.</b> A single converted screen
+  shows you what the agent understood, while a whole application converted at
+  once is unreviewable.</li>
+  <li><b>Read what came back.</b> Check the screen at 1440px and at 375px, and
+  with JavaScript off if the screen is meant to work without it.</li>
+  <li><b>Then widen.</b> Once one screen is right, the same prompt scales to the
+  rest, and the instruction file keeps later sessions consistent.</li>
+</ol>
+
+<h2>3. Prompts to copy</h2>
+
+<p>Each prompt names the real files this release ships, so the agent has no
+reason to invent a path. Paste one as it is.</p>
+
+<!--AGENT-PROMPTS-->
+
+<h2>The rules themselves</h2>
+
+<p>This is what the instruction files contain, and what the prompts carry. Each
+rule says what breaks without it and where the kit checks it, so an agent can
+weigh a rule rather than following it blindly.</p>
+
+<!--AGENT-RULES-->
+
+<h2>If the result looks wrong</h2>
+
+<ul class="bullets">
+  <li><b>Hardcoded values crept in.</b> Ask for a diff of every colour and size
+  the agent introduced, then ask which token covers each one.</li>
+  <li><b>New markup instead of kit components.</b> Point the agent at the
+  <a href="components/overview.html">component catalog</a> and ask it to name
+  the component it replaced.</li>
+  <li><b>Short content wrapping to two rows.</b> That is the defect this kit was
+  corrected twice to prevent. Ask for the audit prompt above, at both widths.</li>
+  <li><b>Console screens missing the shell.</b> The
+  <a href="admin-kit.html">Admin Kit</a> is the reference: four flavors, all
+  generated from one pattern layer.</li>
+</ul>

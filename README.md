@@ -236,6 +236,26 @@ The public reference site deploys to GitHub Pages via
 The workflow fails the deploy if any gate is red. If a push does not trigger a
 run (a known quirk on this repo), dispatch manually: `gh workflow run pages.yml`.
 
+## Working with an AI coding agent
+
+Most teams meet this kit through a coding agent. The package ships the kit's
+rules in the format each agent reads, so you copy one file into your repository
+instead of re-explaining the system every session:
+
+| Agent | Copy this file | To here |
+|---|---|---|
+| Claude Code | `novus-design-kit/agents/claude/CLAUDE.md` | `CLAUDE.md` |
+| GitHub Copilot | `novus-design-kit/agents/copilot/copilot-instructions.md` | `.github/copilot-instructions.md` |
+| GitHub Copilot, console screens | `novus-design-kit/agents/copilot/novus-design-kit.instructions.md` | `.github/instructions/novus-design-kit.instructions.md` |
+| Cursor | `novus-design-kit/agents/cursor/novus-design-kit.mdc` | `.cursor/rules/novus-design-kit.mdc` |
+| Any AGENTS.md reader | `novus-design-kit/agents/AGENTS.md` | `AGENTS.md` |
+
+The files are generated from one source in the kit, so they agree with each
+other and with the documentation. Do not hand edit them: upgrade the package,
+and keep your own project rules in a separate file. The reference site's AI
+agents page carries prompts to copy for adopting the kit, converting a
+hand-built admin screen, and auditing a screen against the rules.
+
 ## Versioning
 
 Semantic versioning with a maintained [CHANGELOG](CHANGELOG.md). Breaking

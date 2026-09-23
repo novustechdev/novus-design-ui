@@ -1,6 +1,6 @@
 {
   "name": "novus-design-kit",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Novus Technologies design kit: tokens, component styles, the console pattern layer, Carlito fonts, and official brand assets. Framework-agnostic CSS; import tokens.css plus console.css and build.",
   "license": "UNLICENSED",
   "author": "Novus Technologies Pte Ltd",
@@ -16,6 +16,10 @@
     "icons/",
     "photos/",
     "js/",
+    "agents/AGENTS.md",
+    "agents/claude/",
+    "agents/copilot/",
+    "agents/cursor/",
     "README.md",
     "CHANGELOG.md"
   ],
@@ -28,7 +32,8 @@
     "./photos/*": "./photos/*",
     "./console.css": "./console.css",
     "./js/novus-console.js": "./js/novus-console.js",
-    "./icons/*": "./icons/*"
+    "./icons/*": "./icons/*",
+    "./agents/*": "./agents/*"
   },
   "scripts": {
     "build:site": "node site/build.mjs",
