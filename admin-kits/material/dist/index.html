@@ -7,11 +7,11 @@
 <title>Dashboard · Novus Admin Kit</title>
 <script>
 try { var t = localStorage.getItem("novus-theme");
-  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
-} catch (e) {}
+  document.documentElement.setAttribute("data-theme", t === "dark" ? "dark" : "light");
+} catch (e) { document.documentElement.setAttribute("data-theme", "light"); }
 </script>
-  <script type="module" crossorigin src="./assets/app-DLsivNDq.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/app-YbU9anTh.css">
+  <script type="module" crossorigin src="./assets/app-DGIuF4u9.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/app-4jLPzlTP.css">
 </head>
 <body>
 <div class="adminwrap">
@@ -90,6 +90,28 @@ try { var t = localStorage.getItem("novus-theme");
 </div>
 <!--/DATA:signals-->
     </div>
+<!--SHELL:landing-stats-->
+<div class="statgrid">
+  <div class="card chartcard">
+    <div class="chartcard__head"><h2>Volume by hour</h2><span class="muted">today</span></div>
+    <div class="chartframe chartframe--short" id="volumechart" role="group" aria-label="Hourly transaction volume by product"></div>
+  </div>
+  <div class="card chartcard">
+    <div class="chartcard__head"><h2>Product mix</h2><span class="muted">share of today's volume</span></div>
+    <div class="chartframe chartframe--short" id="mixchart" role="group" aria-label="Volume share by product"></div>
+    <div class="tablewrap">
+      <table class="table">
+        <thead><tr><th>Product</th><th class="num">Volume</th><th class="num">Share</th></tr></thead>
+        <tbody>
+          <tr><td>novapay</td><td class="num">4211</td><td class="num">62%</td></tr>
+          <tr><td>novabank</td><td class="num">1554</td><td class="num">23%</td></tr>
+          <tr><td>novastore</td><td class="num">1051</td><td class="num">15%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!--/SHELL:landing-stats-->
     <div class="card card--flush">
       <div class="cardhead"><h2>Recent transactions</h2><a class="btn btn--ghost btn--sm" href="transactions.html">View all</a></div>
       <div class="tablewrap">
@@ -97,37 +119,37 @@ try { var t = localStorage.getItem("novus-theme");
           <thead><tr><th>Id</th><th>Time</th><th>Terminal</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th class="cell--actions">Actions</th></tr></thead>
           <tbody>
 <!--DATA:recent-transactions-->
-<tr data-id="TXN-241099" data-status="settled" data-product="novapay" data-terminal="TRM-0177" data-amount="151.17">
+<tr data-id="TXN-241099" data-status="settled" data-product="novapay" data-terminal="TRM-0177" data-amount="151.17" data-date="2026-08-27">
   <td><code>TXN-241099</code></td><td>18:31</td><td>TRM-0177</td>
   <td>novapay</td><td class="num">151.17</td>
   <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
   <td class="cell--actions"><button class="btn btn--ghost btn--sm" data-detail="TXN-241099">Detail</button></td>
 </tr>
-<tr data-id="TXN-241086" data-status="settled" data-product="novapay" data-terminal="TRM-0170" data-amount="721.23">
+<tr data-id="TXN-241086" data-status="settled" data-product="novapay" data-terminal="TRM-0170" data-amount="721.23" data-date="2026-08-27">
   <td><code>TXN-241086</code></td><td>18:14</td><td>TRM-0170</td>
   <td>novapay</td><td class="num">721.23</td>
   <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
   <td class="cell--actions"><button class="btn btn--ghost btn--sm" data-detail="TXN-241086">Detail</button></td>
 </tr>
-<tr data-id="TXN-241073" data-status="pending" data-product="novastore" data-terminal="TRM-0163" data-amount="401.87">
+<tr data-id="TXN-241073" data-status="pending" data-product="novastore" data-terminal="TRM-0163" data-amount="401.87" data-date="2026-08-27">
   <td><code>TXN-241073</code></td><td>17:57</td><td>TRM-0163</td>
   <td>novastore</td><td class="num">401.87</td>
   <td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td>
   <td class="cell--actions"><button class="btn btn--ghost btn--sm" data-detail="TXN-241073">Detail</button></td>
 </tr>
-<tr data-id="TXN-241060" data-status="settled" data-product="novabank" data-terminal="TRM-0156" data-amount="119.22">
+<tr data-id="TXN-241060" data-status="settled" data-product="novabank" data-terminal="TRM-0156" data-amount="119.22" data-date="2026-08-27">
   <td><code>TXN-241060</code></td><td>17:40</td><td>TRM-0156</td>
   <td>novabank</td><td class="num">119.22</td>
   <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
   <td class="cell--actions"><button class="btn btn--ghost btn--sm" data-detail="TXN-241060">Detail</button></td>
 </tr>
-<tr data-id="TXN-241047" data-status="settled" data-product="novapay" data-terminal="TRM-0149" data-amount="931.32">
+<tr data-id="TXN-241047" data-status="settled" data-product="novapay" data-terminal="TRM-0149" data-amount="931.32" data-date="2026-08-27">
   <td><code>TXN-241047</code></td><td>16:23</td><td>TRM-0149</td>
   <td>novapay</td><td class="num">931.32</td>
   <td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td>
   <td class="cell--actions"><button class="btn btn--ghost btn--sm" data-detail="TXN-241047">Detail</button></td>
 </tr>
-<tr data-id="TXN-241034" data-status="pending" data-product="novapay" data-terminal="TRM-0142" data-amount="279.24">
+<tr data-id="TXN-241034" data-status="pending" data-product="novapay" data-terminal="TRM-0142" data-amount="279.24" data-date="2026-08-27">
   <td><code>TXN-241034</code></td><td>16:06</td><td>TRM-0142</td>
   <td>novapay</td><td class="num">279.24</td>
   <td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td>

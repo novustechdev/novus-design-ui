@@ -117,6 +117,15 @@ fi
 OUT=$(node admin-kits/data/generate.mjs --check 2>&1); RC=$?
 gate "admin pattern parity" $RC "$(echo "$OUT" | sed -n 2,4p | tr '\n' ' ')"
 
+# 15. Version agreement (constitution 1.12.0): package, README and CHANGELOG name one release.
+PKG_VER=$(node -p "require('./package.json').version")
+CHG_VER=$(grep -oE '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' CHANGELOG.md | head -1 | tr -d '#[] ')
+README_VER=$(grep -oE 'novus-design-kit@[0-9]+\.[0-9]+\.[0-9]+' README.md | head -1 | cut -d@ -f2)
+BAD=""
+[ -n "$CHG_VER" ] && [ "$PKG_VER" != "$CHG_VER" ] && BAD="package $PKG_VER vs changelog $CHG_VER"
+[ -n "$README_VER" ] && [ "$PKG_VER" != "$README_VER" ] && BAD="$BAD package $PKG_VER vs README $README_VER"
+gate "version agreement" $([ -z "$BAD" ]; echo $?) "$BAD"
+
 # 11. Layout audit (Quality Gate 11): short content stays on one line and no page scrolls
 # horizontally at 375px, rendered in headless Chromium over site/dist (docs and demos).
 if [ -d site/dist ]; then

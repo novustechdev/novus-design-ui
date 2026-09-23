@@ -43,3 +43,31 @@ you don't override keeps tracking the kit across upgrades:</p>
 <p>Releases are semantically versioned with a maintained changelog; breaking changes
 (removed class, custom property, import path, or asset file) ship only in a MAJOR
 with a migration note.</p>
+
+<h2>Building a portal? Add the console layer</h2>
+<p>The kit ships the console patterns as a second stylesheet. Import it after
+the tokens and you inherit the sign-in page, the console shell, side
+navigation, page header, filter bar, list footer, settings layout, chart
+styling and the content-fit rules, with no files copied out of the
+repository.</p>
+
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>import "novus-design-kit/js/novus-theme.js";   // pre-paint theme, light by default
+import "novus-design-kit/tokens.css";          // tokens and components
+import "novus-design-kit/console.css";         // console patterns
+import "novus-design-kit/js/novus-console.js"; // menus, drawer, password toggle</code></pre>
+
+<p>Plain HTML, served over http(s):</p>
+
+<pre class="demo__code" style="border:1px solid var(--border);border-radius:var(--radius-md)"><code>&lt;link rel="stylesheet" href="/node_modules/novus-design-kit/tokens.css"&gt;
+&lt;link rel="stylesheet" href="/node_modules/novus-design-kit/console.css"&gt;
+&lt;script src="/node_modules/novus-design-kit/js/novus-theme.js"&gt;&lt;/script&gt;
+&lt;script src="/node_modules/novus-design-kit/js/novus-console.js" defer&gt;&lt;/script&gt;</code></pre>
+
+<ul class="bullets">
+  <li>Order matters: tokens first, then the console layer, then anything your app overrides.</li>
+  <li>Portals render light by default. To follow the operating system instead, set <code>window.novusThemeFollowOS = true</code> before the theme script.</li>
+  <li>Icons come as a sprite: <code>&lt;svg class=&quot;icon&quot;&gt;&lt;use href=&quot;…/icons/novus-icons.svg#novus-filter&quot;/&gt;&lt;/svg&gt;</code>, or copy the inline markup from the <a href="foundations/icons.html">Icons</a> page.</li>
+  <li>Charts need D3 in your app (<code>npm install d3</code>); the drawing rules and the chart source live with the <a href="components/charts.html">Charts</a> component.</li>
+  <li>Every pattern is documented with live examples in the <a href="components/overview.html">catalog</a>; the <a href="admin-kit.html">Admin Kit</a> shows them working together.</li>
+</ul>
+

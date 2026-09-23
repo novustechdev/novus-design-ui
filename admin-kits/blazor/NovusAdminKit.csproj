@@ -14,9 +14,9 @@
   <Target Name="CopyNovusKit" BeforeTargets="PrepareForBuild">
     <ItemGroup>
       <NovusKit Include="node_modules/novus-design-kit/**/*" />
-      <ChartJs Include="node_modules/chart.js/dist/chart.umd.js" />
+      <D3 Include="node_modules/d3/dist/d3.min.js" />
     </ItemGroup>
     <Copy SourceFiles="@(NovusKit)" DestinationFiles="@(NovusKit->'wwwroot/lib/novus-design-kit/%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="@(ChartJs)" DestinationFiles="@(ChartJs->'wwwroot/lib/chartjs/%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(D3)" DestinationFiles="@(D3->'wwwroot/lib/d3/%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
   </Target>
 </Project>

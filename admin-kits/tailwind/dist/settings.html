@@ -7,11 +7,11 @@
 <title>Settings · Novus Admin Kit</title>
 <script>
 try { var t = localStorage.getItem("novus-theme");
-  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
-} catch (e) {}
+  document.documentElement.setAttribute("data-theme", t === "dark" ? "dark" : "light");
+} catch (e) { document.documentElement.setAttribute("data-theme", "light"); }
 </script>
-  <script type="module" crossorigin src="./assets/app-DTJMQXjM.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/app-CFpqs1DA.css">
+  <script type="module" crossorigin src="./assets/app-LCc_KjmP.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/app-BmRb6nX3.css">
 </head>
 <body>
 <div class="adminwrap">
@@ -67,62 +67,94 @@ try { var t = localStorage.getItem("novus-theme");
       </div>
       <p class="muted pagehead__desc">Profile, appearance, notifications, and API access for this console.</p>
     </div>
-    <div class="tabs">
-      <div class="tablist" role="tablist" aria-label="Settings sections">
-        <input type="radio" name="settings-tab" id="tab-profile" checked><label for="tab-profile">Profile</label>
-        <input type="radio" name="settings-tab" id="tab-appearance"><label for="tab-appearance">Appearance</label>
-        <input type="radio" name="settings-tab" id="tab-notifications"><label for="tab-notifications">Notifications</label>
-        <input type="radio" name="settings-tab" id="tab-api"><label for="tab-api">API access</label>
+<!--SHELL:settings-->
+<div class="settings">
+  <nav class="settings__menu" aria-label="Settings sections">
+    <a class="settings__link" href="#set-profile">Profile</a>
+    <a class="settings__link" href="#set-appearance">Appearance</a>
+    <a class="settings__link" href="#set-notifications">Notifications</a>
+    <a class="settings__link" href="#set-security">Security</a>
+    <a class="settings__link" href="#set-api">API access</a>
+  </nav>
+  <div class="settings__sections">
+    <section class="settingsec" id="set-profile" aria-labelledby="set-profile-h">
+      <div class="settingsec__head"><h2 id="set-profile-h">Profile</h2><p class="muted">Who you are in this console.</p></div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Display name</span><span class="setting__desc">Shown on audit entries and approvals.</span></div>
+        <div class="setting__control"><input class="input" id="s-name" value="Operations Admin"></div>
       </div>
-      <section class="tabpanel" id="panel-profile">
-        <div class="card">
-          <h3>Profile</h3>
-          <p class="muted">Demo only: this form does not persist.</p>
-          <form onsubmit="return false">
-            <div class="field"><label for="s-name">Name</label><input class="input" id="s-name" value="Operations Admin"></div>
-            <div class="field"><label for="s-mail">Email</label><input class="input" id="s-mail" type="email" value="ops.admin@novustech.com.sg"></div>
-            <div class="field"><label for="s-role">Role</label>
-              <span class="selectwrap"><select class="select" id="s-role"><option>Operations</option><option>Finance</option><option>Support</option></select></span>
-            </div>
-            <button class="btn btn--primary">Save</button>
-          </form>
-        </div>
-      </section>
-      <section class="tabpanel" id="panel-appearance">
-        <div class="card">
-          <h3>Appearance</h3>
-          <p class="muted">Light follows the OS unless you choose. The choice persists on this device.</p>
-          <button class="btn btn--secondary toggle44" data-theme-toggle>Toggle light / dark</button>
-        </div>
-      </section>
-      <section class="tabpanel" id="panel-notifications">
-        <div class="card">
-          <h3>Notifications</h3>
-          <p class="muted">Demo only: choices do not persist.</p>
-          <label class="chk"><input type="checkbox" checked> Terminal offline alerts</label>
-          <label class="chk"><input type="checkbox" checked> Risk holds requiring review</label>
-          <label class="chk"><input type="checkbox"> Daily settlement report</label>
-          <label class="chk"><input type="checkbox"> Weekly operations digest</label>
-          <button class="btn btn--primary" style="margin-top:var(--space-3)">Save</button>
-        </div>
-      </section>
-      <section class="tabpanel" id="panel-api">
-        <div class="card">
-          <h3>API access</h3>
-          <p class="muted">Demo only: keys shown are illustrative and not usable.</p>
-          <table class="table">
-            <thead><tr><th>Key name</th><th>Prefix</th><th>Created</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr><td>Settlement export</td><td><code>np_live_4f2c</code></td><td>2026-05-14</td><td><span class="badge badge--success"><span class="badge__dot"></span> Status · Active</span></td></tr>
-              <tr><td>Terminal telemetry</td><td><code>np_live_9a71</code></td><td>2026-03-02</td><td><span class="badge badge--success"><span class="badge__dot"></span> Status · Active</span></td></tr>
-              <tr><td>Legacy reporting</td><td><code>np_live_1e08</code></td><td>2025-11-20</td><td><span class="badge">Status · Revoked</span></td></tr>
-            </tbody>
-          </table>
-          <button class="btn btn--secondary" style="margin-top:var(--space-3)">Generate key</button>
-        </div>
-      </section>
-    </div>
-  
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Email</span><span class="setting__desc">Where this console sends notifications.</span></div>
+        <div class="setting__control"><input class="input" id="s-mail" type="email" value="ops.admin@novustech.com.sg"></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Role</span><span class="setting__desc">Set by your administrator; shown here for reference.</span></div>
+        <div class="setting__control"><span class="selectwrap"><select class="select" id="s-role"><option>Operations</option><option>Finance</option><option>Support</option></select></span></div>
+      </div>
+    </section>
+    <section class="settingsec" id="set-appearance" aria-labelledby="set-appearance-h">
+      <div class="settingsec__head"><h2 id="set-appearance-h">Appearance</h2><p class="muted">How this console looks on this device.</p></div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Theme</span><span class="setting__desc">Light by default. Your choice is remembered on this device.</span></div>
+        <div class="setting__control"><button type="button" class="btn btn--secondary btn--sm toggle44" data-theme-toggle>Switch light and dark</button></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Table density</span><span class="setting__desc">Row height in tables and lists.</span></div>
+        <div class="setting__control"><span class="selectwrap"><select class="select" id="s-density"><option>Compact</option><option>Comfortable</option></select></span></div>
+      </div>
+    </section>
+    <section class="settingsec" id="set-notifications" aria-labelledby="set-notifications-h">
+      <div class="settingsec__head"><h2 id="set-notifications-h">Notifications</h2><p class="muted">What this console tells you about.</p></div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Terminal offline alerts</span><span class="setting__desc">A device stops responding during acceptance hours.</span></div>
+        <div class="setting__control"><input type="checkbox" id="s-n1" checked></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Risk holds requiring review</span><span class="setting__desc">A transaction is held for manual judgement.</span></div>
+        <div class="setting__control"><input type="checkbox" id="s-n2" checked></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Daily settlement report</span><span class="setting__desc">Sent after the last batch window closes.</span></div>
+        <div class="setting__control"><input type="checkbox" id="s-n3"></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Weekly operations digest</span><span class="setting__desc">Volumes, uptime and exceptions for the week.</span></div>
+        <div class="setting__control"><input type="checkbox" id="s-n4"></div>
+      </div>
+    </section>
+    <section class="settingsec" id="set-security" aria-labelledby="set-security-h">
+      <div class="settingsec__head"><h2 id="set-security-h">Security</h2><p class="muted">Session and access rules for this workspace.</p></div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Session timeout</span><span class="setting__desc">Idle time before this console signs you out.</span></div>
+        <div class="setting__control"><span class="selectwrap"><select class="select" id="s-timeout"><option>15 minutes</option><option>30 minutes</option><option>1 hour</option></select></span></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Two-step verification</span><span class="setting__desc">Required for settlement and configuration changes.</span></div>
+        <div class="setting__control"><input type="checkbox" id="s-2fa" checked></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Other sessions</span><span class="setting__desc">Sign out every other browser signed in as you.</span></div>
+        <div class="setting__control"><button type="button" class="btn btn--secondary btn--sm">Sign out other sessions</button></div>
+      </div>
+    </section>
+    <section class="settingsec" id="set-api" aria-labelledby="set-api-h">
+      <div class="settingsec__head"><h2 id="set-api-h">API access</h2><p class="muted">Keys issued for this workspace. Values are illustrative.</p></div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Settlement export</span><span class="setting__desc">Created 2026-05-14, last used today.</span></div>
+        <div class="setting__control"><span class="cluster" style="gap:var(--space-2)"><code>np_live_4f2c</code><span class="badge badge--success"><span class="badge__dot"></span> Active</span></span></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Terminal telemetry</span><span class="setting__desc">Created 2026-03-02, last used today.</span></div>
+        <div class="setting__control"><span class="cluster" style="gap:var(--space-2)"><code>np_live_9a71</code><span class="badge badge--success"><span class="badge__dot"></span> Active</span></span></div>
+      </div>
+      <div class="setting">
+        <div class="setting__text"><span class="setting__label">Legacy reporting</span><span class="setting__desc">Created 2025-11-20, revoked 2026-08-01.</span></div>
+        <div class="setting__control"><span class="cluster" style="gap:var(--space-2)"><code>np_live_1e08</code><span class="badge">Revoked</span></span></div>
+      </div>
+    </section>
+  </div>
+</div>
+<!--/SHELL:settings-->
 </main>
 </div>
 </div>

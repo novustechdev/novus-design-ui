@@ -11,7 +11,7 @@
    - table rows between DATA markers, so JS-off pages are complete.
    Parity check (constitution Quality Gate 10): node generate.mjs --check writes
    nothing and exits 1 listing every emitted file that differs from its source. */
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { icons, svg } from "../shared/icons.mjs";
@@ -68,6 +68,16 @@ ${d.transactions.map((t) => `        new("${t.id}", "${t.ts}", "${t.terminal}", 
     {
 ${d.terminals.map((t) => `        new("${t.id}", "${t.location}", "${t.product}", ${t.uptime}, "${t.health}", "${t.lastSeen}"),`).join("\n")}
     };
+
+    public static readonly HourPoint[] Hourly =
+    {
+${d.hourly.hours.map((h, i) => `        new("${h}", ${d.hourly.series.novapay[i]}, ${d.hourly.series.novabank[i]}, ${d.hourly.series.novastore[i]}),`).join("\n")}
+    };
+}
+
+public record HourPoint(string Hour, int Novapay, int Novabank, int Novastore)
+{
+    public int Total => Novapay + Novabank + Novastore;
 }
 `;
 emit(join(KITS, "blazor/Data/SeedData.cs"), cs);
@@ -92,6 +102,22 @@ for (const dir of ["tailwind/src", "material/src", "blazor/wwwroot", "blazor-dem
   emit(join(KITS, dir, "novus-admin.js"), copyOf("novus-admin.js"));
 }
 for (const flavor of ["tailwind", "material"]) emit(join(KITS, flavor, "src/console-pages.js"), copyOf("console-pages.js"));
+for (const dir of ["tailwind/src", "material/src", "blazor/wwwroot", "blazor-demo/wwwroot"]) emit(join(KITS, dir, "novus-chart.js"), copyOf("novus-chart.js"));
+for (const dir of ["blazor/wwwroot", "blazor-demo/wwwroot"]) emit(join(KITS, dir, "novus-chart-boot.js"), copyOf("novus-chart-boot.js"));
+
+/* Packaged artifacts (feature 008): consumers inherit the console layer by
+   upgrading the package, so the same sources land at the repository root. */
+const ROOT = join(KITS, "..");
+mkdirSync(join(ROOT, "icons"), { recursive: true });
+emit(join(ROOT, "console.css"), copyOf("novus-admin.css"));
+emit(join(ROOT, "js/novus-console.js"), copyOf("novus-admin.js"));
+emit(join(ROOT, "icons/novus-icons.svg"), `<?xml version="1.0" encoding="UTF-8"?>
+<!-- GENERATED from admin-kits/shared/icons.mjs by admin-kits/data/generate.mjs. Do not edit.
+     Use: <svg class="icon" aria-hidden="true"><use href="icons/novus-icons.svg#novus-menu"/></svg> -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+${icons.map(([name, , body]) => `  <symbol id="novus-${name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${body}</symbol>`).join("\n")}
+</svg>
+`);
 
 /* ---- Console shell: one definition, rendered as static HTML and as Razor ---- */
 const LOCKUP = `<span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span>`;
@@ -175,7 +201,16 @@ function navRazor() {
   return out.join("\n");
 }
 
+const AUTH_ART = `<svg class="authhero__art" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path class="authhero__trace" d="M-120 760 L420 120"/>
+    <path class="authhero__trace" d="M-40 860 L560 160"/>
+    <path class="authhero__trace" d="M60 900 L680 220"/>
+    <path class="authhero__mark" d="M96 196 l52 52 -52 52 -52 -52 Z"/>
+    <path class="authhero__mark" d="M404 236 l40 40 -40 40 -40 -40 Z"/>
+  </svg>`;
+
 const brandTpl = `<aside class="authbrand">
+  ${AUTH_ART}
   <div class="authbrand__inner">
     ${LOCKUP}
     <p class="authbrand__tagline">${BRAND.tagline}</p>
@@ -197,6 +232,117 @@ const signedOutTpl = (signInHref) => `<main class="signedout">
   </div>
 </main>`;
 
+const ssoTpl = (flavor) => `<p class="authalt">or</p>
+${flavor === "material"
+  ? `<md-outlined-button class="authcard__sso" type="button">Continue with single sign-on</md-outlined-button>`
+  : `<button type="button" class="btn btn--secondary authcard__sso">Continue with single sign-on</button>`}`;
+
+/* Analytics and landing statistics: D3 charts with a table of the same numbers,
+   so a page without scripting still answers the question (feature 008). */
+const hourRows = d.hourly.hours.map((hour, i) => {
+  const row = { hour, total: 0 };
+  for (const p of ["novapay", "novabank", "novastore"]) { row[p] = d.hourly.series[p][i]; row.total += d.hourly.series[p][i]; }
+  return row;
+});
+const mixTotals = ["novapay", "novabank", "novastore"].map((p) => [p, d.hourly.series[p].reduce((a, b) => a + b, 0)]);
+const mixAll = mixTotals.reduce((a, [, v]) => a + v, 0);
+
+const analyticsTpl = () => `<div class="card chartcard">
+  <div class="chartcard__head"><h2>Volume by hour</h2><span class="muted">today, by product</span></div>
+  <div class="chartframe" id="volumechart" role="group" aria-label="Hourly transaction volume by product"></div>
+  <p class="muted" style="margin:0">Composition in the bars, the total trajectory on the line. Colours are the product accents, read from the tokens at render time, and the chart redraws when the theme changes.</p>
+  <details class="tabledetails">
+    <summary>The same numbers as a table</summary>
+    <div class="tablewrap">
+      <table class="table">
+        <thead><tr><th>Hour</th><th class="num">novapay</th><th class="num">novabank</th><th class="num">novastore</th><th class="num">Total</th></tr></thead>
+        <tbody>
+${hourRows.map((r) => `          <tr><td>${r.hour}</td><td class="num">${r.novapay}</td><td class="num">${r.novabank}</td><td class="num">${r.novastore}</td><td class="num">${r.total}</td></tr>`).join("\n")}
+        </tbody>
+      </table>
+    </div>
+  </details>
+</div>`;
+
+const landingTpl = () => `<div class="statgrid">
+  <div class="card chartcard">
+    <div class="chartcard__head"><h2>Volume by hour</h2><span class="muted">today</span></div>
+    <div class="chartframe chartframe--short" id="volumechart" role="group" aria-label="Hourly transaction volume by product"></div>
+  </div>
+  <div class="card chartcard">
+    <div class="chartcard__head"><h2>Product mix</h2><span class="muted">share of today's volume</span></div>
+    <div class="chartframe chartframe--short" id="mixchart" role="group" aria-label="Volume share by product"></div>
+    <div class="tablewrap">
+      <table class="table">
+        <thead><tr><th>Product</th><th class="num">Volume</th><th class="num">Share</th></tr></thead>
+        <tbody>
+${mixTotals.map(([p, v]) => `          <tr><td>${p}</td><td class="num">${v}</td><td class="num">${Math.round((v / mixAll) * 100)}%</td></tr>`).join("\n")}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>`;
+
+/* Settings: a section menu beside grouped rows, one control per row (feature 008). */
+const SETTINGS = [
+  { id: "profile", label: "Profile", desc: "Who you are in this console.", rows: [
+    { label: "Display name", desc: "Shown on audit entries and approvals.", control: { kind: "text", id: "s-name", value: "Operations Admin" } },
+    { label: "Email", desc: "Where this console sends notifications.", control: { kind: "email", id: "s-mail", value: "ops.admin@novustech.com.sg" } },
+    { label: "Role", desc: "Set by your administrator; shown here for reference.", control: { kind: "select", id: "s-role", options: ["Operations", "Finance", "Support"] } },
+  ] },
+  { id: "appearance", label: "Appearance", desc: "How this console looks on this device.", rows: [
+    { label: "Theme", desc: "Light by default. Your choice is remembered on this device.", control: { kind: "theme" } },
+    { label: "Table density", desc: "Row height in tables and lists.", control: { kind: "select", id: "s-density", options: ["Compact", "Comfortable"] } },
+  ] },
+  { id: "notifications", label: "Notifications", desc: "What this console tells you about.", rows: [
+    { label: "Terminal offline alerts", desc: "A device stops responding during acceptance hours.", control: { kind: "check", id: "s-n1", checked: true } },
+    { label: "Risk holds requiring review", desc: "A transaction is held for manual judgement.", control: { kind: "check", id: "s-n2", checked: true } },
+    { label: "Daily settlement report", desc: "Sent after the last batch window closes.", control: { kind: "check", id: "s-n3" } },
+    { label: "Weekly operations digest", desc: "Volumes, uptime and exceptions for the week.", control: { kind: "check", id: "s-n4" } },
+  ] },
+  { id: "security", label: "Security", desc: "Session and access rules for this workspace.", rows: [
+    { label: "Session timeout", desc: "Idle time before this console signs you out.", control: { kind: "select", id: "s-timeout", options: ["15 minutes", "30 minutes", "1 hour"] } },
+    { label: "Two-step verification", desc: "Required for settlement and configuration changes.", control: { kind: "check", id: "s-2fa", checked: true } },
+    { label: "Other sessions", desc: "Sign out every other browser signed in as you.", control: { kind: "button", label: "Sign out other sessions" } },
+  ] },
+  { id: "api", label: "API access", desc: "Keys issued for this workspace. Values are illustrative.", rows: [
+    { label: "Settlement export", desc: "Created 2026-05-14, last used today.", control: { kind: "status", code: "np_live_4f2c", tone: "success", text: "Active" } },
+    { label: "Terminal telemetry", desc: "Created 2026-03-02, last used today.", control: { kind: "status", code: "np_live_9a71", tone: "success", text: "Active" } },
+    { label: "Legacy reporting", desc: "Created 2025-11-20, revoked 2026-08-01.", control: { kind: "status", code: "np_live_1e08", tone: "", text: "Revoked" } },
+  ] },
+];
+
+const control = (c, flavor) => {
+  const md = flavor === "material";
+  if (c.kind === "text" || c.kind === "email") {
+    return md
+      ? `<md-filled-text-field id="${c.id}" type="${c.kind === "email" ? "email" : "text"}" value="${c.value}" aria-label="setting"></md-filled-text-field>`
+      : `<input class="input" id="${c.id}"${c.kind === "email" ? ' type="email"' : ""} value="${c.value}">`;
+  }
+  if (c.kind === "select") return `<span class="selectwrap"><select class="select" id="${c.id}">${c.options.map((o) => `<option>${o}</option>`).join("")}</select></span>`;
+  if (c.kind === "check") return md
+    ? `<md-checkbox id="${c.id}" touch-target="wrapper"${c.checked ? " checked" : ""}></md-checkbox>`
+    : `<input type="checkbox" id="${c.id}"${c.checked ? " checked" : ""}>`;
+  if (c.kind === "theme") return `<button type="button" class="btn btn--secondary btn--sm toggle44" data-theme-toggle>Switch light and dark</button>`;
+  if (c.kind === "button") return md ? `<md-outlined-button>${c.label}</md-outlined-button>` : `<button type="button" class="btn btn--secondary btn--sm">${c.label}</button>`;
+  return `<span class="cluster" style="gap:var(--space-2)"><code>${c.code}</code><span class="badge${c.tone ? ` badge--${c.tone}` : ""}">${c.tone ? '<span class="badge__dot"></span> ' : ""}${c.text}</span></span>`;
+};
+
+const settingsTpl = (flavor) => `<div class="settings">
+  <nav class="settings__menu" aria-label="Settings sections">
+${SETTINGS.map((sec) => `    <a class="settings__link" href="#set-${sec.id}">${sec.label}</a>`).join("\n")}
+  </nav>
+  <div class="settings__sections">
+${SETTINGS.map((sec) => `    <section class="settingsec" id="set-${sec.id}" aria-labelledby="set-${sec.id}-h">
+      <div class="settingsec__head"><h2 id="set-${sec.id}-h">${sec.label}</h2><p class="muted">${sec.desc}</p></div>
+${sec.rows.map((row) => `      <div class="setting">
+        <div class="setting__text"><span class="setting__label">${row.label}</span><span class="setting__desc">${row.desc}</span></div>
+        <div class="setting__control">${control(row.control, flavor)}</div>
+      </div>`).join("\n")}
+    </section>`).join("\n")}
+  </div>
+</div>`;
+
 /* Filter bar, search, list footers, password toggle: static flavors only
    (the Blazor flavors bind the same markup to component state). */
 const distinct = (key) => [...new Set(d.transactions.map((t) => t[key]))].sort();
@@ -204,6 +350,7 @@ const CATEGORIES = [
   { key: "product", label: "Product", options: distinct("product").map((v) => [v, v]) },
   { key: "terminal", label: "Terminal", options: distinct("terminal").map((v) => [v, v]) },
   { key: "amount", label: "Amount", options: [["lt200", "Under 200.00"], ["200to500", "200.00 to 499.99"], ["gte500", "500.00 and above"]] },
+  { key: "date", label: "Date", range: true },
 ];
 const QUICK = [["all", "All"], ["settled", "Settled"], ["pending", "Pending"], ["failed", "Failed"]];
 const statusCount = (s) => d.transactions.filter((t) => s === "all" || t.status === s).length;
@@ -229,7 +376,10 @@ ${CATEGORIES.map((c, i) => `          <label class="filtermenu__tab"><input type
         </div>
         <div class="filtermenu__panels">
 ${CATEGORIES.map((c) => `          <fieldset class="filtermenu__panel"><legend class="filtermenu__head">${c.label}</legend>
-${c.options.map(([v, l]) => `            <label class="filteropt">${checkbox(flavor, c.key, v)}<span class="truncate">${esc(l)}</span></label>`).join("\n")}
+${c.range
+  ? `            <label class="filterdate"><span class="muted">From</span><input class="input" type="date" name="date-from"></label>
+            <label class="filterdate"><span class="muted">To</span><input class="input" type="date" name="date-to"></label>`
+  : c.options.map(([v, l]) => `            <label class="filteropt">${checkbox(flavor, c.key, v)}<span class="truncate">${esc(l)}</span></label>`).join("\n")}
           </fieldset>`).join("\n")}
         </div>
       </div>
@@ -308,6 +458,10 @@ for (const dir of ["blazor/Components/Shared", "blazor-demo/Shared"]) {
   emit(join(KITS, dir, "AuthBrand.razor"), `${razorBanner}${razorIcons(brandTpl)}\n`);
   emit(join(KITS, dir, "SignedOutCard.razor"), `${razorBanner}${razorIcons(signedOutTpl("login"))}\n`);
   emit(join(KITS, dir, "PasswordToggle.razor"), PWTOGGLE_RAZOR);
+  emit(join(KITS, dir, "AuthSso.razor"), `${razorBanner}${ssoTpl("blazor")}\n`);
+  emit(join(KITS, dir, "AnalyticsChart.razor"), `${razorBanner}${analyticsTpl()}\n`);
+  emit(join(KITS, dir, "LandingStats.razor"), `${razorBanner}${landingTpl()}\n`);
+  emit(join(KITS, dir, "SettingsSections.razor"), `${razorBanner}${settingsTpl("blazor")}\n`);
 }
 
 /* ---- WASM demo: mirror the Blazor Server screens, layouts, and shared components ----
@@ -327,7 +481,7 @@ for (const [from, to] of MIRROR) {
 const chip = (kind, value, tone) =>
   `<span class="badge badge--${tone}"><span class="badge__dot"></span> ${kind} · ${esc(cap(value))}</span>`;
 
-const txRow = (t) => `<tr data-id="${t.id}" data-status="${t.status}" data-product="${t.product}" data-terminal="${t.terminal}" data-amount="${money(t.amount)}">
+const txRow = (t) => `<tr data-id="${t.id}" data-status="${t.status}" data-product="${t.product}" data-terminal="${t.terminal}" data-amount="${money(t.amount)}" data-date="${t.ts.slice(0, 10)}">
   <td><code>${t.id}</code></td><td>${time(t.ts)}</td><td>${t.terminal}</td>
   <td>${t.product}</td><td class="num">${money(t.amount)}</td>
   <td>${chip("Status", t.status, statusTone[t.status])}</td>
@@ -368,6 +522,10 @@ for (const flavor of ["tailwind", "material"]) {
       "listfooter-tx": listfooterTpl("tx"),
       "listfooter-grid": listfooterTpl("grid"),
       pwtoggle: pwtoggleTpl(flavor),
+      "auth-sso": ssoTpl(flavor),
+      "analytics-chart": analyticsTpl(),
+      "landing-stats": landingTpl(),
+      settings: settingsTpl(flavor),
     };
     for (const [name, markup] of Object.entries(shells)) {
       html = html.replace(new RegExp(`(<!--SHELL:${name}-->)[\\s\\S]*?(<!--/SHELL:${name}-->)`, "g"), `$1\n${htmlIcons(markup)}\n$2`);

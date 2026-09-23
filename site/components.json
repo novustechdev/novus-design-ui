@@ -93,6 +93,15 @@
       "css": ["content-fit"]
     },
     {
+      "id": "charts",
+      "name": "Charts",
+      "category": "Data Display",
+      "classes": [".chartframe", ".chartcard", ".charttip", "composes .table"],
+      "fragment": "src/components/charts.html",
+      "summary": "Token-fed D3 charts: composition bars with a trajectory line, share donut, and the table that carries the same numbers.",
+      "css": ["charts"]
+    },
+    {
       "id": "calendar",
       "name": "Calendar",
       "category": "Data Display",
@@ -329,6 +338,15 @@
       "fragment": "src/components/signed-out-page.html",
       "summary": "Centred signed-out card that confirms the session ended and offers to sign in again.",
       "css": ["signed-out"]
+    },
+    {
+      "id": "settings-layout",
+      "name": "Settings layout",
+      "category": "Templates",
+      "classes": [".settings", ".settings__menu", ".settingsec", ".setting", ".setting__control"],
+      "fragment": "src/components/settings-layout.html",
+      "summary": "Configuration screens: a section menu beside grouped sections of labelled setting rows, never a grid of cards.",
+      "css": ["settings-layout"]
     }
   ]
 }

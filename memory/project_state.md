@@ -1,4 +1,19 @@
-# Project state (as of 2026-09-15)
+# Project state (as of 2026-09-23)
+
+- **Feature 008 (enterprise portal defaults, constitution 1.12.0)**: owner
+  feedback round on novabank.novustech.dev turned into kit defaults. The console
+  layer is now PACKAGED (`console.css`, `js/novus-console.js`,
+  `icons/novus-icons.svg`, all generated from `admin-kits/shared/`), so consumers
+  inherit the patterns by upgrading; kit version 0.4.0, npm publish pending the
+  owner. Light is the default theme (`window.novusThemeFollowOS` opts back into
+  the OS). D3 replaced Chart.js everywhere (`admin-kits/shared/novus-chart.js`,
+  one source, `novus-chart-boot.js` for the Blazor flavors). Typography parity
+  (shell and content at --text-sm, page title --text-xl), portal text resets
+  tokens.css's 68ch cap, sign-in is 50/50 with ambient art and single sign-on,
+  settings screens use the settings layout, filter sheet gained a Date range.
+  Gates 12 to 15 added (account menu placement, typography parity, content
+  width, version agreement), all negative-tested. Catalog 42 components.
+  Handover: docs/handover/2026-09-23-session-handover.md.
 
 - **Feature 007 (console patterns, constitution 1.11.0)**: novalending console
   (v2.1nflow.co) is the admin pattern reference; its short-content wrapping is a
@@ -19,7 +34,7 @@
   motion allowed since constitution 1.6.0 (0.2s max, reduced-motion aware).
   Header = novapay lockup + icon theme toggle; below 520px the suffix hides and
   the endorsement mark steps to 20px (375px overflow guard).
-- **Speckit (current)**: active feature `specs/007-novalending-admin-patterns` (T001-T042 done, shipped via PR); earlier `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
+- **Speckit (current)**: active feature `specs/008-enterprise-portal-defaults`; earlier `specs/007-novalending-admin-patterns` (shipped via PR); earlier `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
   (tasks through T036 done); constitution v1.8.0.
 
 - **Package**: `novus-design-kit` on PUBLIC npm (0.3.0 on npm, dist-tag latest, repository field novustechdev), tokenless install
