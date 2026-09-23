@@ -1,17 +1,19 @@
 {
   "name": "novus-design-kit",
-  "version": "0.3.0",
-  "description": "Novus Technologies design kit: tokens, component styles, Carlito fonts, and official brand assets. Framework-agnostic CSS; import tokens.css and build.",
+  "version": "0.4.0",
+  "description": "Novus Technologies design kit: tokens, component styles, the console pattern layer, Carlito fonts, and official brand assets. Framework-agnostic CSS; import tokens.css plus console.css and build.",
   "license": "UNLICENSED",
   "author": "Novus Technologies Pte Ltd",
   "homepage": "https://www.novustech.com.sg",
   "style": "tokens.css",
   "files": [
     "tokens.css",
+    "console.css",
     "fonts/",
     "logos/",
     "!logos/clients/",
     "!logos/schemes/",
+    "icons/",
     "photos/",
     "js/",
     "README.md",
@@ -23,7 +25,10 @@
     "./js/novus-theme.js": "./js/novus-theme.js",
     "./fonts/*": "./fonts/*",
     "./logos/*": "./logos/*",
-    "./photos/*": "./photos/*"
+    "./photos/*": "./photos/*",
+    "./console.css": "./console.css",
+    "./js/novus-console.js": "./js/novus-console.js",
+    "./icons/*": "./icons/*"
   },
   "scripts": {
     "build:site": "node site/build.mjs",

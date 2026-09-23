@@ -1,6 +1,22 @@
 <!--
 Sync Impact Report
-- Version change: 1.10.0 -> 1.11.0 (MINOR: Principles II, IV and VII materially
+- Version change: 1.11.0 -> 1.12.0 (MINOR: portal defaults from the owner's
+  novabank feedback round, 2026-09-23, feature 008)
+- Modified principles:
+  II. Ambient authentication art allowed on sign-in screens only (slow, looping,
+  reduced-motion aware, no layout shift, no gradient).
+  IV. Light is the default theme; dark comes only from the user's choice and
+  following the operating system is an opt-out. Typography parity (one size
+  across header, navigation and content; headings within 1.75x and 1.45x of
+  body). Content width (portal text uses the width of its row).
+  VII. D3 is the charting standard (Chart.js retired); account menu is the last
+  header element; landing page carries interactive statistics beside a table;
+  configuration screens use the settings layout; the console layer ships in the
+  published package.
+- Quality Gates: 12 account menu placement, 13 typography parity, 14 content
+  width, 15 version agreement.
+- Follow-up TODOs: npm publish of 0.4.0 needs the owner (passkey).
+- Prior amendment (1.10.0 -> 1.11.0) (MINOR: Principles II, IV and VII materially
   expanded, Design Standards and Quality Gates extended; owner decision
   2026-09-15, feature 007)
 - Modified principles:
@@ -105,7 +121,11 @@ font weights 400/600 only, and compact information-dense layouts. Motion is
 functional only: brief transitions (0.2s or less) on interactive state changes
 (hover, active navigation, tab switches, opening panels), always disabled under
 `prefers-reduced-motion` (owner decision, 2026-08-27). Decorative illustration,
-page entrance animation, and "AI-bot look" styling MUST NOT ship.
+page entrance animation, and "AI-bot look" styling MUST NOT ship. The single
+exception is ambient authentication art (owner decision, 2026-09-23): a sign-in
+brand panel MAY carry slow looping line art, drawn from tokens, free of
+gradients, which MUST NOT shift layout or block interaction and MUST stop under
+`prefers-reduced-motion`.
 
 **Rationale**: Enterprise and back-office buyers reject gradient/glow aesthetics on
 sight; the product's data is the design.
@@ -130,8 +150,19 @@ preferred so UI works with JS off. Body text contrast MUST be ≥ 4.5:1 and ever
 interactive element MUST have a visible focus state (1px accent border, at most a 2px
 pale ring). Dark mode is dual-trigger: every dark rule under BOTH
 `[data-theme="dark"]` and `@media (prefers-color-scheme: dark)`, with a persisted
-toggle applied before paint. Hover treatment is single and reserved for clickables:
+toggle applied before paint. Light is the default (owner decision, 2026-09-23):
+with no stored choice a product renders light whatever the operating system
+says, dark comes only from the user's own choice, and following the operating
+system is a documented opt-out. Hover treatment is single and reserved for clickables:
 `translateY(-4px)` + raised shadow + accent border; static tiles get no hover.
+Typography parity (owner decision, 2026-09-23): header, navigation and page
+content MUST use the kit typeface at the same size, the header MUST NEVER be
+smaller than the content, and headings MUST stay near body size: page titles
+within 1.75x, section headings within 1.45x. Numeric display values (KPI
+figures) are data, not headings, and are exempt.
+Content width (owner decision, 2026-09-23): portal text MUST use the width of
+its row instead of wrapping into several lines beside unused space; a reading
+measure is opted into explicitly and reserved for long-form prose.
 Content fit (owner decision 2026-09-15): short content (identifiers, names,
 chips and badges, dates, amounts and counts, button and link labels, column
 headers, filter and footer text) MUST render on one line at every width. Data
@@ -201,22 +232,34 @@ from tokens; re-implementing a shipped component is a defect. An admin kit
 flavor ships only after a verified build-and-run with rendered screenshots
 published on the docs site (the Principle VI verification discipline applied
 to applications). The screen set includes an Analytics screen and a Data Grid
-screen: charts follow the locked Novus dashboard-chart rules (Chart.js
-defaults fed from tokens at runtime: Carlito, soft dashed gridlines at low
-alpha, rounded bars with constrained thickness, no axis borders or tick
-marks, dark rounded tooltips, and a composition read plus a trajectory read
-on the primary series; series colours are the product accents, read from
-tokens, never literals). Data grids are sortable, paginated, and searchable,
+screen: charts follow the locked Novus dashboard-chart rules, drawn with D3
+(the charting standard since 2026-09-23, replacing Chart.js): Carlito, soft
+dashed gridlines at low alpha, rounded bars with constrained thickness, no
+axis borders or tick marks, dark rounded tooltips, and a composition read plus
+a trajectory read on the primary series; series colours are the product
+accents, read from tokens at render time, never literals. Charts MUST redraw
+on a theme change, answer hover and keyboard focus, and degrade to a table of
+the same numbers when scripting is unavailable; the post-login landing page
+carries those interactive statistics beside that table. Data grids are sortable, paginated, and searchable,
 using the framework's native grid where one exists and kit-token styling
 always. Each flavor MUST have a live demo hosted with the docs site, and the
 docs page's screenshots MUST link to the running demos. The console pattern
 reference is the novalending console (v2.1nflow.co, captured 2026-09-15; owner
-decision): every flavor ships its split sign-in page, header user menu with
+decision), with the sign-in layout following novacard (50/50 split at full
+width, ambient brand art, single sign-on beside the password form, no theme
+toggle on the page; owner decision 2026-09-23): every flavor ships its split
+sign-in page, header user menu with
 sign out and a signed-out page, grouped side navigation that collapses on
 desktop and opens as a drawer on small screens without JavaScript, page header
 with breadcrumb and end-aligned actions, filter bar with a sub-filter sheet,
 active chips and quick filter chips, and list footer pagination (range,
-previous and next, page label, rows per page). The reference's wrapping of short
+previous and next, page label, rows per page). The account menu is the LAST
+element in the console header, flush to the gutter at every width, and
+configuration screens use the settings layout (a section menu beside grouped
+sections of labelled rows), never a grid of cards. The console layer (styles,
+progressive script, icon set) MUST ship in the published package, so consumers
+inherit these patterns by upgrading instead of copying files.
+The reference's wrapping of short
 content is a recorded defect and MUST NOT be reproduced. Console pattern CSS,
 its progressive JavaScript and the icon set have ONE source
 (`admin-kits/shared/`), copied into each flavor by the parity generator and
@@ -303,6 +346,14 @@ Every change to the kit MUST pass these gates before merge:
 11. Layout audit: the rendered docs site and hosted demos show no short content
     on more than one line and no page-level horizontal scroll at 375px, checked
     in a headless browser at 1440px and 375px; the audit must run in CI.
+12. Account menu placement: nothing sits to the right of the account menu in a
+    console header, at any width.
+13. Typography parity: header, navigation and body render at one size, and no
+    heading exceeds its ratio to body text.
+14. Content width: no portal text block wraps to three or more lines while a
+    quarter or more of its row stays unused, unless marked as a reading measure.
+15. Version agreement: package version, README and CHANGELOG name the same
+    release before a tag.
 
 Reviews reject on any gate failure; gates are not advisory.
 
@@ -331,4 +382,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.11.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-15
+**Version**: 1.12.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23

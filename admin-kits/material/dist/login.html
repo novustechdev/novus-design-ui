@@ -7,11 +7,11 @@
 <title>Sign in · Novus Admin Kit</title>
 <script>
 try { var t = localStorage.getItem("novus-theme");
-  if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
-} catch (e) {}
+  document.documentElement.setAttribute("data-theme", t === "dark" ? "dark" : "light");
+} catch (e) { document.documentElement.setAttribute("data-theme", "light"); }
 </script>
-  <script type="module" crossorigin src="./assets/app-DLsivNDq.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/app-YbU9anTh.css">
+  <script type="module" crossorigin src="./assets/app-DGIuF4u9.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/app-4jLPzlTP.css">
 </head>
 <body>
 <div class="authpage">
@@ -19,6 +19,13 @@ try { var t = localStorage.getItem("novus-theme");
 <div class="authsplit">
 <!--SHELL:auth-brand-->
 <aside class="authbrand">
+  <svg class="authhero__art" viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path class="authhero__trace" d="M-120 760 L420 120"/>
+    <path class="authhero__trace" d="M-40 860 L560 160"/>
+    <path class="authhero__trace" d="M60 900 L680 220"/>
+    <path class="authhero__mark" d="M96 196 l52 52 -52 52 -52 -52 Z"/>
+    <path class="authhero__mark" d="M404 236 l40 40 -40 40 -40 -40 Z"/>
+  </svg>
   <div class="authbrand__inner">
     <span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span>
     <p class="authbrand__tagline">Digital payments, full stack: switching and routing, card acquiring, QR and NFC, reconciliation and settlement.</p>
@@ -49,6 +56,10 @@ try { var t = localStorage.getItem("novus-theme");
       </md-filled-text-field>
     </div>
     <md-filled-button type="submit" class="authcard__submit">Sign in</md-filled-button>
+<!--SHELL:auth-sso-->
+<p class="authalt">or</p>
+<md-outlined-button class="authcard__sso" type="button">Continue with single sign-on</md-outlined-button>
+<!--/SHELL:auth-sso-->
     <details class="authcard__forgot"><summary>Forgot password?</summary><p class="muted">In this sample, password resets are handled by your administrator.</p></details>
     <div class="authcard__foot"><span class="muted">Managed by</span><span class="brandmark" role="img" aria-label="Novus Technologies"></span></div>
   </form>

@@ -6,7 +6,7 @@ It is framework-agnostic CSS: you import one stylesheet and use documented HTML
 class patterns, so it works the same in Blazor, React, Vite, Vue, or plain HTML.
 
 **Documentation site**: https://ui-kit.novustech.dev/
-(foundations, all 40 components with live examples and copyable snippets,
+(foundations, all 42 components with live examples and copyable snippets,
 verified framework and theme guides, and the full asset index)
 
 > The package installs tokenless from public npm. Third-party marks (client
@@ -19,6 +19,9 @@ verified framework and theme guides, and the full asset index)
 | Import path | Contents |
 |---|---|
 | `novus-design-kit/tokens.css` | Everything: tokens, component classes, Carlito @font-face, dark mode |
+| `novus-design-kit/console.css` | The console layer: sign-in, shell, side navigation, page header, filter bar, list footer, settings layout, charts, content-fit rules |
+| `novus-design-kit/js/novus-console.js` | Progressive behaviour for the console layer (menus, drawer, password toggle) |
+| `novus-design-kit/icons/novus-icons.svg` | The line icon set as a sprite |
 | `novus-design-kit/js/novus-theme.js` | Persisted light/dark toggle helper (pre-paint safe) |
 | `novus-design-kit/fonts/*` | Carlito 400/700 woff2 (self-referenced by tokens.css) |
 | `novus-design-kit/logos/*` | Master logo (6 treatments), product lockups, pictographs (client and scheme marks are repository-only) |
@@ -38,7 +41,13 @@ a saved dark-mode choice applies early):
 ```js
 import "novus-design-kit/js/novus-theme.js";
 import "novus-design-kit/tokens.css";
+/* building a portal or console? add the console layer: */
+import "novus-design-kit/console.css";
+import "novus-design-kit/js/novus-console.js";
 ```
+
+Portals render light by default. To follow the operating system instead, set
+`window.novusThemeFollowOS = true` before the theme script.
 
 Plain HTML served over http(s):
 
