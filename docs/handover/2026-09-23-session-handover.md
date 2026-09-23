@@ -47,8 +47,9 @@ The round came from novabank.novustech.dev. Eight items:
 
 ## Open items
 
-- npm publish of 0.4.0 needs the owner (passkey): `npm publish` from the repo
-  root. Until then novabank-py cannot pin 0.4.0.
+- 0.4.0 published to npm by the owner on 2026-09-23, so novabank-py can pin it.
+  The granular token in ~/projects/credentials was never accepted for this
+  package (403 on every authenticated call, 404 on PUT); `npm login` worked.
 - novabank's authenticated screens were never inspected (no credentials); the
   patterns follow the written feedback plus the novacard and novalending
   references.
