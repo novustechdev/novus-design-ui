@@ -37,6 +37,8 @@
 <ul class="bullets">
   <li>Top-level links for the one or two screens people use most; everything else sits in groups named for an area, set in small caps with one line icon and a chevron.</li>
   <li>The group holding the current page is open. The current link carries the accent tint, the accent edge, and <code>aria-current="page"</code>.</li>
-  <li>One visually hidden checkbox drives the menu button: at desktop width it collapses the navigation, and below 900px it opens the navigation as a drawer with a scrim that closes it. No JavaScript is required; the console script only closes the drawer after a link is followed and on Escape.</li>
+  <li>One visually hidden checkbox drives the menu button: at desktop width it collapses the navigation to a rail of icons, and below 900px it opens the navigation as a drawer with a scrim that closes it. No JavaScript is required; the console script only closes the drawer after a link is followed and on Escape.</li>
+  <li>Collapsing never hides the navigation. The rail keeps one icon per destination at 44px, marks the current page with the accent tint, and names each destination through <code>title</code> and the label text, which stays in the markup for assistive technology. Press the menu button in the example above to see it.</li>
+  <li>Because of that rail, every destination carries an icon, including items inside groups. In the rail the group labels and chevrons step aside and their children show as icons, so nothing sits behind a collapsed group.</li>
   <li>Labels are one to three words and never wrap. Rows are 36px on fine pointers and 44px on touch screens.</li>
 </ul>

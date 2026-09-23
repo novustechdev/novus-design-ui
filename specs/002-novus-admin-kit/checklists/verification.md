@@ -67,3 +67,32 @@ four deliverables; default footer "Showing 1-10 of 24", "Page 1 of 3".
 Total: 79/79 checks. Chart.js is gone from every flavor; D3 draws the
 composition bars, the trajectory line and the share donut from tokens.
 
+## Feature 009: icon rail and the light sign-in ground (2026-09-23)
+
+| deliverable | stack verified against | date | evidence | result |
+|---|---|---|---|---|
+| tailwind | vite 8, tailwindcss 4.3, d3 7 | 2026-09-23 | 11/11 checks: rail narrows 240px to 56px, 6 of 6 destinations painted as icons (hit-tested, not measured), no label text visible, every icon named by title and text, current page still marked, all targets at least 36px, second press restores the labelled navigation, sign-in ground rgb(244, 247, 250) at 96% of white, ambient art animating, art stopped under reduced motion, 375px drawer unchanged | pass |
+| material | vite 8, @material/web 2.x, d3 7 | 2026-09-23 | same 11/11 | pass |
+| blazor (server) | .NET SDK 10.0.400, QuickGrid 10.0.11 | 2026-09-23 | same 11/11 plus a reachability check, against the running server flavor | pass |
+| blazor WASM demo (hosted) | .NET 10 WebAssembly publish | 2026-09-23 | same 11/11; ConsoleNav mirrored from the server flavor by generate.mjs | pass |
+| docs + demos layout audit | playwright-core 1.55 + Chromium 151 | 2026-09-23 | 81 pages x 1440/375 with the navigation collapsed in the second pass, 0 findings | pass |
+| gates 16 and 17 | negative tests | 2026-09-23 | hiding the collapsed navigation, stripping the rail icons, dropping the closed-group rule, and restoring the dark sign-in ground each fail the suite by name and pass again after restore | pass |
+
+Total: 45/45 checks.
+
+### Defect found during verification, and the correction
+
+The first pass of gate 16 and of the verified run judged the rail by bounding
+boxes, and reported 6 of 6 destinations present. A hit test showed only 5 of
+them painted: `Settings`, the child of a closed `details` group, reported a
+44x36 box at the right place while the browser never rendered it, because a
+closed details subtree is not painted. The screenshots showed five icons and an
+empty gap, which is what prompted the recheck.
+
+Two corrections followed. The console layer asks for the closed group's
+children back in rail mode only
+(`.navgroup::details-content { content-visibility: visible }`), so the phone
+drawer keeps ordinary group behaviour. Gate 16 and the verified run now judge
+the rail with `elementFromPoint`, so a destination that measures but never
+renders fails; rows below the fold are left unjudged rather than blamed. Both
+were negative-tested against the fixed build.

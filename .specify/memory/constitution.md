@@ -1,6 +1,19 @@
 <!--
 Sync Impact Report
-- Version change: 1.11.0 -> 1.12.0 (MINOR: portal defaults from the owner's
+- Version change: 1.12.0 -> 1.13.0 (MINOR: collapsed navigation must remain an
+  icon rail; authentication screens return to the near-white ground; owner
+  decision 2026-09-23, feature 009)
+- Modified principles:
+  II. The tinted-ground exception for authentication screens is WITHDRAWN:
+  sign-in sits on the kit's near-white ground like every other screen. The
+  ambient authentication art remains the single decorative-motion exception.
+  VII. Collapsing a console's side navigation MUST leave a rail of icons, one
+  per destination, with the current page marked and every destination named;
+  hiding the navigation is a defect. Every navigation destination carries an
+  icon.
+- Quality Gates: 16 (collapsed navigation shows an icon rail), 17 (sign-in
+  ground is near-white in the default theme).
+- Prior amendment (1.11.0 -> 1.12.0) (MINOR: portal defaults from the owner's
   novabank feedback round, 2026-09-23, feature 008)
 - Modified principles:
   II. Ambient authentication art allowed on sign-in screens only (slow, looping,
@@ -114,7 +127,8 @@ is eliminated at the token layer or not at all.
 The kit targets Ant Design-grade enterprise UI: solid neutral grounds (white `--bg`,
 never gradients or tinted page grounds; the single exception is authentication
 screens, which may sit on the solid deep brand ground `--blue-900` in both
-themes, flat, with no gradient or glow; owner decision 2026-09-15), border radius only from the tokens.css
+themes, withdrawn 2026-09-23: authentication now sits on the near-white ground
+like every other screen), border radius only from the tokens.css
 radius scale (`--radius-*`; no ad-hoc radius values), 1px solid borders over
 box-shadows (any shadow subtle, no glows), monochrome grays plus the single accent,
 font weights 400/600 only, and compact information-dense layouts. Motion is
@@ -250,7 +264,10 @@ width, ambient brand art, single sign-on beside the password form, no theme
 toggle on the page; owner decision 2026-09-23): every flavor ships its split
 sign-in page, header user menu with
 sign out and a signed-out page, grouped side navigation that collapses on
-desktop and opens as a drawer on small screens without JavaScript, page header
+desktop into a rail of icons (never into nothing: every destination keeps an
+icon, the current page stays marked, and each icon names its destination on
+hover and to assistive technology; owner decision 2026-09-23) and opens as a
+drawer on small screens without JavaScript, page header
 with breadcrumb and end-aligned actions, filter bar with a sub-filter sheet,
 active chips and quick filter chips, and list footer pagination (range,
 previous and next, page label, rows per page). The account menu is the LAST
@@ -354,6 +371,10 @@ Every change to the kit MUST pass these gates before merge:
     quarter or more of its row stays unused, unless marked as a reading measure.
 15. Version agreement: package version, README and CHANGELOG name the same
     release before a tag.
+16. Collapsed navigation: a collapsed console side navigation renders one icon
+    per destination, with no visible label text and the current page marked.
+17. Authentication ground: a sign-in page renders on the near-white ground in
+    the default theme.
 
 Reviews reject on any gate failure; gates are not advisory.
 
@@ -382,4 +403,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.12.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23
+**Version**: 1.13.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23

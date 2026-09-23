@@ -127,12 +127,12 @@ const NAV = [
   { route: "", page: "index.html", label: "Dashboard", icon: "dashboard" },
   { route: "analytics", page: "analytics.html", label: "Analytics", icon: "chart" },
   { group: "Operations", icon: "layers", items: [
-    { route: "transactions", page: "transactions.html", label: "Transactions" },
-    { route: "datagrid", page: "datagrid.html", label: "Data grid" },
-    { route: "terminals", page: "terminals.html", label: "Terminals" },
+    { route: "transactions", page: "transactions.html", label: "Transactions", icon: "transactions" },
+    { route: "datagrid", page: "datagrid.html", label: "Data grid", icon: "grid" },
+    { route: "terminals", page: "terminals.html", label: "Terminals", icon: "terminal" },
   ] },
   { group: "Configuration", icon: "settings", items: [
-    { route: "settings", page: "settings.html", label: "Settings" },
+    { route: "settings", page: "settings.html", label: "Settings", icon: "settings" },
   ] },
 ];
 const BRAND = {
@@ -173,10 +173,10 @@ const headerTpl = (signOutHref) => `${DEMOBAR}
 const navHead = `<div class="adminnav__head">${LOCKUP}<label for="navtoggle" class="btn btn--ghost btn--sm toggle44" title="Close menu">${I("close")}</label></div>`;
 
 function navHtml(current) {
-  const link = (it, icon) => `<a class="navlink" href="${it.page}"${it.page === current ? ' aria-current="page"' : ""}>${icon ? I(icon) : ""}<span>${it.label}</span></a>`;
+  const link = (it) => `<a class="navlink" href="${it.page}" title="${it.label}"${it.page === current ? ' aria-current="page"' : ""}>${I(it.icon)}<span>${it.label}</span></a>`;
   const out = [`<nav class="adminnav" aria-label="Console">`, `  ${navHead}`];
   for (const n of NAV) {
-    if (!n.group) { out.push(`  ${link(n, n.icon)}`); continue; }
+    if (!n.group) { out.push(`  ${link(n)}`); continue; }
     const open = n.items.some((it) => it.page === current);
     out.push(`  <details class="navgroup"${open ? " open" : ""}>`);
     out.push(`    <summary class="navgroup__label">${I(n.icon, "icon--sm")}<span>${n.group}</span>${I("chevron-down", "icon--sm navgroup__chevron")}</summary>`);
@@ -188,10 +188,10 @@ function navHtml(current) {
 }
 
 function navRazor() {
-  const link = (it, icon) => `<NavLink class="navlink" href="${it.route}"${it.route === "" ? ' Match="NavLinkMatch.All"' : ""}>${icon ? I(icon) : ""}<span>${it.label}</span></NavLink>`;
+  const link = (it) => `<NavLink class="navlink" href="${it.route}" title="${it.label}"${it.route === "" ? ' Match="NavLinkMatch.All"' : ""}>${I(it.icon)}<span>${it.label}</span></NavLink>`;
   const out = [`<nav class="adminnav" aria-label="Console">`, `    ${navHead}`];
   for (const n of NAV) {
-    if (!n.group) { out.push(`    ${link(n, n.icon)}`); continue; }
+    if (!n.group) { out.push(`    ${link(n)}`); continue; }
     out.push(`    <details class="navgroup" open="@(InGroup(${n.items.map((it) => `"${it.route}"`).join(", ")}))">`);
     out.push(`        <summary class="navgroup__label">${I(n.icon, "icon--sm")}<span>${n.group}</span>${I("chevron-down", "icon--sm navgroup__chevron")}</summary>`);
     for (const it of n.items) out.push(`        ${link(it)}`);

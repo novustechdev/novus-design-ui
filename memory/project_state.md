@@ -1,5 +1,18 @@
 # Project state (as of 2026-09-23)
 
+- **Feature 009 (icon rail and the light sign-in ground, constitution 1.13.0)**:
+  two mandatory owner corrections. Collapsing a console's side navigation leaves
+  a RAIL of icons (3.5rem column, 44px targets, labels visually hidden but kept
+  for assistive technology); hiding the navigation is now a defect. A closed
+  `details` group needs `::details-content { content-visibility: visible }` in
+  rail mode, or the browser never paints its children. Sign-in moved to the
+  near-white ground (`--bg-subtle`) with the ambient art retinted, so the
+  tinted-ground exception for authentication is withdrawn. Gates 16 (rail) and
+  17 (ground) added; gate 16 hit-tests paint rather than measuring boxes,
+  because a box check passed a destination that never rendered. Kit version
+  0.5.0 (needs an owner npm publish). Handover:
+  docs/handover/2026-09-23-session-handover.md.
+
 - **Feature 008 (enterprise portal defaults, constitution 1.12.0)**: owner
   feedback round on novabank.novustech.dev turned into kit defaults. The console
   layer is now PACKAGED (`console.css`, `js/novus-console.js`,
