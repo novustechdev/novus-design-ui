@@ -1,6 +1,19 @@
 <!--
 Sync Impact Report
-- Version change: 1.13.0 -> 1.14.0 (MINOR: the kit now tells coding agents how to
+- Version change: 1.14.0 -> 1.15.0 (MINOR: the 44px touch target floor becomes an
+  enforced gate rather than a manual checklist line; the console header's
+  divergence from the upstream section 4c is recorded; owner decision
+  2026-09-23, feature 011)
+- Modified principles: none redefined. Principle IV's 44px requirement is
+  unchanged in substance and is now mechanically checked. It had never been
+  automated, and the reference applications had drifted under it: 222 controls
+  measured under the floor at the 375px baseline when the check was first run.
+- Quality Gates: 19 (target size at the 375px baseline), reported through the
+  layout audit like gates 12 to 18.
+- Header order: Principle VII's account-menu-last rule stands, and its deliberate
+  divergence from tokens.css section 4c is now recorded in that principle.
+  tokens.css is not edited.
+- Prior amendment (1.13.0 -> 1.14.0) (MINOR: the kit now tells coding agents how to
   adopt it, and ships instruction files they read, generated from one rule
   source; owner request 2026-09-23, feature 010)
 - Modified principles: none redefined. Principle I's single-source discipline is
@@ -280,7 +293,12 @@ drawer on small screens without JavaScript, page header
 with breadcrumb and end-aligned actions, filter bar with a sub-filter sheet,
 active chips and quick filter chips, and list footer pagination (range,
 previous and next, page label, rows per page). The account menu is the LAST
-element in the console header, flush to the gutter at every width, and
+element in the console header, flush to the gutter at every width. This diverges
+deliberately from tokens.css section 4c, which is LOCKED upstream and places the
+NOVUS MASTER lockup at the far right as the endorsement: section 4c governs brand
+surfaces, while application chrome puts the operator's own account where
+operators look for it, so the endorsement mark sits immediately before the
+account menu and tokens.css is not edited to resolve it. And
 configuration screens use the settings layout (a section menu beside grouped
 sections of labelled rows), never a grid of cards. The console layer (styles,
 progressive script, icon set) MUST ship in the published package, so consumers
@@ -387,6 +405,11 @@ Every change to the kit MUST pass these gates before merge:
 18. Agent rule parity: `node agents/generate.mjs --check` passes, so every
     generated agent instruction file matches the rule source in
     `agents/rules.mjs`. A hand-edited agent file is a defect.
+19. Target size: at the 375px baseline every interactive control that actually
+    paints measures at least 44px, reported by the layout audit as a TARGET
+    finding. This is Principle IV's long-standing requirement, enforced for the
+    first time in feature 011 after it was found broken across the kit's own
+    reference applications and documentation site.
 
 Reviews reject on any gate failure; gates are not advisory.
 
@@ -415,4 +438,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.14.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23
+**Version**: 1.15.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23

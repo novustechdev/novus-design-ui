@@ -95,9 +95,9 @@ export const RULES = [
   {
     id: "targets",
     scope: "always",
-    text: "Every interactive target is at least 44px, at every width, including icon-only controls.",
-    why: "anything smaller fails on a phone and for anyone with imprecise pointing",
-    enforcedBy: "the 375px pass in the release gates",
+    text: "Every control a person can press measures at least 44px at the 375px baseline, icon-only controls included. A control may look smaller if it carries an expanded hit area that still reaches 44px. Desktop density is a separate decision, so this floor is the phone baseline rather than every width.",
+    why: "anything smaller fails on a phone and for anyone with imprecise pointing, and this rule went unenforced long enough for the kit's own screens to drift under it",
+    enforcedBy: "release gate 19, the layout audit's TARGET check at 375px, which measures the hit area rather than the box",
   },
   {
     id: "motion",
@@ -147,6 +147,13 @@ export const RULES = [
     text: "Sign-in sits on the near-white ground with the ambient line art on the brand panel, single sign-on beside the password form, and no theme toggle on the page.",
     why: "authentication is the first screen anyone sees, and it now follows the same neutral ground as everything else",
     enforcedBy: "release gate 17",
+  },
+  {
+    id: "table-popovers",
+    scope: "console",
+    text: "A menu, popover or tooltip belonging to a table row renders outside the table's scroll wrap, not inside it. The wrap clips what it contains, so anything that needs to overflow the table has to live beyond it.",
+    why: "the wrap is a containing block, so a popover inside it is clipped instead of floating over the page",
+    enforcedBy: "the table pattern in the catalog at https://ui-kit.novustech.dev/components/table.html",
   },
   {
     id: "filters-and-lists",

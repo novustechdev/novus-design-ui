@@ -55,6 +55,23 @@ weigh a rule rather than following it blindly.</p>
 
 <!--AGENT-RULES-->
 
+<h2>Check a screen the way the kit checks itself</h2>
+
+<p>The rules tell an agent to confirm a screen at 1440px and at 375px. That is
+only fair if the check is available, so the kit ships the same audit it runs on
+its own pages. Point it at a built directory:</p>
+
+<pre class="demo__code" style="overflow-x:auto"><code>node node_modules/novus-design-kit/scripts/layout-audit.mjs --target dist</code></pre>
+
+<p>It renders every page at both widths in headless Chromium and reports short
+content that wrapped, pages that scroll sideways on a phone, controls under the
+44px floor, and the console rules for headers, navigation and sign-in. It needs
+<code>playwright-core</code> and a Chromium; without them it says so and exits
+rather than pretending to pass.</p>
+
+<p>An agent that cannot render a page should say that plainly instead of
+reporting a check it did not run.</p>
+
 <h2>If the result looks wrong</h2>
 
 <ul class="bullets">

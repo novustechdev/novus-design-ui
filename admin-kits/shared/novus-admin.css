@@ -11,7 +11,13 @@
    squeezing; free text opts back into wrapping; fixed slots truncate. */
 .badge, .filterchip, .quickchip, .crumbs li, .paginator__label, .listfooter__range, .nowrap { white-space: nowrap; }
 .truncate { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.tablewrap { overflow-x: auto; overscroll-behavior-x: contain; }
+/* Positioned so the wrap is the containing block for its own absolutely positioned
+   descendants. Without this, a .sr-only span inside a horizontally scrolled table
+   resolves against the initial containing block, escapes this clip, and extends the
+   document's scroll width: the page scrolls sideways on a phone while the table
+   looks correctly contained. A popover inside a scrolling table must therefore be
+   rendered outside the wrap, because it is now clipped by it. */
+.tablewrap { position: relative; overflow-x: auto; overscroll-behavior-x: contain; }
 .tablewrap table th, .tablewrap table td { white-space: nowrap; vertical-align: middle; }
 .tablewrap table .cell--wrap { white-space: normal; min-width: 16rem; }
 .table th.num, .table td.num { text-align: right; font-variant-numeric: tabular-nums; }
@@ -42,7 +48,10 @@
 .appheader__right { min-width: 0; }
 .appsuffix { font-size: var(--text-sm); white-space: nowrap; }
 .appname { font-weight: var(--weight-bold); font-size: var(--text-lg); color: var(--text); }
-.toggle44 { min-height: 2.75rem; min-width: 2.75rem; }
+/* A 44px target, anywhere. Named for the rule it satisfies rather than the
+   menu toggle it was first written for. .toggle44 is the former name and
+   keeps working, so nothing already shipped breaks. */
+.target44, .toggle44 { min-height: 2.75rem; min-width: 2.75rem; }
 .navtoggle { padding: 0; cursor: pointer; }
 .navtoggle__input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 .navtoggle__input:focus-visible ~ .appbar .navtoggle { box-shadow: var(--focus-ring); }
@@ -451,4 +460,36 @@ details > summary::marker { font-size: var(--text-lg); }
 .tabledetails > summary { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--accent-text); cursor: pointer; font-size: var(--text-sm); }
 .tabledetails > summary::-webkit-details-marker { display: none; }
 .tabledetails[open] > summary { margin-bottom: var(--space-2); }
+/* @end */
+
+/* @pattern target-size */
+/* Gate 19: at the 375px baseline every control a finger can press clears 44px.
+   This sits last on purpose: the pattern sections above set their own compact
+   heights, and an equal-specificity rule only wins by order. Desktop density
+   (the console decision from feature 003) is untouched, because this is a
+   phone-width floor; the pointer rule in the side navigation covers touch
+   laptops, which a width query cannot see. tokens.css defines most of these
+   controls and is frozen, so the floor lives here. */
+@media (max-width: 899.98px) {
+  .navlink,
+  .navgroup__label,
+  .btn,
+  .linkbtn,
+  .modal-close,
+  .input,
+  .select,
+  .textarea,
+  .chip,
+  .quickchip,
+  .quickchip > label,
+  .filteropt,
+  .filtermenu__tab,
+  .settings__link,
+  summary,
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+  select,
+  textarea { min-height: 2.75rem; }
+  .btn, .linkbtn { padding-block: var(--space-2); }
+  .modal-close { min-width: 2.75rem; }
+}
 /* @end */

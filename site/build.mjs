@@ -59,6 +59,11 @@ const SITE_CSS = `
     :root:not([data-theme]) .themetoggle .ic-moon{display:none;}
     :root:not([data-theme]) .themetoggle .ic-sun{display:block;}
   }
+  /* Gate 19: the docs site holds itself to the same 44px floor at the phone
+     baseline as the kit it documents. */
+  @media (max-width: 899.98px){
+    .demo__copy,.sidenav summary,.docnav summary,.appnav__inner a{min-height:2.75rem;display:inline-flex;align-items:center;}
+  }
   .site-main{padding-block:var(--space-6) var(--space-8);}
   .site-main > h1:first-child{margin-top:var(--space-4);}
   .eyebrow{font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-muted);font-weight:var(--weight-medium);margin:0 0 var(--space-2);}

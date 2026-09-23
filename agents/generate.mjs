@@ -49,9 +49,19 @@ screens also load \`console.css\` after the tokens.`;
 const checking = `## Checking your own work
 
 Before you say a screen is done, confirm it at 1440px and at 375px: nothing short
-wraps to a second line, no page scrolls sideways, every target is at least 44px,
-and the screen still works with JavaScript turned off. If you introduced a value
-that no token covers, say so rather than hiding it in a stylesheet.`;
+wraps to a second line, no page scrolls sideways, every control a finger can
+press reaches 44px at the phone width, and the screen still works with JavaScript
+turned off. If you introduced a value that no token covers, say so rather than
+hiding it in a stylesheet.
+
+You can run the same audit this kit runs on itself, against your own build:
+
+    node node_modules/${KIT.name}/scripts/layout-audit.mjs --target dist
+
+It needs a Chromium and playwright-core. If you cannot render the page at
+all, say so plainly and name what you did check. Do not report a check you did
+not run: a screen that was never rendered is a screen nobody has looked at, and
+saying that honestly is more useful than a confident guess.`;
 
 /* AGENTS.md and CLAUDE.md: plain Markdown, no frontmatter, every rule. */
 const fullFile = (title) => `${stamp}

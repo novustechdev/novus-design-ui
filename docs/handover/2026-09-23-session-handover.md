@@ -1,4 +1,4 @@
-# Handover: Novus Design Kit, 2026-09-23 (features 008, 009 and 010)
+# Handover: Novus Design Kit, 2026-09-23 (features 008 to 011)
 
 ## Where we are
 
@@ -156,3 +156,54 @@ each other, which is exactly what single-source generation guarantees.
 - Publishing: 0.4.0 is the published version. 0.5.0 and 0.6.0 are merged but
   unpublished, so a single `npm publish` of 0.6.0 ships both.
 - The GitHub release for v0.4.0 is still outstanding from the 008 session.
+
+---
+
+# Feature 011: resolving three contradictions
+
+## Where we are
+
+Implemented on branch `feature/011-resolve-rule-conflicts`. Constitution 1.15.0,
+kit 0.7.0, 18 gates, layout audit over 84 pages at two widths with 0 findings.
+
+## The three, and what they turned out to be
+
+1. **A table's scroll wrap was not a containing block.** `.sr-only` is
+   absolutely positioned, so inside a horizontally scrolled table it resolved
+   against the initial containing block, escaped the clip, and extended the
+   document's scroll width. A screen built correctly from the kit scrolled
+   sideways on a phone. One line fixed it, with a fixture in
+   `tests/fixtures/tablewrap-sr-only/` that fails without it.
+2. **The 44px floor had never been enforced.** Principle IV has required it
+   since ratification and nothing ever checked, so the kit's own screens had
+   about 222 controls under it at 375px. Gate 19 now enforces it.
+3. **The header conflict was a wording problem.** tokens.css section 4c is
+   LOCKED and places the master lockup far right; the console puts the account
+   menu there. Section 4c governs brand surfaces, application chrome does not.
+   Recorded in the constitution and the catalog; tokens.css untouched.
+
+## The lesson worth carrying
+
+Two unenforced rules in two features: the layout audit had never audited a root
+page (found in 010), and the 44px floor had never been checked at all (found
+here). A rule nobody measures is a rule the codebase will drift under, quietly,
+for as long as it exists. When adding a rule, add the check in the same change.
+
+The corollary is that a new check is not trustworthy until it has been wrong.
+Gate 19 produced three separate false positives before it was right: boundary
+rounding on a 44px hit area, a 16px checkbox inside a compliant label, and a
+control near the viewport edge whose probe point fell outside the window. Each
+looked like a real defect and each would have sent someone to "fix" compliant
+code.
+
+## Open items
+
+- Publishing: 0.4.0 is the published version. 0.5.0, 0.6.0 and 0.7.0 are merged
+  or pending, so one `npm publish` of 0.7.0 ships them all.
+- The GitHub release for v0.4.0 is still outstanding.
+- A top-navigation console shell was requested by novabank-py for a dense,
+  many-role admin portal. The answer given was yes, as a second supported shell,
+  subject to conditions (single source and parity gate, click not hover, native
+  details so it works without script, no destination unreachable at any width
+  with its own gate, current section marked when its menu is closed, account menu
+  last, 44px targets, documented and demoed before use). That is feature 012.

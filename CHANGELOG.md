@@ -7,6 +7,45 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+## [0.7.0], 2026-09-23
+
+Three contradictions found by shipping the kit's rules to coding agents, and
+resolved (feature 011, constitution 1.15.0). Packaged kit files change.
+
+### Fixed
+
+- A table's scroll wrap is now a containing block. Visually hidden text inside a
+  scrolling table is absolutely positioned, and without this it escaped the
+  wrap's clip and extended the page's scroll width, so a console screen scrolled
+  sideways on a phone while the table itself looked correctly contained. A
+  popover belonging to a table row must now render outside the wrap, because the
+  wrap clips what it holds.
+- Touch targets. The kit's own screens carried about 222 controls under the 44px
+  floor at the 375px baseline, because Principle IV's requirement had never been
+  automated. The console layer now floors every control a finger can press at the
+  phone width, desktop density unchanged, and gate 19 enforces it.
+
+### Added
+
+- Gate 19, target size at the 375px baseline, reported by the layout audit as a
+  TARGET finding. It measures the hit area rather than the box, judges a form
+  control by its label, and leaves controls at the viewport edge unjudged.
+- The layout audit ships in the package and accepts `--target`, so a consumer or
+  an agent can run the same checks the kit runs on itself:
+  `node node_modules/novus-design-kit/scripts/layout-audit.mjs --target dist`
+- `.target44`, a 44px target utility named for the rule it satisfies. The former
+  name `.toggle44` keeps working.
+
+### Changed
+
+- The agent rules now state the target floor the way the constitution does, at
+  the 375px baseline rather than "at every width", and tell an agent that cannot
+  render a page to say so instead of reporting a check it did not run.
+- The console header's divergence from the upstream token file's section 4c is
+  recorded in the constitution and the catalog: the account menu stays last, and
+  the token file is not edited.
+
+
 ## [0.6.0], 2026-09-23
 
 The kit now tells coding agents how to adopt it, and ships the rules they read

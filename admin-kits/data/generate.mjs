@@ -150,7 +150,7 @@ const headerTpl = (signOutHref) => `${DEMOBAR}
 <header class="appbar">
   <div class="appbar__inner appheader">
     <div class="appheader__left">
-      <label for="navtoggle" class="btn btn--ghost btn--sm toggle44 navtoggle" title="Menu">${I("menu")}</label>
+      <label for="navtoggle" class="btn btn--ghost btn--sm target44 navtoggle" title="Menu">${I("menu")}</label>
       ${LOCKUP}
       <span class="muted appsuffix">operations · admin</span>
     </div>
@@ -161,7 +161,7 @@ const headerTpl = (signOutHref) => `${DEMOBAR}
         <summary class="btn btn--ghost btn--sm userdd__trigger">${I("user", "icon--sm")}<span class="userdd__name truncate">${USER.handle}</span>${I("chevron-down", "icon--sm")}</summary>
         <div class="card userdd__menu">
           <div class="userdd__who"><b>${USER.name}</b><span class="muted">${USER.email}</span></div>
-          <div class="userdd__row"><span class="muted">Theme</span><button type="button" class="btn btn--ghost btn--sm toggle44 themetoggle" data-theme-toggle aria-label="Toggle light and dark theme">${I("moon", "ic-moon")}${I("sun", "ic-sun")}</button></div>
+          <div class="userdd__row"><span class="muted">Theme</span><button type="button" class="btn btn--ghost btn--sm target44 themetoggle" data-theme-toggle aria-label="Toggle light and dark theme">${I("moon", "ic-moon")}${I("sun", "ic-sun")}</button></div>
           <div class="userdd__foot"><a class="btn btn--secondary btn--sm" href="${signOutHref}">${I("sign-out", "icon--sm")} Sign out</a></div>
         </div>
       </details>
@@ -170,7 +170,7 @@ const headerTpl = (signOutHref) => `${DEMOBAR}
 </header>
 <label for="navtoggle" class="navscrim" aria-hidden="true"></label>`;
 
-const navHead = `<div class="adminnav__head">${LOCKUP}<label for="navtoggle" class="btn btn--ghost btn--sm toggle44" title="Close menu">${I("close")}</label></div>`;
+const navHead = `<div class="adminnav__head">${LOCKUP}<label for="navtoggle" class="btn btn--ghost btn--sm target44" title="Close menu">${I("close")}</label></div>`;
 
 function navHtml(current) {
   const link = (it) => `<a class="navlink" href="${it.page}" title="${it.label}"${it.page === current ? ' aria-current="page"' : ""}>${I(it.icon)}<span>${it.label}</span></a>`;
@@ -323,7 +323,7 @@ const control = (c, flavor) => {
   if (c.kind === "check") return md
     ? `<md-checkbox id="${c.id}" touch-target="wrapper"${c.checked ? " checked" : ""}></md-checkbox>`
     : `<input type="checkbox" id="${c.id}"${c.checked ? " checked" : ""}>`;
-  if (c.kind === "theme") return `<button type="button" class="btn btn--secondary btn--sm toggle44" data-theme-toggle>Switch light and dark</button>`;
+  if (c.kind === "theme") return `<button type="button" class="btn btn--secondary btn--sm target44" data-theme-toggle>Switch light and dark</button>`;
   if (c.kind === "button") return md ? `<md-outlined-button>${c.label}</md-outlined-button>` : `<button type="button" class="btn btn--secondary btn--sm">${c.label}</button>`;
   return `<span class="cluster" style="gap:var(--space-2)"><code>${c.code}</code><span class="badge${c.tone ? ` badge--${c.tone}` : ""}">${c.tone ? '<span class="badge__dot"></span> ' : ""}${c.text}</span></span>`;
 };
