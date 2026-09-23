@@ -4,8 +4,8 @@
   feedback round on novabank.novustech.dev turned into kit defaults. The console
   layer is now PACKAGED (`console.css`, `js/novus-console.js`,
   `icons/novus-icons.svg`, all generated from `admin-kits/shared/`), so consumers
-  inherit the patterns by upgrading; kit version 0.4.0, npm publish pending the
-  owner. Light is the default theme (`window.novusThemeFollowOS` opts back into
+  inherit the patterns by upgrading; kit version 0.4.0, published to npm on
+  2026-09-23. Light is the default theme (`window.novusThemeFollowOS` opts back into
   the OS). D3 replaced Chart.js everywhere (`admin-kits/shared/novus-chart.js`,
   one source, `novus-chart-boot.js` for the Blazor flavors). Typography parity
   (shell and content at --text-sm, page title --text-xl), portal text resets
