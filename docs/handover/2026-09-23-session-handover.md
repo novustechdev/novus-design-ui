@@ -1,4 +1,4 @@
-# Handover: Novus Design Kit, 2026-09-23 (features 008 and 009)
+# Handover: Novus Design Kit, 2026-09-23 (features 008, 009 and 010)
 
 ## Where we are
 
@@ -108,3 +108,51 @@ verified run judge the rail with `elementFromPoint`. Rule of thumb: for
 - The GitHub release for v0.4.0 was never created: `gh release create v0.4.0
   --target ebe257b` returned HTTP 422 and the retry was blocked by the
   permission classifier. Needs the owner, or an approved rerun.
+
+---
+
+# Feature 010: adopting the kit with an AI coding agent
+
+## Where we are
+
+Implemented on branch `feature/010-agent-adoption-guide`. Constitution 1.14.0,
+kit version 0.6.0, 18 gates, layout audit over 84 pages at two widths.
+
+## What the owner asked for
+
+"I want u put also how to prompt in claude code or copilot or code to use this
+ui kit and implement it to existing project, u can add new menu topbar and put
+guidance proper skill prompt for each llm provider."
+
+Two deliverables. A documentation page at an "AI agents" top navigation entry,
+carrying the order of work and three prompts to copy. And instruction files
+shipped in the package, one per agent, so the rules survive past the first
+conversation.
+
+## The design decision that matters
+
+Everything is generated from `agents/rules.mjs`: the five files and the rules
+shown on the page. Four hand-maintained copies of the same rules would drift
+within a release, which is the lesson the console layer already taught. Gate 18
+makes drift a build failure.
+
+Formats were confirmed against each vendor's documentation rather than from
+memory, and one fact changed the design: Claude Code reads `AGENTS.md` when no
+`CLAUDE.md` is present, and Cursor is on the AGENTS.md reader list too, so a
+consumer can have two of our files loaded at once. They must never contradict
+each other, which is exactly what single-source generation guarantees.
+
+## Two gate gaps found while building this
+
+- The copy gates (em dash, banned category word) scan an explicit path list. A
+  new top-level directory was invisible to them. `agents/` now joins the list.
+- The layout audit had never audited a single root page. It enumerated
+  components, foundations, `admin-kit.html` and the demos, so the landing page
+  and the install page went unchecked for their whole life. It now enumerates
+  every root page: 84 pages, still 0 findings.
+
+## Open items
+
+- Publishing: 0.4.0 is the published version. 0.5.0 and 0.6.0 are merged but
+  unpublished, so a single `npm publish` of 0.6.0 ships both.
+- The GitHub release for v0.4.0 is still outstanding from the 008 session.

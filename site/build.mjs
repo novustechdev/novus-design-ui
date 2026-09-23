@@ -6,6 +6,7 @@ import { readFileSync, writeFileSync, mkdirSync, rmSync, cpSync, existsSync, rea
 import { dirname, join, basename } from "node:path";
 import { fileURLToPath } from "node:url";
 import { icons as ICONS, svg as iconSvg } from "../admin-kits/shared/icons.mjs";
+import { KIT, ALWAYS, CONSOLE, AGENTS, PROMPTS } from "../agents/rules.mjs";
 
 const SITE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(SITE, "..");
@@ -164,7 +165,7 @@ const SITE_CSS = `
 
 const COPY_JS = `
   document.querySelectorAll("[data-theme-toggle]").forEach(b=>{b.hidden=false;if(!window.novusAdmin)b.addEventListener("click",()=>window.novusTheme&&window.novusTheme.toggle());});
-  if(navigator.clipboard)document.querySelectorAll(".demo__copy").forEach(b=>{b.hidden=false;b.addEventListener("click",()=>{navigator.clipboard.writeText(b.closest(".demo").querySelector("code").textContent);b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1200);});});
+  if(navigator.clipboard)document.querySelectorAll(".demo__copy").forEach(b=>{b.hidden=false;b.addEventListener("click",()=>{navigator.clipboard.writeText(b.closest(".demo,.prompt").querySelector("code").textContent);b.textContent="Copied";setTimeout(()=>b.textContent="Copy",1200);});});
   var sn=document.querySelector(".sidenav");if(sn&&matchMedia("(min-width:900px)").matches)sn.open=true;
 `;
 
@@ -186,7 +187,7 @@ const footer = read(join(SRC, "partials/footer.html")).replaceAll("{{VERSION}}",
 function shell({ title, content, depth, active, sidebar }) {
   const rel = "../".repeat(depth);
   let hdr = header.replaceAll("{{REL}}", rel);
-  for (const k of ["home", "foundations", "components", "frameworks", "themes", "admin", "install"]) {
+  for (const k of ["home", "foundations", "components", "frameworks", "themes", "admin", "agents", "install"]) {
     hdr = hdr.replace(`{{CUR_${k}}}`, k === active ? ' aria-current="page"' : "");
   }
   const main = sidebar
@@ -330,13 +331,49 @@ for (const [dir, , pages] of GUIDE_SECTIONS) {
 const FW_FIRST = publishedGuides.frameworks?.[0]?.[0] ?? "blazor.html";
 const TH_FIRST = publishedGuides.themes?.[0]?.[0] ?? "tailwind.html";
 
+/* Agent guidance, rendered from agents/rules.mjs so the page and the shipped
+   instruction files can never disagree. */
+const ruleList = (rules) => `<ul class="bullets">\n${rules
+  .map((r) => `  <li><b>${esc(r.text)}</b><br><span class="muted">Why: ${esc(r.why)}. Checked by: ${esc(r.enforcedBy)}.</span></li>`)
+  .join("\n")}\n</ul>`;
+
+const agentRules = () => `<h3>Rules that always apply</h3>
+${ruleList(ALWAYS)}
+<h3>Rules for console and portal screens</h3>
+<p>These apply to admin consoles, dashboards and portals. They do not apply to a
+marketing page, which is why the path-scoped formats limit them.</p>
+${ruleList(CONSOLE)}`;
+
+const agentPrompts = () =>
+  PROMPTS.map(
+    (p) => `<figure class="prompt" style="margin:0 0 var(--space-6)">
+  <div class="demo__bar"><span class="demo__title">${esc(p.title)}</span><button class="demo__copy btn btn--ghost btn--sm" hidden>Copy</button></div>
+  <pre class="demo__code" style="overflow-x:auto"><code>${esc(p.body())}</code></pre>
+  <figcaption class="muted">Then check: ${p.checks.map(esc).join("; ")}.</figcaption>
+</figure>`
+  ).join("\n");
+
+const agentFiles = () => `<div class="tablewrap"><table class="table">
+  <thead><tr><th>Agent</th><th>Copy this file</th><th>To here</th></tr></thead>
+  <tbody>
+${AGENTS.map(
+  (a) => `    <tr><td>${esc(a.label)}</td><td><code>${esc(KIT.name)}/${esc(a.packagePath)}</code></td><td><code>${esc(a.consumerPath)}</code></td></tr>
+    <tr><td colspan="3" class="muted cell--wrap">${esc(a.note)}</td></tr>`
+).join("\n")}
+  </tbody>
+</table></div>`;
+
 /* Root pages (landing, install) */
-for (const name of ["index.html", "install.html", "admin-kit.html"]) {
+const ROOT_PAGE_KEY = { "index.html": "home", "install.html": "install", "admin-kit.html": "admin", "agents.html": "agents" };
+for (const name of ["index.html", "install.html", "admin-kit.html", "agents.html"]) {
   const p = join(SRC, name);
   if (!existsSync(p)) continue;
-  const raw = read(p);
+  let raw = read(p);
+  if (raw.includes("<!--AGENT-RULES-->")) raw = raw.replace("<!--AGENT-RULES-->", agentRules());
+  if (raw.includes("<!--AGENT-PROMPTS-->")) raw = raw.replace("<!--AGENT-PROMPTS-->", agentPrompts());
+  if (raw.includes("<!--AGENT-FILES-->")) raw = raw.replace("<!--AGENT-FILES-->", agentFiles());
   const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, basename(name, ".html")])[1];
-  writePage(join(DIST, name), shell({ title, content: transformDemos(raw), depth: 0, active: name === "index.html" ? "home" : name === "admin-kit.html" ? "admin" : "install" }));
+  writePage(join(DIST, name), shell({ title, content: transformDemos(raw), depth: 0, active: ROOT_PAGE_KEY[name] }));
   built.push(name);
 }
 

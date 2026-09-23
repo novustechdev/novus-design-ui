@@ -61,7 +61,9 @@ const list = (dir) => existsSync(join(DIST, dir)) ? readdirSync(join(DIST, dir))
 const pages = [];
 for (const f of list("components")) if (f !== "index.html") pages.push({ path: `components/${f}`, kind: "docs" });
 for (const f of list("foundations")) pages.push({ path: `foundations/${f}`, kind: "docs" });
-if (existsSync(join(DIST, "admin-kit.html"))) pages.push({ path: "admin-kit.html", kind: "docs" });
+/* Every root page, not just the Admin Kit one: the landing, install and agent
+   guidance pages were never audited before, so a regression there was invisible. */
+for (const f of readdirSync(DIST).filter((x) => x.endsWith(".html")).sort()) pages.push({ path: f, kind: "docs" });
 for (const flavor of ["tailwind", "material"]) for (const f of list(`demos/${flavor}`)) pages.push({ path: `demos/${flavor}/${f}`, kind: "demo" });
 if (existsSync(join(DIST, "demos/blazor/index.html")))
   for (const r of ["", "login", "signed-out", "analytics", "transactions", "datagrid", "terminals", "settings"])

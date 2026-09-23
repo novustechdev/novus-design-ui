@@ -1,5 +1,18 @@
 # Project state (as of 2026-09-23)
 
+- **Feature 010 (agent adoption guide, constitution 1.14.0)**: the kit now tells
+  coding agents how to adopt it. `agents/rules.mjs` is THE source for the kit's
+  rules; `agents/generate.mjs` renders five outputs (AGENTS.md, CLAUDE.md,
+  two Copilot files, a Cursor .mdc) and the docs page renders the same rules, so
+  they cannot drift. The four provider files ship in the package (`files` and
+  `exports`); the source and generator deliberately do not. New docs page
+  `site/src/agents.html` with an "AI agents" top navigation entry, carrying
+  three copyable prompts (adopt, convert a hand-built screen, audit a screen).
+  Gate 18 (agent rule parity) added and negative-tested. Two gate gaps closed on
+  the way: the copy gates never scanned a new top-level directory, and the
+  layout audit had never audited ANY root page (landing, install), only
+  components, foundations, the Admin Kit page and the demos. Kit version 0.6.0.
+
 - **Feature 009 (icon rail and the light sign-in ground, constitution 1.13.0)**:
   two mandatory owner corrections. Collapsing a console's side navigation leaves
   a RAIL of icons (3.5rem column, 44px targets, labels visually hidden but kept
@@ -47,10 +60,10 @@
   motion allowed since constitution 1.6.0 (0.2s max, reduced-motion aware).
   Header = novapay lockup + icon theme toggle; below 520px the suffix hides and
   the endorsement mark steps to 20px (375px overflow guard).
-- **Speckit (current)**: active feature `specs/008-enterprise-portal-defaults`; earlier `specs/007-novalending-admin-patterns` (shipped via PR); earlier `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
+- **Speckit (current)**: active feature `specs/010-agent-adoption-guide` (constitution 1.14.0); earlier `specs/009-nav-rail-light-auth` (shipped via PR #7); earlier `specs/008-enterprise-portal-defaults`; earlier `specs/007-novalending-admin-patterns` (shipped via PR); earlier `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
   (tasks through T036 done); constitution v1.8.0.
 
-- **Package**: `novus-design-kit` on PUBLIC npm (0.3.0 on npm, dist-tag latest, repository field novustechdev), tokenless install
+- **Package**: `novus-design-kit` on PUBLIC npm (0.4.0 published 2026-09-23 and is dist-tag latest; 0.5.0 and 0.6.0 are merged but NOT published, so one publish of 0.6.0 ships both; repository field novustechdev), tokenless install
   (`npm install novus-design-kit`); third-party marks (logos/clients,
   logos/schemes) stripped from the artifact, repository-only. npm account
   sgultom99, 2FA via passkey: publishing needs the owner in a real terminal.

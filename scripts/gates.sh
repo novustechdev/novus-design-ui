@@ -12,6 +12,7 @@ gate() { # gate <name> <exit-code> [detail]
 
 AUTHORED="site/src js README.md CHANGELOG.md"
 [ -d site/dist ] && AUTHORED="$AUTHORED site/dist"
+[ -d agents ] && AUTHORED="$AUTHORED agents"
 
 # Admin-kit authored sources (constitution VII): Razor/HTML/CSS/JS we wrote,
 # excluding dependencies, build output, and the copied kit itself.
@@ -57,7 +58,7 @@ HITS=$(grep -rnP '[\x{4E00}-\x{9FFF}]' site/src site/dist 2>/dev/null)
 gate "CJK leak grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 6b. Copy style: no em dashes in AUTHORED copy (upstream kit docs in logos/ are excluded authority)
-HITS=$(grep -rn "—" site/src README.md CHANGELOG.md 2>/dev/null; grep -rn --include="*.html" "—" site/dist 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -n "—" $ADMIN_SRC 2>/dev/null)
+HITS=$(grep -rn "—" site/src agents README.md CHANGELOG.md 2>/dev/null; grep -rn --include="*.html" "—" site/dist 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -n "—" $ADMIN_SRC 2>/dev/null)
 gate "em-dash copy-style" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 7. Manifest ↔ detail-page completeness + orphan-class check
@@ -116,6 +117,11 @@ fi
 # shared console layer, shell, icons, WASM mirrors, and data matches its source.
 OUT=$(node admin-kits/data/generate.mjs --check 2>&1); RC=$?
 gate "admin pattern parity" $RC "$(echo "$OUT" | sed -n 2,4p | tr '\n' ' ')"
+
+# 18. Agent rule parity (constitution 1.14.0, Quality Gate 18): every generated agent
+# instruction file matches the single rule source in agents/rules.mjs.
+OUT=$(node agents/generate.mjs --check 2>&1); RC=$?
+gate "agent rule parity" $RC "$(echo "$OUT" | sed -n 1,3p | tr '\n' ' ')"
 
 # 15. Version agreement (constitution 1.12.0): package, README and CHANGELOG name one release.
 PKG_VER=$(node -p "require('./package.json').version")
