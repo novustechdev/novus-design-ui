@@ -136,7 +136,8 @@ gate "version agreement" $([ -z "$BAD" ]; echo $?) "$BAD"
 # horizontally at 375px, rendered in headless Chromium over site/dist (docs and demos).
 # Gates 12 to 14 and 16, 17 and 19 ride inside this run and are reported by kind:
 # HEADER (account menu placement), TYPE (typography parity), WIDTH (content width),
-# RAIL (collapsed navigation), GROUND (sign-in ground), TARGET (44px floor at 375px).
+# RAIL (collapsed navigation), GROUND (sign-in ground), TARGET (44px floor at 375px),
+# NAVREACH (gate 20: a top-bar console reaches every destination its drawer defines).
 if [ -d site/dist ]; then
   OUT=$(node scripts/layout-audit.mjs 2>&1); RC=$?
   if [ $RC -eq 2 ]; then

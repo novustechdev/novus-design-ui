@@ -7,6 +7,35 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+## [0.8.0], 2026-09-23
+
+A second console shell (feature 012, constitution 1.16.0), admitted at the
+request of a team building a dense, many-role banking admin portal. Packaged kit
+files change.
+
+### Added
+
+- The top-navigation console shell: sections live in a bar under the header and
+  their menus open on click, never on hover. Built on native disclosure elements,
+  so the menus work with JavaScript off. The current section stays marked while
+  its menu is shut. A console opts in with `adminwrap--topnav`.
+- Both shells render from ONE navigation definition, so a destination cannot
+  exist in one and not the other, and below 900px both present the same drawer.
+- Gate 20: a top-bar console must reach every destination its navigation
+  defines, judged by what paints once the menus are open, with the drawer as the
+  reference set. Negative-tested.
+- A catalog entry for the pattern, guidance on the Admin Kit page for choosing
+  between the two shells, a rule so an agent picks correctly, and a running demo
+  in the Tailwind flavor.
+
+### Changed
+
+- Gate 16 now names the shell it governs. The icon rail rule belongs to the
+  side-navigation shell; a top-bar console has no side navigation at desktop
+  width, and gate 20 covers its reachability instead.
+- The side-navigation shell remains the DEFAULT. Nothing existing changes shell.
+
+
 ## [0.7.0], 2026-09-23
 
 Three contradictions found by shipping the kit's rules to coding agents, and

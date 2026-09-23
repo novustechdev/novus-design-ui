@@ -12,7 +12,8 @@
      RAIL      a collapsed side navigation shows no icons, or still shows labels
                (gate 16), or
      GROUND    a sign-in page is not on the near-white ground (gate 17), or
-     TARGET    an interactive control is under 44px at the 375px baseline (gate 19).
+     TARGET    an interactive control is under 44px at the 375px baseline (gate 19), or
+     NAVREACH  a top-bar console cannot reach a destination its drawer defines (gate 20).
    Scope: .demo__canvas on docs pages, the whole document on demos; each page is
    audited closed, then with its dismissable menus, sheets, and drawer open.
    Skipped: paragraphs, headings, prose lists, pre, .cell--wrap, [data-audit="skip"].
@@ -185,7 +186,10 @@ function audit({ scopes, kind }) {
   const console_ = document.querySelector(".adminwrap");
   /* Gate 16: a collapsed navigation is a rail of icons, never nothing. */
   const toggle = document.getElementById("navtoggle");
-  if (console_ && toggle && toggle.checked && window.innerWidth >= 900) {
+  /* The rail rule belongs to the side-navigation shell. A top-bar console has no
+     side navigation at desktop width by design (feature 012), so the rule does not
+     apply to it; gate 20 covers that shell's reachability instead. */
+  if (console_ && toggle && toggle.checked && window.innerWidth >= 900 && !console_.classList.contains("adminwrap--topnav")) {
     const nav = console_.querySelector(".adminnav");
     const visible = nav && nav.getBoundingClientRect().width > 8;
     const all = nav ? [...nav.querySelectorAll(".navlink")] : [];
@@ -209,6 +213,32 @@ function audit({ scopes, kind }) {
     else if (icons < all.length) shellExtra.push({ kind: "RAIL", detail: `${icons} icons for ${all.length} destinations in the collapsed rail` });
     else if (labelled > 0) shellExtra.push({ kind: "RAIL", detail: `${labelled} label(s) still visible in the collapsed rail` });
   }
+  /* Gate 20: a top-bar console reaches every destination its navigation defines.
+     The drawer is rendered from the same definition as the bar, so it is the
+     reference set, and no expected count has to be declared anywhere. Judged by
+     paint, in the pass where the menus are open: a menu that reports open while
+     painting nothing is exactly how a destination goes missing. */
+  /* Only a real console, never a documentation page: the catalog shows both shells
+     as illustrative fragments, and comparing one demo against another reports a
+     docs link as a lost destination. Gates 12 and 13 learned this same lesson. */
+  const shellRoot = document.querySelector(".adminwrap");
+  const strip = shellRoot && document.querySelector(".adminmain") ? shellRoot.querySelector(".topnav") : null;
+  if (strip && strip.getBoundingClientRect().height > 4 && shellRoot.querySelector(".topnav__item[open]")) {
+    const shows = (el) => {
+      const b = el.getBoundingClientRect();
+      if (b.width < 2 || b.height < 2) return false;
+      const cy = b.y + b.height / 2;
+      if (cy < 0 || cy > window.innerHeight - 1) return true;
+      const h = document.elementFromPoint(Math.round(b.x + b.width / 2), Math.round(cy));
+      return !!h && (h === el || el.contains(h));
+    };
+    const href = (a) => a.getAttribute("href");
+    const reached = new Set([...shellRoot.querySelectorAll(".topnav__link, .topnav__menu .navlink")].filter(shows).map(href).filter(Boolean));
+    const defined = new Set([...shellRoot.querySelectorAll(".adminnav .navlink")].map(href).filter(Boolean));
+    const missing = [...defined].filter((h) => !reached.has(h));
+    if (missing.length) shellExtra.push({ kind: "NAVREACH", detail: `${missing.length} destination(s) unreachable from the top bar: ${missing.slice(0, 3).join(", ")}` });
+  }
+
   /* Gate 19: touch targets at the 375px baseline (Principle IV). Judged by what
      paints: a control inside a closed details reports a box it never renders, and
      flagging that would send people chasing controls nobody can press. Rows below

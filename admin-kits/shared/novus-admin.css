@@ -135,6 +135,43 @@
 @media (pointer: coarse) { .navlink, .navgroup__label { min-height: 2.75rem; } }
 /* @end */
 
+/* @pattern top-navigation */
+/* The second console shell (feature 012): primary navigation in a bar under the
+   header, with menus that open on CLICK, never on hover. Built on native details
+   so it works when scripting does not run, like every other dismissable surface
+   here. Below the desktop breakpoint this bar steps aside and the drawer from the
+   side-navigation shell takes over, so there is one phone navigation in the kit.
+   The side-navigation shell remains the default; see the catalog for which to
+   choose. */
+.topnav { position: relative; z-index: 50; background: var(--surface); border-bottom: 1px solid var(--border); }
+/* No scroll container here. A menu is absolutely positioned inside this strip,
+   and an ancestor that scrolls clips it: overflow-x: auto forces overflow-y to
+   auto as well, so the dropdown would be cut off at the bar's own height. The
+   bar wraps instead, which keeps every section reachable AND visible. */
+.topnav__inner { display: flex; flex-wrap: wrap; align-items: stretch; gap: var(--space-1); max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.topnav__link, .topnav__trigger { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 2.75rem; padding: var(--space-2) var(--space-3); color: var(--text-secondary); font-size: var(--text-sm); font-weight: var(--weight-medium); white-space: nowrap; text-decoration: none; border-bottom: 2px solid transparent; cursor: pointer; transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease; }
+.topnav__link:hover, .topnav__trigger:hover { color: var(--text); background: var(--bg-subtle); text-decoration: none; }
+.topnav__link:focus-visible, .topnav__trigger:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+/* The current section stays marked while its menu is closed. */
+.topnav__link[aria-current="page"], .topnav__item.is-current > .topnav__trigger { color: var(--accent-text); border-bottom-color: var(--accent); }
+.topnav__item { position: relative; display: flex; }
+.topnav__trigger { list-style: none; }
+.topnav__trigger::-webkit-details-marker { display: none; }
+.topnav__chevron { transition: transform 0.15s ease; }
+.topnav__item[open] > .topnav__trigger .topnav__chevron { transform: rotate(180deg); }
+.topnav__menu { position: absolute; inset-inline-start: 0; top: 100%; z-index: 60; min-width: 14rem; max-height: min(24rem, calc(100vh - 8rem)); overflow-y: auto; padding: var(--space-2); display: flex; flex-direction: column; gap: var(--space-1); font-size: var(--text-sm); line-height: var(--lh-sm); }
+.topnav__menu .navlink { border-inline-start: 0; border-radius: var(--radius-md); }
+/* A console opts into this shell with .adminwrap--topnav. Above the breakpoint the
+   strip is the navigation and the side column steps aside; below it the strip hides
+   and the drawer from the side-navigation shell takes over, unchanged. */
+.adminwrap--topnav .adminbody { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) {
+  .adminwrap--topnav .adminnav { display: none; }
+  .adminwrap--topnav .navtoggle { display: none; }
+}
+@media (max-width: 899.98px) { .topnav { display: none; } }
+/* @end */
+
 /* @pattern page-header */
 .pagehead { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-5); }
 .pagehead__row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3) var(--space-4); flex-wrap: wrap; }

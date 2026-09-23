@@ -187,6 +187,27 @@ function navHtml(current) {
   return out.join("\n");
 }
 
+/* The top-bar shell (feature 012) renders the SAME NAV as the side navigation.
+   One definition, two shells: a group becomes a menu that opens on click, an
+   ungrouped entry becomes a link, and a group holding the current page keeps the
+   current marking while its menu is closed. */
+function navbarHtml(current) {
+  const link = (it, cls = "navlink") => `<a class="${cls}" href="${it.page}"${it.page === current ? ' aria-current="page"' : ""}>${I(it.icon)}<span>${it.label}</span></a>`;
+  const out = [`<nav class="topnav" aria-label="Sections">`, `  <div class="topnav__inner">`];
+  for (const n of NAV) {
+    if (!n.group) { out.push(`    ${link(n, "topnav__link")}`); continue; }
+    const here = n.items.some((it) => it.page === current);
+    out.push(`    <details class="topnav__item${here ? " is-current" : ""}" data-dismiss>`);
+    out.push(`      <summary class="topnav__trigger">${I(n.icon, "icon--sm")}<span>${n.group}</span>${I("chevron-down", "icon--sm topnav__chevron")}</summary>`);
+    out.push(`      <div class="card topnav__menu">`);
+    for (const it of n.items) out.push(`        ${link(it)}`);
+    out.push(`      </div>`);
+    out.push(`    </details>`);
+  }
+  out.push(`  </div>`, `</nav>`);
+  return out.join("\n");
+}
+
 function navRazor() {
   const link = (it) => `<NavLink class="navlink" href="${it.route}" title="${it.label}"${it.route === "" ? ' Match="NavLinkMatch.All"' : ""}>${I(it.icon)}<span>${it.label}</span></NavLink>`;
   const out = [`<nav class="adminnav" aria-label="Console">`, `    ${navHead}`];
@@ -433,10 +454,44 @@ ${icons.map(([name, , body]) => `        "${name}" => "${body.replace(/"/g, "'")
     };
 }
 `;
+function navbarRazor() {
+  const link = (it, cls = "navlink") => `<NavLink class="${cls}" href="${it.route}"${it.route === "" ? ' Match="NavLinkMatch.All"' : ""}>${I(it.icon)}<span>${it.label}</span></NavLink>`;
+  const out = [`<nav class="topnav" aria-label="Sections">`, `    <div class="topnav__inner">`];
+  for (const n of NAV) {
+    if (!n.group) { out.push(`        ${link(n, "topnav__link")}`); continue; }
+    const routes = n.items.map((it) => `"${it.route}"`).join(", ");
+    out.push(`        <details class="topnav__item @(InGroup(${routes}) ? "is-current" : "")" data-dismiss>`);
+    out.push(`            <summary class="topnav__trigger">${I(n.icon, "icon--sm")}<span>${n.group}</span>${I("chevron-down", "icon--sm topnav__chevron")}</summary>`);
+    out.push(`            <div class="card topnav__menu">`);
+    for (const it of n.items) out.push(`                ${link(it)}`);
+    out.push(`            </div>`);
+    out.push(`        </details>`);
+  }
+  out.push(`    </div>`, `</nav>`);
+  return out.join("\n");
+}
+
 const navRazorFile = `${razorBanner}@implements IDisposable
 @inject NavigationManager Nav
 
 ${razorIcons(navRazor())}
+
+@code {
+    bool InGroup(params string[] routes)
+    {
+        var path = Nav.ToBaseRelativePath(Nav.Uri).Split('?', '#')[0].Trim('/');
+        return routes.Contains(path);
+    }
+
+    protected override void OnInitialized() => Nav.LocationChanged += Changed;
+    void Changed(object? sender, LocationChangedEventArgs e) => InvokeAsync(StateHasChanged);
+    public void Dispose() => Nav.LocationChanged -= Changed;
+}
+`;
+const navbarRazorFile = `${razorBanner}@implements IDisposable
+@inject NavigationManager Nav
+
+${razorIcons(navbarRazor())}
 
 @code {
     bool InGroup(params string[] routes)
@@ -455,6 +510,7 @@ for (const dir of ["blazor/Components/Shared", "blazor-demo/Shared"]) {
   emit(join(KITS, dir, "Icon.razor"), iconRazor);
   emit(join(KITS, dir, "ConsoleHeader.razor"), `${razorBanner}${razorIcons(headerTpl("signed-out"))}\n`);
   emit(join(KITS, dir, "ConsoleNav.razor"), navRazorFile);
+  emit(join(KITS, dir, "ConsoleTopNav.razor"), navbarRazorFile);
   emit(join(KITS, dir, "AuthBrand.razor"), `${razorBanner}${razorIcons(brandTpl)}\n`);
   emit(join(KITS, dir, "SignedOutCard.razor"), `${razorBanner}${razorIcons(signedOutTpl("login"))}\n`);
   emit(join(KITS, dir, "PasswordToggle.razor"), PWTOGGLE_RAZOR);
@@ -506,7 +562,7 @@ const blocks = {
   terminals: [...d.terminals].sort((a, b) => (a.health === "healthy") - (b.health === "healthy")).map(termRow).join("\n"),
 };
 
-const PAGES = ["index.html", "analytics.html", "transactions.html", "datagrid.html", "terminals.html", "settings.html", "login.html", "signed-out.html"];
+const PAGES = ["index.html", "analytics.html", "transactions.html", "datagrid.html", "terminals.html", "settings.html", "login.html", "signed-out.html", "topnav.html"];
 for (const flavor of ["tailwind", "material"]) {
   for (const page of PAGES) {
     const p = join(KITS, flavor, page);
@@ -515,6 +571,9 @@ for (const flavor of ["tailwind", "material"]) {
     const shells = {
       header: headerTpl("signed-out.html"),
       nav: navHtml(page),
+      /* The top-bar demo shows a screen inside Operations, so the group carries
+         the current marking while its menu is closed. */
+      topnav: navbarHtml(page === "topnav.html" ? "transactions.html" : page),
       "auth-brand": brandTpl,
       "signed-out": signedOutTpl("login.html"),
       "tx-filterbar": filterbarTpl(flavor),

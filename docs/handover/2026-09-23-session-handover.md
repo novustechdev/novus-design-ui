@@ -1,4 +1,4 @@
-# Handover: Novus Design Kit, 2026-09-23 (features 008 to 011)
+# Handover: Novus Design Kit, 2026-09-23 (features 008 to 012)
 
 ## Where we are
 
@@ -207,3 +207,49 @@ code.
   details so it works without script, no destination unreachable at any width
   with its own gate, current section marked when its menu is closed, account menu
   last, 44px targets, documented and demoed before use). That is feature 012.
+
+---
+
+# Feature 012: a top-navigation console shell
+
+## Where we are
+
+Implemented on branch `feature/012-topnav-console-shell`. Constitution 1.16.0,
+kit 0.8.0, 18 gate lines with gates 16 and 20 covering one shell each, layout
+audit over 86 pages at two widths.
+
+## What it is
+
+A second console shell, requested by novabank-py and admitted on conditions that
+were given to them before any code was written. Sections sit in a bar under the
+header, menus open on click, and the whole thing is native disclosure elements so
+it works with scripting off. The side navigation remains the default.
+
+The design decision that keeps it honest: both shells render from the same `NAV`
+definition, so a destination cannot exist in one and not the other, and below
+900px both present the same drawer. There is one phone navigation in the kit.
+
+## Three defects found by looking rather than by measuring
+
+1. **A clipped menu that reported itself open.** `.topnav__inner` carried
+   `overflow-x: auto`, which clips an absolutely positioned dropdown, because
+   overflow-x auto forces overflow-y to auto. The behavioural suite passed 15 of
+   15 while the menu painted nothing, because it read `details.open` and computed
+   styles. The screenshot showed the truth. The strip now wraps instead of
+   scrolling.
+2. **Gate 16 fired against the new shell.** The rail rule assumed every console
+   has a side navigation to collapse. It now names the shell it governs, in the
+   audit and in the constitution.
+3. **Gate 20 fired on a documentation page.** The catalog shows both shells as
+   fragments, so the new check compared one demo against another. Gates 12 and 13
+   learned this in feature 008; the new gate had to learn it again, and is now
+   scoped to a real console shell.
+
+## Open items
+
+- Publishing: 0.4.0 is the published version. 0.5.0 through 0.8.0 are merged or
+  pending, so one `npm publish` of 0.8.0 ships them all.
+- The GitHub release for v0.4.0 is still outstanding.
+- novabank-py can now build against a shipped pattern. They were asked for their
+  top-level section count and menu depth; past about nine top-level sections the
+  guidance sends them to the side navigation instead.
