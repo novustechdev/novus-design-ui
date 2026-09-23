@@ -139,6 +139,39 @@ npm run dev     # or: npm run build && npm run preview</code></pre>
   <figure style="margin:0"><a href="demos/material/"><img src="assets/admin-kit/material-rail.png" alt="material flavor: collapsed navigation shows a rail of icons" loading="lazy" style="max-width:100%;border:1px solid var(--border);border-radius:var(--radius-lg)"></a><figcaption class="muted">Collapsed navigation: an icon rail, nothing hidden</figcaption></figure>
 </div>
 
+<h2>Choosing a console shell</h2>
+
+<p>A console uses one of two shells. Both carry the same header with the account
+menu last, the same page header, filter bar, paged lists and settings layout, and
+both render from one navigation definition, so moving between them is a shell
+change rather than a rebuild. Below 900px they present the same drawer.</p>
+
+<div class="tablewrap"><table class="table">
+  <thead><tr><th>Shell</th><th>Use it when</th><th>Because</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Side navigation (default)</td>
+      <td class="cell--wrap">A console has many top-level areas, or its structure is deep.</td>
+      <td class="cell--wrap">A rail shows every destination at once, and collapsing it keeps them one click away as icons.</td>
+    </tr>
+    <tr>
+      <td>Top navigation</td>
+      <td class="cell--wrap">A console has a handful of sections, up to about nine, each holding a short menu.</td>
+      <td class="cell--wrap">A horizontal bar reads as the product's spine and returns the full width to the work. Past about nine sections it hides more than it shows, and the side navigation is the better choice.</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<p>The top-navigation menus open on click, never on hover, and are built on
+native disclosure elements, so they work with JavaScript off. The current section
+stays marked while its menu is shut, and a release gate checks that the bar
+reaches every destination the navigation defines.</p>
+
+<div class="row" style="margin-bottom:var(--space-5)">
+  <a class="btn btn--primary" href="demos/tailwind/topnav.html">Open the top-navigation demo</a>
+  <a class="btn btn--secondary" href="components/top-navigation.html">Read the pattern</a>
+</div>
+
 <h2>Parity and data</h2>
 <ul class="bullets">
   <li>One dataset (<code>admin-kits/data/dataset.json</code>) and one shared layer (<code>admin-kits/shared/</code>) generate every flavor's data, console shell, icons, and filter markup; <code>node admin-kits/data/generate.mjs --check</code> proves parity and runs as a release gate.</li>

@@ -1,6 +1,20 @@
 <!--
 Sync Impact Report
-- Version change: 1.14.0 -> 1.15.0 (MINOR: the 44px touch target floor becomes an
+- Version change: 1.15.0 -> 1.16.0 (MINOR: a console may use either of two
+  documented shells; the side navigation remains the default; gate 20; owner
+  decision 2026-09-23, feature 012, at the request of a consumer building a
+  dense, many-role banking admin portal)
+- Modified principles: VII. A console uses one of TWO documented shells. The
+  grouped side navigation that collapses to an icon rail stays the default. The
+  top-navigation shell puts sections in a bar under the header with menus that
+  open on CLICK, never on hover, built on native disclosure elements so they work
+  without scripting. Below the desktop breakpoint both shells present the SAME
+  drawer, so there is one phone navigation in the kit. Both render from one
+  navigation definition. The account menu remains the last element of the header
+  in either shell.
+- Quality Gates: 20 (a top-bar console reaches every destination its navigation
+  defines), reported through the layout audit as a NAVREACH finding.
+- Prior amendment (1.14.0 -> 1.15.0) (MINOR: the 44px touch target floor becomes an
   enforced gate rather than a manual checklist line; the console header's
   divergence from the upstream section 4c is recorded; owner decision
   2026-09-23, feature 011)
@@ -292,8 +306,17 @@ hover and to assistive technology; owner decision 2026-09-23) and opens as a
 drawer on small screens without JavaScript, page header
 with breadcrumb and end-aligned actions, filter bar with a sub-filter sheet,
 active chips and quick filter chips, and list footer pagination (range,
-previous and next, page label, rows per page). The account menu is the LAST
-element in the console header, flush to the gutter at every width. This diverges
+previous and next, page label, rows per page). A console uses ONE OF TWO documented shells (owner decision 2026-09-23): the
+grouped side navigation described above, which is the DEFAULT, or the
+top-navigation shell, which places sections in a bar under the header with menus
+that open on CLICK and never on hover, built on native disclosure elements so
+they work without scripting, marking the current section even while its menu is
+shut. Below the desktop breakpoint both shells present the SAME drawer. Both
+render from one navigation definition, so a destination cannot exist in one shell
+and not the other, and the catalog documents which shell suits which shape of
+console. The account menu is the LAST
+element in the console header, flush to the gutter at every width, in either
+shell. This diverges
 deliberately from tokens.css section 4c, which is LOCKED upstream and places the
 NOVUS MASTER lockup at the far right as the endorsement: section 4c governs brand
 surfaces, while application chrome puts the operator's own account where
@@ -398,8 +421,11 @@ Every change to the kit MUST pass these gates before merge:
     quarter or more of its row stays unused, unless marked as a reading measure.
 15. Version agreement: package version, README and CHANGELOG name the same
     release before a tag.
-16. Collapsed navigation: a collapsed console side navigation renders one icon
-    per destination, with no visible label text and the current page marked.
+16. Collapsed navigation: in a console using the SIDE-NAVIGATION shell, a
+    collapsed side navigation renders one icon per destination, with no visible
+    label text and the current page marked. A console using the top-navigation
+    shell has no side navigation at desktop width, so this gate does not apply to
+    it and gate 20 covers its reachability instead.
 17. Authentication ground: a sign-in page renders on the near-white ground in
     the default theme.
 18. Agent rule parity: `node agents/generate.mjs --check` passes, so every
@@ -410,6 +436,11 @@ Every change to the kit MUST pass these gates before merge:
     finding. This is Principle IV's long-standing requirement, enforced for the
     first time in feature 011 after it was found broken across the kit's own
     reference applications and documentation site.
+20. Navigation reach: in a console using the top-navigation shell, every
+    destination the navigation defines is reachable from the bar, judged by what
+    paints once the menus are open. The drawer, rendered from the same
+    definition, is the reference set. This is the top bar's counterpart to gate
+    16.
 
 Reviews reject on any gate failure; gates are not advisory.
 
@@ -438,4 +469,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.15.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23
+**Version**: 1.16.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23

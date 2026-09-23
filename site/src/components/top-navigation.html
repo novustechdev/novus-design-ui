@@ -1,0 +1,43 @@
+<!-- title: Top navigation -->
+<p>The second console shell. Sections live in a bar under the header and their
+menus open on click. The <a href="side-navigation.html">side navigation</a>
+remains the default; this suits a console with a handful of sections rather than
+a deep one.</p>
+
+<section class="demo" data-title="Top navigation: sections in the bar, menus on click">
+  <nav class="topnav" aria-label="Sections">
+    <div class="topnav__inner">
+      <a class="topnav__link" href="#" aria-current="page">Dashboard</a>
+      <a class="topnav__link" href="#">Analytics</a>
+      <details class="topnav__item" data-dismiss>
+        <summary class="topnav__trigger">Operations<svg class="icon icon--sm topnav__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="card topnav__menu">
+          <a class="navlink" href="#">Transactions</a>
+          <a class="navlink" href="#">Data grid</a>
+          <a class="navlink" href="#">Terminals</a>
+        </div>
+      </details>
+    </div>
+  </nav>
+</section>
+
+<h2>How it behaves</h2>
+<ul class="bullets">
+  <li><b>Click, never hover.</b> Each section is a native disclosure element, so the menus open with JavaScript off. The shared console script closes an open menu on an outside press and on Escape, and returns focus to the section that opened it.</li>
+  <li><b>One menu at a time</b> when scripting is available. Without it, more than one can be open, and the layout tolerates that.</li>
+  <li><b>The current section stays marked</b> while its menu is shut, so an operator can always see where they are.</li>
+  <li><b>Nothing is hidden.</b> Every destination stays reachable at every width, and a release gate compares what the bar can reach against the drawer, which is rendered from the same definition.</li>
+  <li><b>Phones use the drawer.</b> Below 900px the bar steps aside and the drawer from the side-navigation shell takes over, so there is one phone navigation in the kit.</li>
+</ul>
+
+<h2>Markup</h2>
+<p>A console opts in with <code>adminwrap--topnav</code>, which hides the side
+column at desktop width. The strip sits between the header and the console body,
+and the drawer markup stays in place for phone widths.</p>
+
+<h2>Which shell to choose</h2>
+<ul class="bullets">
+  <li><b>Use the side navigation</b> when a console has many top-level areas. A rail shows them all at once, and a bar would push most of them behind menus.</li>
+  <li><b>Use the top navigation</b> when a console has a handful of sections, up to about nine, each holding a short menu, and the horizontal bar reads as the product's spine.</li>
+  <li>Both shells use the same navigation definition, the same header with the account menu last, and the same drawer on phones, so moving between them is a shell change rather than a rebuild.</li>
+</ul>

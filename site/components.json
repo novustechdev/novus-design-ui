@@ -272,6 +272,24 @@
       "css": ["console-shell", "side-navigation"]
     },
     {
+      "id": "top-navigation",
+      "name": "Top navigation",
+      "category": "Navigation",
+      "classes": [
+        ".topnav",
+        ".topnav__inner",
+        ".topnav__link",
+        ".topnav__item",
+        ".topnav__trigger",
+        ".topnav__menu"
+      ],
+      "fragment": "src/components/top-navigation.html",
+      "summary": "The second console shell: sections in a bar under the header, menus on click, native so it works without JavaScript, with the drawer taking over on phones.",
+      "css": [
+        "top-navigation"
+      ]
+    },
+    {
       "id": "user-menu",
       "name": "User menu",
       "category": "Navigation",

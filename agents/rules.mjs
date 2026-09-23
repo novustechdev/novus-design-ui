@@ -128,6 +128,13 @@ export const RULES = [
     enforcedBy: "console.css and the Admin Kit reference applications",
   },
   {
+    id: "console-shell-choice",
+    scope: "console",
+    text: "Pick one of the kit's two console shells rather than inventing a third. The grouped side navigation is the default and suits a console with many or deep top-level areas. The top-navigation bar suits a console with a handful of sections, up to about nine, each holding a short menu. Both use the same header, the same drawer on phones, and one navigation definition.",
+    why: "a third shell is a divergence nobody else can inherit, and the two shipped ones already cover the shapes an enterprise console takes",
+    enforcedBy: "the shell guidance on the Admin Kit page, and release gates 16 and 20 for the two shells",
+  },
+  {
     id: "account-menu-last",
     scope: "console",
     text: "The account menu is the last element in a console header. Nothing sits to the right of it, at any width.",

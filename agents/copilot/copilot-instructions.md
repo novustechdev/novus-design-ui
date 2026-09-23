@@ -1,10 +1,10 @@
-<!-- Generated from novus-design-kit 0.7.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
+<!-- Generated from novus-design-kit 0.8.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
 
 # novus-design-kit instructions
 
 These are the rules of the novus-design-kit design system, for the coding
 agent working in this repository. They come from the kit itself, version
-0.7.0. Upgrade the package to get the current version of this file.
+0.8.0. Upgrade the package to get the current version of this file.
 
 ## What the kit ships
 
