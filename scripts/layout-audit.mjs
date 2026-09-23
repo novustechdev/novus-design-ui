@@ -8,7 +8,10 @@
      HEADER    something sits to the right of the account menu (gate 12),
      TYPE      header, navigation and body sizes diverge, or a heading breaks its
                ratio to body text (gate 13), or
-     WIDTH     a text block wraps while a quarter of its row stays unused (gate 14).
+     WIDTH     a text block wraps while a quarter of its row stays unused (gate 14),
+     RAIL      a collapsed side navigation shows no icons, or still shows labels
+               (gate 16), or
+     GROUND    a sign-in page is not on the near-white ground (gate 17).
    Scope: .demo__canvas on docs pages, the whole document on demos; each page is
    audited closed, then with its dismissable menus, sheets, and drawer open.
    Skipped: paragraphs, headings, prose lists, pre, .cell--wrap, [data-audit="skip"].
@@ -83,6 +86,7 @@ try {
 
 /* ---- in-page audit ---- */
 function audit({ scopes, kind }) {
+  const shellExtra = [];
   const SKIP = "p, h1, h2, h3, h4, h5, h6, pre, figcaption, blockquote, .bullets, .cell--wrap, [data-audit='skip'], script, style, svg, textarea, option";
   const roots = scopes.flatMap((s) => [...document.querySelectorAll(s)]);
   const found = new Map();
@@ -143,11 +147,48 @@ function audit({ scopes, kind }) {
     }
   }
 
+  /* Gate 17: authentication sits on the near-white ground (feature 009). */
+  const auth = document.querySelector(".authpage");
+  if (auth && document.documentElement.getAttribute("data-theme") !== "dark") {
+    const bg = getComputedStyle(auth).backgroundColor;
+    const rgb = (bg.match(/\d+(\.\d+)?/g) || []).slice(0, 3).map(Number);
+    if (rgb.length === 3) {
+      const lum = (0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2]) / 255;
+      if (lum < 0.95) shellExtra.push({ kind: "GROUND", detail: `sign-in ground ${bg} is ${(lum * 100).toFixed(0)}% of white (needs 95%)` });
+    }
+  }
+
   /* Gates 12 and 13: console header order and typographic parity. These judge a
      real console shell, not a header example sitting inside documentation prose. */
   const console_ = document.querySelector(".adminwrap");
+  /* Gate 16: a collapsed navigation is a rail of icons, never nothing. */
+  const toggle = document.getElementById("navtoggle");
+  if (console_ && toggle && toggle.checked && window.innerWidth >= 900) {
+    const nav = console_.querySelector(".adminnav");
+    const visible = nav && nav.getBoundingClientRect().width > 8;
+    const all = nav ? [...nav.querySelectorAll(".navlink")] : [];
+    /* Judged by what actually paints, not by what measures: a closed details group
+       still reports a box for its children while the browser never renders them, so
+       a box check would call a hidden destination present. Rows below the fold are
+       left unjudged rather than blamed. */
+    const paints = (el) => {
+      const r = el.getBoundingClientRect();
+      if (r.width < 4 || r.height < 4) return false;
+      const cy = r.y + r.height / 2;
+      if (cy < 0 || cy > window.innerHeight - 1) return true;
+      const hit = document.elementFromPoint(Math.round(r.x + r.width / 2), Math.round(cy));
+      return !!hit && (hit === el || el.contains(hit));
+    };
+    const painted = all.filter(paints);
+    const icons = painted.filter((a) => { const i = a.querySelector(".icon"); return i && i.getBoundingClientRect().width > 4; }).length;
+    const labelled = nav ? [...nav.querySelectorAll(".navlink > span")].filter((l) => l.getBoundingClientRect().width > 4).length : 0;
+    if (!visible) shellExtra.push({ kind: "RAIL", detail: "collapsed navigation is hidden instead of showing icons" });
+    else if (painted.length < all.length) shellExtra.push({ kind: "RAIL", detail: `${all.length - painted.length} of ${all.length} destination(s) do not render in the collapsed rail` });
+    else if (icons < all.length) shellExtra.push({ kind: "RAIL", detail: `${icons} icons for ${all.length} destinations in the collapsed rail` });
+    else if (labelled > 0) shellExtra.push({ kind: "RAIL", detail: `${labelled} label(s) still visible in the collapsed rail` });
+  }
   const header = console_ ? console_.querySelector(".appheader") : null;
-  const shell = [];
+  const shell = shellExtra;
   if (header && document.querySelector(".adminmain")) {
     const menu = header.querySelector(".userdd");
     if (menu) {
@@ -202,7 +243,7 @@ async function run(ctx, width, p) {
       let n = 0;
       document.querySelectorAll("details[data-dismiss]").forEach((d) => { d.setAttribute("open", ""); n++; });
       const t = document.getElementById("navtoggle");
-      if (t && w < 900) { t.checked = true; n++; }
+      if (t) { t.checked = true; n++; }
       return n;
     }, width);
     let open = { wraps: [] };
@@ -210,6 +251,7 @@ async function run(ctx, width, p) {
       await page.waitForTimeout(260);
       const openScopes = p.kind === "docs" ? [".demo__canvas details[data-dismiss]"] : ["details[data-dismiss]", ".adminnav"];
       open = await page.evaluate(audit, { scopes: openScopes, kind: p.kind });
+      for (const sh of open.shell || []) findings.push(`${sh.kind} ${width} ${p.path || "/"} ${sh.detail}`);
     }
     for (const w of closed.widths) findings.push(`WIDTH ${width} ${p.path || "/"} ${w.sel} "${w.text}" lines=${w.lines} unused=${w.unused}%`);
     for (const sh of closed.shell) findings.push(`${sh.kind} ${width} ${p.path || "/"} ${sh.detail}`);

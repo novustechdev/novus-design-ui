@@ -57,8 +57,22 @@
 .adminmain { min-width: 0; }
 @media (min-width: 900px) {
   .adminbody { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-6); align-items: start; }
-  .adminwrap:has(.navtoggle__input:checked) .adminbody { grid-template-columns: minmax(0, 1fr); }
-  .adminwrap:has(.navtoggle__input:checked) .adminnav { display: none; }
+  /* Collapsed at desktop width: a rail of icons, never nothing (feature 009). */
+  .adminwrap:has(.navtoggle__input:checked) .adminbody { grid-template-columns: 3.5rem minmax(0, 1fr); }
+  .adminwrap:has(.navtoggle__input:checked) .adminnav { align-items: center; }
+  .adminwrap:has(.navtoggle__input:checked) .navlink { justify-content: center; gap: 0; width: 2.75rem; padding: 0; border-inline-start: 0; border-radius: var(--radius-md); }
+  .adminwrap:has(.navtoggle__input:checked) .navlink > span,
+  .adminwrap:has(.navtoggle__input:checked) .navgroup__label > span,
+  .adminwrap:has(.navtoggle__input:checked) .navgroup__chevron { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .adminwrap:has(.navtoggle__input:checked) .navgroup { border-top-color: transparent; }
+  .adminwrap:has(.navtoggle__input:checked) .navgroup:last-child { border-bottom-color: transparent; }
+  .adminwrap:has(.navtoggle__input:checked) .navgroup__label { justify-content: center; padding: 0; min-height: 0; height: var(--space-4); cursor: default; }
+  .adminwrap:has(.navtoggle__input:checked) .navgroup__label .icon { display: none; }
+  .adminwrap:has(.navtoggle__input:checked) .navgroup > .navlink { padding-inline-start: 0; }
+  /* A closed group still shows its destinations in the rail: the browser stops painting a
+     closed details subtree, so the rail asks for it back. Rail mode only, so the phone
+     drawer keeps ordinary group behaviour. */
+  .adminwrap:has(.navtoggle__input:checked) .navgroup::details-content { content-visibility: visible; block-size: auto; }
   .navscrim { display: none; }
 }
 @media (max-width: 899.98px) {
@@ -145,42 +159,40 @@
 /* @end */
 
 /* @pattern sign-in */
-/* Authentication screens only: the solid deep brand ground in both themes
-   (constitution 1.11.0, Principle II exception). Flat colour: no gradients, no glow. */
-.authpage { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; background: var(--blue-900); }
+/* Authentication screens sit on the kit's near-white ground like every other
+   screen (feature 009, replacing the deep brand panel from 007). The ambient
+   line work carries the interest. Flat colour: no gradients, no glow. */
+.authpage { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; background: var(--bg-subtle); }
 .authsplit { flex: 1; display: flex; flex-direction: column; }
-.authbrand { position: relative; overflow: hidden; display: flex; align-items: center; padding: var(--space-6) var(--gutter); color: var(--blue-100); }
+.authbrand { position: relative; overflow: hidden; display: flex; align-items: center; padding: var(--space-6) var(--gutter); color: var(--text-secondary); }
 /* Ambient authentication art: slow looping line work on the flat brand ground,
    the one decorative motion the kit allows (constitution 1.12.0, Principle II). */
 .authhero__art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.authhero__trace { fill: none; stroke: var(--blue-700); stroke-width: 1; opacity: 0.55; stroke-dasharray: 220 900; animation: authtrace 13s linear infinite; }
+.authhero__trace { fill: none; stroke: var(--blue-200); stroke-width: 1; opacity: 0.9; stroke-dasharray: 220 900; animation: authtrace 13s linear infinite; }
 .authhero__trace:nth-of-type(2) { animation-delay: -4s; }
 .authhero__trace:nth-of-type(3) { animation-delay: -8s; }
-.authhero__mark { fill: none; stroke: var(--blue-700); stroke-width: 1.5; opacity: 0.4; animation: authmark 9s ease-in-out infinite; transform-origin: center; }
+.authhero__mark { fill: none; stroke: var(--blue-200); stroke-width: 1.5; opacity: 0.75; animation: authmark 9s ease-in-out infinite; transform-origin: center; }
 .authhero__mark:nth-of-type(5) { animation-delay: -4.5s; }
 .authbrand__inner { position: relative; }
 @keyframes authtrace { from { stroke-dashoffset: 1120; } to { stroke-dashoffset: 0; } }
-@keyframes authmark { 0%, 100% { opacity: 0.22; } 50% { opacity: 0.5; } }
+@keyframes authmark { 0%, 100% { opacity: 0.45; } 50% { opacity: 0.85; } }
 @media (prefers-reduced-motion: reduce) {
   .authhero__trace, .authhero__mark { animation: none; }
 }
 .authbrand__inner { width: 100%; max-width: 28rem; margin-inline: auto; display: flex; flex-direction: column; gap: var(--space-4); }
-/* the kit's dark-lockup treatment, fixed on the always-dark panel */
-.authpage .authbrand .theme-novapay { --accent-text: var(--blue-300); }
-.authpage .authbrand .vlogo .vmark { width: 2.5rem; height: 2.5rem; stroke: var(--blue-300); }
+/* The lockup keeps its normal treatment: the panel is a light surface now. */
+.authpage .authbrand .vlogo .vmark { width: 2.5rem; height: 2.5rem; }
 .authpage .authbrand .wm { font-size: var(--text-2xl); }
-.authpage .authbrand .wm .nm { color: var(--blue-200); }
-.authpage .authbrand .wm .sf { color: var(--blue-300); }
-.authbrand__tagline { margin: 0; font-size: var(--text-lg); line-height: var(--lh-lg); color: var(--blue-200); }
+.authbrand__tagline { margin: 0; font-size: var(--text-lg); line-height: var(--lh-lg); color: var(--text-secondary); }
 .authbrand__modules { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; padding: 0; }
-.authbrand__modules li { display: inline-flex; align-items: center; min-height: 2rem; padding: var(--space-1) var(--space-3); border: 1px solid var(--blue-700); border-radius: var(--radius-pill); background: var(--blue-800); color: var(--blue-200); font-size: var(--text-sm); white-space: nowrap; }
+.authbrand__modules li { display: inline-flex; align-items: center; min-height: 2rem; padding: var(--space-1) var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface); color: var(--text-secondary); font-size: var(--text-sm); white-space: nowrap; }
 .authmain { flex: 1; display: grid; place-items: center; padding: var(--space-2) var(--gutter) var(--space-7); }
 @media (min-width: 900px) {
   .authsplit { flex-direction: row; }
   .authbrand { flex: 1 1 50%; padding: var(--space-8); }
   .authmain { flex: 1 1 50%; padding: var(--space-7) var(--gutter); }
 }
-.authcard { width: 100%; max-width: 28.5rem; padding: var(--space-6); border-radius: var(--radius-xl); box-shadow: var(--shadow-3); }
+.authcard { width: 100%; max-width: 28.5rem; padding: var(--space-6); border-radius: var(--radius-xl); box-shadow: var(--shadow-2); border: 1px solid var(--border); }
 @media (min-width: 480px) { .authcard { padding: var(--space-6) var(--space-7); } }
 .authcard__mark { display: block; width: 2.75rem; height: 2.75rem; margin: 0 0 var(--space-5); fill: none; stroke: var(--accent-text); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .authcard__title { margin: 0 0 var(--space-2); font-size: var(--text-2xl); line-height: var(--lh-2xl); text-align: start; }

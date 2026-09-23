@@ -1,4 +1,4 @@
-# Handover: Novus Design Kit, 2026-09-23 (feature 008)
+# Handover: Novus Design Kit, 2026-09-23 (features 008 and 009)
 
 ## Where we are
 
@@ -63,3 +63,48 @@ The round came from novabank.novustech.dev. Eight items:
 2. The layout audit needs `playwright-core` at the repo root and a Chromium
    (`CHROME_PATH`, or `~/.cache/ms-playwright`).
 3. Commits are authored as sgultom99 with no assistant trailers.
+
+---
+
+# Feature 009: icon rail and the light sign-in ground
+
+## Where we are
+
+Implemented and verified on branch `feature/009-nav-rail-light-auth`.
+Constitution is 1.13.0, kit version 0.5.0, all 17 gates pass, and the layout
+audit covers 81 pages at two widths with the navigation collapsed in the second
+pass.
+
+## What the owner asked for
+
+"in admin kit, I want u put mandatory nav bar sidemenu when hide/collapse, it
+should show as icon rather than nothing also use mandatory background login that
+we are using canvas animation to be more light theme adjust to nearly white."
+
+1. Collapsing the side navigation at desktop width now leaves a rail of icons:
+   a 3.5rem column, 44px targets, the current page still accented, labels
+   visually hidden but kept in the accessibility tree, and a `title` on every
+   link. The drawer below 900px is untouched.
+2. Sign-in sits on `--bg-subtle`. The ambient line art is retinted for a light
+   surface and still stops under reduced motion; the lockup returns to its
+   normal light treatment and the card gains a border. Principle II's
+   tinted-ground exception for authentication is withdrawn.
+
+## The defect worth remembering
+
+A closed `details` group does not paint its children, even when CSS gives them
+`display: flex` and a box. The first gate and verified run measured bounding
+boxes, so both reported 6 of 6 rail destinations when only 5 rendered; the
+screenshots showed the truth. The console layer now asks for the subtree back in
+rail mode (`.navgroup::details-content { content-visibility: visible }`), scoped
+inside the desktop media block so the drawer is unaffected, and gate 16 plus the
+verified run judge the rail with `elementFromPoint`. Rule of thumb: for
+"is it visible", hit-test; a rectangle is not proof.
+
+## Open items
+
+- 0.5.0 is not published. The owner publishes (`npm login`, then
+  `npm publish`); the granular token has never been accepted for this package.
+- The GitHub release for v0.4.0 was never created: `gh release create v0.4.0
+  --target ebe257b` returned HTTP 422 and the retry was blocked by the
+  permission classifier. Needs the owner, or an approved rerun.
