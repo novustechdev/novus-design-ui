@@ -44,7 +44,8 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 - Constitution 1.12.0 and four new gates: account menu placement, typography
   parity, content width, and version agreement across package, README and
   CHANGELOG.
-- npm publish of 0.4.0 is pending the owner (passkey).
+- Published to npm on 2026-09-23 (dist-tag latest), so portals inherit the
+  console layer by upgrading to 0.4.0.
 
 
 - Console patterns from the novalending reference (feature 007, constitution
