@@ -48,6 +48,8 @@ if (txTable) {
   const triggerCount = $(".filtermenu__count", bar);
   const empty = $("#txempty");
   const CATS = { product: "Product", terminal: "Terminal", amount: "Amount" };
+  const dateFrom = $('[name="date-from"]', bar);
+  const dateTo = $('[name="date-to"]', bar);
   const inAmount = (amount, bucket) =>
     bucket === "lt200" ? amount < 200 : bucket === "200to500" ? amount >= 200 && amount < 500 : amount >= 500;
   const options = (cat) => $$(`.filtermenu__panel [name="${cat}"]`, bar);
@@ -57,8 +59,12 @@ if (txTable) {
   const apply = () => {
     const q = (search.value || "").trim().toLowerCase();
     const sel = Object.fromEntries(Object.keys(CATS).map((c) => [c, ticked(c).map((o) => o.value)]));
+    const from = dateFrom && dateFrom.value;
+    const to = dateTo && dateTo.value;
     const base = list.all.filter((r) =>
       (!q || r.textContent.toLowerCase().includes(q)) &&
+      (!from || r.dataset.date >= from) &&
+      (!to || r.dataset.date <= to) &&
       (!sel.product.length || sel.product.includes(r.dataset.product)) &&
       (!sel.terminal.length || sel.terminal.includes(r.dataset.terminal)) &&
       (!sel.amount.length || sel.amount.some((b) => inAmount(Number(r.dataset.amount), b))));
@@ -71,7 +77,19 @@ if (txTable) {
     const rows = base.filter((r) => status === "all" || r.dataset.status === status);
 
     const active = Object.keys(CATS).flatMap((c) => ticked(c).map((o) => [c, o]));
-    chips.replaceChildren(...active.map(([c, o]) => {
+    const dateChips = [];
+    if (from) dateChips.push(["Date", `from ${from}`, () => { dateFrom.value = ""; }]);
+    if (to) dateChips.push(["Date", `to ${to}`, () => { dateTo.value = ""; }]);
+    const dateNodes = dateChips.map(([group, label, clear]) => {
+      const node = chipTpl.content.firstElementChild.cloneNode(true);
+      node.querySelector(".filterchip__group").textContent = group;
+      node.querySelector(".filterchip__label").textContent = label;
+      const remove = node.querySelector(".filterchip__remove");
+      remove.setAttribute("aria-label", `Remove ${group} ${label}`);
+      remove.addEventListener("click", () => { clear(); apply(); });
+      return node;
+    });
+    chips.replaceChildren(...dateNodes, ...active.map(([c, o]) => {
       const node = chipTpl.content.firstElementChild.cloneNode(true);
       node.querySelector(".filterchip__group").textContent = CATS[c];
       node.querySelector(".filterchip__label").textContent = optionLabel(o);
@@ -80,12 +98,13 @@ if (txTable) {
       remove.addEventListener("click", () => { o.checked = false; apply(); });
       return node;
     }), clearAll);
-    chips.hidden = active.length === 0;
-    triggerCount.textContent = active.length;
-    triggerCount.hidden = active.length === 0;
-    trigger.classList.toggle("filtermenu__trigger--on", active.length > 0);
+    const activeCount = active.length + dateChips.length;
+    chips.hidden = activeCount === 0;
+    triggerCount.textContent = activeCount;
+    triggerCount.hidden = activeCount === 0;
+    trigger.classList.toggle("filtermenu__trigger--on", activeCount > 0);
     for (const badge of $$(".filtermenu__tabcount", bar)) {
-      const n = ticked(badge.dataset.cat).length;
+      const n = badge.dataset.cat === "date" ? dateChips.length : ticked(badge.dataset.cat).length;
       badge.textContent = n;
       badge.hidden = n === 0;
     }
@@ -95,10 +114,15 @@ if (txTable) {
 
   bar.addEventListener("change", apply);
   search.addEventListener("input", apply);
-  clearAll.addEventListener("click", () => { Object.keys(CATS).forEach((c) => ticked(c).forEach((o) => { o.checked = false; })); apply(); });
+  const clearSheet = () => {
+    Object.keys(CATS).forEach((c) => ticked(c).forEach((o) => { o.checked = false; }));
+    if (dateFrom) dateFrom.value = "";
+    if (dateTo) dateTo.value = "";
+  };
+  clearAll.addEventListener("click", () => { clearSheet(); apply(); });
   $('[data-filter-clear="all"]').addEventListener("click", () => {
     search.value = "";
-    Object.keys(CATS).forEach((c) => ticked(c).forEach((o) => { o.checked = false; }));
+    clearSheet();
     $('[name="quickstatus"][value="all"]', bar).checked = true;
     apply();
   });
@@ -121,11 +145,22 @@ if (txTable) {
   });
 }
 
-/* ---- Analytics: chart loaded only where the canvas exists ---- */
-const volCanvas = $("#volumechart");
-if (volCanvas) {
-  import("./novus-chart.js").then((m) => {
-    m.themeAware(() => m.volumeChart(volCanvas, hourly));
+/* ---- Charts: D3, mounted only where a chart frame exists ---- */
+const volumeFrame = $("#volumechart");
+const mixFrame = $("#mixchart");
+if (volumeFrame || mixFrame) {
+  const share = () => ["novapay", "novabank", "novastore"].map((label, i) => ({
+    label,
+    token: ["--blue-500", "--green-500", "--amber-400"][i],
+    value: hourly.series[label].reduce((a, b) => a + b, 0),
+  }));
+  import("d3").then(async (d3) => {
+    window.d3 = d3;
+    await import("./novus-chart.js");
+    window.novusChart.themeAware(() => {
+      if (volumeFrame) window.novusChart.volumeChart(volumeFrame, hourly);
+      if (mixFrame) window.novusChart.donutChart(mixFrame, share());
+    });
   });
 }
 

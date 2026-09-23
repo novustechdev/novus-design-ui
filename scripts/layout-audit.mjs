@@ -3,8 +3,12 @@
    Renders the built docs site and hosted Admin Kit demos in headless Chromium at
    1440px and 375px and fails when
      WRAP      short content (40 characters or fewer, or any table cell not marked
-               .cell--wrap) renders on more than one line, or
-     OVERFLOW  a page scrolls horizontally at 375px.
+               .cell--wrap) renders on more than one line,
+     OVERFLOW  a page scrolls horizontally at 375px,
+     HEADER    something sits to the right of the account menu (gate 12),
+     TYPE      header, navigation and body sizes diverge, or a heading breaks its
+               ratio to body text (gate 13), or
+     WIDTH     a text block wraps while a quarter of its row stays unused (gate 14).
    Scope: .demo__canvas on docs pages, the whole document on demos; each page is
    audited closed, then with its dismissable menus, sheets, and drawer open.
    Skipped: paragraphs, headings, prose lists, pre, .cell--wrap, [data-audit="skip"].
@@ -110,8 +114,70 @@ function audit({ scopes, kind }) {
       if (tops.length > 1 && !found.has(unit)) found.set(unit, { sel: describe(unit), text: full.slice(0, 60), lines: tops.length });
     }
   }
+  /* Gate 14: text that wraps while the space beside it goes unused. */
+  const widths = [];
+  for (const root of roots) {
+    for (const el of root.querySelectorAll("p, .pagehead__desc, .setting__desc, figcaption, .muted")) {
+      if (el.closest(".measure, .bullets, [data-audit='skip'], pre, table")) continue;
+      const text = el.textContent.replace(/\s+/g, " ").trim();
+      if (text.length < 60) continue;
+      const box = el.getBoundingClientRect();
+      if (box.width < 2 || box.height < 2) continue;
+      const style = getComputedStyle(el);
+      const lines = Math.round(box.height / (parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.4));
+      if (lines < 3) continue;
+      const parent = el.parentElement;
+      if (!parent) continue;
+      const pStyle = getComputedStyle(parent);
+      const pBox = parent.getBoundingClientRect();
+      const avail = pBox.width - parseFloat(pStyle.paddingLeft) - parseFloat(pStyle.paddingRight);
+      const unused = avail - box.width;
+      if (unused / avail < 0.25) continue;
+      /* only a finding when nothing occupies the space beside it */
+      const beside = [...parent.children].some((sib) => {
+        if (sib === el) return false;
+        const r = sib.getBoundingClientRect();
+        return r.width > 8 && r.left >= box.right - 1 && r.top < box.bottom && r.bottom > box.top;
+      });
+      if (!beside) widths.push({ sel: describe(el), text: text.slice(0, 60), lines, unused: Math.round((unused / avail) * 100) });
+    }
+  }
+
+  /* Gates 12 and 13: console header order and typographic parity. These judge a
+     real console shell, not a header example sitting inside documentation prose. */
+  const console_ = document.querySelector(".adminwrap");
+  const header = console_ ? console_.querySelector(".appheader") : null;
+  const shell = [];
+  if (header && document.querySelector(".adminmain")) {
+    const menu = header.querySelector(".userdd");
+    if (menu) {
+      const menuRight = menu.getBoundingClientRect().right;
+      for (const el of header.querySelectorAll("*")) {
+        if (menu.contains(el) || el.contains(menu)) continue;
+        const r = el.getBoundingClientRect();
+        if (r.width > 4 && r.right > menuRight + 1) { shell.push({ kind: "HEADER", detail: `${describe(el)} sits right of the account menu` }); break; }
+      }
+      const gutter = window.innerWidth - menuRight;
+      if (gutter > 40) shell.push({ kind: "HEADER", detail: `account menu is ${Math.round(gutter)}px from the edge` });
+    }
+    const size = (el) => (el ? parseFloat(getComputedStyle(el).fontSize) : null);
+    const body = size(document.querySelector(".adminmain"));
+    const bar = size(header);
+    const nav = size(document.querySelector(".navlink"));
+    if (body && bar && Math.abs(bar - body) > 0.5) shell.push({ kind: "TYPE", detail: `header ${bar}px vs body ${body}px` });
+    if (body && nav && Math.abs(nav - body) > 0.5) shell.push({ kind: "TYPE", detail: `navigation ${nav}px vs body ${body}px` });
+    for (const [sel, ratio] of [["h1", 1.75], ["h2", 1.45], ["h3", 1.45]]) {
+      for (const h of document.querySelectorAll(`.adminmain ${sel}`)) {
+        const hs = size(h);
+        if (body && hs && hs / body > ratio + 0.01) { shell.push({ kind: "TYPE", detail: `${sel} ${hs}px is ${(hs / body).toFixed(2)}x body ${body}px (max ${ratio})` }); break; }
+      }
+    }
+  }
+
   return {
     wraps: [...found.values()],
+    widths,
+    shell,
     scrollWidth: document.documentElement.scrollWidth,
     innerWidth: window.innerWidth,
   };
@@ -145,6 +211,8 @@ async function run(ctx, width, p) {
       const openScopes = p.kind === "docs" ? [".demo__canvas details[data-dismiss]"] : ["details[data-dismiss]", ".adminnav"];
       open = await page.evaluate(audit, { scopes: openScopes, kind: p.kind });
     }
+    for (const w of closed.widths) findings.push(`WIDTH ${width} ${p.path || "/"} ${w.sel} "${w.text}" lines=${w.lines} unused=${w.unused}%`);
+    for (const sh of closed.shell) findings.push(`${sh.kind} ${width} ${p.path || "/"} ${sh.detail}`);
     const seen = new Set();
     for (const w of [...closed.wraps, ...open.wraps]) {
       const key = w.sel + w.text;

@@ -10,6 +10,17 @@
   var doc = document;
   var small = window.matchMedia("(max-width: 899.98px)");
 
+  /* Light is the default for portals (constitution 1.12.0). The pre-paint
+     snippet sets it; this re-asserts it after any older copy of the theme
+     helper, which cleared the attribute when nothing was stored. Set
+     window.novusThemeFollowOS = true to follow the operating system instead. */
+  try {
+    var stored = localStorage.getItem("novus-theme");
+    if (!window.novusThemeFollowOS && stored !== "dark" && stored !== "light") {
+      doc.documentElement.setAttribute("data-theme", "light");
+    }
+  } catch (e) { /* private mode: the pre-paint snippet already applied light */ }
+
   function closeMenus(except) {
     doc.querySelectorAll("details[data-dismiss][open]").forEach(function (d) {
       if (d !== except && !d.contains(except)) d.removeAttribute("open");

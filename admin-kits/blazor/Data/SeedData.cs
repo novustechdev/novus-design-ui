@@ -65,4 +65,25 @@ public static class SeedData
         new("TRM-0170", "Penang Georgetown", "novapay", 99.3, "healthy", "2026-08-27T16:50:00+08:00"),
         new("TRM-0177", "Davao Abreeza", "novapay", 99.3, "healthy", "2026-08-27T17:01:00+08:00"),
     };
+
+    public static readonly HourPoint[] Hourly =
+    {
+        new("08:00", 242, 97, 60),
+        new("09:00", 281, 96, 71),
+        new("10:00", 324, 108, 86),
+        new("11:00", 350, 132, 98),
+        new("12:00", 386, 141, 103),
+        new("13:00", 424, 149, 113),
+        new("14:00", 462, 161, 107),
+        new("15:00", 414, 162, 112),
+        new("16:00", 377, 154, 84),
+        new("17:00", 352, 138, 91),
+        new("18:00", 315, 106, 68),
+        new("19:00", 284, 110, 58),
+    };
+}
+
+public record HourPoint(string Hour, int Novapay, int Novabank, int Novastore)
+{
+    public int Total => Novapay + Novabank + Novastore;
 }

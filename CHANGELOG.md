@@ -7,6 +7,46 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+## [0.4.0], 2026-09-23
+
+### Added
+
+- The console layer ships in the package: `console.css`, `js/novus-console.js`
+  and `icons/novus-icons.svg`. A portal now inherits the Novus console patterns
+  (sign-in, shell, side navigation, page header, filter bar, list footer,
+  settings layout, charts, content fit) by upgrading, instead of copying files
+  out of the repository.
+- Settings layout: a section menu beside grouped sections of labelled rows,
+  replacing the card grid and tab strip on configuration screens.
+- Charts move to D3 (the kit's charting standard, replacing Chart.js) with the
+  locked Novus chart rules, hover and keyboard tooltips, theme redraw, and a
+  table of the same numbers for pages without scripting. The Admin Kit landing
+  page carries interactive statistics.
+- Sign-in follows novacard: a 50/50 split at full width, ambient line art on
+  the flat brand ground (the one decoration the kit allows, stopped under
+  reduced motion), and single sign-on beside the password form.
+- Date range category in the filter sheet, for audit-style screens.
+
+### Changed
+
+- Light is the default theme everywhere, including sign-in. Dark comes only
+  from the user's choice and persists; following the operating system is an
+  opt-in (`window.novusThemeFollowOS`).
+- Typography parity in consoles: header, navigation and content share one
+  family and size, and headings stay within 1.75x (page title) and 1.45x
+  (sections) of body size.
+- Portal text uses the width of its row; a reading measure is opted into with
+  `.measure`.
+- Component catalog grows 40 to 42 (Charts, Settings layout).
+
+### Governance
+
+- Constitution 1.12.0 and four new gates: account menu placement, typography
+  parity, content width, and version agreement across package, README and
+  CHANGELOG.
+- npm publish of 0.4.0 is pending the owner (passkey).
+
+
 - Console patterns from the novalending reference (feature 007, constitution
   1.11.0). One shared, token-only pattern layer (`admin-kits/shared/`:
   `novus-admin.css`, `novus-admin.js`, `icons.mjs`) consumed by every Admin Kit

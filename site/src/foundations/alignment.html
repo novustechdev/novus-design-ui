@@ -37,6 +37,31 @@
 <h2>Wrap only free text</h2>
 <p>Descriptions, notes, and messages are the only content that wraps. In tables they opt in with <code>.cell--wrap</code>, which keeps a readable minimum width; everywhere else paragraphs wrap as normal text.</p>
 
+<h2>Use the width you have</h2>
+<p>The mirror of the single-line rule: a paragraph should not stack into three
+or four lines while a quarter of its row sits empty. Portal text runs to the
+width of its container. A reading measure is a deliberate choice, marked with
+<code>.measure</code>, and belongs to long-form prose, not to a console screen.</p>
+
+<section class="demo" data-title="Right: the description runs the width of the row">
+  <div class="pagehead" style="margin:0">
+    <div class="pagehead__row"><h1>Dashboards</h1></div>
+    <p class="muted pagehead__desc">Every workspace you can open, with the cases waiting in each one, the breaks still unmatched, and the approvals sitting with you today.</p>
+  </div>
+</section>
+<div data-audit="skip">
+<section class="demo" data-title="Wrong: the same sentence capped at a narrow column">
+  <div class="pagehead" style="margin:0">
+    <div class="pagehead__row"><h1>Dashboards</h1></div>
+    <p class="muted pagehead__desc" style="max-width:18rem">Every workspace you can open, with the cases waiting in each one, the breaks still unmatched, and the approvals sitting with you today.</p>
+  </div>
+</section>
+</div>
+<p>The layout audit flags any portal text block that wraps to three or more
+lines while a quarter or more of its row stays unused and nothing sits beside
+it. Text that shares its row with a chart or a card is not flagged: the space
+is in use.</p>
+
 <h2>Truncate fixed slots</h2>
 <section class="demo" data-title="One line with an ellipsis; the full value stays available">
   <div class="card" style="max-width:15rem;display:flex;align-items:center;gap:var(--space-2);padding:var(--space-3)">
