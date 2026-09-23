@@ -1,5 +1,18 @@
 # Project state (as of 2026-09-23)
 
+- **Feature 012 (top-navigation console shell, constitution 1.16.0)**: the kit
+  now admits TWO console shells, requested by novabank-py for a dense,
+  many-role banking admin portal (their specs/028-digital-bank-onboarding). The
+  side navigation stays the DEFAULT; the new shell puts sections in a bar under
+  the header with menus on CLICK (never hover), built on native details so they
+  work with JavaScript off. Both render from ONE `NAV` definition
+  (`navbarHtml`/`navbarRazor` beside `navHtml`/`navRazor`), and below 900px both
+  present the SAME drawer. Opt in with `adminwrap--topnav`. GATE 20 (NAVREACH)
+  checks the bar reaches every destination the drawer defines, judged by paint.
+  Gate 16 was rescoped: the rail rule belongs to the side-nav shell only.
+  Catalog entry `top-navigation`, demo at demos/tailwind/topnav.html, shell
+  guidance on the Admin Kit page. Kit version 0.8.0.
+
 - **Feature 011 (resolving three contradictions, constitution 1.15.0)**: writing
   the rules down in 010 exposed three places the kit contradicted itself.
   (1) `.tablewrap` is now a containing block: `.sr-only` is absolutely
@@ -75,7 +88,7 @@
   motion allowed since constitution 1.6.0 (0.2s max, reduced-motion aware).
   Header = novapay lockup + icon theme toggle; below 520px the suffix hides and
   the endorsement mark steps to 20px (375px overflow guard).
-- **Speckit (current)**: active feature `specs/011-resolve-rule-conflicts` (constitution 1.15.0); earlier `specs/010-agent-adoption-guide` (constitution 1.14.0); earlier `specs/009-nav-rail-light-auth` (shipped via PR #7); earlier `specs/008-enterprise-portal-defaults`; earlier `specs/007-novalending-admin-patterns` (shipped via PR); earlier `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
+- **Speckit (current)**: active feature `specs/012-topnav-console-shell` (constitution 1.16.0); earlier `specs/011-resolve-rule-conflicts`; earlier `specs/010-agent-adoption-guide` (constitution 1.14.0); earlier `specs/009-nav-rail-light-auth` (shipped via PR #7); earlier `specs/008-enterprise-portal-defaults`; earlier `specs/007-novalending-admin-patterns` (shipped via PR); earlier `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
   (tasks through T036 done); constitution v1.8.0.
 
 - **Package**: `novus-design-kit` on PUBLIC npm (0.4.0 published 2026-09-23 and is dist-tag latest; 0.5.0 and 0.6.0 are merged but NOT published, so one publish of 0.6.0 ships both; repository field novustechdev), tokenless install

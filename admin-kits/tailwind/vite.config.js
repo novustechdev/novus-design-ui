@@ -16,6 +16,7 @@ export default defineConfig({
         datagrid: resolve(import.meta.dirname, "datagrid.html"),
         login: resolve(import.meta.dirname, "login.html"),
         "signed-out": resolve(import.meta.dirname, "signed-out.html"),
+        topnav: resolve(import.meta.dirname, "topnav.html"),
       },
     },
   },

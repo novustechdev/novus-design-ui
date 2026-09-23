@@ -1,15 +1,15 @@
 ---
-description: Rules of the novus-design-kit design system, version 0.7.0. Apply when writing or reviewing any interface code in this project.
+description: Rules of the novus-design-kit design system, version 0.8.0. Apply when writing or reviewing any interface code in this project.
 globs: **/*.{html,razor,cshtml,jsx,tsx,vue,svelte,css}
 alwaysApply: true
 ---
-<!-- Generated from novus-design-kit 0.7.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
+<!-- Generated from novus-design-kit 0.8.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
 
 # novus-design-kit
 
 These are the rules of the novus-design-kit design system, for the coding
 agent working in this repository. They come from the kit itself, version
-0.7.0. Upgrade the package to get the current version of this file.
+0.8.0. Upgrade the package to get the current version of this file.
 
 ## What the kit ships
 
@@ -52,6 +52,8 @@ screens also load `console.css` after the tokens.
 
 - **Build console screens on the shipped shell: a header carrying the product lockup and an account menu, a grouped side navigation with line icons, and a page header with a breadcrumb and end-aligned actions.**
   Why: every screen assembled by hand drifts from the rest of the portal. Checked by: console.css and the Admin Kit reference applications.
+- **Pick one of the kit's two console shells rather than inventing a third. The grouped side navigation is the default and suits a console with many or deep top-level areas. The top-navigation bar suits a console with a handful of sections, up to about nine, each holding a short menu. Both use the same header, the same drawer on phones, and one navigation definition.**
+  Why: a third shell is a divergence nobody else can inherit, and the two shipped ones already cover the shapes an enterprise console takes. Checked by: the shell guidance on the Admin Kit page, and release gates 16 and 20 for the two shells.
 - **The account menu is the last element in a console header. Nothing sits to the right of it, at any width.**
   Why: operators look to the far right for their own account, and anything past it is noise. Checked by: release gate 12.
 - **Collapsing the side navigation leaves a rail of icons, one per destination, with the current page still marked and each icon carrying its name for assistive technology. Never hide the navigation.**
