@@ -33,3 +33,10 @@
   <li>Numeric columns take <code>class="num"</code> on the header and the cells (right-aligned, tabular numerals); row actions take <code>.cell--actions</code>, aligned to the end.</li>
   <li>Header cells sit on the subtle tint; rows highlight on hover for scanning. See <a href="../foundations/alignment.html">Alignment and content fit</a>.</li>
 </ul>
+
+<h3>Popovers and menus in a table</h3>
+<p>The scroll wrap is a containing block, so anything absolutely positioned
+inside it is clipped by it. That is deliberate: it keeps visually hidden text
+from extending the page sideways on a phone. It also means a row menu, popover
+or tooltip must render outside the wrap rather than inside the cell it belongs
+to.</p>

@@ -11,7 +11,8 @@
      WIDTH     a text block wraps while a quarter of its row stays unused (gate 14),
      RAIL      a collapsed side navigation shows no icons, or still shows labels
                (gate 16), or
-     GROUND    a sign-in page is not on the near-white ground (gate 17).
+     GROUND    a sign-in page is not on the near-white ground (gate 17), or
+     TARGET    an interactive control is under 44px at the 375px baseline (gate 19).
    Scope: .demo__canvas on docs pages, the whole document on demos; each page is
    audited closed, then with its dismissable menus, sheets, and drawer open.
    Skipped: paragraphs, headings, prose lists, pre, .cell--wrap, [data-audit="skip"].
@@ -20,21 +21,26 @@
    Exit:  0 clean, 1 findings or CI tooling failure, 2 skipped locally. */
 import { createServer } from "node:http";
 import { readFileSync, existsSync, statSync, readdirSync } from "node:fs";
-import { join, extname, dirname, normalize } from "node:path";
+import { join, extname, dirname, normalize, resolve, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const DIST = join(ROOT, "site/dist");
+const arg = (name) => { const i = process.argv.indexOf(name); return i > 0 ? process.argv[i + 1] : ""; };
+/* --target audits a directory that is not this repository's build: a reproduction
+   fixture, or a consumer's own output. Without it the rule telling an agent to
+   check its work at two widths is not followable. */
+const TARGET = arg("--target");
+const DIST = TARGET ? resolve(process.cwd(), TARGET) : join(ROOT, "site/dist");
 const CI = process.env.CI === "true";
-const ONLY = (() => { const i = process.argv.indexOf("--only"); return i > 0 ? process.argv[i + 1] : ""; })();
+const ONLY = arg("--only");
 
 const bail = (msg) => { console.log(`${CI ? "FAIL" : "SKIP"}  layout audit: ${msg}`); process.exit(CI ? 1 : 2); };
 
 let chromium;
 try { ({ chromium } = await import("playwright-core")); }
 catch { bail("playwright-core not installed (npm install --no-save --no-package-lock playwright-core@1.55.0)"); }
-if (!existsSync(DIST)) bail("site/dist missing (run node site/build.mjs)");
+if (!existsSync(DIST)) bail(TARGET ? `${DIST} not found` : "site/dist missing (run node site/build.mjs)");
 
 /* ---- static server with the Blazor demo's SPA fallback ---- */
 const MIME = {
@@ -49,6 +55,7 @@ const server = createServer((req, res) => {
   if (!file.startsWith(DIST)) { res.writeHead(403).end(); return; }
   if (existsSync(file) && statSync(file).isDirectory()) file = join(file, "index.html");
   if (!existsSync(file) && url.startsWith("/demos/blazor/")) file = join(DIST, "demos/blazor/index.html");
+  if (!existsSync(file) && TARGET) { const fromRoot = normalize(join(ROOT, url)); if (fromRoot.startsWith(ROOT) && existsSync(fromRoot)) file = fromRoot; }
   if (!existsSync(file)) { res.writeHead(404).end(); return; }
   res.writeHead(200, { "content-type": MIME[extname(file)] || "application/octet-stream" });
   res.end(readFileSync(file));
@@ -59,6 +66,18 @@ const BASE = `http://127.0.0.1:${server.address().port}`;
 /* ---- page list ---- */
 const list = (dir) => existsSync(join(DIST, dir)) ? readdirSync(join(DIST, dir)).filter((f) => f.endsWith(".html")).sort() : [];
 const pages = [];
+if (TARGET) {
+  const walk = (dir) => {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      if (e.name === "node_modules" || e.name.startsWith(".")) continue;
+      const full = join(dir, e.name);
+      if (e.isDirectory()) walk(full);
+      else if (e.name.endsWith(".html")) pages.push({ path: relative(DIST, full).split(/[\\/]/).join("/"), kind: "demo" });
+    }
+  };
+  walk(DIST);
+}
+if (!TARGET) {
 for (const f of list("components")) if (f !== "index.html") pages.push({ path: `components/${f}`, kind: "docs" });
 for (const f of list("foundations")) pages.push({ path: `foundations/${f}`, kind: "docs" });
 /* Every root page, not just the Admin Kit one: the landing, install and agent
@@ -68,6 +87,7 @@ for (const flavor of ["tailwind", "material"]) for (const f of list(`demos/${fla
 if (existsSync(join(DIST, "demos/blazor/index.html")))
   for (const r of ["", "login", "signed-out", "analytics", "transactions", "datagrid", "terminals", "settings"])
     pages.push({ path: `demos/blazor/${r}`, kind: "blazor" });
+}
 const todo = pages.filter((p) => !ONLY || p.path.includes(ONLY));
 
 /* ---- browser ---- */
@@ -189,6 +209,54 @@ function audit({ scopes, kind }) {
     else if (icons < all.length) shellExtra.push({ kind: "RAIL", detail: `${icons} icons for ${all.length} destinations in the collapsed rail` });
     else if (labelled > 0) shellExtra.push({ kind: "RAIL", detail: `${labelled} label(s) still visible in the collapsed rail` });
   }
+  /* Gate 19: touch targets at the 375px baseline (Principle IV). Judged by what
+     paints: a control inside a closed details reports a box it never renders, and
+     flagging that would send people chasing controls nobody can press. Rows below
+     the fold are left unjudged rather than blamed. */
+  if (window.innerWidth <= 480) {
+    const TSEL = 'a.btn, button, input:not([type="hidden"]), select, textarea, summary, [role="button"], .chip, .quickchip > label, .navlink, .paginator a, .paginator button';
+    const small = [];
+    for (const el of document.querySelectorAll(TSEL)) {
+      const r = el.getBoundingClientRect();
+      if (r.width < 4 || r.height < 4) continue;
+      const cy = r.y + r.height / 2;
+      if (cy < 0 || cy > window.innerHeight - 1) continue;
+      const hit = document.elementFromPoint(Math.round(r.x + r.width / 2), Math.round(cy));
+      if (!hit || !(hit === el || el.contains(hit))) continue;
+      if (r.height >= 43.5) continue;
+      /* A form control's target is the thing a finger lands on, which for a
+         checkbox or radio is its label. A 16px box inside a 44px label is
+         compliant, and flagging it sends people to enlarge the wrong element. */
+      const tag = el.tagName.toLowerCase();
+      if (tag === "input" || tag === "select" || tag === "textarea") {
+        const lab = el.closest("label") || (el.id ? document.querySelector(`label[for="${CSS.escape(el.id)}"]`) : null);
+        if (lab && lab.getBoundingClientRect().height >= 43.5) continue;
+      }
+      /* The rule is about the target, not the box. A control may be visually
+         small while carrying an expanded hit area (the kit does this with an
+         ::after on chip remove buttons), so probe 44px apart vertically and
+         accept anything that still answers for itself there. */
+      /* One pixel of tolerance: a control with a 44px hit area has its boundary
+         exactly at 22px from centre, and probing that pixel lands outside as
+         often as in. Sampling at 21 keeps the 44px intent without failing a
+         control that already complies. */
+      const half = 21;
+      let offscreen = false;
+      const reaches = [cy - half, cy + half].every((y) => {
+        /* A probe point past the viewport edge says nothing about the control:
+           it is the window that ran out, not the target. Leave those unjudged,
+           the way rows below the fold are, rather than failing a control for
+           sitting near the bottom of the page. */
+        if (y < 0 || y > window.innerHeight - 1) { offscreen = true; return false; }
+        const h2 = document.elementFromPoint(Math.round(r.x + r.width / 2), Math.round(y));
+        return !!h2 && (h2 === el || el.contains(h2));
+      });
+      if (reaches || offscreen) continue;
+      small.push({ el, h: Math.round(r.height), label: (el.textContent || el.getAttribute("aria-label") || el.getAttribute("placeholder") || "").trim().slice(0, 20) });
+    }
+    for (const x of small.slice(0, 3)) shellExtra.push({ kind: "TARGET", detail: `${describe(x.el)} "${x.label}" is ${x.h}px, under the 44px floor` });
+    if (small.length > 3) shellExtra.push({ kind: "TARGET", detail: `${small.length - 3} more control(s) under the 44px floor on this page` });
+  }
   const header = console_ ? console_.querySelector(".appheader") : null;
   const shell = shellExtra;
   if (header && document.querySelector(".adminmain")) {
@@ -248,15 +316,20 @@ async function run(ctx, width, p) {
       if (t) { t.checked = true; n++; }
       return n;
     }, width);
-    let open = { wraps: [] };
+    let open = { wraps: [], shell: [] };
     if (opened) {
       await page.waitForTimeout(260);
       const openScopes = p.kind === "docs" ? [".demo__canvas details[data-dismiss]"] : ["details[data-dismiss]", ".adminnav"];
       open = await page.evaluate(audit, { scopes: openScopes, kind: p.kind });
-      for (const sh of open.shell || []) findings.push(`${sh.kind} ${width} ${p.path || "/"} ${sh.detail}`);
     }
     for (const w of closed.widths) findings.push(`WIDTH ${width} ${p.path || "/"} ${w.sel} "${w.text}" lines=${w.lines} unused=${w.unused}%`);
-    for (const sh of closed.shell) findings.push(`${sh.kind} ${width} ${p.path || "/"} ${sh.detail}`);
+    const seenShell = new Set();
+    for (const sh of [...closed.shell, ...(open.shell || [])]) {
+      const key = `${sh.kind} ${sh.detail}`;
+      if (seenShell.has(key)) continue;
+      seenShell.add(key);
+      findings.push(`${sh.kind} ${width} ${p.path || "/"} ${sh.detail}`);
+    }
     const seen = new Set();
     for (const w of [...closed.wraps, ...open.wraps]) {
       const key = w.sel + w.text;

@@ -3,7 +3,7 @@
 @inject NavigationManager Nav
 
 <nav class="adminnav" aria-label="Console">
-    <div class="adminnav__head"><span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span><label for="navtoggle" class="btn btn--ghost btn--sm toggle44" title="Close menu"><Icon Name="close" /></label></div>
+    <div class="adminnav__head"><span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span><label for="navtoggle" class="btn btn--ghost btn--sm target44" title="Close menu"><Icon Name="close" /></label></div>
     <NavLink class="navlink" href="" title="Dashboard" Match="NavLinkMatch.All"><Icon Name="dashboard" /><span>Dashboard</span></NavLink>
     <NavLink class="navlink" href="analytics" title="Analytics"><Icon Name="chart" /><span>Analytics</span></NavLink>
     <details class="navgroup" open="@(InGroup("transactions", "datagrid", "terminals"))">

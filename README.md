@@ -250,6 +250,13 @@ instead of re-explaining the system every session:
 | Cursor | `novus-design-kit/agents/cursor/novus-design-kit.mdc` | `.cursor/rules/novus-design-kit.mdc` |
 | Any AGENTS.md reader | `novus-design-kit/agents/AGENTS.md` | `AGENTS.md` |
 
+The kit also ships the audit it runs on its own pages, so the instruction to
+check a screen at both widths is one you can actually follow:
+
+```bash
+node node_modules/novus-design-kit/scripts/layout-audit.mjs --target dist
+```
+
 The files are generated from one source in the kit, so they agree with each
 other and with the documentation. Do not hand edit them: upgrade the package,
 and keep your own project rules in a separate file. The reference site's AI
