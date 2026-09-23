@@ -7,6 +7,42 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+## [0.6.0], 2026-09-23
+
+The kit now tells coding agents how to adopt it, and ships the rules they read
+(feature 010, constitution 1.14.0). Packaged kit files change, so a consumer
+gets the agent files by upgrading.
+
+### Added
+
+- Agent instruction files, one per agent, in the format each one reads:
+  `agents/claude/CLAUDE.md`, `agents/copilot/copilot-instructions.md` and the
+  path-scoped `agents/copilot/novus-design-kit.instructions.md`,
+  `agents/cursor/novus-design-kit.mdc`, and `agents/AGENTS.md` for the
+  cross-tool convention. Copy one into a repository and the agent working there
+  inherits the kit's rules, then keeps inheriting them by upgrading.
+- A documentation page, AI agents, reached from a new top navigation entry. It
+  carries the order of work for adopting the kit in an application that already
+  exists, three prompts to copy (adopt, convert a hand-built screen, audit a
+  screen), and the rules themselves.
+- All five outputs and the page are generated from one rule source,
+  `agents/rules.mjs`, so the rules cannot drift between providers or between the
+  files and the documentation.
+
+### Changed
+
+- The layout audit now covers every root documentation page. It had only ever
+  audited the component, foundation and Admin Kit pages, so the landing and
+  install pages were never checked.
+- The copy gates now scan the generated agent files, which a new top-level
+  directory would otherwise have escaped.
+
+### Governance
+
+- Constitution 1.14.0; gate 18 (agent rule parity), negative-tested both ways:
+  a hand edit fails it alone, an em dash fails it and the copy gate.
+
+
 ## [0.5.0], 2026-09-23
 
 Two mandatory corrections to the console patterns (feature 009, constitution

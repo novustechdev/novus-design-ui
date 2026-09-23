@@ -1,6 +1,15 @@
 <!--
 Sync Impact Report
-- Version change: 1.12.0 -> 1.13.0 (MINOR: collapsed navigation must remain an
+- Version change: 1.13.0 -> 1.14.0 (MINOR: the kit now tells coding agents how to
+  adopt it, and ships instruction files they read, generated from one rule
+  source; owner request 2026-09-23, feature 010)
+- Modified principles: none redefined. Principle I's single-source discipline is
+  extended to the agent rules: they are written once in agents/rules.mjs and
+  generated into every provider format, never hand written.
+- Quality Gates: 18 (agent rule parity). The copy gates widen to cover agents/,
+  and the layout audit widens to cover every root documentation page, which it
+  had never audited.
+- Prior amendment (1.12.0 -> 1.13.0) (MINOR: collapsed navigation must remain an
   icon rail; authentication screens return to the near-white ground; owner
   decision 2026-09-23, feature 009)
 - Modified principles:
@@ -375,6 +384,9 @@ Every change to the kit MUST pass these gates before merge:
     per destination, with no visible label text and the current page marked.
 17. Authentication ground: a sign-in page renders on the near-white ground in
     the default theme.
+18. Agent rule parity: `node agents/generate.mjs --check` passes, so every
+    generated agent instruction file matches the rule source in
+    `agents/rules.mjs`. A hand-edited agent file is a defect.
 
 Reviews reject on any gate failure; gates are not advisory.
 
@@ -403,4 +415,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.13.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23
+**Version**: 1.14.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23
