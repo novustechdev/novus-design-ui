@@ -1,10 +1,10 @@
-<!-- Generated from novus-design-kit 0.6.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
+<!-- Generated from novus-design-kit 0.7.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
 
 # novus-design-kit instructions
 
 These are the rules of the novus-design-kit design system, for the coding
 agent working in this repository. They come from the kit itself, version
-0.6.0. Upgrade the package to get the current version of this file.
+0.7.0. Upgrade the package to get the current version of this file.
 
 ## What the kit ships
 
@@ -34,8 +34,8 @@ screens also load `console.css` after the tokens.
   Why: portals were flipping to dark on first visit for anyone with a dark operating system. Checked by: js/novus-theme.js, which applies the default before first paint.
 - **Header, navigation and body text render at one size. Headings step up by their documented ratio, and never further.**
   Why: a navigation smaller than the content it sits beside reads as a different product. Checked by: release gate 13.
-- **Every interactive target is at least 44px, at every width, including icon-only controls.**
-  Why: anything smaller fails on a phone and for anyone with imprecise pointing. Checked by: the 375px pass in the release gates.
+- **Every control a person can press measures at least 44px at the 375px baseline, icon-only controls included. A control may look smaller if it carries an expanded hit area that still reaches 44px. Desktop density is a separate decision, so this floor is the phone baseline rather than every width.**
+  Why: anything smaller fails on a phone and for anyone with imprecise pointing, and this rule went unenforced long enough for the kit's own screens to drift under it. Checked by: release gate 19, the layout audit's TARGET check at 375px, which measures the hit area rather than the box.
 - **Motion is functional and lasts 0.2s or less, and it is removed under prefers-reduced-motion. The one exception is the slow ambient art on the sign-in panel, which also stops under reduced motion.**
   Why: decorative motion in a console gets in the way of work. Checked by: the constitution's motion rule and the reduced-motion verification runs.
 - **Patterns keep working when JavaScript does not run. Menus, drawers, filter sheets and tabs are built on native elements first, with script only as an enhancement.**
@@ -46,9 +46,19 @@ screens also load `console.css` after the tokens.
 ## Checking your own work
 
 Before you say a screen is done, confirm it at 1440px and at 375px: nothing short
-wraps to a second line, no page scrolls sideways, every target is at least 44px,
-and the screen still works with JavaScript turned off. If you introduced a value
-that no token covers, say so rather than hiding it in a stylesheet.
+wraps to a second line, no page scrolls sideways, every control a finger can
+press reaches 44px at the phone width, and the screen still works with JavaScript
+turned off. If you introduced a value that no token covers, say so rather than
+hiding it in a stylesheet.
+
+You can run the same audit this kit runs on itself, against your own build:
+
+    node node_modules/novus-design-kit/scripts/layout-audit.mjs --target dist
+
+It needs a Chromium and playwright-core. If you cannot render the page at
+all, say so plainly and name what you did check. Do not report a check you did
+not run: a screen that was never rendered is a screen nobody has looked at, and
+saying that honestly is more useful than a confident guess.
 
 Console and portal screens carry further rules, in
 `.github/instructions/novus-design-kit.instructions.md`.

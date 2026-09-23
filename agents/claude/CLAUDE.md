@@ -1,10 +1,10 @@
-<!-- Generated from novus-design-kit 0.6.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
+<!-- Generated from novus-design-kit 0.7.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
 
 # Working with the novus-design-kit
 
 These are the rules of the novus-design-kit design system, for the coding
 agent working in this repository. They come from the kit itself, version
-0.6.0. Upgrade the package to get the current version of this file.
+0.7.0. Upgrade the package to get the current version of this file.
 
 ## What the kit ships
 
@@ -34,8 +34,8 @@ screens also load `console.css` after the tokens.
   Why: portals were flipping to dark on first visit for anyone with a dark operating system. Checked by: js/novus-theme.js, which applies the default before first paint.
 - **Header, navigation and body text render at one size. Headings step up by their documented ratio, and never further.**
   Why: a navigation smaller than the content it sits beside reads as a different product. Checked by: release gate 13.
-- **Every interactive target is at least 44px, at every width, including icon-only controls.**
-  Why: anything smaller fails on a phone and for anyone with imprecise pointing. Checked by: the 375px pass in the release gates.
+- **Every control a person can press measures at least 44px at the 375px baseline, icon-only controls included. A control may look smaller if it carries an expanded hit area that still reaches 44px. Desktop density is a separate decision, so this floor is the phone baseline rather than every width.**
+  Why: anything smaller fails on a phone and for anyone with imprecise pointing, and this rule went unenforced long enough for the kit's own screens to drift under it. Checked by: release gate 19, the layout audit's TARGET check at 375px, which measures the hit area rather than the box.
 - **Motion is functional and lasts 0.2s or less, and it is removed under prefers-reduced-motion. The one exception is the slow ambient art on the sign-in panel, which also stops under reduced motion.**
   Why: decorative motion in a console gets in the way of work. Checked by: the constitution's motion rule and the reduced-motion verification runs.
 - **Patterns keep working when JavaScript does not run. Menus, drawers, filter sheets and tabs are built on native elements first, with script only as an enhancement.**
@@ -56,6 +56,8 @@ marketing pages.
   Why: hiding it strands the operator with no way to move until they reopen the menu. Checked by: release gate 16.
 - **Sign-in sits on the near-white ground with the ambient line art on the brand panel, single sign-on beside the password form, and no theme toggle on the page.**
   Why: authentication is the first screen anyone sees, and it now follows the same neutral ground as everything else. Checked by: release gate 17.
+- **A menu, popover or tooltip belonging to a table row renders outside the table's scroll wrap, not inside it. The wrap clips what it contains, so anything that needs to overflow the table has to live beyond it.**
+  Why: the wrap is a containing block, so a popover inside it is clipped instead of floating over the page. Checked by: the table pattern in the catalog at https://ui-kit.novustech.dev/components/table.html.
 - **Lists use the filter bar with its sub-filter sheet, active chips and quick chips with counts, and they end with the list footer: a count, page controls, and rows per page.**
   Why: hand-built filter bars were the specific complaint that produced this pattern. Checked by: console.css and the Admin Kit reference applications.
 - **Charts read their colours and fonts from the tokens at render time, redraw when the theme changes, and are accompanied by the same numbers as a table so a page without scripting still answers the question.**
@@ -64,6 +66,16 @@ marketing pages.
 ## Checking your own work
 
 Before you say a screen is done, confirm it at 1440px and at 375px: nothing short
-wraps to a second line, no page scrolls sideways, every target is at least 44px,
-and the screen still works with JavaScript turned off. If you introduced a value
-that no token covers, say so rather than hiding it in a stylesheet.
+wraps to a second line, no page scrolls sideways, every control a finger can
+press reaches 44px at the phone width, and the screen still works with JavaScript
+turned off. If you introduced a value that no token covers, say so rather than
+hiding it in a stylesheet.
+
+You can run the same audit this kit runs on itself, against your own build:
+
+    node node_modules/novus-design-kit/scripts/layout-audit.mjs --target dist
+
+It needs a Chromium and playwright-core. If you cannot render the page at
+all, say so plainly and name what you did check. Do not report a check you did
+not run: a screen that was never rendered is a screen nobody has looked at, and
+saying that honestly is more useful than a confident guess.
