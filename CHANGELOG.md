@@ -7,6 +7,33 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+## [0.5.0], 2026-09-23
+
+Two mandatory corrections to the console patterns (feature 009, constitution
+1.13.0). Packaged kit files change, so portals pick both up by upgrading.
+
+### Changed
+
+- Collapsing a console's side navigation now leaves a rail of icons instead of
+  hiding it. Every destination keeps an icon at a 44px target, the current page
+  keeps the accent treatment, and each icon names its destination on hover and
+  to assistive technology. Group labels and chevrons step aside in the rail and
+  their children show as icons, so nothing hides behind a collapsed group. The
+  drawer below 900px is unchanged.
+- Sign-in moves to the kit's near-white ground. The deep brand panel is gone,
+  the ambient line art is retinted for a light surface and still stops under
+  reduced motion, the lockup returns to its normal light treatment, and the
+  credential card gains a border so it stays separate from the page. With this,
+  the tinted-ground exception for authentication screens is withdrawn: every
+  screen now sits on a neutral ground.
+- Every navigation destination carries an icon, including items inside groups.
+
+### Governance
+
+- Constitution 1.13.0; gates 16 (collapsed navigation shows an icon rail) and
+  17 (sign-in ground is near-white), both negative-tested.
+
+
 ## [0.4.0], 2026-09-23
 
 ### Added
