@@ -153,8 +153,8 @@ each other, which is exactly what single-source generation guarantees.
 
 ## Open items
 
-- Publishing: 0.4.0 is the published version. 0.5.0 and 0.6.0 are merged but
-  unpublished, so a single `npm publish` of 0.6.0 ships both.
+- Publishing: DONE. The owner published 0.8.0 on 2026-09-24, which carries the
+  work of 0.5.0 through 0.7.0 as well; those never shipped separately.
 - The GitHub release for v0.4.0 is still outstanding from the 008 session.
 
 ---
@@ -198,8 +198,8 @@ code.
 
 ## Open items
 
-- Publishing: 0.4.0 is the published version. 0.5.0, 0.6.0 and 0.7.0 are merged
-  or pending, so one `npm publish` of 0.7.0 ships them all.
+- Publishing: DONE. The owner published 0.8.0 on 2026-09-24, which carries the
+  work of 0.5.0 through 0.7.0 as well; those were never published separately.
 - The GitHub release for v0.4.0 is still outstanding.
 - A top-navigation console shell was requested by novabank-py for a dense,
   many-role admin portal. The answer given was yes, as a second supported shell,
@@ -247,8 +247,8 @@ definition, so a destination cannot exist in one and not the other, and below
 
 ## Open items
 
-- Publishing: 0.4.0 is the published version. 0.5.0 through 0.8.0 are merged or
-  pending, so one `npm publish` of 0.8.0 ships them all.
+- Publishing: DONE. The owner published 0.8.0 on 2026-09-24. Registry versions
+  are 0.2.0, 0.3.0, 0.4.0 and 0.8.0.
 - The GitHub release for v0.4.0 is still outstanding.
 - novabank-py can now build against a shipped pattern. They were asked for their
   top-level section count and menu depth; past about nine top-level sections the

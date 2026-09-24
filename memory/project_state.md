@@ -91,7 +91,7 @@
 - **Speckit (current)**: active feature `specs/012-topnav-console-shell` (constitution 1.16.0); earlier `specs/011-resolve-rule-conflicts`; earlier `specs/010-agent-adoption-guide` (constitution 1.14.0); earlier `specs/009-nav-rail-light-auth` (shipped via PR #7); earlier `specs/008-enterprise-portal-defaults`; earlier `specs/007-novalending-admin-patterns` (shipped via PR); earlier `specs/005-mobile-foundations` (T001-T007 done; was 004 T001-T016) (T001-T016 done, was 003 through T036)
   (tasks through T036 done); constitution v1.8.0.
 
-- **Package**: `novus-design-kit` on PUBLIC npm (0.4.0 published 2026-09-23 and is dist-tag latest; 0.5.0 and 0.6.0 are merged but NOT published, so one publish of 0.6.0 ships both; repository field novustechdev), tokenless install
+- **Package**: `novus-design-kit` on PUBLIC npm (**0.8.0 published 2026-09-24 by the owner and is dist-tag latest**; published versions are 0.2.0, 0.3.0, 0.4.0, 0.8.0, so 0.5.0 through 0.7.0 never shipped as separate artifacts and their content rides inside 0.8.0; repository field novustechdev), tokenless install
   (`npm install novus-design-kit`); third-party marks (logos/clients,
   logos/schemes) stripped from the artifact, repository-only. npm account
   sgultom99, 2FA via passkey: publishing needs the owner in a real terminal.
