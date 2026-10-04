@@ -8,7 +8,7 @@
       the static fallback, the claims filter, the host allow-list, recents, keyboard and focus
 - [x] T004 `console.css` `.nv-apps*`: button, panel, search, grid, tiles, "All apps", phone sheet, both
       themes, reduced motion; the header rule "nothing to the left of the app switcher"
-- [ ] T005 Both shells' reference markup and `site/` demo with a sample catalog; `files` and `exports`
+- [x] T005 Both shells' reference markup and `site/` demo with a sample catalog; `files` and `exports`
       in `package.json`
 - [ ] T006 Tests: unit (filter, allow-list, fallback order, recents), layout audit and axe at 390,
       1366 and 1920 px in both themes, keyboard walk

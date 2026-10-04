@@ -163,7 +163,7 @@ const SITE_CSS = `
   .pvtoggle input:checked + label { background: var(--accent-subtle); color: var(--accent-text); }
   .pvtoggle input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -2px; }
   .demo__canvas .authpage, .demo__canvas .signedout, .demo__canvas .adminwrap { min-height: 0; }
-  .demo:has(details[open]) { overflow: visible; }
+  .demo:has(details[open]), .demo:has(.nv-apps__panel:not([hidden])) { overflow: visible; }
   body:has(#pv-mobile:checked) .demo__canvas { max-width: 375px; border-inline-end: 1px dashed var(--border-strong); }
   @media (prefers-reduced-motion: reduce) { .pvtoggle label { transition: none; } }
 `;
@@ -300,6 +300,14 @@ for (const [src, out] of [
   mkdirSync(join(DIST, out), { recursive: true });
   writeFileSync(join(DIST, out, "index.html"), read(p).replaceAll("../../", "../../../"));
   built.push(`${out}/index.html`);
+}
+
+/* App switcher demos (feature 014): a console header in each shell, the switcher first,
+   reading a sample catalog that stands in for the workspace launcher's. Hosted like the
+   other demos, at the depth their relative paths are written for. */
+if (existsSync(join(SRC, "demos/app-switcher"))) {
+  cpSync(join(SRC, "demos/app-switcher"), join(DIST, "demos/app-switcher"), { recursive: true });
+  for (const f of readdirSync(join(SRC, "demos/app-switcher")).filter((f) => f.endsWith(".html"))) built.push(`demos/app-switcher/${f}`);
 }
 
 
