@@ -4,7 +4,7 @@
       the destination menu folded into search
 - [x] T002 `js/novus-app-marks.js` and `logos/marks/*.svg`: the four product marks, then the eight new
       marks in the same style
-- [ ] T003 `js/novus-app-switcher.js`: the element, the catalog fetch with its 3 s bound, the cache,
+- [x] T003 `js/novus-app-switcher.js`: the element, the catalog fetch with its 3 s bound, the cache,
       the static fallback, the claims filter, the host allow-list, recents, keyboard and focus
 - [ ] T004 `console.css` `.nv-apps*`: button, panel, search, grid, tiles, "All apps", phone sheet, both
       themes, reduced motion; the header rule "nothing to the left of the app switcher"
