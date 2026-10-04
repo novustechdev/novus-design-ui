@@ -218,3 +218,23 @@ test("a deployment without a launcher never fetches, and shows its static list",
   assert.equal(fetched, false);
   assert.equal(result.source, "static");
 });
+
+test("a console's own labels replace the English ones, key by key; anything else keeps its English", () => {
+  const sinhala = { apps: "Novus යෙදුම්", find: "Novus යෙදුම් සොයන්න", all: "සියලු යෙදුම්", countOther: "යෙදුම් {n}", unknown: "ignored" };
+  const merged = plain(S.mergeLabels(sinhala));
+  assert.equal(merged.apps, "Novus යෙදුම්");
+  assert.equal(merged.find, "Novus යෙදුම් සොයන්න");
+  assert.equal(merged.all, "සියලු යෙදුම්");
+  assert.equal(merged.noMatch, S.defaultLabels.noMatch);
+  assert.equal(merged.unknown, undefined);
+  assert.deepEqual(plain(S.mergeLabels(null)), plain(S.defaultLabels));
+  assert.deepEqual(plain(S.mergeLabels({ apps: "", find: 42, all: "x".repeat(121) })), plain(S.defaultLabels));
+});
+
+test("the count line takes the console's words, with the number in place of {n}", () => {
+  const tamil = S.mergeLabels({ countOne: "1 பயன்பாடு", countOther: "{n} பயன்பாடுகள்" });
+  assert.equal(S.countText(tamil, 1), "1 பயன்பாடு");
+  assert.equal(S.countText(tamil, 7), "7 பயன்பாடுகள்");
+  assert.equal(S.countText(S.defaultLabels, 0), "0 apps");
+  assert.equal(S.countText(S.defaultLabels, 1), "1 app");
+});

@@ -27,6 +27,9 @@ journey. Packaged kit files change.
   console release.
 - Only https addresses on the deployment's allowed host suffixes are offered, so
   a tampered catalog cannot send an operator to a look-alike host.
+- Its own words are translatable: a console in Sinhala, Tamil or any other language
+  passes `labels` (an attribute holding JSON, or a property) and the header shows
+  no English it did not choose. A label left out keeps its English.
 - The product mark registry (`js/novus-app-marks.js`, `logos/marks/`): the four
   console marks, unchanged, and nine new ones for NovaLending, NovaPlan, NovaSearch,
   NovaTicket, NovaEdge, Novus ID, the Design kit, Internet banking and Mobile
