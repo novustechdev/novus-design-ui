@@ -121,6 +121,13 @@ Four consoles ship their own copy of the same switcher: a waffle at the **top ri
 - New marks in the same style for the apps the workspace adds:
   - NovaLending (a stack of coins under an arrow; its own glyph, on green-900, the nearest
     palette step to the teal it asked for that keeps every mark distinct);
+  - NovaMerchant (a shopfront under an awning), NovaMerchant POS (a payment terminal) and
+    NovaMerchant Biller (a receipt with a bolt), at NovaMerchant's request NB-01, with its own
+    glyphs. The three share one ground, indigo-700, and are told apart by glyph: with thirteen
+    colours taken, no three free palette steps stay 20 apart in Lab from the rest and from each
+    other (the best three reach 17.8), and indigo-700 is the free step farthest from every other
+    product (26.9, from Novus ID's blue-800) and reads white at 13:1. The distinctness rule holds
+    between products, and every mark keeps a glyph of its own;
   - NovaPlan (a board);
   - NovaSearch (a lens);
   - NovaTicket (a ticket);
