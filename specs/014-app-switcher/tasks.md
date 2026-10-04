@@ -10,7 +10,7 @@
       themes, reduced motion; the header rule "nothing to the left of the app switcher"
 - [x] T005 Both shells' reference markup and `site/` demo with a sample catalog; `files` and `exports`
       in `package.json`
-- [ ] T006 Tests: unit (filter, allow-list, fallback order, recents), layout audit and axe at 390,
+- [x] T006 Tests: unit (filter, allow-list, fallback order, recents), layout audit and axe at 390,
       1366 and 1920 px in both themes, keyboard walk
 - [ ] T007 CHANGELOG, a minor version, and the npm publish
 - [ ] T008 Adoption, in each console's own repository (D6): novabank, novahub, novatrace, novacard

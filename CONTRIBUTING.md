@@ -34,7 +34,7 @@ fails a gate cannot merge, so read this first.
 3. Build and gate locally:
 
    ```sh
-   npm install --no-save --no-package-lock playwright-core@1.55.0   # once, for the layout audit
+   npm install --no-save --no-package-lock playwright-core@1.55.0 axe-core@4.10.3   # once, for the browser audits
    node admin-kits/data/generate.mjs
    node site/build.mjs && scripts/gates.sh     # CHROME_PATH=/path/to/chromium if needed
    ```
