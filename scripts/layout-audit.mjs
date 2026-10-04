@@ -5,7 +5,8 @@
      WRAP      short content (40 characters or fewer, or any table cell not marked
                .cell--wrap) renders on more than one line,
      OVERFLOW  a page scrolls horizontally at 375px,
-     HEADER    something sits to the right of the account menu (gate 12),
+     HEADER    something sits to the right of the account menu (gate 12), or to the
+               left of the app switcher (feature 014),
      TYPE      header, navigation and body sizes diverge, or a heading breaks its
                ratio to body text (gate 13), or
      WIDTH     a text block wraps while a quarter of its row stays unused (gate 14),
@@ -294,12 +295,23 @@ function audit({ scopes, kind }) {
     if (menu) {
       const menuRight = menu.getBoundingClientRect().right;
       for (const el of header.querySelectorAll("*")) {
-        if (menu.contains(el) || el.contains(menu)) continue;
+        /* An open app switcher is an overlay dropped from the header, like the menu's own panel. */
+        if (menu.contains(el) || el.contains(menu) || el.closest(".nv-apps__panel")) continue;
         const r = el.getBoundingClientRect();
         if (r.width > 4 && r.right > menuRight + 1) { shell.push({ kind: "HEADER", detail: `${describe(el)} sits right of the account menu` }); break; }
       }
       const gutter = window.innerWidth - menuRight;
       if (gutter > 40) shell.push({ kind: "HEADER", detail: `account menu is ${Math.round(gutter)}px from the edge` });
+    }
+    /* Feature 014: the app switcher leads the header; nothing paints to the left of it. */
+    const apps = header.querySelector("novus-app-switcher");
+    if (apps && !apps.hidden) {
+      const appsLeft = apps.getBoundingClientRect().left;
+      for (const el of header.querySelectorAll("*")) {
+        if (apps.contains(el) || el.contains(apps)) continue;
+        const r = el.getBoundingClientRect();
+        if (r.width > 4 && r.height > 4 && r.left < appsLeft - 1) { shell.push({ kind: "HEADER", detail: `${describe(el)} sits left of the app switcher` }); break; }
+      }
     }
     const size = (el) => (el ? parseFloat(getComputedStyle(el).fontSize) : null);
     const body = size(document.querySelector(".adminmain"));
