@@ -31,9 +31,10 @@ journey. Packaged kit files change.
   passes `labels` (an attribute holding JSON, or a property) and the header shows
   no English it did not choose. A label left out keeps its English.
 - The product mark registry (`js/novus-app-marks.js`, `logos/marks/`): the four
-  console marks, unchanged, and nine new ones for NovaLending, NovaPlan, NovaSearch,
-  NovaTicket, NovaEdge, Novus ID, the Design kit, Internet banking and Mobile
-  banking.
+  console marks, unchanged, and twelve new ones for NovaLending, NovaMerchant,
+  NovaMerchant POS, NovaMerchant Biller, NovaPlan, NovaSearch, NovaTicket,
+  NovaEdge, Novus ID, the Design kit, Internet banking and Mobile banking.
+  NovaMerchant's three marks share NovaMerchant's colour and differ by glyph.
 - Gate 21, the switcher's placement and behaviour, with unit tests, a layout
   audit at 390, 1366 and 1920px in both themes, and a browser audit of axe, the
   keyboard walk and six catalog failure cases.

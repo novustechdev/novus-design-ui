@@ -6,8 +6,9 @@
    the same mark as a placed asset for anything that cannot run this script.
 
    NovaBank, NovaHub, NovaCard and NovaTrace are the four marks the consoles already drew, moved
-   here unchanged. The other eight are drawn in the same style. An app with no mark here shows
-   its initial on grey.
+   here unchanged. The others are drawn in the same style. Each product has a colour of its own;
+   NovaMerchant's three marks (the merchant app, its POS and its biller) share NovaMerchant's and
+   are told apart by glyph. An app with no mark here shows its initial on grey.
 
    Usage: <script src=".../js/novus-app-marks.js"></script>, or
    import "novus-design-kit/js/novus-app-marks.js" from a bundler; either way the registry is
@@ -57,7 +58,19 @@
     /* A stack of coins under an arrow: credit going out. The glyph is NovaLending's own. */
     { id: "nova-lending", name: "NovaLending", token: "green-900",
       glyph: '<path d="M12 3v4M12 3 9.5 5.5M12 3l2.5 2.5"/><path d="M6 11a6 2.2 0 1 0 12 0a6 2.2 0 1 0-12 0Z"/>' +
-        '<path d="M6 11v4c0 1.2 2.7 2.2 6 2.2s6-1 6-2.2v-4"/><path d="M6 15v3c0 1.2 2.7 2.2 6 2.2s6-1 6-2.2v-3"/>' }
+        '<path d="M6 11v4c0 1.2 2.7 2.2 6 2.2s6-1 6-2.2v-4"/><path d="M6 15v3c0 1.2 2.7 2.2 6 2.2s6-1 6-2.2v-3"/>' },
+    /* A shopfront under a scalloped awning, with its door. */
+    { id: "novamerchant", name: "NovaMerchant", token: "indigo-700",
+      glyph: '<path d="M4 9.5 5.5 4.5h13L20 9.5"/>' +
+        '<path d="M4 9.5c0 1.4 1.1 2.5 2.7 2.5s2.6-1.1 2.6-2.5c0 1.4 1.2 2.5 2.7 2.5s2.7-1.1 2.7-2.5c0 1.4 1 2.5 2.6 2.5S20 10.9 20 9.5"/>' +
+        '<path d="M5.5 12v7.5h13V12"/><path d="M10 19.5v-4.5h4v4.5"/>' },
+    /* A payment terminal: its screen over a keypad. On NovaMerchant's ground. */
+    { id: "novamerchant-pos", name: "NovaMerchant POS", token: "indigo-700",
+      glyph: '<rect x="6" y="3" width="12" height="18" rx="2.2"/><path d="M9 7h6v3H9z"/>' +
+        '<path d="M9 14h.01M12 14h.01M15 14h.01M9 17h.01M12 17h.01M15 17h.01"/>' },
+    /* A torn-off receipt with a bolt: a bill paid. On NovaMerchant's ground. */
+    { id: "novamerchant-biller", name: "NovaMerchant Biller", token: "indigo-700",
+      glyph: '<path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="m12.8 7-2.6 4h3.6l-2.6 4"/>' }
   ];
 
   /* The ground an app with no mark here is shown on, with its initial in white. */

@@ -1,6 +1,6 @@
-/* The product mark registry: the four marks the consoles drew, moved unchanged; the eight new
-   ones in the same style; every colour a palette token that passes contrast with white and
-   stays distinguishable from the other eleven; and the placed SVG assets agreeing with it. */
+/* The product mark registry: the four marks the consoles drew, moved unchanged; the new ones in
+   the same style; every colour a palette token that passes contrast with white, each product's
+   colour distinguishable from every other product's; and the placed SVG assets agreeing with it. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { existsSync, readFileSync } from "node:fs";
@@ -18,7 +18,11 @@ const MOVED = {
   novacard: ["#534AB7", '<rect x="3" y="6" width="18" height="12" rx="2.2"/><path d="M3 10.2h18M7 14.6h4"/>'],
   novatrace: ["#D46420", '<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>'],
 };
-const NEW = ["novaplan", "novasearch", "novaticket", "novaedge", "novus-id", "design-kit", "ibanking", "mbanking", "nova-lending"];
+const NEW = ["novaplan", "novasearch", "novaticket", "novaedge", "novus-id", "design-kit", "ibanking", "mbanking", "nova-lending",
+  "novamerchant", "novamerchant-pos", "novamerchant-biller"];
+/* Marks on another mark's ground: one product's apps share its colour and differ by glyph. */
+const GROUND = { "novamerchant-pos": "novamerchant", "novamerchant-biller": "novamerchant" };
+const product = (id) => GROUND[id] ?? id;
 
 function channel(c) {
   const v = c / 255;
@@ -35,7 +39,7 @@ function lab(h) {
   return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
 }
 
-test("the registry holds the four moved marks and the eight new ones, in that order", () => {
+test("the registry holds the four moved marks and the new ones, in that order", () => {
   assert.deepEqual(Array.from(M.ids()), [...Object.keys(MOVED), ...NEW]);
 });
 
@@ -56,17 +60,20 @@ test("every colour is a palette token, named by reference and never as a literal
   assert.ok(!/#[0-9a-fA-F]{3,8}\b/.test(readFileSync(join(ROOT, "js/novus-app-marks.js"), "utf8")));
 });
 
-test("white passes contrast on every mark, and every pair of marks stays distinguishable", () => {
+test("white passes contrast on every mark, and every pair of products stays distinguishable", () => {
   const all = Array.from(M.ids());
   for (const id of all) {
     const ratio = 1.05 / (luminance(hex(id)) + 0.05);
     assert.ok(ratio >= 3, `${id} ${hex(id)} gives white ${ratio.toFixed(2)}:1, under 3:1`);
   }
-  assert.equal(new Set(all.map(hex)).size, all.length);
-  for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) {
-    const a = lab(hex(all[i])), b = lab(hex(all[j]));
+  for (const id of all) assert.equal(M.get(id).token, M.get(product(id)).token, `${id} is not on ${product(id)}'s ground`);
+  assert.equal(new Set(all.map((id) => M.get(id).glyph)).size, all.length, "two marks share a glyph");
+  const products = all.filter((id) => product(id) === id);
+  assert.equal(new Set(products.map(hex)).size, products.length);
+  for (let i = 0; i < products.length; i++) for (let j = i + 1; j < products.length; j++) {
+    const a = lab(hex(products[i])), b = lab(hex(products[j]));
     const distance = Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
-    assert.ok(distance >= 20, `${all[i]} and ${all[j]} are ${distance.toFixed(1)} apart in Lab, under 20`);
+    assert.ok(distance >= 20, `${products[i]} and ${products[j]} are ${distance.toFixed(1)} apart in Lab, under 20`);
   }
   const grey = M.unknown.token;
   assert.ok(1.05 / (luminance(P[grey]) + 0.05) >= 4.5, "an initial on the unknown grey must read as text");
