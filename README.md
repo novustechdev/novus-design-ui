@@ -19,8 +19,10 @@ verified framework and theme guides, and the full asset index)
 | Import path | Contents |
 |---|---|
 | `novus-design-kit/tokens.css` | Everything: tokens, component classes, Carlito @font-face, dark mode |
-| `novus-design-kit/console.css` | The console layer: sign-in, shell, side navigation, page header, filter bar, list footer, settings layout, charts, content-fit rules |
+| `novus-design-kit/console.css` | The console layer: sign-in, shell, side navigation, app switcher, page header, filter bar, list footer, settings layout, charts, content-fit rules |
 | `novus-design-kit/js/novus-console.js` | Progressive behaviour for the console layer (menus, drawer, password toggle) |
+| `novus-design-kit/js/novus-app-switcher.js` | The Novus app switcher, `<novus-app-switcher>`: first in every console header, fed by the workspace launcher's catalog |
+| `novus-design-kit/js/novus-app-marks.js` | The product mark registry the switcher and the workspace launcher draw from (also placed as `logos/marks/*.svg`) |
 | `novus-design-kit/icons/novus-icons.svg` | The line icon set as a sprite |
 | `novus-design-kit/js/novus-theme.js` | Persisted light/dark toggle helper (pre-paint safe) |
 | `novus-design-kit/fonts/*` | Carlito 400/700 woff2 (self-referenced by tokens.css) |

@@ -15,6 +15,8 @@ rules in `.github/copilot-instructions.md`.
   Why: a third shell is a divergence nobody else can inherit, and the two shipped ones already cover the shapes an enterprise console takes. Checked by: the shell guidance on the Admin Kit page, and release gates 16 and 20 for the two shells.
 - **The account menu is the last element in a console header. Nothing sits to the right of it, at any width.**
   Why: operators look to the far right for their own account, and anything past it is noise. Checked by: release gate 12.
+- **The Novus app switcher, <novus-app-switcher>, is the first control in a console header. Nothing sits to the left of it, and it is the only grid button on the bar.**
+  Why: an operator moving between Novus apps finds the switcher in one place, and two grid buttons on one bar is the confusion it replaces. Checked by: the layout audit's HEADER check.
 - **Collapsing the side navigation leaves a rail of icons, one per destination, with the current page still marked and each icon carrying its name for assistive technology. Never hide the navigation.**
   Why: hiding it strands the operator with no way to move until they reopen the menu. Checked by: release gate 16.
 - **Sign-in sits on the near-white ground with the ambient line art on the brand panel, single sign-on beside the password form, and no theme toggle on the page.**

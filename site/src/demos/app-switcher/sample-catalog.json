@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "categories": [
+    { "id": "core-banking", "name": "Core banking" },
+    { "id": "payments", "name": "Payments" },
+    { "id": "cards", "name": "Cards" },
+    { "id": "risk-identity", "name": "Risk and identity" },
+    { "id": "agency-banking", "name": "Agency banking" },
+    { "id": "customer-channels", "name": "Customer channels" },
+    { "id": "workplace", "name": "Workplace" },
+    { "id": "developer", "name": "Developer" }
+  ],
+  "apps": [
+    { "id": "novabank", "name": "NovaBank", "description": "Core-banking console: deposits, payments, lending and ledger on a legacy core.", "category": "core-banking", "url": "https://novabank.novustech.dev", "mark": { "colour": "#00A04A", "glyph": "novabank" }, "requiredRoles": ["operator", "checker", "administrator"] },
+    { "id": "novahub", "name": "NovaHub", "description": "Payment orchestration hub for banks.", "category": "payments", "url": "https://novahub.novustech.dev", "mark": { "colour": "#0070C0", "glyph": "novahub" }, "requiredRoles": ["operations", "business_administration", "compliance_audit", "executive", "config_admin"] },
+    { "id": "novacard", "name": "NovaCard", "description": "Card management system: card issuing and acquiring.", "category": "cards", "url": "https://novacard.novustech.dev", "mark": { "colour": "#534AB7", "glyph": "novacard" }, "requiredRoles": ["platform-admin", "fraud-supervisor", "fraud-analyst", "compliance-officer", "card-supervisor", "card-operator", "callcentre-agent", "read-only-observer"] },
+    { "id": "novatrace", "name": "NovaTrace", "description": "Fraud and financial crime platform for banks, fintechs and marketplaces.", "category": "risk-identity", "url": "https://novatrace.novustech.dev/?from=workspace", "mark": { "colour": "#D46420", "glyph": "novatrace" }, "requiredRoles": ["platform-admin", "fraud-supervisor", "fraud-analyst", "compliance-officer", "card-supervisor", "card-operator", "callcentre-agent", "read-only-observer"] },
+    { "id": "novus-id", "name": "Novus ID", "description": "Identity verification: document, liveness and face-match capture with KYC checks.", "category": "risk-identity", "url": "https://novaid.novustech.dev", "mark": { "colour": "#073355", "glyph": "novus-id" }, "requiredRoles": ["default-roles-supernova-dev"] },
+    { "id": "novaedge", "name": "NovaEdge", "description": "Agency banking: last-mile agents and kiosks.", "category": "agency-banking", "url": "https://novaedge.novustech.dev", "mark": { "colour": "#0A6E38", "glyph": "novaedge" }, "requiredRoles": ["default-roles-supernova-dev"] },
+    { "id": "ibanking", "name": "Internet banking", "description": "The bank's web channel for its customers.", "category": "customer-channels", "url": "https://ibanking.novustech.dev", "mark": { "colour": "#8A3E14", "glyph": "ibanking" }, "requiredRoles": ["default-roles-supernova-dev"] },
+    { "id": "mbanking", "name": "Mobile banking", "description": "The bank's mobile channel for its customers.", "category": "customer-channels", "url": "https://mbanking.novustech.dev", "mark": { "colour": "#664500", "glyph": "mbanking" }, "requiredRoles": ["default-roles-supernova-dev"] },
+    { "id": "novaplan", "name": "NovaPlan", "description": "Revenue planning for Novus teams.", "category": "workplace", "url": "https://novaplan.novustech.dev", "mark": { "colour": "#B97F00", "glyph": "novaplan" }, "requiredRoles": ["default-roles-supernova-dev"] },
+    { "id": "novaticket", "name": "NovaTicket", "description": "Raise and follow tickets across Novus teams.", "category": "workplace", "url": "https://novaticket.novustech.dev", "mark": { "colour": "#D56A61", "glyph": "novaticket" }, "requiredRoles": ["default-roles-supernova-dev"] },
+    { "id": "novasearch", "name": "NovaSearch", "description": "Search across the Supernova apps and open the record where it lives.", "category": "workplace", "url": "https://novasearch.novustech.dev", "mark": { "colour": "#8E84E0", "glyph": "novasearch" }, "requiredRoles": ["novasearch-user"] },
+    { "id": "design-kit", "name": "Design kit", "description": "Tokens, components and console patterns for every Novus app.", "category": "developer", "url": "https://ui-kit.novustech.dev", "mark": { "colour": "#551815", "glyph": "design-kit" }, "requiredRoles": ["default-roles-supernova-dev"] }
+  ]
+}

@@ -27,7 +27,9 @@ gate "gradient grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 2. No ad-hoc hex colours (tokens define every colour)
 # Mobile foundation pages are excluded here and covered by the stricter parity gate below.
-HITS=$( { grep -rnE '#[0-9a-fA-F]{3,8}\b' --exclude=manifest.webmanifest --exclude='mobile-*.html' site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE '#[0-9a-fA-F]{3,8}\b' $ADMIN_SRC 2>/dev/null; } | grep -vE 'href="#|url\(#|&#')
+# The app switcher's sample catalog is data in the workspace launcher's published contract,
+# whose product colours are hex by that contract; the marks that draw them name tokens.
+HITS=$( { grep -rnE '#[0-9a-fA-F]{3,8}\b' --exclude=manifest.webmanifest --exclude='mobile-*.html' --exclude=sample-catalog.json site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE '#[0-9a-fA-F]{3,8}\b' $ADMIN_SRC 2>/dev/null; } | grep -vE 'href="#|url\(#|&#')
 gate "ad-hoc hex audit" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 2b. Mobile token parity (constitution VIII): every colour literal on a mobile

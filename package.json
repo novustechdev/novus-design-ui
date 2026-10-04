@@ -33,6 +33,8 @@
     "./photos/*": "./photos/*",
     "./console.css": "./console.css",
     "./js/novus-console.js": "./js/novus-console.js",
+    "./js/novus-app-switcher.js": "./js/novus-app-switcher.js",
+    "./js/novus-app-marks.js": "./js/novus-app-marks.js",
     "./icons/*": "./icons/*",
     "./agents/*": "./agents/*",
     "./audit": "./scripts/layout-audit.mjs"

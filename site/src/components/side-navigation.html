@@ -1,9 +1,20 @@
-<section class="demo" data-title="Console shell: menu toggle, grouped navigation, drawer on phones">
-  <div class="adminwrap" style="border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden">
+<script src="../js/novus-app-marks.js" defer></script>
+<script src="../js/novus-app-switcher.js" defer></script>
+<script>
+  /* The demo viewer holds every role the sample catalog names; see App switcher. */
+  customElements.whenDefined("novus-app-switcher").then(function () {
+    document.querySelectorAll("novus-app-switcher").forEach(function (s) {
+      s.claims = ["operator", "operations", "platform-admin", "novasearch-user", "default-roles-supernova-dev"];
+    });
+  });
+</script>
+<section class="demo" data-title="Console shell: app switcher, menu toggle, grouped navigation, drawer on phones">
+  <div class="adminwrap" style="border:1px solid var(--border);border-radius:var(--radius-md)">
     <input type="checkbox" id="navtoggle-demo" class="navtoggle__input" aria-label="Show or hide the menu">
     <header class="appbar">
       <div class="appbar__inner appheader">
         <div class="appheader__left">
+          <novus-app-switcher current="novapay" launcher="https://workspace.novustech.dev" catalog="../demos/app-switcher/sample-catalog.json"></novus-app-switcher>
           <label for="navtoggle-demo" class="btn btn--ghost btn--sm toggle44 navtoggle" title="Menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></label>
           <span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span>
           <span class="muted appsuffix">operations · admin</span>
