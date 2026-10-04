@@ -53,7 +53,11 @@
       glyph: '<rect x="3" y="4.5" width="18" height="15" rx="2.2"/><path d="M3 9h18"/><path d="M6 6.8h.01M8.6 6.8h.01"/><path d="M7 13h7M7 16h4.5"/>' },
     /* A phone. */
     { id: "mbanking", name: "Mobile banking", token: "amber-800",
-      glyph: '<rect x="6.8" y="2.8" width="10.4" height="18.4" rx="2.2"/><path d="M11 17.8h2"/>' }
+      glyph: '<rect x="6.8" y="2.8" width="10.4" height="18.4" rx="2.2"/><path d="M11 17.8h2"/>' },
+    /* A stack of coins under an arrow: credit going out. The glyph is NovaLending's own. */
+    { id: "nova-lending", name: "NovaLending", token: "green-900",
+      glyph: '<path d="M12 3v4M12 3 9.5 5.5M12 3l2.5 2.5"/><path d="M6 11a6 2.2 0 1 0 12 0a6 2.2 0 1 0-12 0Z"/>' +
+        '<path d="M6 11v4c0 1.2 2.7 2.2 6 2.2s6-1 6-2.2v-4"/><path d="M6 15v3c0 1.2 2.7 2.2 6 2.2s6-1 6-2.2v-3"/>' }
   ];
 
   /* The ground an app with no mark here is shown on, with its initial in white. */

@@ -119,6 +119,8 @@ Four consoles ship their own copy of the same switcher: a waffle at the **top ri
   as a registry, `js/novus-app-marks.js`, plus SVGs under `logos/marks/`. They keep their
   colours in the dark theme.
 - New marks in the same style for the apps the workspace adds:
+  - NovaLending (a stack of coins under an arrow; its own glyph, on green-900, the nearest
+    palette step to the teal it asked for that keeps every mark distinct);
   - NovaPlan (a board);
   - NovaSearch (a lens);
   - NovaTicket (a ticket);

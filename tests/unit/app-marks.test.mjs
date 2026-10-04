@@ -18,7 +18,7 @@ const MOVED = {
   novacard: ["#534AB7", '<rect x="3" y="6" width="18" height="12" rx="2.2"/><path d="M3 10.2h18M7 14.6h4"/>'],
   novatrace: ["#D46420", '<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>'],
 };
-const NEW = ["novaplan", "novasearch", "novaticket", "novaedge", "novus-id", "design-kit", "ibanking", "mbanking"];
+const NEW = ["novaplan", "novasearch", "novaticket", "novaedge", "novus-id", "design-kit", "ibanking", "mbanking", "nova-lending"];
 
 function channel(c) {
   const v = c / 255;

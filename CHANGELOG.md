@@ -28,7 +28,7 @@ journey. Packaged kit files change.
 - Only https addresses on the deployment's allowed host suffixes are offered, so
   a tampered catalog cannot send an operator to a look-alike host.
 - The product mark registry (`js/novus-app-marks.js`, `logos/marks/`): the four
-  console marks, unchanged, and eight new ones for NovaPlan, NovaSearch,
+  console marks, unchanged, and nine new ones for NovaLending, NovaPlan, NovaSearch,
   NovaTicket, NovaEdge, Novus ID, the Design kit, Internet banking and Mobile
   banking.
 - Gate 21, the switcher's placement and behaviour, with unit tests, a layout

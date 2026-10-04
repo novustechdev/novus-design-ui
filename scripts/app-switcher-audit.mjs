@@ -123,7 +123,7 @@ for (const theme of THEMES) for (const vp of WIDTHS) for (const file of PAGES) {
       };
     });
     const phone = vp[0] < 600;
-    expect(g.tiles === 13, "LAYOUT", where, `${g.tiles} tiles for a viewer holding every role (want 12 apps and All apps)`);
+    expect(g.tiles === 14, "LAYOUT", where, `${g.tiles} tiles for a viewer holding every role (want 13 apps and All apps)`);
     expect(g.current === "novabank", "LAYOUT", where, `current tile is ${g.current}`);
     expect(g.columns === (vp[0] >= 900 ? 5 : phone ? 3 : 4), "LAYOUT", where, `${g.columns} columns`);
     expect(g.focused && g.placeholder === "Find Novus apps", "KEYS", where, "search is not focused on open, or its placeholder is wrong");
@@ -253,7 +253,7 @@ async function scenario(name, handler, { prime = false, fallback = false } = {})
     throw e;
   }
 }
-const all = ["novabank", "novahub", "novacard", "novatrace", "novus-id", "novaedge", "ibanking", "mbanking", "novaplan", "novaticket", "novasearch", "design-kit", "all"];
+const all = ["novabank", "nova-lending", "novahub", "novacard", "novatrace", "novus-id", "novaedge", "ibanking", "mbanking", "novaplan", "novaticket", "novasearch", "design-kit", "all"];
 const cases = [
   ["error, with a good copy kept", (r) => r.fulfill({ status: 500, body: "" }), { prime: true }, (x) => JSON.stringify(x.tiles) === JSON.stringify(all)],
   ["garbage, with a good copy kept", (r) => r.fulfill({ status: 200, contentType: "application/json", body: "{\"oops\": true}" }), { prime: true }, (x) => JSON.stringify(x.tiles) === JSON.stringify(all)],
@@ -269,12 +269,14 @@ for (const [name, handler, opts, ok] of cases) {
   } catch (e) { fail("ERROR", "1366", `${name}: ${e.message.split("\n")[0]}`); }
 }
 try {
+  // Each hostile entry starts from a real one, picked by id so the catalog's order can change.
+  const real = (id) => GOOD.apps.find((app) => app.id === id);
   const hostile = {
     ...GOOD,
     apps: [
-      { ...GOOD.apps[1], name: '<img src=x onerror="window.__pwned=1">NovaHub', description: '<b onmouseover="window.__pwned=1">x</b>' },
-      { ...GOOD.apps[2], id: "lookalike", url: "https://novacard.novustech.dev.evil.example" },
-      { ...GOOD.apps[3], id: "plainhttp", url: "http://novatrace.novustech.dev" },
+      { ...real("novahub"), name: '<img src=x onerror="window.__pwned=1">NovaHub', description: '<b onmouseover="window.__pwned=1">x</b>' },
+      { ...real("novacard"), id: "lookalike", url: "https://novacard.novustech.dev.evil.example" },
+      { ...real("novatrace"), id: "plainhttp", url: "http://novatrace.novustech.dev" },
     ],
   };
   const x = await scenario("hostile", (r) => r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(hostile) }));
