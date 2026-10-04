@@ -1,12 +1,12 @@
 ---
 applyTo: "**/*.{html,razor,cshtml,jsx,tsx,vue,svelte,css}"
 ---
-<!-- Generated from novus-design-kit 0.8.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
+<!-- Generated from novus-design-kit 0.9.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
 
 # novus-design-kit, console and portal screens
 
 These rules apply to admin consoles, dashboards and portals built with the
-novus-design-kit, version 0.8.0. They sit on top of the repository-wide
+novus-design-kit, version 0.9.0. They sit on top of the repository-wide
 rules in `.github/copilot-instructions.md`.
 
 - **Build console screens on the shipped shell: a header carrying the product lockup and an account menu, a grouped side navigation with line icons, and a page header with a breadcrumb and end-aligned actions.**

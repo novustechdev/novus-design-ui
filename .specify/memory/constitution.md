@@ -1,6 +1,20 @@
 <!--
 Sync Impact Report
-- Version change: 1.15.0 -> 1.16.0 (MINOR: a console may use either of two
+- Version change: 1.16.0 -> 1.17.0 (MINOR: every console draws ONE Novus app
+  switcher, the first control at the far left of its header, fed by the
+  workspace launcher's catalog at run time; gate 21; owner request 2026-10-04,
+  feature 014, after two grid-like buttons on one bar confused the user journey)
+- Modified principles: VII. The header now has a fixed first element as well as
+  a fixed last one: the app switcher (`<novus-app-switcher>`, shipped in the
+  package with the product mark registry) sits at the far left, the account menu
+  stays last. A console draws exactly one grid button; an in-app destination
+  menu folds into the console's search. The switcher's list is the workspace
+  catalog's, read at run time and filtered by the viewer's own claims, with a
+  bounded fetch, a cached copy and the deployment's static list as fallbacks,
+  and only https addresses on the deployment's allowed host suffixes.
+- Quality Gates: 21 (app switcher placement and behaviour), reported through the
+  switcher audit and the layout audit at 390, 1366 and 1920px in both themes.
+- Prior amendment (1.15.0 -> 1.16.0) (MINOR: a console may use either of two
   documented shells; the side navigation remains the default; gate 20; owner
   decision 2026-09-23, feature 012, at the request of a consumer building a
   dense, many-role banking admin portal)
@@ -314,9 +328,11 @@ they work without scripting, marking the current section even while its menu is
 shut. Below the desktop breakpoint both shells present the SAME drawer. Both
 render from one navigation definition, so a destination cannot exist in one shell
 and not the other, and the catalog documents which shell suits which shape of
-console. The account menu is the LAST
-element in the console header, flush to the gutter at every width, in either
-shell. This diverges
+console. The Novus app switcher is the FIRST element in the console header and
+the account menu is the LAST, each flush to its gutter at every width, in either
+shell. A console draws exactly one grid button, the switcher, which lists the
+apps the workspace launcher's catalog opens to the viewer, read at run time so an
+app added to the workspace reaches every console without a release. This diverges
 deliberately from tokens.css section 4c, which is LOCKED upstream and places the
 NOVUS MASTER lockup at the far right as the endorsement: section 4c governs brand
 surfaces, while application chrome puts the operator's own account where
@@ -441,6 +457,11 @@ Every change to the kit MUST pass these gates before merge:
     paints once the menus are open. The drawer, rendered from the same
     definition, is the reference set. This is the top bar's counterpart to gate
     16.
+21. App switcher: in a console header the app switcher is the first control,
+    nothing sits to its left, and no other grid button is drawn; its panel passes
+    the layout audit and axe at 390, 1366 and 1920px in both themes, is operable
+    by keyboard alone, and keeps the page usable when the catalog is slow,
+    malformed or hostile, as the switcher audit checks.
 
 Reviews reject on any gate failure; gates are not advisory.
 
@@ -469,4 +490,4 @@ in the PR description against Principle III.
   owner (passkey) and is recorded as pending in the release notes until done
   (owner decision, 2026-08-27).
 
-**Version**: 1.16.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-09-23
+**Version**: 1.17.0 | **Ratified**: 2026-08-26 | **Last Amended**: 2026-10-04

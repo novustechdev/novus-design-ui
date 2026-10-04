@@ -12,5 +12,6 @@
       in `package.json`
 - [x] T006 Tests: unit (filter, allow-list, fallback order, recents), layout audit and axe at 390,
       1366 and 1920 px in both themes, keyboard walk
-- [ ] T007 CHANGELOG, a minor version, and the npm publish
+- [x] T007 CHANGELOG, version 0.9.0, constitution 1.17.0 (gate 21); every gate green on server one.
+      The npm publish is the owner's (passkey) and is pending
 - [ ] T008 Adoption, in each console's own repository (D6): novabank, novahub, novatrace, novacard
