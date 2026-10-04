@@ -12,7 +12,11 @@
      catalog        the catalog's address, when it is not {launcher}/api/catalog
      allowed-hosts  host suffixes an app may live on (default ".novustech.dev .novustech.id")
      fallback       base64 JSON of the deployment's static list, [{key, name, url}]
+     labels         JSON of the element's own words in the console's language (see below)
    Property  claims: the viewer's realm roles and group names, as an array of strings
+   Property  labels: the same words as an object; it wins over the attribute. Keys: apps, find,
+             grid, all, allTitle, noMatch, noApps, loading, countOne, countOther ({n} is the
+             number). A key left out keeps its English.
    Event     novus-app-open: detail is the app id, fired before the browser navigates; it
              bubbles and is cancelable, so a host can keep the navigation for itself
 
@@ -26,7 +30,22 @@
   "use strict";
 
   var TAG = "novus-app-switcher";
-  var LABEL = "Novus apps";
+  /* The element's own words, in English. A console in another language passes its own through
+     the labels attribute (JSON) or property; a key it leaves out keeps its English. {n} in a
+     count is replaced by the number. Every label is set as text, never as markup. */
+  var DEFAULT_LABELS = Object.freeze({
+    apps: "Novus apps",
+    find: "Find Novus apps",
+    grid: "Apps",
+    all: "All apps",
+    allTitle: "Every Novus app, grouped by category",
+    noMatch: "No app matches",
+    noApps: "No app is available to your sign-in",
+    loading: "Loading apps",
+    countOne: "1 app",
+    countOther: "{n} apps"
+  });
+  var LABEL_MAX = 120;
   var TIMEOUT_MS = 3000;
   var FRESH_MS = 300000;
   var RECENT_MAX = 4;
@@ -59,6 +78,24 @@
 
   function text(value, max) {
     return typeof value === "string" && value.trim() && value.length <= max ? value.trim() : "";
+  }
+
+  /* A console's own labels over the English ones: only known keys, only non-empty strings of
+     a bounded length; anything else keeps its English. */
+  function mergeLabels(given) {
+    var merged = Object.assign({}, DEFAULT_LABELS);
+    if (given && typeof given === "object") {
+      Object.keys(DEFAULT_LABELS).forEach(function (key) {
+        var value = text(given[key], LABEL_MAX);
+        if (value) merged[key] = value;
+      });
+    }
+    return merged;
+  }
+
+  /* The count line, in the console's words: {n} replaced by the number. */
+  function countText(labels, n) {
+    return (n === 1 ? labels.countOne : labels.countOther).split("{n}").join(String(n));
   }
 
   function roleList(value) {
@@ -232,7 +269,8 @@
   global.NovusAppSwitcher = Object.freeze({
     suffixes: suffixes, allowedUrl: allowedUrl, parseCatalog: parseCatalog, parseStatic: parseStatic,
     isVisible: isVisible, ordered: ordered, matches: matches, readRecents: readRecents,
-    remember: remember, resolve: resolve, timeoutMs: TIMEOUT_MS, recentMax: RECENT_MAX
+    remember: remember, resolve: resolve, mergeLabels: mergeLabels, countText: countText,
+    defaultLabels: DEFAULT_LABELS, timeoutMs: TIMEOUT_MS, recentMax: RECENT_MAX
   });
 
   if (!global.customElements || !global.HTMLElement || global.customElements.get(TAG)) return;
@@ -283,11 +321,12 @@
   }
 
   class NovusAppSwitcherElement extends global.HTMLElement {
-    static get observedAttributes() { return ["current", "launcher", "catalog", "allowed-hosts", "fallback"]; }
+    static get observedAttributes() { return ["current", "launcher", "catalog", "allowed-hosts", "fallback", "labels"]; }
 
     constructor() {
       super();
       this._claims = [];
+      this._labelsSet = null;
       this._data = null;
       this._at = 0;
       this._pending = null;
@@ -303,21 +342,43 @@
       if (this._data) this._render();
     }
 
-    connectedCallback() {
-      /* A host that set claims before this script defined the element left a plain property
-         behind, which would hide the accessor; it is taken over here. */
-      if (Object.prototype.hasOwnProperty.call(this, "claims")) {
-        var early = this.claims;
-        delete this.claims;
-        this.claims = early;
+    /* The labels in force: the property's if a host set it, else the attribute's, each key
+       falling back to its English. */
+    get labels() { return Object.assign({}, this._labels); }
+    set labels(value) {
+      this._labelsSet = value && typeof value === "object" ? value : null;
+      if (this._button) this._applyLabels();
+    }
+
+    get _labels() {
+      var given = this._labelsSet;
+      if (!given) {
+        try { given = JSON.parse(this.getAttribute("labels") || "null"); } catch (unreadable) { given = null; }
       }
+      return mergeLabels(given);
+    }
+
+    connectedCallback() {
+      /* A host that set claims or labels before this script defined the element left a plain
+         property behind, which would hide the accessor; it is taken over here. */
+      ["claims", "labels"].forEach(function (name) {
+        if (Object.prototype.hasOwnProperty.call(this, name)) {
+          var early = this[name];
+          delete this[name];
+          this[name] = early;
+        }
+      }, this);
       if (!this._button) this._build();
       this._sync();
     }
 
     disconnectedCallback() { this.close(false); }
 
-    attributeChangedCallback() {
+    attributeChangedCallback(name) {
+      if (name === "labels") {
+        if (this._button) this._applyLabels();
+        return;
+      }
       this._data = null;
       this._pending = null;
       if (this._button) this._sync();
@@ -340,8 +401,6 @@
       var id = "nv-apps-" + (++count);
       this._button = el("button", "nv-apps__button");
       this._button.type = "button";
-      this._button.setAttribute("aria-label", LABEL);
-      this._button.title = LABEL;
       this._button.setAttribute("aria-haspopup", "dialog");
       this._button.setAttribute("aria-expanded", "false");
       this._button.setAttribute("aria-controls", id);
@@ -351,29 +410,39 @@
       this._panel.id = id;
       this._panel.hidden = true;
       this._panel.setAttribute("role", "dialog");
-      this._panel.setAttribute("aria-label", LABEL);
       this._panel.tabIndex = -1;
       var search = el("div", "nv-apps__search");
       search.innerHTML = LENS;
       this._input = el("input", "input nv-apps__input");
       this._input.type = "search";
-      this._input.placeholder = "Find Novus apps";
-      this._input.setAttribute("aria-label", "Find Novus apps");
       this._input.autocomplete = "off";
       this._input.spellcheck = false;
       search.appendChild(this._input);
       this._status = el("p", "nv-apps__status");
       this._status.setAttribute("role", "status");
       this._grid = el("ul", "nv-apps__grid");
-      this._grid.setAttribute("aria-label", "Apps");
       this._panel.append(search, this._status, this._grid);
       this.append(this._button, this._panel);
+      this._applyLabels();
 
       var self = this;
       this._button.addEventListener("click", function () { if (self.isOpen) self.close(false); else self.open(); });
       this._input.addEventListener("input", function () { self._query = self._input.value; self._render(); });
       this._panel.addEventListener("keydown", function (event) { self._onKey(event); });
       this._grid.addEventListener("click", function (event) { self._onActivate(event); });
+    }
+
+    /* Puts the labels in force on the button, the panel, the search field and the grid, and
+       redraws the panel's own words if it is showing. */
+    _applyLabels() {
+      var labels = this._labels;
+      this._button.setAttribute("aria-label", labels.apps);
+      this._button.title = labels.apps;
+      this._panel.setAttribute("aria-label", labels.apps);
+      this._input.placeholder = labels.find;
+      this._input.setAttribute("aria-label", labels.find);
+      this._grid.setAttribute("aria-label", labels.grid);
+      if (this._data) this._render();
     }
 
     get isOpen() { return !!this._panel && !this._panel.hidden; }
@@ -443,9 +512,10 @@
 
     _render() {
       if (!this._grid) return;
+      var labels = this._labels;
       this._grid.textContent = "";
       if (!this._data) {
-        this._status.textContent = "Loading apps";
+        this._status.textContent = labels.loading;
         this._status.className = "nv-apps__status";
         return;
       }
@@ -460,17 +530,17 @@
       if (launcher) {
         var all = el("a", "nv-apps__tile nv-apps__tile--all");
         all.href = launcher;
-        all.title = "Every Novus app, grouped by category";
+        all.title = labels.allTitle;
         var allMark = el("span", "nv-apps__mark nv-apps__mark--all");
         allMark.setAttribute("aria-hidden", "true");
         allMark.innerHTML = ALL;
-        all.append(allMark, el("span", "nv-apps__name", "All apps"));
+        all.append(allMark, el("span", "nv-apps__name", labels.all));
         var li = el("li");
         li.appendChild(all);
         this._grid.appendChild(li);
       }
-      var said = !apps.length && query.trim() ? "No app matches" : !apps.length && !launcher ? "No app is available to your sign-in" : "";
-      this._status.textContent = said || (apps.length === 1 ? "1 app" : apps.length + " apps");
+      var said = !apps.length && query.trim() ? labels.noMatch : !apps.length && !launcher ? labels.noApps : "";
+      this._status.textContent = said || countText(labels, apps.length);
       this._status.className = said ? "nv-apps__status" : "nv-apps__status sr-only";
     }
 

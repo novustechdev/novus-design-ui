@@ -61,6 +61,7 @@ first in <code>.appheader__left</code>.</p>
     <tr><td><code>catalog</code></td><td>attribute</td><td class="cell--wrap">The catalog's address, when it is not <code>{launcher}/api/catalog</code>.</td></tr>
     <tr><td><code>allowed-hosts</code></td><td>attribute</td><td class="cell--wrap">Host suffixes an app may live on, separated by spaces. A leading dot admits subdomains only.</td></tr>
     <tr><td><code>fallback</code></td><td>attribute</td><td class="cell--wrap">Base64 JSON of the deployment's static list, <code>[{key, name, url}]</code>: the <code>apps</code> setting consoles carry today.</td></tr>
+    <tr><td><code>labels</code></td><td>attribute (JSON) or property (object)</td><td class="cell--wrap">The element's own words in the console's language: <code>apps</code>, <code>find</code>, <code>grid</code>, <code>all</code>, <code>allTitle</code>, <code>noMatch</code>, <code>noApps</code>, <code>loading</code>, <code>countOne</code>, <code>countOther</code> (with <code>{n}</code> for the number). A key left out keeps its English; every label is set as text.</td></tr>
     <tr><td><code>claims</code></td><td>property</td><td class="cell--wrap">The viewer's realm roles and group names, as an array of strings.</td></tr>
     <tr><td><code>novus-app-open</code></td><td>event</td><td class="cell--wrap">Fired before the browser navigates, with the app id as its detail. It bubbles and is cancelable, so a host can keep the navigation for itself.</td></tr>
   </tbody>

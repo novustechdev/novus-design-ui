@@ -286,8 +286,34 @@ try {
   await x.ctx.close();
 } catch (e) { fail("ERROR", "1366", `hostile: ${e.message.split("\n")[0]}`); }
 
+try {
+  // A console in Sinhala passes its own words; the header and the panel show no English it did
+  // not choose, and the words arrive as text, never as markup.
+  const ctx = await context("light", [1366, 768]);
+  const page = await ctx.newPage();
+  await page.goto(BASE + "index.html", { waitUntil: "load" });
+  await page.waitForFunction(() => customElements.get("novus-app-switcher"));
+  await page.$eval("novus-app-switcher", (s) => s.setAttribute("labels", JSON.stringify({ apps: "Novus යෙදුම්", find: "Novus යෙදුම් සොයන්න", all: "සියලු යෙදුම්", countOther: "යෙදුම් {n}" })));
+  await page.click(BUTTON);
+  await loaded(page);
+  const words = await page.evaluate(() => {
+    const s = document.querySelector("novus-app-switcher");
+    return {
+      button: s.querySelector(".nv-apps__button").getAttribute("aria-label"),
+      panel: s.querySelector(".nv-apps__panel").getAttribute("aria-label"),
+      find: s.querySelector(".nv-apps__input").getAttribute("placeholder"),
+      all: s.querySelector(".nv-apps__tile--all .nv-apps__name")?.textContent,
+      status: s.querySelector(".nv-apps__status").textContent,
+    };
+  });
+  expect(words.button === "Novus යෙදුම්" && words.panel === "Novus යෙදුම්", "CATALOG", "1366", `labels not on the button and panel: ${JSON.stringify(words)}`);
+  expect(words.find === "Novus යෙදුම් සොයන්න" && words.all === "සියලු යෙදුම්", "CATALOG", "1366", `labels not in the panel: ${JSON.stringify(words)}`);
+  expect(/^යෙදුම් \d+$/.test(words.status), "CATALOG", "1366", `count not in the console's words: ${words.status}`);
+  await ctx.close();
+} catch (e) { fail("ERROR", "1366", `labels: ${e.message.split("\n")[0]}`); }
+
 await browser.close();
 server.close();
 for (const f of findings) console.log(f);
-console.log(`app switcher audit: ${WIDTHS.length} widths x ${THEMES.length} themes x ${PAGES.length} shells, keyboard walk at 2 widths, ${cases.length + 1} catalog cases; ${checks} checks, ${findings.length} finding(s)`);
+console.log(`app switcher audit: ${WIDTHS.length} widths x ${THEMES.length} themes x ${PAGES.length} shells, keyboard walk at 2 widths, ${cases.length + 2} catalog cases; ${checks} checks, ${findings.length} finding(s)`);
 process.exit(findings.length ? 1 : 0);
