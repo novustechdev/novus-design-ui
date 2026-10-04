@@ -16,9 +16,9 @@
      TARGET    an interactive control is under 44px at the 375px baseline (gate 19), or
      NAVREACH  a top-bar console cannot reach a destination its drawer defines (gate 20).
    Scope: .demo__canvas on docs pages, the whole document on demos; each page is
-   audited closed, then with its dismissable menus, sheets, and drawer open.
+   audited closed, then with its dismissable menus, sheets, drawer and app switcher open.
    Skipped: paragraphs, headings, prose lists, pre, .cell--wrap, [data-audit="skip"].
-   Usage: node scripts/layout-audit.mjs [--only <substring>]
+   Usage: node scripts/layout-audit.mjs [--only <substring>] [--widths 390,1366,1920] [--theme dark]
    Env:   CHROME_PATH (Chromium executable), CI=true (missing tooling fails).
    Exit:  0 clean, 1 findings or CI tooling failure, 2 skipped locally. */
 import { createServer } from "node:http";
@@ -36,6 +36,10 @@ const TARGET = arg("--target");
 const DIST = TARGET ? resolve(process.cwd(), TARGET) : join(ROOT, "site/dist");
 const CI = process.env.CI === "true";
 const ONLY = arg("--only");
+/* --widths and --theme let one component be held to its own widths in both themes (the app
+   switcher's are 390, 1366 and 1920). The default run stays at 1440 and 375, light. */
+const WIDTHS = arg("--widths");
+const THEME = arg("--theme");
 
 const bail = (msg) => { console.log(`${CI ? "FAIL" : "SKIP"}  layout audit: ${msg}`); process.exit(CI ? 1 : 2); };
 
@@ -86,6 +90,7 @@ for (const f of list("foundations")) pages.push({ path: `foundations/${f}`, kind
    guidance pages were never audited before, so a regression there was invisible. */
 for (const f of readdirSync(DIST).filter((x) => x.endsWith(".html")).sort()) pages.push({ path: f, kind: "docs" });
 for (const flavor of ["tailwind", "material"]) for (const f of list(`demos/${flavor}`)) pages.push({ path: `demos/${flavor}/${f}`, kind: "demo" });
+for (const f of list("demos/app-switcher")) pages.push({ path: `demos/app-switcher/${f}`, kind: "demo" });
 if (existsSync(join(DIST, "demos/blazor/index.html")))
   for (const r of ["", "login", "signed-out", "analytics", "transactions", "datagrid", "terminals", "settings"])
     pages.push({ path: `demos/blazor/${r}`, kind: "blazor" });
@@ -337,7 +342,9 @@ function audit({ scopes, kind }) {
 }
 
 const findings = [];
-const widths = [[1440, 900], [375, 812]];
+const widths = WIDTHS
+  ? WIDTHS.split(",").map(Number).filter((w) => w > 0).map((w) => [w, w <= 480 ? 844 : Math.round((w * 9) / 16)])
+  : [[1440, 900], [375, 812]];
 async function run(ctx, width, p) {
   const page = await ctx.newPage();
   try {
@@ -348,8 +355,8 @@ async function run(ctx, width, p) {
     await page.waitForTimeout(p.kind === "blazor" ? 600 : 150);
     const scopes = p.kind === "docs" ? [".demo__canvas"] : ["body"];
     const closed = await page.evaluate(audit, { scopes, kind: p.kind });
-    if (width === 375 && closed.scrollWidth > closed.innerWidth + 1)
-      findings.push(`OVERFLOW 375 ${p.path || "/"} scrollWidth=${closed.scrollWidth}`);
+    if (width <= 480 && closed.scrollWidth > closed.innerWidth + 1)
+      findings.push(`OVERFLOW ${width} ${p.path || "/"} scrollWidth=${closed.scrollWidth}`);
     /* second pass: open dismissable menus and sheets, and at phone width the drawer */
     const opened = await page.evaluate((w) => {
       let n = 0;
@@ -364,16 +371,33 @@ async function run(ctx, width, p) {
       const openScopes = p.kind === "docs" ? [".demo__canvas details[data-dismiss]"] : ["details[data-dismiss]", ".adminnav"];
       open = await page.evaluate(audit, { scopes: openScopes, kind: p.kind });
     }
+    /* third pass: the app switcher on its own, with the menus and drawer shut again, since its
+       open panel covers the navigation the second pass judges (feature 014) */
+    let apps = { wraps: [], shell: [] };
+    const switchers = await page.evaluate(() => {
+      document.querySelectorAll("details[data-dismiss][open]").forEach((d) => d.removeAttribute("open"));
+      const t = document.getElementById("navtoggle");
+      if (t) t.checked = false;
+      let n = 0;
+      document.querySelectorAll("novus-app-switcher").forEach((s) => { if (typeof s.open === "function" && !s.hidden) { s.open(); n++; } });
+      return n;
+    });
+    if (switchers) {
+      /* A panel has loaded once its status no longer says so, and is at rest after its entrance. */
+      await page.waitForFunction(() => [...document.querySelectorAll(".nv-apps__panel:not([hidden]) .nv-apps__status")].every((s) => s.textContent !== "Loading apps"), null, { timeout: 5000 }).catch(() => {});
+      await page.waitForTimeout(260);
+      apps = await page.evaluate(audit, { scopes: p.kind === "docs" ? [".demo__canvas .nv-apps__panel"] : [".nv-apps__panel"], kind: p.kind });
+    }
     for (const w of closed.widths) findings.push(`WIDTH ${width} ${p.path || "/"} ${w.sel} "${w.text}" lines=${w.lines} unused=${w.unused}%`);
     const seenShell = new Set();
-    for (const sh of [...closed.shell, ...(open.shell || [])]) {
+    for (const sh of [...closed.shell, ...(open.shell || []), ...apps.shell]) {
       const key = `${sh.kind} ${sh.detail}`;
       if (seenShell.has(key)) continue;
       seenShell.add(key);
       findings.push(`${sh.kind} ${width} ${p.path || "/"} ${sh.detail}`);
     }
     const seen = new Set();
-    for (const w of [...closed.wraps, ...open.wraps]) {
+    for (const w of [...closed.wraps, ...open.wraps, ...apps.wraps]) {
       const key = w.sel + w.text;
       if (seen.has(key)) continue;
       seen.add(key);
@@ -388,6 +412,7 @@ async function run(ctx, width, p) {
 
 for (const [w, h] of widths) {
   const ctx = await browser.newContext({ viewport: { width: w, height: h } });
+  if (THEME === "dark" || THEME === "light") await ctx.addInitScript((t) => { try { localStorage.setItem("novus-theme", t); } catch (e) { /* private mode */ } }, THEME);
   const queue = [...todo];
   await Promise.all(Array.from({ length: 4 }, async () => { for (let p = queue.shift(); p; p = queue.shift()) await run(ctx, w, p); }));
   await ctx.close();
@@ -396,5 +421,5 @@ await browser.close();
 server.close();
 
 for (const f of findings) console.log(f);
-console.log(`layout audit: ${todo.length} pages x ${widths.length} widths, ${findings.length} finding(s)`);
+console.log(`layout audit: ${todo.length} pages x ${widths.length} widths${THEME ? `, ${THEME} theme` : ""}, ${findings.length} finding(s)`);
 process.exit(findings.length ? 1 : 0);

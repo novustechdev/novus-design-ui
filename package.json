@@ -41,7 +41,8 @@
   },
   "scripts": {
     "build:site": "node site/build.mjs",
-    "gates": "scripts/gates.sh"
+    "gates": "scripts/gates.sh",
+    "test": "node --test tests/unit/*.test.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

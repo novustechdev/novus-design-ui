@@ -149,6 +149,25 @@ if [ -d site/dist ]; then
   fi
 fi
 
+# Unit tests (feature 014): the app switcher's rules and the product mark registry, in Node's
+# own test runner, so the gate needs nothing installed.
+OUT=$(node --test tests/unit/*.test.mjs 2>&1); RC=$?
+gate "unit tests" $RC "$(echo "$OUT" | grep -E '^# (pass|fail)' | tr '\n' ' ')"
+
+# App switcher (feature 014): its demos held to the layout rules at 390, 1366 and 1920px in both
+# themes, then axe, the panel's geometry, the keyboard walk and the catalog fallbacks in a real
+# browser. Both skip locally, like the layout audit, when the browser tooling is absent.
+if [ -d site/dist/demos/app-switcher ]; then
+  for THEME in light dark; do
+    OUT=$(node scripts/layout-audit.mjs --only app-switcher --widths 390,1366,1920 --theme $THEME 2>&1); RC=$?
+    if [ $RC -eq 2 ]; then echo "SKIP  app switcher layout ($THEME): $(echo "$OUT" | tail -1)"
+    else gate "app switcher layout ($THEME)" $RC "$(echo "$OUT" | grep -E '^(WRAP|OVERFLOW|ERROR|FAIL|HEADER|TARGET|TYPE|WIDTH)' | head -3 | tr '\n' ' ')"; fi
+  done
+  OUT=$(node scripts/app-switcher-audit.mjs 2>&1); RC=$?
+  if [ $RC -eq 2 ]; then echo "SKIP  app switcher audit: $(echo "$OUT" | tail -1)"
+  else gate "app switcher audit" $RC "$(echo "$OUT" | grep -vE '^app switcher audit:' | head -3 | tr '\n' ' ')"; fi
+fi
+
 echo
 [ $FAIL -eq 0 ] && echo "ALL GATES PASS" || echo "GATE FAILURES — release blocked"
 exit $FAIL
