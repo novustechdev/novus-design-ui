@@ -7,6 +7,44 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+## [0.9.0], 2026-10-04
+
+One Novus app switcher for every console (feature 014, constitution 1.17.0), at
+the owner's request after two grid-like buttons on one bar confused the user
+journey. Packaged kit files change.
+
+### Added
+
+- `<novus-app-switcher>` (`js/novus-app-switcher.js`): the first control at the
+  far left of the console header, after the Microsoft 365 app launcher. A panel
+  with a search field, the apps the viewer may open as tiles, the viewer's recent
+  apps first, and "All apps" to the workspace launcher. Framework-free, in light
+  DOM, so React consoles and plain-script consoles draw the same thing.
+- It reads the workspace launcher's catalog (`GET {launcher}/api/catalog`) when
+  the panel first opens, bounded at 3 seconds, and falls back to the last good
+  copy, then the deployment's own list, then "All apps" alone. An app added to the
+  workspace reaches every console within the catalog's five-minute cache, with no
+  console release.
+- Only https addresses on the deployment's allowed host suffixes are offered, so
+  a tampered catalog cannot send an operator to a look-alike host.
+- Its own words are translatable: a console in Sinhala, Tamil or any other language
+  passes `labels` (an attribute holding JSON, or a property) and the header shows
+  no English it did not choose. A label left out keeps its English.
+- The product mark registry (`js/novus-app-marks.js`, `logos/marks/`): the four
+  console marks, unchanged, and twelve new ones for NovaLending, NovaMerchant,
+  NovaMerchant POS, NovaMerchant Biller, NovaPlan, NovaSearch, NovaTicket,
+  NovaEdge, Novus ID, the Design kit, Internet banking and Mobile banking.
+  NovaMerchant's three marks share NovaMerchant's colour and differ by glyph.
+- Gate 21, the switcher's placement and behaviour, with unit tests, a layout
+  audit at 390, 1366 and 1920px in both themes, and a browser audit of axe, the
+  keyboard walk and six catalog failure cases.
+
+### Changed
+
+- The console header's rule gains a first element: nothing sits to the left of
+  the app switcher, as nothing sits to the right of the account menu.
+- Publishing 0.9.0 to npm is pending the owner.
+
 ## [0.8.0], 2026-09-23
 
 A second console shell (feature 012, constitution 1.16.0), admitted at the

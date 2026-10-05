@@ -8,10 +8,12 @@
      brand panel, signed-out card, filter bar, list footers) as static markup
      between SHELL markers and as generated Razor components for both Blazor
      projects;
-   - table rows between DATA markers, so JS-off pages are complete.
+   - table rows between DATA markers, so JS-off pages are complete;
+   - the product marks in js/novus-app-marks.js as placed SVGs in logos/marks/.
    Parity check (constitution Quality Gate 10): node generate.mjs --check writes
    nothing and exits 1 listing every emitted file that differs from its source. */
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
+import vm from "node:vm";
 import { dirname, join, relative } from "node:path";
 import { fileURLToPath } from "node:url";
 import { icons, svg } from "../shared/icons.mjs";
@@ -118,6 +120,30 @@ emit(join(ROOT, "icons/novus-icons.svg"), `<?xml version="1.0" encoding="UTF-8"?
 ${icons.map(([name, , body]) => `  <symbol id="novus-${name}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${body}</symbol>`).join("\n")}
 </svg>
 `);
+
+/* Product marks (feature 014): logos/marks/<id>.svg, the placed-asset form of each entry in
+   js/novus-app-marks.js. The registry names its colours by palette token, so each one is
+   resolved against tokens.css here, and the asset can never drift from what the switcher
+   draws. Geometry matches the switcher's mark: a 48px square on the 12px radius step, the
+   glyph drawn 26px wide in its middle. */
+{
+  const palette = Object.fromEntries([...readFileSync(join(ROOT, "tokens.css"), "utf8").matchAll(/(--[a-z]+-\d+):\s*(#[0-9A-Fa-f]{6})/g)].map((m) => [m[1], m[2].toUpperCase()]));
+  const sandbox = {};
+  vm.runInNewContext(readFileSync(join(ROOT, "js/novus-app-marks.js"), "utf8"), { window: sandbox });
+  const marks = sandbox.NovusAppMarks;
+  mkdirSync(join(ROOT, "logos/marks"), { recursive: true });
+  for (const id of marks.ids()) {
+    const mark = marks.get(id);
+    if (!palette[mark.token]) throw new Error(`novus-app-marks.js: ${id} names ${mark.token}, which tokens.css does not define`);
+    emit(join(ROOT, `logos/marks/${id}.svg`), `<?xml version="1.0" encoding="UTF-8"?>
+<!-- GENERATED from js/novus-app-marks.js by admin-kits/data/generate.mjs. Do not edit. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="${esc(mark.name)}">
+  <rect width="48" height="48" rx="12" fill="${palette[mark.token]}"/>
+  <svg x="11" y="11" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="${palette["--neutral-0"]}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${mark.glyph}</svg>
+</svg>
+`);
+  }
+}
 
 /* ---- Console shell: one definition, rendered as static HTML and as Razor ---- */
 const LOCKUP = `<span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span>`;

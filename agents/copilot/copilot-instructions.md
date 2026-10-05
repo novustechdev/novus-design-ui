@@ -1,10 +1,10 @@
-<!-- Generated from novus-design-kit 0.8.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
+<!-- Generated from novus-design-kit 0.9.0 by agents/generate.mjs. Do not edit by hand: edit agents/rules.mjs and regenerate. -->
 
 # novus-design-kit instructions
 
 These are the rules of the novus-design-kit design system, for the coding
 agent working in this repository. They come from the kit itself, version
-0.8.0. Upgrade the package to get the current version of this file.
+0.9.0. Upgrade the package to get the current version of this file.
 
 ## What the kit ships
 
@@ -12,6 +12,8 @@ agent working in this repository. They come from the kit itself, version
 - `novus-design-kit/console.css`: the console layer: shell, side navigation, page header, filter bar, paged list, sign-in, settings
 - `novus-design-kit/js/novus-theme.js`: the theme script: light by default, remembers a choice, applies before first paint
 - `novus-design-kit/js/novus-console.js`: progressive console behaviour, with every pattern still working when it does not run
+- `novus-design-kit/js/novus-app-switcher.js`: the Novus app switcher element, first in every console header, fed by the workspace launcher's catalog
+- `novus-design-kit/js/novus-app-marks.js`: the product mark registry the app switcher draws from
 - `novus-design-kit/icons/novus-icons.svg`: the line icon sprite used across console screens
 
 Import `tokens.css` once at the application root, and load `js/novus-theme.js`

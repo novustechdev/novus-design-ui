@@ -290,6 +290,15 @@
       ]
     },
     {
+      "id": "app-switcher",
+      "name": "App switcher",
+      "category": "Navigation",
+      "classes": ["novus-app-switcher", ".nv-apps__button", ".nv-apps__panel", ".nv-apps__grid", ".nv-apps__tile", ".nv-apps__mark"],
+      "fragment": "src/components/app-switcher.html",
+      "summary": "The Novus app switcher, first in every console header: search and a grid of the apps the viewer may open, read from the workspace launcher's catalog.",
+      "css": ["app-switcher"]
+    },
+    {
       "id": "user-menu",
       "name": "User menu",
       "category": "Navigation",

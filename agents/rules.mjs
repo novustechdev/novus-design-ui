@@ -37,6 +37,8 @@ export const ARTIFACTS = [
   { path: "console.css", what: "the console layer: shell, side navigation, page header, filter bar, paged list, sign-in, settings" },
   { path: "js/novus-theme.js", what: "the theme script: light by default, remembers a choice, applies before first paint" },
   { path: "js/novus-console.js", what: "progressive console behaviour, with every pattern still working when it does not run" },
+  { path: "js/novus-app-switcher.js", what: "the Novus app switcher element, first in every console header, fed by the workspace launcher's catalog" },
+  { path: "js/novus-app-marks.js", what: "the product mark registry the app switcher draws from" },
   { path: "icons/novus-icons.svg", what: "the line icon sprite used across console screens" },
 ].filter((a) => shipped(a.path));
 
@@ -140,6 +142,13 @@ export const RULES = [
     text: "The account menu is the last element in a console header. Nothing sits to the right of it, at any width.",
     why: "operators look to the far right for their own account, and anything past it is noise",
     enforcedBy: "release gate 12",
+  },
+  {
+    id: "app-switcher-first",
+    scope: "console",
+    text: "The Novus app switcher, <novus-app-switcher>, is the first control in a console header. Nothing sits to the left of it, and it is the only grid button on the bar.",
+    why: "an operator moving between Novus apps finds the switcher in one place, and two grid buttons on one bar is the confusion it replaces",
+    enforcedBy: "the layout audit's HEADER check",
   },
   {
     id: "nav-rail",

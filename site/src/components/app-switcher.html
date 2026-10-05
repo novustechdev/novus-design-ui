@@ -1,0 +1,114 @@
+<!-- title: App switcher -->
+<p>One switcher for every Novus console, after the Microsoft 365 app launcher: a nine-dot
+button at the far left of the header opens a panel with a search field and a grid of the
+apps the signed-in person may open. It reads the workspace launcher's catalog at run time,
+so an app added to the workspace reaches every console without a rebuild.</p>
+<script src="../js/novus-app-marks.js" defer></script>
+<script src="../js/novus-app-switcher.js" defer></script>
+
+<section class="demo" data-title="Console header: the app switcher first, then the product lockup">
+  <header class="appbar" style="border:1px solid var(--border);border-radius:var(--radius-md)">
+    <div class="appbar__inner appheader">
+      <div class="appheader__left">
+        <novus-app-switcher current="novabank" launcher="https://workspace.novustech.dev" catalog="../demos/app-switcher/sample-catalog.json"></novus-app-switcher>
+        <span class="theme-novabank wm"><span class="nm">nova</span><span class="sf">bank</span></span>
+      </div>
+      <div class="appheader__right"><span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span></div>
+    </div>
+  </header>
+</section>
+<script>
+  /* The demo viewer holds every role the sample catalog names. A console hands over the
+     signed-in person's realm roles and group names instead. */
+  customElements.whenDefined("novus-app-switcher").then(function () {
+    document.querySelectorAll("novus-app-switcher").forEach(function (s) {
+      s.claims = ["operator", "operations", "platform-admin", "novasearch-user", "default-roles-supernova-dev"];
+    });
+  });
+</script>
+<p>Full-page demos, each with a viewer picker:
+<a href="../demos/app-switcher/index.html">side-navigation shell</a> and
+<a href="../demos/app-switcher/top-navigation.html">top-navigation shell</a>.</p>
+
+<h2>How it behaves</h2>
+<ul class="bullets">
+  <li><b>First in the header.</b> Nothing sits to the left of the switcher, in either shell. On a phone the drawer toggle follows it, then the product lockup. A console draws one grid button, never two, and the layout audit fails a header that places anything before it.</li>
+  <li><b>Search first.</b> The field takes focus when the panel opens and filters by name, description and category as you type. When nothing matches it says so in words.</li>
+  <li><b>Tiles.</b> Each tile is the product's mark with its name under it, and the description as its tooltip and accessible description. Five to a row on a desktop, four on a tablet, three on a phone. This console's own tile is marked as current and goes nowhere.</li>
+  <li><b>Order.</b> The last four apps this console's switcher opened come first, then the catalog's category order, then catalog order.</li>
+  <li><b>All apps</b> is the last tile whenever a workspace launcher is declared, and opens it, where every app is grouped by category and can be pinned.</li>
+  <li><b>Keyboard.</b> The arrows walk the grid as drawn, Home and End jump to its ends, typing goes to the search field, Tab stays inside the panel, and Escape closes it and returns focus to the button. A press outside closes it too.</li>
+  <li><b>Same tab.</b> Every app signs in through the same realm, so a second tab would only be a second copy of the session.</li>
+</ul>
+
+<h2>Who sees what</h2>
+<ul class="bullets">
+  <li>An app shows when one of its <code>requiredRoles</code> is among the claims the console hands over: the viewer's realm roles and group names. An entry with no roles, a malformed entry, or a viewer with no claims shows nothing.</li>
+  <li>Only <code>https</code> addresses on the allowed host suffixes are linked (by default <code>.novustech.dev</code> and <code>.novustech.id</code>). Any other entry is dropped, so a tampered catalog cannot send an operator to a look-alike host.</li>
+  <li>The catalog is fetched when the panel first opens, never at page load, and is given three seconds. If it does not answer, or answers something unreadable, the switcher uses the last good copy this browser kept, then the deployment's static list, then only "All apps". The page never waits on it.</li>
+  <li>A bank's own deployment, whose staff do not sign in to the Novus workspace, declares no launcher: its switcher shows the static list and no "All apps" tile.</li>
+</ul>
+
+<h2>Markup</h2>
+<p>Load <code>js/novus-app-marks.js</code> and <code>js/novus-app-switcher.js</code> with
+<code>console.css</code>, as plain scripts or as imports from a bundler, and place the element
+first in <code>.appheader__left</code>.</p>
+<div class="tablewrap"><table class="table">
+  <thead><tr><th>Name</th><th>Kind</th><th>Meaning</th></tr></thead>
+  <tbody>
+    <tr><td><code>current</code></td><td>attribute</td><td class="cell--wrap">This console's app id. Its tile shows as current.</td></tr>
+    <tr><td><code>launcher</code></td><td>attribute</td><td class="cell--wrap">The workspace launcher's origin, such as <code>https://workspace.novustech.dev</code>. Leave it out on a bank's own deployment.</td></tr>
+    <tr><td><code>catalog</code></td><td>attribute</td><td class="cell--wrap">The catalog's address, when it is not <code>{launcher}/api/catalog</code>.</td></tr>
+    <tr><td><code>allowed-hosts</code></td><td>attribute</td><td class="cell--wrap">Host suffixes an app may live on, separated by spaces. A leading dot admits subdomains only.</td></tr>
+    <tr><td><code>fallback</code></td><td>attribute</td><td class="cell--wrap">Base64 JSON of the deployment's static list, <code>[{key, name, url}]</code>: the <code>apps</code> setting consoles carry today.</td></tr>
+    <tr><td><code>labels</code></td><td>attribute (JSON) or property (object)</td><td class="cell--wrap">The element's own words in the console's language: <code>apps</code>, <code>find</code>, <code>grid</code>, <code>all</code>, <code>allTitle</code>, <code>noMatch</code>, <code>noApps</code>, <code>loading</code>, <code>countOne</code>, <code>countOther</code> (with <code>{n}</code> for the number). A key left out keeps its English; every label is set as text.</td></tr>
+    <tr><td><code>claims</code></td><td>property</td><td class="cell--wrap">The viewer's realm roles and group names, as an array of strings.</td></tr>
+    <tr><td><code>novus-app-open</code></td><td>event</td><td class="cell--wrap">Fired before the browser navigates, with the app id as its detail. It bubbles and is cancelable, so a host can keep the navigation for itself.</td></tr>
+  </tbody>
+</table></div>
+<pre class="demo__code"><code>&lt;!-- A plain-script console --&gt;
+&lt;novus-app-switcher current="novatrace" launcher="https://workspace.novustech.dev"&gt;&lt;/novus-app-switcher&gt;
+&lt;script&gt;document.querySelector("novus-app-switcher").claims = session.roles.concat(session.groups);&lt;/script&gt;
+
+// A React console: attributes in JSX, the claims property set through a ref
+import "novus-design-kit/js/novus-app-marks.js";
+import "novus-design-kit/js/novus-app-switcher.js";
+const ref = useRef(null);
+useEffect(() =&gt; { ref.current.claims = [...roles, ...groups]; }, [roles, groups]);
+&lt;novus-app-switcher ref={ref} current="novabank" launcher={launcherOrigin} fallback={apps} /&gt;</code></pre>
+
+<h2>The catalog</h2>
+<p>The workspace launcher answers <code>GET /api/catalog</code> with CORS open to any origin, no
+credentials and a five-minute cache. It holds names, addresses, categories and role names, and
+nothing secret.</p>
+<pre class="demo__code"><code>{ "version": 1,
+  "categories": [{ "id": "core-banking", "name": "Core banking" }],
+  "apps": [{ "id": "novabank", "name": "NovaBank", "description": "Core-banking console",
+             "category": "core-banking", "url": "https://novabank.novustech.dev",
+             "mark": { "colour": "(the product colour)", "glyph": "novabank" },
+             "requiredRoles": ["operator", "checker", "administrator"] }] }</code></pre>
+
+<h2>Product marks</h2>
+<p>Each <code>glyph</code> names a mark in <code>js/novus-app-marks.js</code>: a square of the
+product's colour with a white line glyph, 24 units, stroke 1.8, round caps. The colours are fixed
+product identity, taken from the palette in <code>tokens.css</code>, and keep in the dark theme.
+The same marks ship as placed assets in <code>logos/marks/</code>. NovaMerchant's three marks share
+NovaMerchant's colour and are told apart by glyph. An app with no mark shows its initial on grey.</p>
+<div class="assetgrid">
+  <div class="clogo"><img src="../logos/marks/novabank.svg" alt="NovaBank mark"><code>novabank</code></div>
+  <div class="clogo"><img src="../logos/marks/novahub.svg" alt="NovaHub mark"><code>novahub</code></div>
+  <div class="clogo"><img src="../logos/marks/novacard.svg" alt="NovaCard mark"><code>novacard</code></div>
+  <div class="clogo"><img src="../logos/marks/novatrace.svg" alt="NovaTrace mark"><code>novatrace</code></div>
+  <div class="clogo"><img src="../logos/marks/novaplan.svg" alt="NovaPlan mark"><code>novaplan</code></div>
+  <div class="clogo"><img src="../logos/marks/novasearch.svg" alt="NovaSearch mark"><code>novasearch</code></div>
+  <div class="clogo"><img src="../logos/marks/novaticket.svg" alt="NovaTicket mark"><code>novaticket</code></div>
+  <div class="clogo"><img src="../logos/marks/novaedge.svg" alt="NovaEdge mark"><code>novaedge</code></div>
+  <div class="clogo"><img src="../logos/marks/novus-id.svg" alt="Novus ID mark"><code>novus-id</code></div>
+  <div class="clogo"><img src="../logos/marks/design-kit.svg" alt="Design kit mark"><code>design-kit</code></div>
+  <div class="clogo"><img src="../logos/marks/ibanking.svg" alt="Internet banking mark"><code>ibanking</code></div>
+  <div class="clogo"><img src="../logos/marks/mbanking.svg" alt="Mobile banking mark"><code>mbanking</code></div>
+  <div class="clogo"><img src="../logos/marks/nova-lending.svg" alt="NovaLending mark"><code>nova-lending</code></div>
+  <div class="clogo"><img src="../logos/marks/novamerchant.svg" alt="NovaMerchant mark"><code>novamerchant</code></div>
+  <div class="clogo"><img src="../logos/marks/novamerchant-pos.svg" alt="NovaMerchant POS mark"><code>novamerchant-pos</code></div>
+  <div class="clogo"><img src="../logos/marks/novamerchant-biller.svg" alt="NovaMerchant Biller mark"><code>novamerchant-biller</code></div>
+</div>

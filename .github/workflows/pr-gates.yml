@@ -26,6 +26,6 @@ jobs:
       - name: Build reference site
         run: node site/build.mjs
       - name: Install layout audit tooling
-        run: npm install --no-save --no-package-lock playwright-core@1.55.0
+        run: npm install --no-save --no-package-lock playwright-core@1.55.0 axe-core@4.10.3
       - name: Run quality gates
         run: scripts/gates.sh
