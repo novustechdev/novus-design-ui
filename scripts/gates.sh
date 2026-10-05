@@ -27,7 +27,9 @@ gate "gradient grep" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 2. No ad-hoc hex colours (tokens define every colour)
 # Mobile foundation pages are excluded here and covered by the stricter parity gate below.
-HITS=$( { grep -rnE '#[0-9a-fA-F]{3,8}\b' --exclude=manifest.webmanifest --exclude='mobile-*.html' site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE '#[0-9a-fA-F]{3,8}\b' $ADMIN_SRC 2>/dev/null; } | grep -vE 'href="#|url\(#|&#')
+# The app switcher's sample catalog is data in the workspace launcher's published contract,
+# whose product colours are hex by that contract; the marks that draw them name tokens.
+HITS=$( { grep -rnE '#[0-9a-fA-F]{3,8}\b' --exclude=manifest.webmanifest --exclude='mobile-*.html' --exclude=sample-catalog.json site/src js 2>/dev/null; [ -n "$ADMIN_SRC" ] && grep -nE '#[0-9a-fA-F]{3,8}\b' $ADMIN_SRC 2>/dev/null; } | grep -vE 'href="#|url\(#|&#')
 gate "ad-hoc hex audit" $([ -z "$HITS" ]; echo $?) "$(echo "$HITS" | head -3)"
 
 # 2b. Mobile token parity (constitution VIII): every colour literal on a mobile
@@ -145,6 +147,25 @@ if [ -d site/dist ]; then
   else
     gate "layout audit" $RC "$(echo "$OUT" | grep -E '^(WRAP|OVERFLOW|ERROR|FAIL)' | head -3 | tr '\n' ' ')"
   fi
+fi
+
+# Unit tests (feature 014): the app switcher's rules and the product mark registry, in Node's
+# own test runner, so the gate needs nothing installed.
+OUT=$(node --test tests/unit/*.test.mjs 2>&1); RC=$?
+gate "unit tests" $RC "$(echo "$OUT" | grep -E '^# (pass|fail)' | tr '\n' ' ')"
+
+# App switcher (feature 014): its demos held to the layout rules at 390, 1366 and 1920px in both
+# themes, then axe, the panel's geometry, the keyboard walk and the catalog fallbacks in a real
+# browser. Both skip locally, like the layout audit, when the browser tooling is absent.
+if [ -d site/dist/demos/app-switcher ]; then
+  for THEME in light dark; do
+    OUT=$(node scripts/layout-audit.mjs --only app-switcher --widths 390,1366,1920 --theme $THEME 2>&1); RC=$?
+    if [ $RC -eq 2 ]; then echo "SKIP  app switcher layout ($THEME): $(echo "$OUT" | tail -1)"
+    else gate "app switcher layout ($THEME)" $RC "$(echo "$OUT" | grep -E '^(WRAP|OVERFLOW|ERROR|FAIL|HEADER|TARGET|TYPE|WIDTH)' | head -3 | tr '\n' ' ')"; fi
+  done
+  OUT=$(node scripts/app-switcher-audit.mjs 2>&1); RC=$?
+  if [ $RC -eq 2 ]; then echo "SKIP  app switcher audit: $(echo "$OUT" | tail -1)"
+  else gate "app switcher audit" $RC "$(echo "$OUT" | grep -vE '^app switcher audit:' | head -3 | tr '\n' ' ')"; fi
 fi
 
 echo
