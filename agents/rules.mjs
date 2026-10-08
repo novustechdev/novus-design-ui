@@ -130,13 +130,6 @@ export const RULES = [
     enforcedBy: "the spacing tokens in tokens.css and the container patterns in the catalog",
   },
   {
-    id: "static-browser-tab",
-    scope: "always",
-    text: "The browser tab is static. Every page ships one favicon, a square PNG declared with its sizes attribute and kept to a few kilobytes, and no script swaps or redraws it. The tab title is written in the page head in the form Page · Product, and no script rewrites it from the open menu or the route.",
-    why: "a script-swapped favicon flickers on theme change and a title that follows the menu turns the browser history into a navigation log, while a favicon without a declared size renders at the wrong scale on high-density displays",
-    enforcedBy: "the generated heads of the Admin Kit flavors and the favicon in admin-kits/shared/favicon.png, which the generate script copies byte for byte, and the copy audits, which fail a page whose title changes",
-  },
-  {
     id: "console-shell",
     scope: "console",
     text: "Build console screens on the shipped shell: a header carrying the product lockup and an account menu, a grouped side navigation with line icons, and a page header with a breadcrumb and end-aligned actions.",
