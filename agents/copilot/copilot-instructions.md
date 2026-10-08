@@ -44,6 +44,8 @@ screens also load `console.css` after the tokens.
   Why: a console that needs script to open its own menu fails in the environments enterprises actually run. Checked by: the JavaScript-off verification runs recorded for every Admin Kit flavor.
 - **Write plain copy. No em dashes anywhere in published text, and no marketing category jargon for the product.**
   Why: the kit's copy style is checked mechanically and a stray character fails the release. Checked by: release gates 6 and 8, the copy audits.
+- **When generating a component, add no white space just to make a layout look symmetric: no empty element balancing one side against the other, no padding on one column to match its neighbour. Balance comes from the grid or flex rules the pattern already sets. Every other gap is deliberate too, coming from a spacing token or a container that carries it (.row spaces its children, .field pairs its label and control).**
+  Why: space invented to look balanced is invisible to the next change, so it drifts the moment one side moves and it never had a token behind it. Checked by: the spacing tokens in tokens.css and the container patterns in the catalog.
 
 ## Checking your own work
 
