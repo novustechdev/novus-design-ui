@@ -195,7 +195,7 @@ export const RULES = [
   {
     id: "amount-formatting",
     scope: "console",
-    text: "Every amount carries its currency and a thousands separator: 1,250,000.00 LKR, 1,250,000.00 USD, 1,250,000.00 EUR. Never bare digits, never a rounded abbreviation standing in for a total. Within a product one currency reads one way across every screen, table, chart and export: the ISO code, LKR or USD or EUR, never a local symbol or abbreviation like Rs.",
+    text: "Every amount carries its currency and a thousands separator, and the separator is a comma: 1,250,000.00 LKR, 1,250,000.00 USD, 1,250,000.00 EUR. Never bare digits, never a space or a decimal comma where the thousands comma goes, never a rounded abbreviation standing in for a total. Within a product one currency reads one way across every screen, table, chart and export: the ISO code, LKR or USD or EUR, never a local symbol or abbreviation like Rs.",
     why: "an amount without its currency is a number rather than a price, and Rs beside LKR on neighbouring screens leaves the reader working out whether they are the same money",
     enforcedBy: "console.css and the Admin Kit reference applications",
   },
