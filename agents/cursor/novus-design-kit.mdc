@@ -35,8 +35,8 @@ screens also load `console.css` after the tokens.
   Why: re-implemented components miss the accessibility, dark mode and responsive behaviour the originals carry. Checked by: the component catalog at https://ui-kit.novustech.dev/components/overview.html, which carries the markup for each pattern.
 - **Short content stays on one line. Identifiers, names, chips, dates, amounts, buttons and column headers never wrap to two or three rows, and a table scrolls inside its own card instead of squeezing its columns.**
   Why: wrapped identifiers and squeezed tables are the defect this kit was corrected twice to prevent. Checked by: release gate 11, the layout audit at 1440px and 375px.
-- **Do not cap portal text at a reading measure. A paragraph uses the width it has, unless it is deliberately marked as prose with the measure class.**
-  Why: a reading cap leaves text wrapping into three lines beside empty space. Checked by: release gate 14.
+- **Do not cap portal text at a reading measure, and do not narrow descriptive text with a margin: a paragraph, a help line or any other descriptive copy spans the full width of its container, with inline margins of zero if any were going to be set. Only text deliberately marked as prose with the measure class takes a reading cap.**
+  Why: a reading cap, or a margin narrowing the copy, leaves text wrapping into three lines beside empty space. Checked by: release gate 14.
 - **Light is the default theme. Dark comes only from a choice the person made, which persists. Do not follow the operating system unless the app opts in explicitly.**
   Why: portals were flipping to dark on first visit for anyone with a dark operating system. Checked by: js/novus-theme.js, which applies the default before first paint.
 - **Header, navigation and body text render at one size. Headings step up by their documented ratio, and never further.**
