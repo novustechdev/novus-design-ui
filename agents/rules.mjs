@@ -207,6 +207,13 @@ export const RULES = [
     enforcedBy: "the .field pattern in the catalog, and the field and input component docs",
   },
   {
+    id: "no-lock-icon",
+    scope: "always",
+    text: "A field the person cannot edit carries no padlock icon. Say it with the control itself: readonly on an input the person may focus and copy from, disabled on one they cannot, and a .field__help line naming why it is locked, like Set by your administrator. The state stays legible from the styling the control already has, so no new icon joins the label.",
+    why: "a padlock in a field is decoration that competes with the control, and it disappears from the accessibility tree, so the state it describes is left to colour alone",
+    enforcedBy: "the form field pattern in tokens.css, which styles the control states and needs no extra element",
+  },
+  {
     id: "button-gap",
     scope: "console",
     text: "Buttons sit in a .row, which spaces them and wraps at narrow widths; a lone button gets the same treatment, and a dialog or form foot ends the row with inline justify-content: flex-end. A button carries no margin of its own, so a button never touches another button, a field, a table or any other component, above or below it. Where the container around a row carries no spacing, give the row one.",
