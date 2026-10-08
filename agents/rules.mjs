@@ -185,6 +185,13 @@ export const RULES = [
     why: "a chart with baked-in colours goes wrong the moment the theme flips",
     enforcedBy: "the charts pattern documented in the catalog",
   },
+  {
+    id: "amount-formatting",
+    scope: "console",
+    text: "Every amount carries its currency and a thousands separator: 1,250,000.00 LKR. Never bare digits, never a rounded abbreviation standing in for a total.",
+    why: "an amount without its currency is a number rather than a price, and the reader is left hunting the unit on the rest of the page",
+    enforcedBy: "console.css and the Admin Kit reference applications",
+  },
 ];
 
 export const ALWAYS = RULES.filter((r) => r.scope === "always");
