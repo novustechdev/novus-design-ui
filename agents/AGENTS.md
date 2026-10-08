@@ -68,6 +68,8 @@ marketing pages.
   Why: hand-built filter bars were the specific complaint that produced this pattern. Checked by: console.css and the Admin Kit reference applications.
 - **Charts read their colours and fonts from the tokens at render time, redraw when the theme changes, and are accompanied by the same numbers as a table so a page without scripting still answers the question.**
   Why: a chart with baked-in colours goes wrong the moment the theme flips. Checked by: the charts pattern documented in the catalog.
+- **Every amount carries its currency and a thousands separator: 1,250,000.00 LKR. Never bare digits, never a rounded abbreviation standing in for a total.**
+  Why: an amount without its currency is a number rather than a price, and the reader is left hunting the unit on the rest of the page. Checked by: console.css and the Admin Kit reference applications.
 
 ## Checking your own work
 
