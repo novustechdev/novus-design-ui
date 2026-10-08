@@ -192,6 +192,13 @@ export const RULES = [
     why: "an amount without its currency is a number rather than a price, and the reader is left hunting the unit on the rest of the page",
     enforcedBy: "console.css and the Admin Kit reference applications",
   },
+  {
+    id: "button-gap",
+    scope: "console",
+    text: "Buttons sit in a .row, which spaces them and wraps at narrow widths; a lone button gets the same treatment, and a dialog or form foot ends the row with inline justify-content: flex-end. A button carries no margin of its own, so a button never touches another button, a field, a table or any other component, above or below it. Where the container around a row carries no spacing, give the row one.",
+    why: "buttons placed as bare siblings have no spacing of their own, so they touch, and the pair reads as one broken control rather than two choices",
+    enforcedBy: "the .row utility in tokens.css, and the spacing of the container around it",
+  },
 ];
 
 export const ALWAYS = RULES.filter((r) => r.scope === "always");
