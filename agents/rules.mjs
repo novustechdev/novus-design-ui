@@ -76,8 +76,8 @@ export const RULES = [
   {
     id: "content-width",
     scope: "always",
-    text: "Do not cap portal text at a reading measure. A paragraph uses the width it has, unless it is deliberately marked as prose with the measure class.",
-    why: "a reading cap leaves text wrapping into three lines beside empty space",
+    text: "Do not cap portal text at a reading measure, and do not narrow descriptive text with a margin: a paragraph, a help line or any other descriptive copy spans the full width of its container, with inline margins of zero if any were going to be set. Only text deliberately marked as prose with the measure class takes a reading cap.",
+    why: "a reading cap, or a margin narrowing the copy, leaves text wrapping into three lines beside empty space",
     enforcedBy: "release gate 14",
   },
   {
