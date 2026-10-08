@@ -54,7 +54,7 @@ screens also load `console.css` after the tokens.
 - **A field's default edit mode is a real label above the control, the .field pattern. A placeholder is a hint that disappears once someone types, so it never stands in for the label, and an input ships with no placeholder-only field. Keep the placeholder for format examples, like name@novustech.com.sg.**
   Why: a placeholder standing in for the label is gone the moment the field is filled, so the person cannot check what they typed. Checked by: the .field pattern in the catalog, and the field and input component docs.
 - **A field the person cannot edit carries no padlock icon. Say it with the control itself: readonly on an input the person may focus and copy from, disabled on one they cannot, and a .field__help line naming why it is locked, like Set by your administrator. The state stays legible from the styling the control already has, so no new icon joins the label.**
-  Why: a padlock in a field is decoration that competes with the control, and it disappears from the accessibility tree, so the state it describes is left to colour alone. Checked by: the form field pattern in tokens.css, which styles the control states and needs no extra element.
+  Why: a padlock in a field is decoration that competes with the control, and it disappears from the accessibility tree, so the state it describes is left to colour alone. Checked by: the form field pattern in tokens.css, whose disabled and readonly rules mute the surface and text, and which needs no extra element.
 
 ## Rules for console and portal screens
 

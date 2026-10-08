@@ -211,7 +211,7 @@ export const RULES = [
     scope: "always",
     text: "A field the person cannot edit carries no padlock icon. Say it with the control itself: readonly on an input the person may focus and copy from, disabled on one they cannot, and a .field__help line naming why it is locked, like Set by your administrator. The state stays legible from the styling the control already has, so no new icon joins the label.",
     why: "a padlock in a field is decoration that competes with the control, and it disappears from the accessibility tree, so the state it describes is left to colour alone",
-    enforcedBy: "the form field pattern in tokens.css, which styles the control states and needs no extra element",
+    enforcedBy: "the form field pattern in tokens.css, whose disabled and readonly rules mute the surface and text, and which needs no extra element",
   },
   {
     id: "button-gap",

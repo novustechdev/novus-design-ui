@@ -32,10 +32,25 @@
   </div>
 </section>
 
+<section class="demo" data-title="Locked fields (disabled and readonly)">
+  <div style="max-width:360px">
+    <div class="field">
+      <label for="f-lock-dis">Tenant ID</label>
+      <input class="input" id="f-lock-dis" type="text" value="tnt-88214" disabled>
+      <span class="field__help">Set by your administrator.</span>
+    </div>
+    <div class="field">
+      <label for="f-lock-ro">Account number</label>
+      <input class="input" id="f-lock-ro" type="text" value="0044 1900 7721" readonly>
+      <span class="field__help">Select and copy this number.</span>
+    </div>
+  </div>
+</section>
+
 <h2>Usage</h2>
 <ul class="bullets">
   <li>Every input has a real <code>&lt;label&gt;</code>; help and error lines are part of the field block.</li>
   <li>Focus shows the accent border plus the token focus ring, never remove the visible focus state.</li>
-  <li>A field the person cannot edit says so with <code>readonly</code> or <code>disabled</code> and a help line, never a padlock icon.</li>
+  <li>A locked field mutes its surface and text on the muted background. <code>disabled</code> shows a not-allowed cursor and cannot be focused; <code>readonly</code> keeps a text cursor and stays selectable and copyable, so it never carries a padlock icon.</li>
   <li>Touch targets stay ≥ 44px on mobile.</li>
 </ul>

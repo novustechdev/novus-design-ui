@@ -664,6 +664,9 @@ hr { border:0; border-top:1px solid var(--border); margin:var(--space-6) 0; }
 }
 .input:hover,.select:hover,.textarea:hover { border-color:var(--neutral-400); }
 .input:focus-visible { border-color:var(--accent); box-shadow:var(--focus-ring); outline:none; }
+.input:disabled,.select:disabled,.textarea:disabled,
+.input[readonly],.select[readonly],.textarea[readonly] { background:var(--bg-muted); color:var(--text-muted); border-color:var(--border); cursor:not-allowed; }
+.input[readonly],.select[readonly],.textarea[readonly] { cursor:text; } /* readonly stays focusable and copyable, so no not-allowed */
 .field--error .input { border-color:var(--danger); }
 .field__error { color:var(--danger-text); font-size:var(--text-sm); }
 .field__help  { color:var(--text-muted);  font-size:var(--text-sm); }
