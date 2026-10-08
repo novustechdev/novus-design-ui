@@ -187,6 +187,7 @@ const headerTpl = (signOutHref) => `${DEMOBAR}
         <summary class="btn btn--ghost btn--sm userdd__trigger">${I("user", "icon--sm")}<span class="userdd__name truncate">${USER.handle}</span>${I("chevron-down", "icon--sm")}</summary>
         <div class="card userdd__menu">
           <div class="userdd__who"><b>${USER.name}</b><span class="muted">${USER.email}</span></div>
+          <a class="userdd__item" href="settings.html#set-profile">${I("user", "icon--sm")} Profile</a>
           <div class="userdd__row"><span class="muted">Theme</span><button type="button" class="btn btn--ghost btn--sm target44 themetoggle" data-theme-toggle aria-label="Toggle light and dark theme">${I("moon", "ic-moon")}${I("sun", "ic-sun")}</button></div>
           <div class="userdd__foot"><a class="btn btn--secondary btn--sm" href="${signOutHref}">${I("sign-out", "icon--sm")} Sign out</a></div>
         </div>
