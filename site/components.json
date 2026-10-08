@@ -304,7 +304,7 @@
       "category": "Navigation",
       "classes": [".userdd", ".userdd__trigger", ".userdd__menu"],
       "fragment": "src/components/user-menu.html",
-      "summary": "Header account menu on native details: identity, theme, and Sign out at its foot.",
+      "summary": "Header account menu on native details: identity, Profile, theme, and Sign out at its foot.",
       "css": ["user-menu"]
     },
     {
