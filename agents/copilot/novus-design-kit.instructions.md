@@ -29,6 +29,8 @@ rules in `.github/copilot-instructions.md`.
   Why: a chart with baked-in colours goes wrong the moment the theme flips. Checked by: the charts pattern documented in the catalog.
 - **Every amount carries its currency and a thousands separator: 1,250,000.00 LKR. Never bare digits, never a rounded abbreviation standing in for a total.**
   Why: an amount without its currency is a number rather than a price, and the reader is left hunting the unit on the rest of the page. Checked by: console.css and the Admin Kit reference applications.
+- **Buttons sit in a .row, which spaces them and wraps at narrow widths; a lone button gets the same treatment, and a dialog or form foot ends the row with inline justify-content: flex-end. A button carries no margin of its own, so a button never touches another button, a field, a table or any other component, above or below it. Where the container around a row carries no spacing, give the row one.**
+  Why: buttons placed as bare siblings have no spacing of their own, so they touch, and the pair reads as one broken control rather than two choices. Checked by: the .row utility in tokens.css, and the spacing of the container around it.
 
 ## Checking your own work
 
