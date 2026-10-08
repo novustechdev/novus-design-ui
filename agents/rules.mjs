@@ -118,8 +118,8 @@ export const RULES = [
   {
     id: "plain-copy",
     scope: "always",
-    text: "Write plain copy. No em dashes anywhere in published text, and no marketing category jargon for the product.",
-    why: "the kit's copy style is checked mechanically and a stray character fails the release",
+    text: "Write plain copy. No em dashes anywhere in published text, and no marketing category jargon for the product. Add descriptive text only when it was asked for: no invented helper line, hint, explanation or tooltip filling a space the instruction left open. If a control needs no explanation, ship it without one.",
+    why: "the kit's copy style is checked mechanically and a stray character fails the release, and copy nobody asked for is a maintenance cost nobody agreed to",
     enforcedBy: "release gates 6 and 8, the copy audits",
   },
   {
