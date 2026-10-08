@@ -200,6 +200,13 @@ export const RULES = [
     enforcedBy: "console.css and the Admin Kit reference applications",
   },
   {
+    id: "label-first",
+    scope: "always",
+    text: "A field's default edit mode is a real label above the control, the .field pattern. A placeholder is a hint that disappears once someone types, so it never stands in for the label, and an input ships with no placeholder-only field. Keep the placeholder for format examples, like name@novustech.com.sg.",
+    why: "a placeholder standing in for the label is gone the moment the field is filled, so the person cannot check what they typed",
+    enforcedBy: "the .field pattern in the catalog, and the field and input component docs",
+  },
+  {
     id: "button-gap",
     scope: "console",
     text: "Buttons sit in a .row, which spaces them and wraps at narrow widths; a lone button gets the same treatment, and a dialog or form foot ends the row with inline justify-content: flex-end. A button carries no margin of its own, so a button never touches another button, a field, a table or any other component, above or below it. Where the container around a row carries no spacing, give the row one.",

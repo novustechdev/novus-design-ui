@@ -46,6 +46,8 @@ screens also load `console.css` after the tokens.
   Why: the kit's copy style is checked mechanically and a stray character fails the release. Checked by: release gates 6 and 8, the copy audits.
 - **When generating a component, add no white space just to make a layout look symmetric: no empty element balancing one side against the other, no padding on one column to match its neighbour. Balance comes from the grid or flex rules the pattern already sets. Every other gap is deliberate too, coming from a spacing token or a container that carries it (.row spaces its children, .field pairs its label and control).**
   Why: space invented to look balanced is invisible to the next change, so it drifts the moment one side moves and it never had a token behind it. Checked by: the spacing tokens in tokens.css and the container patterns in the catalog.
+- **A field's default edit mode is a real label above the control, the .field pattern. A placeholder is a hint that disappears once someone types, so it never stands in for the label, and an input ships with no placeholder-only field. Keep the placeholder for format examples, like name@novustech.com.sg.**
+  Why: a placeholder standing in for the label is gone the moment the field is filled, so the person cannot check what they typed. Checked by: the .field pattern in the catalog, and the field and input component docs.
 
 ## Rules for console and portal screens
 
