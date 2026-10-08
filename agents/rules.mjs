@@ -123,6 +123,13 @@ export const RULES = [
     enforcedBy: "release gates 6 and 8, the copy audits",
   },
   {
+    id: "no-stray-space",
+    scope: "always",
+    text: "When generating a component, add no white space just to make a layout look symmetric: no empty element balancing one side against the other, no padding on one column to match its neighbour. Balance comes from the grid or flex rules the pattern already sets. Every other gap is deliberate too, coming from a spacing token or a container that carries it (.row spaces its children, .field pairs its label and control).",
+    why: "space invented to look balanced is invisible to the next change, so it drifts the moment one side moves and it never had a token behind it",
+    enforcedBy: "the spacing tokens in tokens.css and the container patterns in the catalog",
+  },
+  {
     id: "console-shell",
     scope: "console",
     text: "Build console screens on the shipped shell: a header carrying the product lockup and an account menu, a grouped side navigation with line icons, and a page header with a breadcrumb and end-aligned actions.",
