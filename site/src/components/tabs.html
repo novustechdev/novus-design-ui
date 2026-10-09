@@ -4,7 +4,7 @@
       <label class="tabs__tab"><input type="radio" name="mtab" checked>Overview</label>
       <label class="tabs__tab"><input type="radio" name="mtab">History</label>
       <label class="tabs__tab"><input type="radio" name="mtab">API keys</label>
-      <label class="tabs__tab"><input type="radio" name="mtab">Audit log</label>
+      <label class="tabs__tab"><input type="radio" name="mtab">Audit log <span class="badge">12</span></label>
     </div>
     <section class="tabs__panel"><p style="margin:0">Merchant standing, limits, and contacts live here.</p></section>
     <section class="tabs__panel"><p style="margin:0">Settlement history for the last 90 days.</p></section>
@@ -17,7 +17,9 @@
 <ul class="bullets">
   <li>Tabs are native radio inputs switched by CSS <code>:has()</code>: no JavaScript, arrow keys move between them, and where <code>:has</code> is unsupported every panel shows at once rather than vanishing.</li>
   <li>Each <code>.tabs__tab</code> label wraps its own radio input, so there are no ids to keep in sync; <code>:has(input:checked)</code> drives the colour and each <code>.tabs__panel</code> matches its tab by order.</li>
-  <li>Colour carries three states: idle is <code>--text-secondary</code>, hover lifts to <code>--text</code> on <code>--bg-subtle</code>, and the selected tab fills <code>--accent</code> with <code>--text-on-accent</code>. Hover on the selected tab deepens to <code>--accent-hover</code> so it still reads as one.</li>
+  <li>Colour carries three states: idle is <code>--text-secondary</code>, hover lifts to <code>--text</code> on <code>--bg-subtle</code>, and the selected tab takes <code>--accent-text</code> over a 2px <code>--accent</code> rule that slides in under its label.</li>
+  <li>The active mark is an underline, not a fill. A fill belongs to <code>.btn</code>; a filled tab reads as a button and spends the accent the page is supposed to spend once.</li>
+  <li>Counts sit inside the tab as a <code>.badge</code>, so the number rides with the label instead of floating beside it.</li>
   <li>The radio is visually hidden but keeps its focus ring, drawn on the label with <code>focus-visible</code>. Never <code>display:none</code> the input or keyboard users lose the tab bar.</li>
   <li>Tabs divide one subject into facets. For moving between subjects use <a href="nav.html">navigation</a>; for a linear flow use the <a href="stepper.html">stepper</a>.</li>
   <li>Keep labels to one or two words; the CSS matches up to six.</li>

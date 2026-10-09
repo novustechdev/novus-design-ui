@@ -894,18 +894,23 @@ button.pill:hover, a.pill:hover { background:var(--bg-muted); color:var(--text);
   font:inherit; line-height:1; cursor:pointer; }
 .pill__x:hover { background:var(--bg-muted); }
 
-/* Tabs (native radios nested in their labels, switched by :has, works with JS off) */
+/* Tabs (native radios nested in their labels, switched by :has, works with JS off).
+   A fill is for .btn. A tab carries its state on an accent rule under the label and on the
+   label colour, so the row stays a row and the page keeps one accent per view. */
 .tabs__list { display:flex; flex-wrap:wrap; gap:var(--space-1); border-bottom:1px solid var(--border); }
 .tabs input[type="radio"] { position:absolute; opacity:0; pointer-events:none; }
 .tabs__tab { position:relative; display:inline-flex; align-items:center; gap:var(--space-2);
-  cursor:pointer; padding:var(--space-2) var(--space-4); min-height:2.75rem;
+  cursor:pointer; padding:var(--space-2) var(--space-3); min-height:2.75rem;
   border-radius:var(--radius-sm) var(--radius-sm) 0 0;
   font-size:var(--text-sm); font-weight:var(--weight-medium); color:var(--text-secondary);
   transition:color .15s ease, background-color .15s ease; }
 .tabs__tab:hover { color:var(--text); background:var(--bg-subtle); }
+.tabs__tab::after { content:""; position:absolute; left:var(--space-3); right:var(--space-3); bottom:-1px;
+  height:2px; border-radius:2px; background:var(--accent); transform:scaleX(0); transition:transform .18s ease; }
 .tabs__tab:has(input:focus-visible) { outline:2px solid var(--accent); outline-offset:-2px; }
-.tabs__tab:has(input:checked) { background:var(--accent); color:var(--text-on-accent); }
-.tabs__tab:has(input:checked):hover { background:var(--accent-hover); }
+.tabs__tab:has(input:checked) { color:var(--accent-text); }
+.tabs__tab:has(input:checked)::after { transform:scaleX(1); }
+.tabs__tab:has(input:checked):hover { color:var(--accent-text); }
 /* One panel per radio, matched by order. Six tabs is more than the pattern allows anyway. */
 .tabs__panel { display:none; }
 .tabs:has(.tabs__list>label:nth-of-type(1) input:checked)>.tabs__panel:nth-of-type(1),
@@ -915,7 +920,7 @@ button.pill:hover, a.pill:hover { background:var(--bg-muted); color:var(--text);
 .tabs:has(.tabs__list>label:nth-of-type(5) input:checked)>.tabs__panel:nth-of-type(5),
 .tabs:has(.tabs__list>label:nth-of-type(6) input:checked)>.tabs__panel:nth-of-type(6) { display:block; animation:tabfade .18s ease; }
 @keyframes tabfade { from { opacity:0; transform:translateY(4px); } }
-@media (prefers-reduced-motion:reduce) { .tabs__tab { transition:none; } .tabs__panel { animation:none; } }
+@media (prefers-reduced-motion:reduce) { .tabs__tab, .tabs__tab::after { transition:none; } .tabs__panel { animation:none; } }
 
 /* Table (data-dense; numerals right-aligned) */
 .table { width:100%; border-collapse:collapse; font-size:var(--text-sm); }
