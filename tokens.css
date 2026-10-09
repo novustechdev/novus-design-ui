@@ -873,6 +873,18 @@ dialog.slideover[open]::backdrop{animation:slideover-fade .22s ease;}
 .badge--danger  { background:var(--danger-subtle);  color:var(--danger-text);  border-color:transparent; }
 .badge__dot { width:.5rem; height:.5rem; border-radius:50%; background:currentColor; }
 
+/* Pills (labels, filters, removable chips) */
+.pill { display:inline-flex; align-items:center; gap:var(--space-2); padding:.25rem .75rem;
+  font-size:var(--text-sm); font-weight:var(--weight-medium); border-radius:var(--radius-pill);
+  background:var(--surface); color:var(--text-secondary); border:1px solid var(--border); min-height:2rem; }
+button.pill, a.pill { cursor:pointer; }
+button.pill:hover, a.pill:hover { background:var(--bg-muted); color:var(--text); }
+.pill[aria-pressed="true"] { background:var(--accent-subtle); color:var(--accent-text); border-color:transparent; }
+.pill__x { display:inline-flex; align-items:center; justify-content:center; width:1.25rem; height:1.25rem;
+  margin-right:-.375rem; border:0; border-radius:50%; background:transparent; color:inherit;
+  font:inherit; line-height:1; cursor:pointer; }
+.pill__x:hover { background:var(--bg-muted); }
+
 /* Table (data-dense; numerals right-aligned) */
 .table { width:100%; border-collapse:collapse; font-size:var(--text-sm); }
 .table th, .table td { text-align:left; padding:.625rem .75rem; border-bottom:1px solid var(--border); }

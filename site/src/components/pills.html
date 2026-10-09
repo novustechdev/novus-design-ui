@@ -1,0 +1,40 @@
+<section class="demo" data-title="Label pills">
+  <div class="row">
+    <span class="pill">Terminal fleet</span>
+    <span class="pill">Certificate renewal</span>
+    <span class="pill">Q4 window</span>
+  </div>
+</section>
+
+<section class="demo" data-title="Pills with a count">
+  <div class="row">
+    <span class="pill">Approvals <span class="badge">14</span></span>
+    <span class="pill">Attachments <span class="badge">3</span></span>
+    <span class="pill">Overdue <span class="badge badge--danger">2</span></span>
+  </div>
+</section>
+
+<section class="demo" data-title="Filter pills (aria-pressed)">
+  <div class="row" role="group" aria-label="Filter by state">
+    <button class="pill" aria-pressed="true" onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed') !== 'true')">All</button>
+    <button class="pill" aria-pressed="false" onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed') !== 'true')">Pending</button>
+    <button class="pill" aria-pressed="false" onclick="this.setAttribute('aria-pressed', this.getAttribute('aria-pressed') !== 'true')">Approved</button>
+  </div>
+</section>
+
+<section class="demo" data-title="Removable pills">
+  <div class="row" id="pill-tags">
+    <span class="pill">Harborline Freight <button class="pill__x" aria-label="Remove Harborline Freight" onclick="this.closest('.pill').remove()">&times;</button></span>
+    <span class="pill">Medium priority <button class="pill__x" aria-label="Remove Medium priority" onclick="this.closest('.pill').remove()">&times;</button></span>
+    <span class="pill">Owen Bristol <button class="pill__x" aria-label="Remove Owen Bristol" onclick="this.closest('.pill').remove()">&times;</button></span>
+  </div>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>A pill is a chip that <em>does</em> something; a <a href="badge.html">badge</a> is a chip that <em>says</em> something. Labels and states are badges; tags, filters, and selections are pills.</li>
+  <li>Toggle filters with <code>aria-pressed</code>, not a colour swap alone &mdash; the selected pill gets the accent tint and the state is announced.</li>
+  <li>Removable pills carry a <code>.pill__x</code> button with its own <code>aria-label</code> naming what it removes; "Remove" alone reads as noise to a screen reader.</li>
+  <li>Counts live inside a pill as a <code>.badge</code>, judgement colour only when the number judges.</li>
+  <li>Lay pills out in a <code>.row</code> so they wrap instead of colliding on a phone.</li>
+</ul>
