@@ -340,6 +340,14 @@
       "summary": "Facet switcher on native radio inputs; the selected tab takes the accent colour and a 2px rule, hover lifts the rest. Works with JavaScript off."
     },
     {
+      "id": "browser-tab",
+      "name": "Browser tab",
+      "category": "Theming",
+      "classes": ["one icon file per slot", "pinned <title>"],
+      "fragment": "src/components/browser-tab.html",
+      "summary": "What the tab strip shows: the product name pinned as the title, and a favicon cut per slot size so a 16px tab never downloads a 3 kB master."
+    },
+    {
       "id": "product-themes",
       "name": "Product themes",
       "category": "Theming",
