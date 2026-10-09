@@ -1,0 +1,318 @@
+- generic [active] [ref=f4e1]:
+  - banner [ref=f4e2]:
+    - generic [ref=f4e3]:
+      - link "Novus Design Kit home" [ref=f4e4] [cursor=pointer]:
+        - /url: ../index.html
+        - img "Novus Technologies" [ref=f4e5]
+        - generic [ref=f4e6]: design kit
+        - generic "Documented kit version" [ref=f4e7]: v0.9.0
+      - button "Toggle light and dark theme" [ref=f4e8] [cursor=pointer]
+  - navigation "Site" [ref=f4e11]:
+    - generic [ref=f4e12]:
+      - link "Overview" [ref=f4e13] [cursor=pointer]:
+        - /url: ../index.html
+      - link "Foundations" [ref=f4e14] [cursor=pointer]:
+        - /url: ../foundations/principles.html
+      - link "Components" [ref=f4e15] [cursor=pointer]:
+        - /url: ../components/overview.html
+      - link "Frameworks" [ref=f4e16] [cursor=pointer]:
+        - /url: ../frameworks/blazor.html
+      - link "Themes" [ref=f4e17] [cursor=pointer]:
+        - /url: ../themes/tailwind.html
+      - link "Admin Kit" [ref=f4e18] [cursor=pointer]:
+        - /url: ../admin-kit.html
+      - link "AI agents" [ref=f4e19] [cursor=pointer]:
+        - /url: ../agents.html
+      - link "Install" [ref=f4e20] [cursor=pointer]:
+        - /url: ../install.html
+  - main [ref=f4e21]:
+    - generic [ref=f4e22]:
+      - group [ref=f4e23]:
+        - generic [ref=f4e24]:
+          - link "Overview" [ref=f4e25] [cursor=pointer]:
+            - /url: overview.html
+          - paragraph [ref=f4e26]: General
+          - link "Button" [ref=f4e27] [cursor=pointer]:
+            - /url: button.html
+          - link "Badge" [ref=f4e28] [cursor=pointer]:
+            - /url: badge.html
+          - link "Pills" [ref=f4e29] [cursor=pointer]:
+            - /url: pills.html
+          - link "Avatar" [ref=f4e30] [cursor=pointer]:
+            - /url: avatar.html
+          - link "Brand lockup" [ref=f4e31] [cursor=pointer]:
+            - /url: brand-lockup.html
+          - paragraph [ref=f4e32]: Layout
+          - link "Container" [ref=f4e33] [cursor=pointer]:
+            - /url: container.html
+          - link "Grid & Row" [ref=f4e34] [cursor=pointer]:
+            - /url: grid-row.html
+          - link "Surface & text utilities" [ref=f4e35] [cursor=pointer]:
+            - /url: surface.html
+          - link "App shell" [ref=f4e36] [cursor=pointer]:
+            - /url: app-shell.html
+          - link "Page header" [ref=f4e37] [cursor=pointer]:
+            - /url: page-header.html
+          - paragraph [ref=f4e38]: Data Display
+          - link "Card" [ref=f4e39] [cursor=pointer]:
+            - /url: card.html
+          - link "Table" [ref=f4e40] [cursor=pointer]:
+            - /url: table.html
+          - link "Charts" [ref=f4e41] [cursor=pointer]:
+            - /url: charts.html
+          - link "Calendar" [ref=f4e42] [cursor=pointer]:
+            - /url: calendar.html
+          - link "Stats" [ref=f4e43] [cursor=pointer]:
+            - /url: stats.html
+          - link "Bullets" [ref=f4e44] [cursor=pointer]:
+            - /url: bullets.html
+          - link "Leaders" [ref=f4e45] [cursor=pointer]:
+            - /url: leaders.html
+          - link "Logo wall" [ref=f4e46] [cursor=pointer]:
+            - /url: logo-wall.html
+          - link "Collapse & Disclosure" [ref=f4e47] [cursor=pointer]:
+            - /url: collapse.html
+          - link "Timeline" [ref=f4e48] [cursor=pointer]:
+            - /url: timeline.html
+          - link "Value chain" [ref=f4e49] [cursor=pointer]:
+            - /url: value-chain.html
+          - link "Descriptions" [ref=f4e50] [cursor=pointer]:
+            - /url: descriptions.html
+          - paragraph [ref=f4e51]: Feedback
+          - link "Alert" [ref=f4e52] [cursor=pointer]:
+            - /url: alert.html
+          - link "Progress" [ref=f4e53] [cursor=pointer]:
+            - /url: progress.html
+          - link "Modal" [ref=f4e54] [cursor=pointer]:
+            - /url: modal.html
+          - link "Slide-over" [ref=f4e55] [cursor=pointer]:
+            - /url: slide-over.html
+          - link "Skeleton" [ref=f4e56] [cursor=pointer]:
+            - /url: skeleton.html
+          - link "Empty state" [ref=f4e57] [cursor=pointer]:
+            - /url: empty.html
+          - paragraph [ref=f4e58]: Forms
+          - link "Field & Input" [ref=f4e59] [cursor=pointer]:
+            - /url: field-input.html
+          - link "Dropdown" [ref=f4e60] [cursor=pointer]:
+            - /url: dropdown.html
+          - link "Lead form & CTA row" [ref=f4e61] [cursor=pointer]:
+            - /url: lead-form.html
+          - link "Date picker" [ref=f4e62] [cursor=pointer]:
+            - /url: date-picker.html
+          - link "Filter bar" [ref=f4e63] [cursor=pointer]:
+            - /url: filter-bar.html
+          - paragraph [ref=f4e64]: Navigation
+          - link "Nav" [ref=f4e65] [cursor=pointer]:
+            - /url: nav.html
+          - link "Side navigation" [ref=f4e66] [cursor=pointer]:
+            - /url: side-navigation.html
+          - link "Top navigation" [ref=f4e67] [cursor=pointer]:
+            - /url: top-navigation.html
+          - link "App switcher" [ref=f4e68] [cursor=pointer]:
+            - /url: app-switcher.html
+          - link "User menu" [ref=f4e69] [cursor=pointer]:
+            - /url: user-menu.html
+          - link "Stepper" [ref=f4e70] [cursor=pointer]:
+            - /url: stepper.html
+          - link "Tabs" [ref=f4e71] [cursor=pointer]:
+            - /url: tabs.html
+          - link "Breadcrumb" [ref=f4e72] [cursor=pointer]:
+            - /url: breadcrumb.html
+          - link "Pagination" [ref=f4e73] [cursor=pointer]:
+            - /url: pagination.html
+          - paragraph [ref=f4e74]: Templates
+          - link "Sign-in page" [ref=f4e75] [cursor=pointer]:
+            - /url: sign-in-page.html
+          - link "Signed-out page" [ref=f4e76] [cursor=pointer]:
+            - /url: signed-out-page.html
+          - link "Settings layout" [ref=f4e77] [cursor=pointer]:
+            - /url: settings-layout.html
+          - paragraph [ref=f4e78]: Theming
+          - link "Browser tab" [ref=f4e79] [cursor=pointer]:
+            - /url: browser-tab.html
+          - link "Product themes" [ref=f4e80] [cursor=pointer]:
+            - /url: product-themes.html
+      - generic [ref=f4e81]:
+        - paragraph [ref=f4e82]: Data Display
+        - heading "Table" [level=1] [ref=f4e83]
+        - paragraph [ref=f4e84]: "Data-dense table: single-line cells in a scroll container, right-aligned numerals, end-aligned actions."
+        - paragraph [ref=f4e85]:
+          - code [ref=f4e86]: .table
+          - text: ·
+          - code [ref=f4e87]: .tablewrap
+          - text: ·
+          - code [ref=f4e88]: .cell--wrap
+          - text: ·
+          - code [ref=f4e89]: .cell--actions
+          - text: ·
+          - code [ref=f4e90]: .cell-stack
+        - group "Preview width" [ref=f4e91]:
+          - radio "Web" [checked]
+          - generic [ref=f4e92] [cursor=pointer]: Web
+          - radio "Mobile 375px"
+          - generic [ref=f4e93] [cursor=pointer]: Mobile 375px
+        - figure [ref=f4e94]:
+          - table [ref=f4e98]:
+            - rowgroup [ref=f4e99]:
+              - row [ref=f4e100]:
+                - columnheader "Reference" [ref=f4e101]
+                - columnheader "Merchant" [ref=f4e102]
+                - columnheader "Product" [ref=f4e103]
+                - columnheader "Amount (USD)" [ref=f4e104]
+                - columnheader "Status" [ref=f4e105]
+                - columnheader "Submitted" [ref=f4e106]
+                - columnheader "Actions" [ref=f4e107]
+            - rowgroup [ref=f4e108]:
+              - row [ref=f4e109]:
+                - cell [ref=f4e110]:
+                  - code [ref=f4e111]: TXN-241099
+                - cell "Hillcrest Grocers Makati" [ref=f4e112]
+                - cell "novapay" [ref=f4e113]
+                - cell "151.17" [ref=f4e114]
+                - cell "Status · Settled" [ref=f4e115]
+                - cell "27 Aug 2026, 18:31" [ref=f4e118]
+                - cell [ref=f4e119]:
+                  - button "Detail" [ref=f4e120] [cursor=pointer]
+              - row [ref=f4e121]:
+                - cell [ref=f4e122]:
+                  - code [ref=f4e123]: TXN-241073
+                - cell "Riverside Fuel Station 12" [ref=f4e124]
+                - cell "novastore" [ref=f4e125]
+                - cell "401.87" [ref=f4e126]
+                - cell "Status · Pending" [ref=f4e127]
+                - cell "27 Aug 2026, 17:57" [ref=f4e130]
+                - cell [ref=f4e131]:
+                  - button "Detail" [ref=f4e132] [cursor=pointer]
+              - row [ref=f4e133]:
+                - cell [ref=f4e134]:
+                  - code [ref=f4e135]: TXN-240981
+                - cell "Harbourfront Pharmacy" [ref=f4e136]
+                - cell "novabank" [ref=f4e137]
+                - cell "96.40" [ref=f4e138]
+                - cell "Status · Failed" [ref=f4e139]
+                - cell "27 Aug 2026, 15:12" [ref=f4e142]
+                - cell [ref=f4e143]:
+                  - button "Detail" [ref=f4e144] [cursor=pointer]
+          - generic [ref=f4e145]:
+            - generic [ref=f4e146]: "Data table in a scroll container: every cell on one line"
+            - button "Copy" [ref=f4e147] [cursor=pointer]
+          - code [ref=f4e149]: <div class="card card--flush"> <div class="tablewrap"> <table class="table"> <thead><tr><th>Reference</th><th>Merchant</th><th>Product</th><th class="num">Amount (USD)</th><th>Status</th><th>Submitted</th><th class="cell--actions">Actions</th></tr></thead> <tbody> <tr><td><code>TXN-241099</code></td><td>Hillcrest Grocers Makati</td><td>novapay</td><td class="num">151.17</td><td><span class="badge badge--success"><span class="badge__dot"></span> Status · Settled</span></td><td>27 Aug 2026, 18:31</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr> <tr><td><code>TXN-241073</code></td><td>Riverside Fuel Station 12</td><td>novastore</td><td class="num">401.87</td><td><span class="badge badge--warning"><span class="badge__dot"></span> Status · Pending</span></td><td>27 Aug 2026, 17:57</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr> <tr><td><code>TXN-240981</code></td><td>Harbourfront Pharmacy</td><td>novabank</td><td class="num">96.40</td><td><span class="badge badge--danger"><span class="badge__dot"></span> Status · Failed</span></td><td>27 Aug 2026, 15:12</td><td class="cell--actions"><button class="btn btn--ghost btn--sm">Detail</button></td></tr> </tbody> </table> </div> </div>
+        - figure [ref=f4e150]:
+          - table [ref=f4e153]:
+            - rowgroup [ref=f4e154]:
+              - row [ref=f4e155]:
+                - columnheader "Holder" [ref=f4e156]
+                - columnheader "Terminal" [ref=f4e157]
+                - columnheader "Note" [ref=f4e158]
+            - rowgroup [ref=f4e159]:
+              - row [ref=f4e160]:
+                - cell "Unclaimed Credit analyst" [ref=f4e161]:
+                  - generic [ref=f4e162]:
+                    - generic [ref=f4e163]: Unclaimed
+                    - generic [ref=f4e164]: Credit analyst
+                - cell [ref=f4e165]:
+                  - code [ref=f4e166]: TRM-0128
+                - cell "Two failed settlements in the last hour on the same terminal; review the device before the next batch window." [ref=f4e167]
+              - row [ref=f4e168]:
+                - cell "ops.admin Operations" [ref=f4e169]:
+                  - generic [ref=f4e170]:
+                    - generic [ref=f4e171]: ops.admin
+                    - generic [ref=f4e172]: Operations
+                - cell [ref=f4e173]:
+                  - code [ref=f4e174]: TRM-0177
+                - cell "Gateway certificate renewal scheduled." [ref=f4e175]
+          - generic [ref=f4e176]:
+            - generic [ref=f4e177]: Two-line cells and a wrapping note column
+            - button "Copy" [ref=f4e178] [cursor=pointer]
+          - code [ref=f4e180]: <div class="tablewrap"> <table class="table"> <thead><tr><th>Holder</th><th>Terminal</th><th>Note</th></tr></thead> <tbody> <tr><td><div class="cell-stack"><span>Unclaimed</span><span class="cell-stack__meta">Credit analyst</span></div></td><td><code>TRM-0128</code></td><td class="cell--wrap">Two failed settlements in the last hour on the same terminal; review the device before the next batch window.</td></tr> <tr><td><div class="cell-stack"><span>ops.admin</span><span class="cell-stack__meta">Operations</span></div></td><td><code>TRM-0177</code></td><td class="cell--wrap">Gateway certificate renewal scheduled.</td></tr> </tbody> </table> </div>
+        - heading "Usage" [level=2] [ref=f4e181]
+        - list [ref=f4e182]:
+          - listitem [ref=f4e183]:
+            - text: ›Put every data table in a
+            - code [ref=f4e184]: .tablewrap
+            - text: ": cells stay on one line and the table scrolls sideways inside its container instead of squeezing columns, so identifiers, names, chips, dates, and amounts never break across lines. The page itself never scrolls sideways."
+          - listitem [ref=f4e185]:
+            - text: ›Free-text columns opt back into wrapping with
+            - code [ref=f4e186]: .cell--wrap
+            - text: ", which keeps a readable minimum width."
+          - listitem [ref=f4e187]:
+            - text: ›A second fact in a cell goes in a
+            - code [ref=f4e188]: .cell-stack
+            - text: ": two single-line lines, the second one muted."
+          - listitem [ref=f4e189]:
+            - text: ›Numeric columns take
+            - code [ref=f4e190]: class="num"
+            - text: on the header and the cells (right-aligned, tabular numerals); row actions take
+            - code [ref=f4e191]: .cell--actions
+            - text: ", aligned to the end."
+          - listitem [ref=f4e192]:
+            - text: ›Header cells sit on the subtle tint; rows highlight on hover for scanning. See
+            - link "Alignment and content fit" [ref=f4e193] [cursor=pointer]:
+              - /url: ../foundations/alignment.html
+            - text: .
+        - heading "Popovers and menus in a table" [level=3] [ref=f4e194]
+        - paragraph [ref=f4e195]: "The scroll wrap is a containing block, so anything absolutely positioned inside it is clipped by it. That is deliberate: it keeps visually hidden text from extending the page sideways on a phone. It also means a row menu, popover or tooltip must render outside the wrap rather than inside the cell it belongs to."
+        - heading "CSS" [level=2] [ref=f4e196]
+        - paragraph [ref=f4e197]:
+          - text: These rules ship in the console pattern layer,
+          - code [ref=f4e198]: admin-kits/shared/novus-admin.css
+          - text: ", which this site and every Admin Kit flavor load after"
+          - code [ref=f4e199]: tokens.css
+          - text: . Copy the whole layer, or only the sections below; every value is a token.
+        - figure [ref=f4e200]:
+          - generic [ref=f4e201]:
+            - generic [ref=f4e202]: "@pattern content-fit"
+            - button "Copy" [ref=f4e203] [cursor=pointer]
+          - code [ref=f4e205]: "/* One short value, one line. Tables scroll inside .tablewrap instead of squeezing; free text opts back into wrapping; fixed slots truncate. */ .badge, .filterchip, .quickchip, .crumbs li, .paginator__label, .listfooter__range, .nowrap { white-space: nowrap; } .truncate { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } /* Positioned so the wrap is the containing block for its own absolutely positioned descendants. Without this, a .sr-only span inside a horizontally scrolled table resolves against the initial containing block, escapes this clip, and extends the document's scroll width: the page scrolls sideways on a phone while the table looks correctly contained. A popover inside a scrolling table must therefore be rendered outside the wrap, because it is now clipped by it. */ .tablewrap { position: relative; overflow-x: auto; overscroll-behavior-x: contain; } .tablewrap table th, .tablewrap table td { white-space: nowrap; vertical-align: middle; } .tablewrap table .cell--wrap { white-space: normal; min-width: 16rem; } .table th.num, .table td.num { text-align: right; font-variant-numeric: tabular-nums; } .table th.cell--actions, .table td.cell--actions { text-align: right; width: 1%; } .cell--actions .btn + .btn { margin-inline-start: var(--space-2); } .cell-stack { display: flex; flex-direction: column; gap: calc(var(--space-1) / 2); } .cell-stack__meta { font-size: var(--text-xs); line-height: var(--lh-xs); color: var(--text-secondary); } /* Portal text uses the width of its row: the kit's reading measure is for prose, so console screens reset it. A measure is opted into explicitly (constitution 1.12.0, Principle IV). */ .adminmain p, .adminmain li, .authcard p, .settings p, .signedout p, .chartcard p { max-width: none; } .measure { max-width: 68ch; }"
+        - generic [ref=f4e206]:
+          - link "‹ Card" [ref=f4e208] [cursor=pointer]:
+            - /url: card.html
+          - link "Charts ›" [ref=f4e210] [cursor=pointer]:
+            - /url: charts.html
+  - contentinfo [ref=f4e211]:
+    - generic [ref=f4e212]:
+      - separator [ref=f4e213]
+      - generic [ref=f4e214]:
+        - generic [ref=f4e215]:
+          - generic [ref=f4e216]: Documentation
+          - link "Foundations" [ref=f4e217] [cursor=pointer]:
+            - /url: ../foundations/principles.html
+          - link "Components" [ref=f4e218] [cursor=pointer]:
+            - /url: ../components/overview.html
+          - link "Frameworks" [ref=f4e219] [cursor=pointer]:
+            - /url: ../frameworks/blazor.html
+          - link "Themes" [ref=f4e220] [cursor=pointer]:
+            - /url: ../themes/tailwind.html
+          - link "Install" [ref=f4e221] [cursor=pointer]:
+            - /url: ../install.html
+        - generic [ref=f4e222]:
+          - generic [ref=f4e223]: Admin Kit
+          - link "Overview" [ref=f4e224] [cursor=pointer]:
+            - /url: ../admin-kit.html
+          - 'link "Live demo: Blazor" [ref=f4e225] [cursor=pointer]':
+            - /url: ../demos/blazor/
+          - 'link "Live demo: Tailwind" [ref=f4e226] [cursor=pointer]':
+            - /url: ../demos/tailwind/
+        - generic [ref=f4e227]:
+          - generic [ref=f4e228]: Resources
+          - link "npm package" [ref=f4e229] [cursor=pointer]:
+            - /url: https://www.npmjs.com/package/novus-design-kit
+          - link "GitHub repository" [ref=f4e230] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui
+          - link "Releases" [ref=f4e231] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui/releases
+          - link "Changelog" [ref=f4e232] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui/blob/main/CHANGELOG.md
+          - link "Asset index" [ref=f4e233] [cursor=pointer]:
+            - /url: ../foundations/assets.html
+        - generic [ref=f4e234]:
+          - generic [ref=f4e235]: Novus Technologies
+          - link "www.novustech.com.sg" [ref=f4e236] [cursor=pointer]:
+            - /url: https://www.novustech.com.sg
+          - link "LinkedIn" [ref=f4e237] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/novus-technologies-pte-ltd/
+      - paragraph [ref=f4e238]:
+        - text: © 2026 Novus Technologies Pte Ltd · This reference site documents and is built with
+        - code [ref=f4e239]: novus-design-kit v0.9.0
+        - text: .
