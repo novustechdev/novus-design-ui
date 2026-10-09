@@ -36,11 +36,11 @@
 
 <section class="demo" data-title="Trigger + slide-over open">
   <button class="btn btn--primary" onclick="this.nextElementSibling.showModal()">Open slide-over</button>
-  <dialog class="slideover">
+  <dialog class="slideover" aria-labelledby="slideover-title">
     <div class="slideover__head">
       <div>
         <span class="slideover__code">CR-NVP-0013</span>
-        <h3 class="slideover__title">Gateway certificate renewal</h3>
+        <h3 class="slideover__title" id="slideover-title">Gateway certificate renewal</h3>
         <p class="slideover__sub">Waiting on client approval</p>
       </div>
       <button class="modal-close" aria-label="Close" onclick="this.closest('dialog').close()">&times;</button>
@@ -68,6 +68,7 @@
 <h2>Usage</h2>
 <ul class="bullets">
   <li>A slide-over is a <code>&lt;dialog class="slideover"&gt;</code>. The right edge pin, focus trap, Esc, and the inert page behind come from the element itself; <code>showModal()</code> opens it, nothing else does.</li>
+  <li>Give the dialog an <code>aria-labelledby</code> pointing at its title so a screen reader announces the record, not just "dialog".</li>
   <li>Use it when the task stays on one record and the page behind is context worth keeping visible. A <a href="modal.html">modal</a> asks for a decision; a slide-over shows a record and offers actions at its foot.</li>
   <li>The slide is a keyframe on <code>[open]</code>, not a measured transform. Nothing scripts the panel open or shut, so it costs nothing and cannot desync.</li>
   <li>Body scrolls on its own and carries <code>overscroll-behavior: contain</code>, so scrolling to the foot does not drag the page behind it. On a phone the panel goes full width; past 60rem the body splits into content and a details column.</li>

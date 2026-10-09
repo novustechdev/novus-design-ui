@@ -810,6 +810,9 @@ dialog.slideover[open]::backdrop{animation:slideover-fade .22s ease;}
 .slideover__body h4{margin:var(--space-4) 0 var(--space-2);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-muted);}
 .slideover__cols{display:grid;gap:var(--space-6);}
 .slideover__foot{display:flex;gap:var(--space-2);justify-content:flex-end;padding:var(--space-4) var(--space-6);border-top:1px solid var(--border);background:var(--bg-subtle);}
+/* The foot is the bottom edge of a full-height panel, which on a phone is where the
+   home indicator lives. max() keeps the token spacing when there is no inset. */
+@supports (padding:max(0px)){.slideover__foot{padding-bottom:max(var(--space-4),env(safe-area-inset-bottom));}}
 @media (min-width:60rem){.slideover__cols{grid-template-columns:minmax(0,1fr) 16rem;}}
 /* The anatomy demo on the docs page draws the panel inline rather than opening
    one, so it gets a frame and a capped height instead of the right-edge pin. */
