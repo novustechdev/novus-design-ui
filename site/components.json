@@ -282,9 +282,9 @@
       "id": "side-navigation",
       "name": "Side navigation",
       "category": "Navigation",
-      "classes": [".adminnav", ".navgroup", ".navlink", ".navtoggle__input", ".navscrim"],
+      "classes": [".adminnav", ".navgroup", ".navlink", ".navtoggle__input", ".navscrim", ".adminnav--flat", ".navtoggle--edge"],
       "fragment": "src/components/side-navigation.html",
-      "summary": "Grouped console navigation with line icons that collapses on desktop and opens as a drawer on phones, without JavaScript.",
+      "summary": "Two sidebars from one mechanism: grouped (NovaCard) with the appbar hamburger, flat (NovaPulse) with a chevron on its own edge. Both collapse to an icon rail on desktop and open as a drawer on phones, without JavaScript.",
       "css": ["console-shell", "side-navigation"]
     },
     {

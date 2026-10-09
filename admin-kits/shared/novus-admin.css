@@ -133,6 +133,24 @@
 .navgroup[open] > .navgroup__label .navgroup__chevron { transform: rotate(180deg); }
 .navgroup > .navlink { padding-inline-start: calc(var(--space-3) + 1rem + var(--space-2)); }
 @media (pointer: coarse) { .navlink, .navgroup__label { min-height: 2.75rem; } }
+/* Variant — flat. For a product whose destinations are peers with no grouping to
+   nest (a monitoring surface), the nav is one flat list. Its collapse control is
+   a chevron pinned to the sidebar's own edge, not an appbar hamburger: collapsing
+   hides only labels, so the button belongs beside the thing it collapses. It
+   drives the same hidden checkbox, so every rail rule above applies unchanged. */
+.adminnav--flat { position: relative; padding-block-start: var(--space-6); }
+.navtoggle--edge { position: absolute; inset-block-start: var(--space-3); inset-inline-start: 100%; z-index: 5; translate: -50% 0; display: grid; place-items: center; width: 1.5rem; height: 1.5rem; padding: 0; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-2); color: var(--text-secondary); cursor: pointer; }
+.navtoggle--edge:hover { color: var(--text); }
+.navtoggle--edge .icon { width: 1rem; height: 1rem; }
+.navtoggle--edge .ic-expand { display: none; }
+.adminwrap:has(.navtoggle__input:checked) .navtoggle--edge .ic-collapse { display: none; }
+.adminwrap:has(.navtoggle__input:checked) .navtoggle--edge .ic-expand { display: block; }
+@media (min-width: 900px) {
+  .adminwrap:has(.adminnav--flat) .navtoggle { display: none; }
+}
+@media (max-width: 899.98px) {
+  .navtoggle--edge { display: none; }
+}
 /* @end */
 
 /* @pattern top-navigation */
