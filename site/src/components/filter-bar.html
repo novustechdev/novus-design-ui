@@ -82,6 +82,7 @@
 
 <section class="demo" data-title="Compact row: a few plain filters that scroll instead of wrapping">
   <div class="filterrow filterrow--nowrap">
+    <span class="selectwrap"><select class="select" aria-label="Period"><option>Last 90 days</option><option>Last 30 days</option><option>Last 7 days</option><option>Custom range</option></select></span>
     <input class="input" type="search" placeholder="Account" aria-label="Account">
     <span class="selectwrap"><select class="select" aria-label="Type"><option>All types</option><option>Settlement</option><option>Refund</option></select></span>
     <span class="selectwrap"><select class="select" aria-label="Channel"><option>All channels</option><option>Card present</option><option>QR</option></select></span>
@@ -96,6 +97,6 @@
   <li>The sheet has two panes: categories on one side (native radio tabs), the chosen category's options on the other (checkboxes). Choosing a category never closes the sheet; long option lists scroll inside their pane; six categories at most. On phones the categories sit above the options.</li>
   <li>Every ticked option appears as a removable chip naming its category and value, followed by Clear all. Options within a category combine with OR; categories combine with AND.</li>
   <li>Quick chips with live counts sit above queue-style lists for the one dimension people switch most (status, bucket); exactly one is selected. Keep that dimension out of the sheet so the two controls never disagree.</li>
-  <li>Only a few filters? Use the compact row: plain controls on one line that scrolls sideways instead of wrapping.</li>
+  <li>Only a few filters? Use the compact row: plain controls on one line that scrolls sideways instead of wrapping. A dropdown there is a trigger, not a text field &mdash; it keeps the Filters button's height, radius and inset padding, and the row's inline padding keeps the first and last control off the edge it scrolls against.</li>
   <li>Everything opens and closes with JavaScript off (native details, radios, checkboxes); applying the filters is the application's job, and an empty result offers to clear them.</li>
 </ul>

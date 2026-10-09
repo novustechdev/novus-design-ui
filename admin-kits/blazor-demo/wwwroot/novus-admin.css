@@ -385,9 +385,12 @@
 .filterchip__remove:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 .linkbtn { min-height: 2.25rem; padding: var(--space-1) var(--space-2); border: 0; border-radius: var(--radius-sm); background: transparent; font: inherit; font-size: var(--text-sm); color: var(--accent-text); text-decoration: underline; white-space: nowrap; cursor: pointer; }
 .linkbtn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-/* compact variant: one row of plain controls that scrolls instead of wrapping */
-.filterrow { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-4); }
-.filterrow .select { width: auto; min-height: 2.75rem; }
+/* A dropdown in a toolbar is a trigger, not a text field: same height, radius and
+   inset padding as the Filters button above, so a row of them reads as one set of
+   controls. The row's inline padding keeps the first and last control off the edge
+   it scrolls against — a control flush to that edge reads as clipped, not as last. */
+.filterrow { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; margin-bottom: var(--space-4); padding-inline: var(--space-1); }
+.filterrow .select { width: auto; min-height: 2.75rem; padding-block: 0; padding-inline: var(--space-3) calc(var(--space-4) * 2); border-radius: var(--radius-md); }
 .filterrow--nowrap { flex-wrap: nowrap; overflow-x: auto; padding-bottom: var(--space-1); }
 .filterrow--nowrap > * { flex: 0 0 auto; }
 .filterrow--nowrap > input[type="search"] { flex: 1 1 14rem; min-width: 11rem; }
