@@ -24,6 +24,7 @@
 <h2>Usage</h2>
 <ul class="bullets">
   <li>For choosing one value, use the native <code>&lt;select class="select"&gt;</code> inside a <code>.selectwrap</code>: the wrapper draws the chevron inset from the edge and the platform provides the option list, keyboard support, and mobile pickers.</li>
+  <li>Which of the two treatments it takes follows from where it sits. Inside a <code>.field</code> it is a field: it fills the column and has a label above it. Inside <code>.filterrow</code> or <code>.listfooter</code> it is a control in a row, so it takes the Filters trigger's height, radius and inset padding &mdash; otherwise a bare select reads as a text field parked among buttons, with its label crowding the left edge.</li>
   <li>For an action menu, use native <code>&lt;details&gt;</code> with a button-styled <code>&lt;summary&gt;</code> and a <code>.card</code> panel: it opens on click, closes on a second click, and needs no JavaScript.</li>
   <li>Menus are click-driven, never hover: touch devices and keyboard users depend on it.</li>
   <li>Keep menu items short, verb-first, and never more than seven; longer lists belong in a select.</li>
