@@ -791,6 +791,31 @@ dialog.vdialog::backdrop{background:rgba(11,22,32,.55);backdrop-filter:blur(3px)
 .modal-close{border:0;background:transparent;color:var(--text-secondary);font-size:1.1rem;line-height:1;cursor:pointer;width:36px;height:36px;border-radius:var(--radius-md);flex:0 0 auto;}
 .modal-close:hover{background:var(--bg-subtle);color:var(--text);}
 
+/* Slide-over panel — a native <dialog> pinned to the right edge. Same platform
+   deal as .vdialog, so focus trap, Esc, and the inert background come free from
+   showModal(); only the anchor and the slide are ours. The slide is a transition
+   on [open], so no script opens, closes, or measures it. */
+dialog.slideover{margin:0 0 0 auto;padding:0;width:min(40rem,100%);max-width:100%;height:100dvh;max-height:100dvh;border:0;border-left:1px solid var(--border);border-radius:0;background:var(--surface);color:var(--text);box-shadow:var(--shadow-3);}
+dialog.slideover::backdrop{background:var(--scrim);backdrop-filter:blur(3px);}
+dialog.slideover[open]{animation:slideover-in .22s cubic-bezier(.2,.7,.3,1);}
+dialog.slideover[open]::backdrop{animation:slideover-fade .22s ease;}
+@keyframes slideover-in{from{transform:translateX(100%);}to{transform:translateX(0);}}
+@keyframes slideover-fade{from{opacity:0;}to{opacity:1;}}
+.slideover{display:grid;grid-template-rows:auto minmax(0,1fr) auto;}
+.slideover__head{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--space-4);padding:var(--space-5) var(--space-6);border-bottom:1px solid var(--border);}
+.slideover__title{margin:0;font-size:var(--text-lg);line-height:var(--lh-lg);}
+.slideover__code{display:block;font-size:var(--text-xs);color:var(--text-muted);letter-spacing:var(--tracking-wide);}
+.slideover__sub{margin:var(--space-1) 0 0;font-size:var(--text-sm);color:var(--text-secondary);}
+.slideover__body{padding:var(--space-5) var(--space-6);overflow-y:auto;overscroll-behavior:contain;}
+.slideover__body h4{margin:var(--space-4) 0 var(--space-2);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-muted);}
+.slideover__cols{display:grid;gap:var(--space-6);}
+.slideover__foot{display:flex;gap:var(--space-2);justify-content:flex-end;padding:var(--space-4) var(--space-6);border-top:1px solid var(--border);background:var(--bg-subtle);}
+@media (min-width:60rem){.slideover__cols{grid-template-columns:minmax(0,1fr) 16rem;}}
+/* The anatomy demo on the docs page draws the panel inline rather than opening
+   one, so it gets a frame and a capped height instead of the right-edge pin. */
+.slideover--preview{height:auto;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-1);overflow:hidden;}
+@media (prefers-reduced-motion:reduce){dialog.slideover[open],dialog.slideover[open]::backdrop{animation:none;}}
+
 /* Lead-capture form (in a dialog) — name / title / organisation / email / mobile. */
 .lead-form{display:grid;gap:var(--space-3);margin-top:var(--space-2);}
 .lead-form .field{display:flex;flex-direction:column;gap:.3rem;}

@@ -198,6 +198,14 @@
       "summary": "In-page detail dialog, native dialog gives focus trap, Esc, and inert background."
     },
     {
+      "id": "slide-over",
+      "name": "Slide-over",
+      "category": "Feedback",
+      "classes": [".slideover", ".slideover__head", ".slideover__body", ".slideover__cols", ".slideover__foot", ".slideover--preview"],
+      "fragment": "src/components/slide-over.html",
+      "summary": "Right-edge panel for one record: native dialog gives focus trap and an inert page, the slide is a keyframe on open."
+    },
+    {
       "id": "skeleton",
       "name": "Skeleton",
       "category": "Feedback",
