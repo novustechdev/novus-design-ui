@@ -166,7 +166,18 @@ const SITE_CSS = `
   .pvtoggle input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -2px; }
   .demo__canvas .authpage, .demo__canvas .signedout, .demo__canvas .adminwrap { min-height: 0; }
   .demo:has(details[open]), .demo:has(.nv-apps__panel:not([hidden])) { overflow: visible; }
-  body:has(#pv-mobile:checked) .demo__canvas { max-width: 375px; border-inline-end: 1px dashed var(--border-strong); }
+  /* The Mobile 375px toggle narrows the box, but a media query still reads the real
+     viewport — so wide layouts stay on inside a phone-width canvas and squeeze the text
+     column to nothing. container-type gives the canvas its own query context; restate the
+     phone rules under @container. Keep in step with the max-width:40rem block in tokens.css,
+     and add a line here when a component gains a wide-only layout. */
+  body:has(#pv-mobile:checked) .demo__canvas { max-width: 375px; border-inline-end: 1px dashed var(--border-strong); container-type: inline-size; }
+  @container (max-width: 40rem) {
+    .slideover__cols { grid-template-columns: minmax(0, 1fr); }
+    .slideover__head { position: relative; padding-right: 3.75rem; }
+    .slideover__head > div { flex: 1 1 100%; }
+    .slideover__foot > .btn { flex: 1 1 0; }
+  }
   @media (prefers-reduced-motion: reduce) { .pvtoggle label { transition: none; } }
 `;
 
