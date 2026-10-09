@@ -31,10 +31,12 @@ function dedent(s) {
 }
 
 /* <section class="demo" data-title="X"> live markup </section>
-   → rendered example + escaped, copyable snippet (snippet === example by construction). */
+   → rendered example + escaped, copyable snippet (snippet === example by construction).
+   The closing tag must be flush-left: fragments nest their own <section> (tab panels,
+   setting sections), and a lazy `.*?` would stop at the first one and tear the page up. */
 function transformDemos(html) {
   return html.replace(
-    /<section class="demo"([^>]*)>([\s\S]*?)<\/section>/g,
+    /<section class="demo"([^>]*)>([\s\S]*?)\n<\/section>/g,
     (_, attrs, inner) => {
       const title = (attrs.match(/data-title="([^"]*)"/) || [, "Example"])[1];
       const code = dedent(inner);
