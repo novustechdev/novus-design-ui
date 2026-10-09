@@ -233,9 +233,9 @@
       "id": "empty",
       "name": "Empty state",
       "category": "Feedback",
-      "classes": ["composes .card and .btn"],
+      "classes": [".empty", ".empty__title", ".empty__text", ".empty__action", "composes .card and .btn"],
       "fragment": "src/components/empty.html",
-      "summary": "Plain text plus one action: what is empty, when content appears, and the button that fixes it."
+      "summary": "The default for any list, table, or search result with no rows: what is empty, when content appears, and the one action that fixes it."
     },
     {
       "id": "dropdown",
