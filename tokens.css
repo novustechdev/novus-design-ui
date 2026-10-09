@@ -822,6 +822,15 @@ dialog.slideover[open]::backdrop{animation:slideover-fade .22s ease;}
    home indicator lives. max() keeps the token spacing when there is no inset. */
 @supports (padding:max(0px)){.slideover__foot{padding-bottom:max(var(--space-4),env(safe-area-inset-bottom));}}
 @media (min-width:60rem){.slideover__cols{grid-template-columns:minmax(0,1fr) 16rem;}}
+/* Phone: pin the close to the corner so the title gets the full measure, and let
+   the actions fill the foot instead of huddling at one edge. */
+@media (max-width:40rem){
+  .slideover__head{position:relative;padding-right:var(--space-6);}
+  .slideover__head:has(>.modal-close){padding-right:3.75rem;}
+  .slideover__head>div{flex:1 1 100%;}
+  .slideover__head>.modal-close{position:absolute;top:var(--space-4);right:var(--space-3);}
+  .slideover__foot>.btn{flex:1 1 0;}
+}
 /* The anatomy demo on the docs page draws the panel inline rather than opening
    one, so it gets a frame and a capped height instead of the right-edge pin. */
 .slideover--preview{height:auto;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-1);overflow:hidden;}
