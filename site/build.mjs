@@ -199,10 +199,14 @@ function sideNav(groups, currentFile) {
 }
 
 const KIT_VERSION = JSON.parse(read(join(ROOT, "package.json"))).version;
+/* The browser tab title is the product, not the page you happen to be on: it must not
+   change as you move through the menu, or every tab in a row of open pages reads the same
+   and you lose which one you are looking at. */
+const SITE_TITLE = "Novus Design Kit";
 const header = read(join(SRC, "partials/header.html")).replaceAll("{{VERSION}}", KIT_VERSION);
 const footer = read(join(SRC, "partials/footer.html")).replaceAll("{{VERSION}}", KIT_VERSION).replaceAll("{{YEAR}}", String(new Date().getFullYear()));
 
-function shell({ title, content, depth, active, sidebar }) {
+function shell({ content, depth, active, sidebar }) {
   const rel = "../".repeat(depth);
   let hdr = header.replaceAll("{{REL}}", rel);
   for (const k of ["home", "foundations", "components", "frameworks", "themes", "admin", "agents", "install"]) {
@@ -216,11 +220,14 @@ function shell({ title, content, depth, active, sidebar }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} · Novus Design Kit</title>
+<title>${esc(SITE_TITLE)}</title>
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B1620">
-<link rel="icon" type="image/png" sizes="512x512" href="${rel}assets/novus-favicon.png">
-<link rel="apple-touch-icon" href="${rel}assets/novus-favicon.png">
+<!-- Tab icons are drawn at the size they are used: 16px is 358 bytes, 32px is 506.
+     The 512 master only serves the manifest, where a large icon is wanted. -->
+<link rel="icon" type="image/png" sizes="32x32" href="${rel}assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${rel}assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="${rel}assets/favicon-180.png">
 <link rel="manifest" href="${rel}manifest.webmanifest">
 <link rel="stylesheet" href="${rel}tokens.css">
 <link rel="stylesheet" href="${rel}assets/novus-admin.css">
@@ -398,8 +405,7 @@ for (const name of ["index.html", "install.html", "admin-kit.html", "agents.html
   if (raw.includes("<!--AGENT-RULES-->")) raw = raw.replace("<!--AGENT-RULES-->", agentRules());
   if (raw.includes("<!--AGENT-PROMPTS-->")) raw = raw.replace("<!--AGENT-PROMPTS-->", agentPrompts());
   if (raw.includes("<!--AGENT-FILES-->")) raw = raw.replace("<!--AGENT-FILES-->", agentFiles());
-  const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, basename(name, ".html")])[1];
-  writePage(join(DIST, name), shell({ title, content: transformDemos(raw), depth: 0, active: ROOT_PAGE_KEY[name] }));
+  writePage(join(DIST, name), shell({ content: transformDemos(raw), depth: 0, active: ROOT_PAGE_KEY[name] }));
   built.push(name);
 }
 
@@ -428,9 +434,8 @@ if (existsSync(foundDir)) {
     let raw = read(join(foundDir, f));
     if (raw.includes("<!--ASSET-INDEX-->")) raw = raw.replace("<!--ASSET-INDEX-->", assetIndex());
     if (raw.includes("<!--ICON-INDEX-->")) raw = raw.replace("<!--ICON-INDEX-->", iconIndex());
-    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, label])[1];
     const sidebar = sideNav([["Foundations", present.map(([g, l]) => [g, l])]], f);
-    writePage(join(DIST, "foundations", f), shell({ title, content: transformDemos(raw), depth: 1, active: "foundations", sidebar }));
+    writePage(join(DIST, "foundations", f), shell({ content: transformDemos(raw), depth: 1, active: "foundations", sidebar }));
     built.push(`foundations/${f}`);
   }
 }
@@ -439,11 +444,10 @@ if (existsSync(foundDir)) {
    only guides the verification record marks "pass" are published (FR-017). */
 for (const [dir, label] of GUIDE_SECTIONS) {
   const present = publishedGuides[dir];
-  for (const [f, name] of present) {
+  for (const [f] of present) {
     const raw = read(join(SRC, dir, f));
-    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, name])[1];
     const sidebar = sideNav([[label, present.map(([g, l]) => [g, l])]], f);
-    writePage(join(DIST, dir, f), shell({ title, content: transformDemos(raw), depth: 1, active: dir, sidebar }));
+    writePage(join(DIST, dir, f), shell({ content: transformDemos(raw), depth: 1, active: dir, sidebar }));
     built.push(`${dir}/${f}`);
   }
 }
@@ -487,7 +491,7 @@ ${c.css ? patternCss(c.css) : ""}
   <span>${prev ? `<a href="${prev.id}.html">‹ ${esc(prev.name)}</a>` : ""}</span>
   <span>${next ? `<a href="${next.id}.html">${esc(next.name)} ›</a>` : ""}</span>
 </div>`;
-    writePage(join(DIST, "components", `${c.id}.html`), shell({ title: c.name, content, depth: 1, active: "components", sidebar: sideNav(compGroups, `${c.id}.html`) }));
+    writePage(join(DIST, "components", `${c.id}.html`), shell({ content, depth: 1, active: "components", sidebar: sideNav(compGroups, `${c.id}.html`) }));
     built.push(`components/${c.id}.html`);
   });
 
@@ -564,12 +568,12 @@ ${c.css ? patternCss(c.css) : ""}
   });
 })();
 </script>`;
-  writePage(join(DIST, "components", "overview.html"), shell({ title: "Components", content: ov, depth: 1, active: "components", sidebar: sideNav(compGroups, "overview.html") }));
+  writePage(join(DIST, "components", "overview.html"), shell({ content: ov, depth: 1, active: "components", sidebar: sideNav(compGroups, "overview.html") }));
   built.push("components/overview.html");
 
   /* Redirect stub for anyone landing on /components or /components/ — never a content page. */
   writeFileSync(join(DIST, "components", "index.html"), `<!DOCTYPE html><!--redirect-stub-->
-<html lang="en"><head><meta charset="utf-8"><title>Components · Novus Design Kit</title>
+<html lang="en"><head><meta charset="utf-8"><title>${esc(SITE_TITLE)}</title>
 <script>location.replace(location.pathname.replace(/\\/?(index(\\.html)?)?$/, "/overview.html"));</script>
 </head><body><p><a href="overview.html">Component overview</a></p></body></html>
 `);
