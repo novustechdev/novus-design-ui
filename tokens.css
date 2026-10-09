@@ -811,6 +811,12 @@ dialog.slideover[open]::backdrop{animation:slideover-fade .22s ease;}
 .slideover__body h4{margin:var(--space-4) 0 var(--space-2);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-muted);}
 .slideover__cols{display:grid;gap:var(--space-6);}
 .slideover__cols>div>*:last-child{margin-bottom:0;}
+.slideover__facts{margin:0;}
+.slideover__facts>div{display:flex;align-items:center;gap:var(--space-3);justify-content:space-between;padding-block:var(--space-2);border-bottom:1px solid var(--border);}
+.slideover__facts>div:last-child{border-bottom:0;}
+.slideover__facts dt{font-size:var(--text-sm);color:var(--text-secondary);}
+.slideover__facts dd{margin:0;display:flex;align-items:center;gap:var(--space-2);}
+.slideover__facts .badge{font-variant-numeric:tabular-nums;min-width:1.75rem;justify-content:center;}
 .slideover__foot{display:flex;gap:var(--space-2);justify-content:flex-end;padding:var(--space-4) var(--space-6);border-top:1px solid var(--border);background:var(--bg-subtle);}
 /* The foot is the bottom edge of a full-height panel, which on a phone is where the
    home indicator lives. max() keeps the token spacing when there is no inset. */

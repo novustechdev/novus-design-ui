@@ -21,9 +21,13 @@
         </div>
         <div>
           <h4>Details</h4>
-          <p class="muted" style="margin:0">Tenant: Harborline Freight</p>
-          <p class="muted" style="margin:0">Priority: Medium</p>
-          <p class="muted" style="margin:0">Requester: Owen Bristol</p>
+          <dl class="slideover__facts">
+            <div><dt>Approvals</dt><dd><span class="badge">14</span></dd></div>
+            <div><dt>Attachments</dt><dd><span class="badge">3</span></dd></div>
+            <div><dt>Tenant</dt><dd>Harborline Freight</dd></div>
+            <div><dt>Priority</dt><dd>Medium</dd></div>
+            <div><dt>Requester</dt><dd>Owen Bristol</dd></div>
+          </dl>
         </div>
       </div>
     </div>
@@ -53,8 +57,12 @@
         </div>
         <div>
           <h4>Details</h4>
-          <p class="muted" style="margin:0">Target date: 4 September</p>
-          <p class="muted" style="margin:0">Submitted: 25 September</p>
+          <dl class="slideover__facts">
+            <div><dt>Approvals</dt><dd><span class="badge">14</span></dd></div>
+            <div><dt>Attachments</dt><dd><span class="badge">3</span></dd></div>
+            <div><dt>Target date</dt><dd>4 September</dd></div>
+            <div><dt>Submitted</dt><dd>25 September</dd></div>
+          </dl>
         </div>
       </div>
     </div>
@@ -72,5 +80,6 @@
   <li>Use it when the task stays on one record and the page behind is context worth keeping visible. A <a href="modal.html">modal</a> asks for a decision; a slide-over shows a record and offers actions at its foot.</li>
   <li>The slide is a keyframe on <code>[open]</code>, not a measured transform. Nothing scripts the panel open or shut, so it costs nothing and cannot desync.</li>
   <li>Body scrolls on its own and carries <code>overscroll-behavior: contain</code>, so scrolling to the foot does not drag the page behind it. On a phone the panel goes full width; past 60rem the body splits into content and a details column.</li>
+  <li>Counts and attachments live in the details column as a <code>&lt;dl class="slideover__facts"&gt;</code>: muted term left, value right, and anything countable gets a <code>.badge</code> chip so a growing queue is visible at a glance.</li>
   <li>Actions sit right in <code>.slideover__foot</code> with the primary last. Keep them to two: a cancel and the one thing the panel exists to do.</li>
 </ul>
