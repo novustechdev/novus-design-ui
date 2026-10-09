@@ -337,7 +337,7 @@
       "category": "Navigation",
       "classes": [".tabs", ".tabs__list", ".tabs__tab", ".tabs__panel", "native radio + :has pattern"],
       "fragment": "src/components/tabs.html",
-      "summary": "Facet switcher on native radio inputs with an accent fill for the selected tab and a lifted hover state; works with JavaScript off."
+      "summary": "Facet switcher on native radio inputs; the selected tab takes the accent colour and a 2px rule, hover lifts the rest. Works with JavaScript off."
     },
     {
       "id": "product-themes",
