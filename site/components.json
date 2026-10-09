@@ -18,6 +18,14 @@
       "summary": "Status chip with semantic tints and an optional dot."
     },
     {
+      "id": "pills",
+      "name": "Pills",
+      "category": "General",
+      "classes": [".pill", ".pill[aria-pressed=true]", ".pill__x", "composes .badge for counts"],
+      "fragment": "src/components/pills.html",
+      "summary": "Actionable chips: labels with a remove button, filters toggled on aria-pressed, and counts inside."
+    },
+    {
       "id": "avatar",
       "name": "Avatar",
       "category": "General",
