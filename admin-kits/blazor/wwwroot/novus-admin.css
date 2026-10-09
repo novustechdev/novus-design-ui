@@ -265,11 +265,27 @@
 .authalt { display: flex; align-items: center; gap: var(--space-3); margin: var(--space-4) 0 var(--space-3); color: var(--text-muted); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: var(--tracking-wide); }
 .authalt::before, .authalt::after { content: ""; flex: 1; height: 1px; background: var(--border); }
 .authcard__sso { width: 100%; min-height: 2.75rem; }
-.authcard__forgot { margin-top: var(--space-3); text-align: center; font-size: var(--text-sm); }
-.authcard__forgot > summary { display: inline-flex; align-items: center; min-height: 2.75rem; list-style: none; color: var(--accent-text); text-decoration: underline; cursor: pointer; }
+/* Forgot password is a screen in this flow, not a disclosure on the card, so the
+   link and the step's back link are the same affordance: centred, accent, underlined. */
+.authcard__forgot { margin-top: var(--space-3); font-size: var(--text-sm); text-align: center; }
+.authcard__forgot > summary, .authcard__back { display: inline-flex; align-items: center; justify-content: center; min-height: 2.75rem; color: var(--accent-text); text-decoration: underline; cursor: pointer; }
+.authcard__back { width: 100%; }
+.authcard__forgot > summary { list-style: none; }
 .authcard__forgot > summary::-webkit-details-marker { display: none; }
-.authcard__forgot > summary:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
+.authcard__forgot:focus-visible, .authcard__forgot > summary:focus-visible, .authcard__back:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-sm); }
 .authcard__forgot > p { margin: 0 auto; max-width: 22rem; }
+/* The one auth state with no fields: a circled check, the headline, then quiet links.
+   Centred because there is nothing to fill and nothing to align to. */
+.authcard__done { text-align: center; }
+.authcard__done > .authcard__check { display: grid; place-items: center; width: 3rem; height: 3rem; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--success-subtle); color: var(--success-text); }
+.authcard__done > .authcard__check > .icon { width: 1.5rem; height: 1.5rem; }
+.authcard__links { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border); }
+/* An SSO-only workspace drops the password form entirely, so the provider button
+   takes the primary slot instead of sitting under an "or". */
+.authcard__sso--primary { background: var(--accent); color: var(--text-on-accent); }
+.authcard__sso--primary:hover { background: var(--accent-hover); border-color: transparent; }
+.authcard__note { margin: var(--space-3) 0 0; font-size: var(--text-sm); text-align: center; color: var(--text-muted); }
+.authcard__back { width: 100%; margin-top: var(--space-3); }
 .authcard__foot, .signedout__foot { display: flex; align-items: center; justify-content: center; gap: var(--space-2); font-size: var(--text-sm); }
 .authcard__foot { margin-top: var(--space-4); }
 .authcard__foot > .muted, .signedout__foot > .muted { white-space: nowrap; }

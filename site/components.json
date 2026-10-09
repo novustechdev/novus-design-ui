@@ -376,9 +376,9 @@
       "id": "sign-in-page",
       "name": "Sign-in page",
       "category": "Templates",
-      "classes": [".authpage", ".authsplit", ".authbrand", ".authcard", ".pwgroup", ".pwtoggle", ".field__req"],
+      "classes": [".authpage", ".authsplit", ".authbrand", ".authcard", ".pwgroup", ".pwtoggle", ".authcard__back", ".authcard__done", ".authcard__sso--primary", ".field__req"],
       "fragment": "src/components/sign-in-page.html",
-      "summary": "Split sign-in on the deep brand ground: brand panel beside a credential card with small-caps fields and a password toggle.",
+      "summary": "Split sign-in with the ambient brand panel, the three-screen forgot-password flow, and both SSO shapes: optional under the divider, or the only way in.",
       "css": ["sign-in"]
     },
     {

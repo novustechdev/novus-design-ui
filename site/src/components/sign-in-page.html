@@ -34,7 +34,7 @@
           <button class="btn btn--primary btn--lg authcard__submit">Sign in</button>
           <p class="authalt">or</p>
           <button type="button" class="btn btn--secondary authcard__sso">Continue with single sign-on</button>
-          <details class="authcard__forgot"><summary>Forgot password?</summary><p class="muted">Password resets are handled by your administrator.</p></details>
+          <p class="authcard__forgot"><a class="authcard__back" href="sign-in-page.html">Forgot password?</a></p>
           <div class="authcard__foot"><span class="muted">Managed by</span><span class="brandmark" role="img" aria-label="Novus Technologies"></span></div>
         </form>
       </div>
@@ -64,9 +64,102 @@
           <button class="btn btn--primary btn--lg authcard__submit">Sign in</button>
           <p class="authalt">or</p>
           <button type="button" class="btn btn--secondary authcard__sso">Continue with single sign-on</button>
-          <details class="authcard__forgot"><summary>Forgot password?</summary><p class="muted">Password resets are handled by your administrator.</p></details>
+          <p class="authcard__forgot"><a class="authcard__back" href="sign-in-page.html">Forgot password?</a></p>
           <div class="authcard__foot"><span class="muted">Managed by</span><span class="brandmark" role="img" aria-label="Novus Technologies"></span></div>
         </form>
+    </div>
+  </div>
+</section>
+
+<h2>Forgot password</h2>
+
+<section class="demo" data-title="Step 1 — request a reset link">
+  <div class="authpage">
+    <div class="authmain">
+      <form class="card authcard" action="sign-in-page.html">
+        <svg class="authcard__mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+        <h2 class="authcard__title">Reset your password</h2>
+        <p class="muted authcard__sub">Enter your username and we will send a reset link to the email on file.</p>
+        <div class="field">
+          <label for="fp-user">Username<span class="field__req" aria-hidden="true">*</span></label>
+          <input class="input" id="fp-user" name="username" autocomplete="username" required>
+        </div>
+        <button class="btn btn--primary btn--lg authcard__submit">Send reset link</button>
+        <p class="authcard__forgot"><a class="authcard__back" href="sign-in-page.html">Back to sign in</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="Step 2 — link sent (name the inbox, never the account)">
+  <div class="authpage">
+    <div class="authmain">
+      <div class="card authcard">
+        <div class="authcard__done">
+          <span class="authcard__check"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>
+          <h2 class="authcard__title">Check your email</h2>
+          <p class="muted authcard__sub">If an account exists for that username, a reset link is on its way. It expires in 30 minutes.</p>
+        </div>
+        <div class="authcard__links">
+          <button type="button" class="btn btn--secondary authcard__sso">Resend link</button>
+          <a class="authcard__back" href="sign-in-page.html">Back to sign in</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="Step 3 — new password, with the expired-link error">
+  <div class="authpage">
+    <div class="authmain">
+      <form class="card authcard" action="sign-in-page.html">
+        <div class="alert alert--danger" role="alert">This reset link has expired. Request a new one below.</div>
+        <h2 class="authcard__title" style="margin-top:var(--space-4)">Choose a new password</h2>
+        <p class="muted authcard__sub">Eight characters or more. It cannot match any of your last five.</p>
+        <div class="field">
+          <label for="fp-new">New password<span class="field__req" aria-hidden="true">*</span></label>
+          <div class="pwgroup">
+            <input class="input" id="fp-new" name="new-password" type="password" autocomplete="new-password" required>
+            <button type="button" class="pwtoggle" data-password-toggle aria-controls="fp-new" aria-pressed="false" aria-label="Show password"><svg class="icon pwtoggle__show" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></svg><svg class="icon pwtoggle__hide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.9 5.7A9.9 9.9 0 0 1 12 5.5c6 0 9.5 6.5 9.5 6.5a17 17 0 0 1-2.4 3.2M6.5 6.6A16.6 16.6 0 0 0 2.5 12s3.5 6.5 9.5 6.5a9.4 9.4 0 0 0 5.5-1.7"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M3 3l18 18"/></svg></button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fp-confirm">Confirm new password<span class="field__req" aria-hidden="true">*</span></label>
+          <input class="input" id="fp-confirm" name="confirm-password" type="password" autocomplete="new-password" required>
+        </div>
+        <button class="btn btn--primary btn--lg authcard__submit">Save password</button>
+        <p class="authcard__forgot"><a class="authcard__back" href="sign-in-page.html">Request a new link</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<h2>Single sign-on</h2>
+
+<section class="demo" data-title="SSO-only workspace — the provider takes the primary slot">
+  <div class="authpage">
+    <div class="authmain">
+      <form class="card authcard" action="sign-in-page.html">
+        <svg class="authcard__mark" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg>
+        <h2 class="authcard__title">Sign in to your console</h2>
+        <p class="muted authcard__sub">This workspace signs in through your organisation's identity provider.</p>
+        <button class="btn btn--lg authcard__sso authcard__sso--primary">Continue with single sign-on</button>
+        <p class="authcard__note">Accounts for this workspace are managed by your administrator.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="SSO in flight and failed — the error keeps the way back">
+  <div class="authpage">
+    <div class="authmain">
+      <form class="card authcard" action="sign-in-page.html" style="max-width:28.5rem">
+        <div class="alert alert--danger" role="alert">Single sign-on failed: your session at the identity provider expired. Try again.</div>
+        <h2 class="authcard__title" style="margin-top:var(--space-4)">Sign in to your console</h2>
+        <p class="muted authcard__sub">Use the account your administrator issued you.</p>
+        <button class="btn btn--primary btn--lg authcard__submit">Retry single sign-on</button>
+        <p class="authcard__forgot"><a class="authcard__back" href="sign-in-page.html">Sign in with a password instead</a></p>
+      </form>
     </div>
   </div>
 </section>
@@ -84,4 +177,23 @@
   <li>One full-width primary action. The reset link sits centred under it, and the Novus endorsement signs the card off.</li>
   <li>Wrong credentials show one inline error under the username and keep what was typed. Never clear the form.</li>
   <li>The password toggle is a real button named "Show password" or "Hide password"; the console layer hides it when scripting is unavailable, so a page never shows a dead control.</li>
+</ul>
+
+<h2>Usage — forgot password</h2>
+<ul class="bullets">
+  <li>Forgot password is its own screen, not a disclosure on the sign-in card. The link and every step's back link are the same affordance: <code>.authcard__back</code>, full width, centred, accent, underlined.</li>
+  <li>Three screens: request (username only) &rarr; link sent &rarr; choose a new password. The brand panel drops away from step one &mdash; once someone has decided they are locked out, the artwork is in the way.</li>
+  <li>Step two never confirms an account exists. "If an account exists for that username" is the whole message, so the screen cannot be used to enumerate users; it names the inbox and the expiry, not the person.</li>
+  <li>Step three pairs the two fields and their <code>autocomplete</code> tokens (<code>new-password</code>, not <code>current-password</code>), so a password manager offers to generate one instead of filling the old.</li>
+  <li>A bad or expired link is an <code>.alert--danger</code> at the top of step three with the request form still usable underneath &mdash; never a dead end that sends the user back to the start.</li>
+  <li>Password policy is one line of sub-copy. Do not build a live rules checklist: the server is the authority and a client-side list always disagrees with it eventually.</li>
+</ul>
+
+<h2>Usage — single sign-on</h2>
+<ul class="bullets">
+  <li>Where SSO is one option among several it sits under the <code>or</code> divider as a secondary button, and the password form keeps the view's one primary.</li>
+  <li>Where the workspace is SSO-only, delete the password form rather than disabling it, and promote the provider button with <code>.authcard__sso--primary</code>. A greyed-out password box reads as a broken login.</li>
+  <li>A failed SSO round trip is an <code>.alert--danger</code> naming what happened in the provider's terms, plus a retry that stays primary. Always keep the way back to password sign-in underneath.</li>
+  <li>Redirects are a loading state, not a screen: put <code>data-loading="true"</code> on the button that was pressed, or the user clicks twice and opens two tabs.</li>
+  <li>The provider name goes in the button ("Continue with Okta"), never a generic SSO icon alone. The user must know where they are being sent before they leave.</li>
 </ul>
