@@ -106,6 +106,18 @@ for (const dir of ["tailwind/src", "material/src", "blazor/wwwroot", "blazor-dem
 for (const flavor of ["tailwind", "material"]) emit(join(KITS, flavor, "src/console-pages.js"), copyOf("console-pages.js"));
 for (const dir of ["tailwind/src", "material/src", "blazor/wwwroot", "blazor-demo/wwwroot"]) emit(join(KITS, dir, "novus-chart.js"), copyOf("novus-chart.js"));
 for (const dir of ["blazor/wwwroot", "blazor-demo/wwwroot"]) emit(join(KITS, dir, "novus-chart-boot.js"), copyOf("novus-chart-boot.js"));
+/* The favicon is one square 128x128 PNG in shared/. Copies are byte-for-byte, so the
+   --check drift gate can compare them; a text comment cannot go inside a PNG. */
+function emitBytes(path, buf) {
+  if (!existsSync(dirname(path))) return;
+  const current = existsSync(path) ? readFileSync(path) : null;
+  if (current && current.equals(buf)) return;
+  if (CHECK) { drift.push(relative(KITS, path)); return; }
+  writeFileSync(path, buf);
+  console.log("wrote", relative(KITS, path));
+}
+const favicon = readFileSync(join(KITS, "shared", "favicon.png"));
+for (const dir of ["tailwind/public", "material/public", "blazor/wwwroot", "blazor-demo/wwwroot"]) emitBytes(join(KITS, dir, "favicon.png"), favicon);
 
 /* Packaged artifacts (feature 008): consumers inherit the console layer by
    upgrading the package, so the same sources land at the repository root. */
@@ -187,6 +199,7 @@ const headerTpl = (signOutHref) => `${DEMOBAR}
         <summary class="btn btn--ghost btn--sm userdd__trigger">${I("user", "icon--sm")}<span class="userdd__name truncate">${USER.handle}</span>${I("chevron-down", "icon--sm")}</summary>
         <div class="card userdd__menu">
           <div class="userdd__who"><b>${USER.name}</b><span class="muted">${USER.email}</span></div>
+          <a class="userdd__item" href="settings.html#set-profile">${I("user", "icon--sm")} Profile</a>
           <div class="userdd__row"><span class="muted">Theme</span><button type="button" class="btn btn--ghost btn--sm target44 themetoggle" data-theme-toggle aria-label="Toggle light and dark theme">${I("moon", "ic-moon")}${I("sun", "ic-sun")}</button></div>
           <div class="userdd__foot"><a class="btn btn--secondary btn--sm" href="${signOutHref}">${I("sign-out", "icon--sm")} Sign out</a></div>
         </div>

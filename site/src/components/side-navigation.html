@@ -8,7 +8,7 @@
     });
   });
 </script>
-<section class="demo" data-title="Console shell: app switcher, menu toggle, grouped navigation, drawer on phones">
+<section class="demo" data-title="Grouped sidebar (NovaCard): destinations under areas, so the appbar hamburger collapses it">
   <div class="adminwrap" style="border:1px solid var(--border);border-radius:var(--radius-md)">
     <input type="checkbox" id="navtoggle-demo" class="navtoggle__input" aria-label="Show or hide the menu">
     <header class="appbar">
@@ -44,6 +44,38 @@
   </div>
 </section>
 
+<section class="demo" data-title="Flat sidebar (NovaPulse): peers with no grouping, so the toggle is the chevron on its edge">
+  <div class="adminwrap" style="border:1px solid var(--border);border-radius:var(--radius-md)">
+    <input type="checkbox" id="navtoggle-flat" class="navtoggle__input" aria-label="Show or hide the menu">
+    <header class="appbar">
+      <div class="appbar__inner appheader">
+        <div class="appheader__left">
+          <label for="navtoggle-flat" class="btn btn--ghost btn--sm toggle44 navtoggle" title="Menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></label>
+          <span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14.5h4l2.5-7 4 12 2.5-5h5"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pulse</span></span></span>
+          <span class="muted appsuffix">live monitoring</span>
+        </div>
+        <div class="appheader__right"><span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span></div>
+      </div>
+    </header>
+    <label for="navtoggle-flat" class="navscrim" aria-hidden="true"></label>
+    <div class="adminbody">
+      <nav class="adminnav adminnav--flat" aria-label="Monitoring example">
+        <label for="navtoggle-flat" class="navtoggle--edge" title="Collapse the menu">
+          <svg class="icon ic-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg>
+          <svg class="icon ic-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg>
+          <span class="sr-only">Collapse the menu</span>
+        </label>
+        <a class="navlink" href="side-navigation.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13h4l2.5-7 4 12 2.5-5h5"/></svg><span>Live view</span></a>
+        <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6m0 6v6M4.5 7.5 9 10m6 4 4.5 2.5M4.5 16.5 9 14m6-4 4.5-2.5"/></svg><span>Signals</span></a>
+        <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v8m0 0 3.5-3.5M12 12 8.5 8.5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg><span>Streams</span></a>
+        <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14v15H5z"/><path d="M8.5 9.5h7M8.5 13h4"/></svg><span>Runbooks</span></a>
+        <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span>History</span></a>
+      </nav>
+      <div class="adminmain"><p class="muted" style="margin:0">Screen content. The chevron on the sidebar's edge collapses it; on a phone the appbar menu button takes over, as it does for every sidebar.</p></div>
+    </div>
+  </div>
+</section>
+
 <h2>Usage</h2>
 <ul class="bullets">
   <li>Top-level links for the one or two screens people use most; everything else sits in groups named for an area, set in small caps with one line icon and a chevron.</li>
@@ -52,4 +84,12 @@
   <li>Collapsing never hides the navigation. The rail keeps one icon per destination at 44px, marks the current page with the accent tint, and names each destination through <code>title</code> and the label text, which stays in the markup for assistive technology. Press the menu button in the example above to see it.</li>
   <li>Because of that rail, every destination carries an icon, including items inside groups. In the rail the group labels and chevrons step aside and their children show as icons, so nothing sits behind a collapsed group.</li>
   <li>Labels are one to three words and never wrap. Rows are 36px on fine pointers and 44px on touch screens.</li>
+</ul>
+
+<h2>Choosing a sidebar</h2>
+<ul class="bullets">
+  <li>Grouped (NovaCard, the first example): when destinations belong to areas &mdash; Cards, Payments, Risk &mdash; the tree earns its keep, and the collapse control is the appbar hamburger, because the sidebar is one part of a wider header.</li>
+  <li>Flat (<code>.adminnav--flat</code>, the second example): when every destination is a peer and a group would invent a hierarchy that does not exist, the list is flat and the control is a chevron pinned to the sidebar's own edge. Collapsing hides labels only, so the button sits beside the thing it collapses instead of travelling to the other end of the window.</li>
+  <li>The two are the same mechanism: one hidden checkbox, the same rail, no JavaScript. Only the button and its icon change &mdash; a hamburger for the grouped tree, a chevron that flips direction with the state.</li>
+  <li>Below 900px both are drawers and the control returns to the appbar hamburger; the edge chevron is desktop-only and hides with the docked sidebar.</li>
 </ul>

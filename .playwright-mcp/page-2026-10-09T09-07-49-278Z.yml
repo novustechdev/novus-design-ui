@@ -1,0 +1,306 @@
+- generic [active] [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - link "Novus Design Kit home" [ref=f1e4] [cursor=pointer]:
+        - /url: ../index.html
+        - img "Novus Technologies" [ref=f1e5]
+        - generic [ref=f1e6]: design kit
+        - generic "Documented kit version" [ref=f1e7]: v0.9.0
+      - button "Toggle light and dark theme" [ref=f1e8] [cursor=pointer]
+  - navigation "Site" [ref=f1e11]:
+    - generic [ref=f1e12]:
+      - link "Overview" [ref=f1e13] [cursor=pointer]:
+        - /url: ../index.html
+      - link "Foundations" [ref=f1e14] [cursor=pointer]:
+        - /url: ../foundations/principles.html
+      - link "Components" [ref=f1e15] [cursor=pointer]:
+        - /url: ../components/overview.html
+      - link "Frameworks" [ref=f1e16] [cursor=pointer]:
+        - /url: ../frameworks/blazor.html
+      - link "Themes" [ref=f1e17] [cursor=pointer]:
+        - /url: ../themes/tailwind.html
+      - link "Admin Kit" [ref=f1e18] [cursor=pointer]:
+        - /url: ../admin-kit.html
+      - link "AI agents" [ref=f1e19] [cursor=pointer]:
+        - /url: ../agents.html
+      - link "Install" [ref=f1e20] [cursor=pointer]:
+        - /url: ../install.html
+  - main [ref=f1e21]:
+    - generic [ref=f1e22]:
+      - group [ref=f1e23]:
+        - generic [ref=f1e24]:
+          - link "Overview" [ref=f1e25] [cursor=pointer]:
+            - /url: overview.html
+          - paragraph [ref=f1e26]: General
+          - link "Button" [ref=f1e27] [cursor=pointer]:
+            - /url: button.html
+          - link "Badge" [ref=f1e28] [cursor=pointer]:
+            - /url: badge.html
+          - link "Pills" [ref=f1e29] [cursor=pointer]:
+            - /url: pills.html
+          - link "Avatar" [ref=f1e30] [cursor=pointer]:
+            - /url: avatar.html
+          - link "Brand lockup" [ref=f1e31] [cursor=pointer]:
+            - /url: brand-lockup.html
+          - paragraph [ref=f1e32]: Layout
+          - link "Container" [ref=f1e33] [cursor=pointer]:
+            - /url: container.html
+          - link "Grid & Row" [ref=f1e34] [cursor=pointer]:
+            - /url: grid-row.html
+          - link "Surface & text utilities" [ref=f1e35] [cursor=pointer]:
+            - /url: surface.html
+          - link "App shell" [ref=f1e36] [cursor=pointer]:
+            - /url: app-shell.html
+          - link "Page header" [ref=f1e37] [cursor=pointer]:
+            - /url: page-header.html
+          - paragraph [ref=f1e38]: Data Display
+          - link "Card" [ref=f1e39] [cursor=pointer]:
+            - /url: card.html
+          - link "Table" [ref=f1e40] [cursor=pointer]:
+            - /url: table.html
+          - link "Charts" [ref=f1e41] [cursor=pointer]:
+            - /url: charts.html
+          - link "Calendar" [ref=f1e42] [cursor=pointer]:
+            - /url: calendar.html
+          - link "Stats" [ref=f1e43] [cursor=pointer]:
+            - /url: stats.html
+          - link "Bullets" [ref=f1e44] [cursor=pointer]:
+            - /url: bullets.html
+          - link "Leaders" [ref=f1e45] [cursor=pointer]:
+            - /url: leaders.html
+          - link "Logo wall" [ref=f1e46] [cursor=pointer]:
+            - /url: logo-wall.html
+          - link "Collapse & Disclosure" [ref=f1e47] [cursor=pointer]:
+            - /url: collapse.html
+          - link "Timeline" [ref=f1e48] [cursor=pointer]:
+            - /url: timeline.html
+          - link "Value chain" [ref=f1e49] [cursor=pointer]:
+            - /url: value-chain.html
+          - link "Descriptions" [ref=f1e50] [cursor=pointer]:
+            - /url: descriptions.html
+          - paragraph [ref=f1e51]: Feedback
+          - link "Alert" [ref=f1e52] [cursor=pointer]:
+            - /url: alert.html
+          - link "Progress" [ref=f1e53] [cursor=pointer]:
+            - /url: progress.html
+          - link "Modal" [ref=f1e54] [cursor=pointer]:
+            - /url: modal.html
+          - link "Slide-over" [ref=f1e55] [cursor=pointer]:
+            - /url: slide-over.html
+          - link "Skeleton" [ref=f1e56] [cursor=pointer]:
+            - /url: skeleton.html
+          - link "Empty state" [ref=f1e57] [cursor=pointer]:
+            - /url: empty.html
+          - paragraph [ref=f1e58]: Forms
+          - link "Field & Input" [ref=f1e59] [cursor=pointer]:
+            - /url: field-input.html
+          - link "Dropdown" [ref=f1e60] [cursor=pointer]:
+            - /url: dropdown.html
+          - link "Lead form & CTA row" [ref=f1e61] [cursor=pointer]:
+            - /url: lead-form.html
+          - link "Date picker" [ref=f1e62] [cursor=pointer]:
+            - /url: date-picker.html
+          - link "Filter bar" [ref=f1e63] [cursor=pointer]:
+            - /url: filter-bar.html
+          - paragraph [ref=f1e64]: Navigation
+          - link "Nav" [ref=f1e65] [cursor=pointer]:
+            - /url: nav.html
+          - link "Side navigation" [ref=f1e66] [cursor=pointer]:
+            - /url: side-navigation.html
+          - link "Top navigation" [ref=f1e67] [cursor=pointer]:
+            - /url: top-navigation.html
+          - link "App switcher" [ref=f1e68] [cursor=pointer]:
+            - /url: app-switcher.html
+          - link "User menu" [ref=f1e69] [cursor=pointer]:
+            - /url: user-menu.html
+          - link "Stepper" [ref=f1e70] [cursor=pointer]:
+            - /url: stepper.html
+          - link "Tabs" [ref=f1e71] [cursor=pointer]:
+            - /url: tabs.html
+          - link "Breadcrumb" [ref=f1e72] [cursor=pointer]:
+            - /url: breadcrumb.html
+          - link "Pagination" [ref=f1e73] [cursor=pointer]:
+            - /url: pagination.html
+          - paragraph [ref=f1e74]: Templates
+          - link "Sign-in page" [ref=f1e75] [cursor=pointer]:
+            - /url: sign-in-page.html
+          - link "Signed-out page" [ref=f1e76] [cursor=pointer]:
+            - /url: signed-out-page.html
+          - link "Settings layout" [ref=f1e77] [cursor=pointer]:
+            - /url: settings-layout.html
+          - paragraph [ref=f1e78]: Theming
+          - link "Browser tab" [ref=f1e79] [cursor=pointer]:
+            - /url: browser-tab.html
+          - link "Product themes" [ref=f1e80] [cursor=pointer]:
+            - /url: product-themes.html
+      - generic [ref=f1e81]:
+        - paragraph [ref=f1e82]: Navigation
+        - heading "Side navigation" [level=1] [ref=f1e83]
+        - paragraph [ref=f1e84]: "Two sidebars from one mechanism: grouped (NovaCard) with the appbar hamburger, flat (NovaPulse) with a chevron on its own edge. Both collapse to an icon rail on desktop and open as a drawer on phones, without JavaScript."
+        - paragraph [ref=f1e85]:
+          - code [ref=f1e86]: .adminnav
+          - text: ·
+          - code [ref=f1e87]: .navgroup
+          - text: ·
+          - code [ref=f1e88]: .navlink
+          - text: ·
+          - code [ref=f1e89]: .navtoggle__input
+          - text: ·
+          - code [ref=f1e90]: .navscrim
+          - text: ·
+          - code [ref=f1e91]: .adminnav--flat
+          - text: ·
+          - code [ref=f1e92]: .navtoggle--edge
+        - group "Preview width" [ref=f1e93]:
+          - radio "Web" [checked]
+          - generic [ref=f1e94] [cursor=pointer]: Web
+          - radio "Mobile 375px"
+          - generic [ref=f1e95] [cursor=pointer]: Mobile 375px
+        - figure [ref=f1e96]:
+          - generic [ref=f1e98]:
+            - checkbox "Show or hide the menu"
+            - generic [ref=f1e100]:
+              - generic [ref=f1e101]:
+                - button "Novus apps" [ref=f1e103] [cursor=pointer]
+                - generic "Menu" [ref=f1e114] [cursor=pointer]
+                - generic [ref=f1e117]: novapay
+                - generic [ref=f1e122]: operations · admin
+              - img "Novus Technologies" [ref=f1e125]
+            - generic [ref=f1e126]:
+              - navigation "Console example" [ref=f1e127]:
+                - link "Dashboard" [ref=f1e128] [cursor=pointer]:
+                  - /url: side-navigation.html
+                - link "Analytics" [ref=f1e135] [cursor=pointer]:
+                  - /url: side-navigation.html
+                - group [ref=f1e140]:
+                  - generic "Operations" [ref=f1e141] [cursor=pointer]
+                  - link "Transactions" [ref=f1e148] [cursor=pointer]:
+                    - /url: side-navigation.html
+                  - link "Data grid" [ref=f1e149] [cursor=pointer]:
+                    - /url: side-navigation.html
+                  - link "Terminals" [ref=f1e150] [cursor=pointer]:
+                    - /url: side-navigation.html
+                - group [ref=f1e151]:
+                  - generic "Configuration" [ref=f1e152] [cursor=pointer]
+              - paragraph [ref=f1e162]: Screen content. The menu button collapses the navigation at desktop width; on a phone it opens the navigation as a drawer.
+          - generic [ref=f1e163]:
+            - generic [ref=f1e164]: Grouped sidebar (NovaCard) — destinations under areas, so the appbar hamburger collapses it
+            - button "Copy" [ref=f1e165] [cursor=pointer]
+          - code [ref=f1e167]: <div class="adminwrap" style="border:1px solid var(--border);border-radius:var(--radius-md)"> <input type="checkbox" id="navtoggle-demo" class="navtoggle__input" aria-label="Show or hide the menu"> <header class="appbar"> <div class="appbar__inner appheader"> <div class="appheader__left"> <novus-app-switcher current="novapay" launcher="https://workspace.novustech.dev" catalog="../demos/app-switcher/sample-catalog.json"></novus-app-switcher> <label for="navtoggle-demo" class="btn btn--ghost btn--sm toggle44 navtoggle" title="Menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></label> <span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span> <span class="muted appsuffix">operations · admin</span> </div> <div class="appheader__right"><span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span></div> </div> </header> <label for="navtoggle-demo" class="navscrim" aria-hidden="true"></label> <div class="adminbody"> <nav class="adminnav" aria-label="Console example"> <div class="adminnav__head"><span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="2"/><line x1="3.5" y1="9.5" x2="20.5" y2="9.5"/><rect x="6" y="12" width="3.6" height="3" rx="0.6"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pay</span></span></span><label for="navtoggle-demo" class="btn btn--ghost btn--sm toggle44" title="Close menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></label></div> <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="8" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="5" rx="1.5"/><rect x="13.5" y="11.5" width="7" height="9" rx="1.5"/><rect x="3.5" y="14.5" width="7" height="6" rx="1.5"/></svg><span>Dashboard</span></a> <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4v16h16"/><path d="M8.5 16v-4M12.5 16V7.5M16.5 16v-6"/></svg><span>Analytics</span></a> <details class="navgroup" open> <summary class="navgroup__label"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3.5 8.5 4.5-8.5 4.5L3.5 8Z"/><path d="m3.5 12.5 8.5 4.5 8.5-4.5"/></svg><span>Operations</span><svg class="icon icon--sm navgroup__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary> <a class="navlink" href="side-navigation.html" aria-current="page">Transactions</a> <a class="navlink" href="side-navigation.html">Data grid</a> <a class="navlink" href="side-navigation.html">Terminals</a> </details> <details class="navgroup"> <summary class="navgroup__label"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h9m4 0h3M4 12h3m4 0h9M4 18h11m4 0h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></svg><span>Configuration</span><svg class="icon icon--sm navgroup__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary> <a class="navlink" href="side-navigation.html">Settings</a> </details> </nav> <div class="adminmain"><p class="muted" style="margin:0">Screen content. The menu button collapses the navigation at desktop width; on a phone it opens the navigation as a drawer.</p></div> </div> </div>
+        - figure [ref=f1e168]:
+          - generic [ref=f1e170]:
+            - checkbox "Show or hide the menu"
+            - generic [ref=f1e172]:
+              - generic [ref=f1e173]:
+                - generic [ref=f1e174]: novapulse
+                - generic [ref=f1e178]: live monitoring
+              - img "Novus Technologies" [ref=f1e181]
+            - generic [ref=f1e182]:
+              - navigation "Monitoring example" [ref=f1e183]:
+                - generic "Collapse the menu" [ref=f1e184] [cursor=pointer]
+                - link "Live view" [ref=f1e188] [cursor=pointer]:
+                  - /url: side-navigation.html
+                - link "Signals" [ref=f1e192] [cursor=pointer]:
+                  - /url: side-navigation.html
+                - link "Streams" [ref=f1e196] [cursor=pointer]:
+                  - /url: side-navigation.html
+                - link "Runbooks" [ref=f1e201] [cursor=pointer]:
+                  - /url: side-navigation.html
+                - link "History" [ref=f1e206] [cursor=pointer]:
+                  - /url: side-navigation.html
+              - paragraph [ref=f1e212]: Screen content. The chevron on the sidebar's edge collapses it; on a phone the appbar menu button takes over, as it does for every sidebar.
+          - generic [ref=f1e213]:
+            - generic [ref=f1e214]: Flat sidebar (NovaPulse) — peers with no grouping, so the toggle is the chevron on its edge
+            - button "Copy" [ref=f1e215] [cursor=pointer]
+          - code [ref=f1e217]: <div class="adminwrap" style="border:1px solid var(--border);border-radius:var(--radius-md)"> <input type="checkbox" id="navtoggle-flat" class="navtoggle__input" aria-label="Show or hide the menu"> <header class="appbar"> <div class="appbar__inner appheader"> <div class="appheader__left"> <label for="navtoggle-flat" class="btn btn--ghost btn--sm toggle44 navtoggle" title="Menu"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></label> <span class="theme-novapay vlogo"><svg class="vmark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14.5h4l2.5-7 4 12 2.5-5h5"/></svg><span class="wm"><span class="nm">nova</span><span class="sf">pulse</span></span></span> <span class="muted appsuffix">live monitoring</span> </div> <div class="appheader__right"><span class="appheader__endorse"><span class="brandmark" role="img" aria-label="Novus Technologies"></span></span></div> </div> </header> <label for="navtoggle-flat" class="navscrim" aria-hidden="true"></label> <div class="adminbody"> <nav class="adminnav adminnav--flat" aria-label="Monitoring example"> <label for="navtoggle-flat" class="navtoggle--edge" title="Collapse the menu"> <svg class="icon ic-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg> <svg class="icon ic-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 6 6 6-6 6"/></svg> <span class="sr-only">Collapse the menu</span> </label> <a class="navlink" href="side-navigation.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13h4l2.5-7 4 12 2.5-5h5"/></svg><span>Live view</span></a> <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v6m0 6v6M4.5 7.5 9 10m6 4 4.5 2.5M4.5 16.5 9 14m6-4 4.5-2.5"/></svg><span>Signals</span></a> <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v8m0 0 3.5-3.5M12 12 8.5 8.5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg><span>Streams</span></a> <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14v15H5z"/><path d="M8.5 9.5h7M8.5 13h4"/></svg><span>Runbooks</span></a> <a class="navlink" href="side-navigation.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span>History</span></a> </nav> <div class="adminmain"><p class="muted" style="margin:0">Screen content. The chevron on the sidebar's edge collapses it; on a phone the appbar menu button takes over, as it does for every sidebar.</p></div> </div> </div>
+        - heading "Usage" [level=2] [ref=f1e218]
+        - list [ref=f1e219]:
+          - listitem [ref=f1e220]: ›Top-level links for the one or two screens people use most; everything else sits in groups named for an area, set in small caps with one line icon and a chevron.
+          - listitem [ref=f1e221]:
+            - text: ›The group holding the current page is open. The current link carries the accent tint, the accent edge, and
+            - code [ref=f1e222]: aria-current="page"
+            - text: .
+          - listitem [ref=f1e223]: "›One visually hidden checkbox drives the menu button: at desktop width it collapses the navigation to a rail of icons, and below 900px it opens the navigation as a drawer with a scrim that closes it. No JavaScript is required; the console script only closes the drawer after a link is followed and on Escape."
+          - listitem [ref=f1e224]:
+            - text: ›Collapsing never hides the navigation. The rail keeps one icon per destination at 44px, marks the current page with the accent tint, and names each destination through
+            - code [ref=f1e225]: title
+            - text: and the label text, which stays in the markup for assistive technology. Press the menu button in the example above to see it.
+          - listitem [ref=f1e226]: ›Because of that rail, every destination carries an icon, including items inside groups. In the rail the group labels and chevrons step aside and their children show as icons, so nothing sits behind a collapsed group.
+          - listitem [ref=f1e227]: ›Labels are one to three words and never wrap. Rows are 36px on fine pointers and 44px on touch screens.
+        - heading "Choosing a sidebar" [level=2] [ref=f1e228]
+        - list [ref=f1e229]:
+          - listitem [ref=f1e230]: "›Grouped (NovaCard, the first example): when destinations belong to areas — Cards, Payments, Risk — the tree earns its keep, and the collapse control is the appbar hamburger, because the sidebar is one part of a wider header."
+          - listitem [ref=f1e231]:
+            - text: ›Flat (
+            - code [ref=f1e232]: .adminnav--flat
+            - text: ", the second example): when every destination is a peer and a group would invent a hierarchy that does not exist, the list is flat and the control is a chevron pinned to the sidebar's own edge. Collapsing hides labels only, so the button sits beside the thing it collapses instead of travelling to the other end of the window."
+          - listitem [ref=f1e233]: "›The two are the same mechanism: one hidden checkbox, the same rail, no JavaScript. Only the button and its icon change — a hamburger for the grouped tree, a chevron that flips direction with the state."
+          - listitem [ref=f1e234]: ›Below 900px both are drawers and the control returns to the appbar hamburger; the edge chevron is desktop-only and hides with the docked sidebar.
+        - heading "CSS" [level=2] [ref=f1e235]
+        - paragraph [ref=f1e236]:
+          - text: These rules ship in the console pattern layer,
+          - code [ref=f1e237]: admin-kits/shared/novus-admin.css
+          - text: ", which this site and every Admin Kit flavor load after"
+          - code [ref=f1e238]: tokens.css
+          - text: . Copy the whole layer, or only the sections below; every value is a token.
+        - figure [ref=f1e239]:
+          - generic [ref=f1e240]:
+            - generic [ref=f1e241]: "@pattern console-shell"
+            - button "Copy" [ref=f1e242] [cursor=pointer]
+          - code [ref=f1e244]: ".adminwrap { min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column; } .demobar { background: var(--bg-subtle); border-bottom: 1px solid var(--border); padding: var(--space-1) var(--gutter); font-size: var(--text-xs); color: var(--text-secondary); text-align: right; } .appbar__inner { max-width: none; font-size: var(--text-sm); line-height: var(--lh-sm); } .appheader { flex-wrap: nowrap; } .appheader__left { min-width: 0; gap: var(--space-2); } .appheader__right { min-width: 0; } .appsuffix { font-size: var(--text-sm); white-space: nowrap; } .appname { font-weight: var(--weight-bold); font-size: var(--text-lg); color: var(--text); } /* A 44px target, anywhere. Named for the rule it satisfies rather than the menu toggle it was first written for. .toggle44 is the former name and keeps working, so nothing already shipped breaks. */ .target44, .toggle44 { min-height: 2.75rem; min-width: 2.75rem; } .navtoggle { padding: 0; cursor: pointer; } .navtoggle__input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; } .navtoggle__input:focus-visible ~ .appbar .navtoggle { box-shadow: var(--focus-ring); } /* Endorsement: placed asset via tokens, dark swap under BOTH triggers */ .brandmark { display: block; height: var(--logo-height); width: 132px; background: var(--logo-master-colour) center/contain no-repeat; flex: 0 0 auto; } [data-theme=\"dark\"] .brandmark { background-image: var(--logo-master-white); } @media (prefers-color-scheme: dark) { :root:not([data-theme]) .brandmark { background-image: var(--logo-master-white); } } [data-theme=\"light\"] .brandmark { background-image: var(--logo-master-colour); } .adminbody { flex: 1; width: 100%; padding: var(--space-5) var(--gutter) var(--space-8); font-size: var(--text-sm); line-height: var(--lh-sm); } .adminmain { min-width: 0; } @media (min-width: 900px) { .adminbody { display: grid; grid-template-columns: 15rem minmax(0, 1fr); gap: var(--space-6); align-items: start; } /* Collapsed at desktop width: a rail of icons, never nothing (feature 009). */ .adminwrap:has(.navtoggle__input:checked) .adminbody { grid-template-columns: 3.5rem minmax(0, 1fr); } .adminwrap:has(.navtoggle__input:checked) .adminnav { align-items: center; } .adminwrap:has(.navtoggle__input:checked) .navlink { justify-content: center; gap: 0; width: 2.75rem; padding: 0; border-inline-start: 0; border-radius: var(--radius-md); } .adminwrap:has(.navtoggle__input:checked) .navlink > span, .adminwrap:has(.navtoggle__input:checked) .navgroup__label > span, .adminwrap:has(.navtoggle__input:checked) .navgroup__chevron { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; } .adminwrap:has(.navtoggle__input:checked) .navgroup { border-top-color: transparent; } .adminwrap:has(.navtoggle__input:checked) .navgroup:last-child { border-bottom-color: transparent; } .adminwrap:has(.navtoggle__input:checked) .navgroup__label { justify-content: center; padding: 0; min-height: 0; height: var(--space-4); cursor: default; } .adminwrap:has(.navtoggle__input:checked) .navgroup__label .icon { display: none; } .adminwrap:has(.navtoggle__input:checked) .navgroup > .navlink { padding-inline-start: 0; } /* A closed group still shows its destinations in the rail: the browser stops painting a closed details subtree, so the rail asks for it back. Rail mode only, so the phone drawer keeps ordinary group behaviour. */ .adminwrap:has(.navtoggle__input:checked) .navgroup::details-content { content-visibility: visible; block-size: auto; } .navscrim { display: none; } } @media (max-width: 899.98px) { .navscrim { position: fixed; inset: 0; z-index: 60; background: var(--scrim); opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease; } .adminwrap:has(.navtoggle__input:checked) .navscrim { opacity: 1; visibility: visible; } body:has(.navtoggle__input:checked) { overflow: hidden; } } /* Two-mark rule below 520px: divider and suffix drop, endorsement steps down, never disappears */ @media (max-width: 519.98px) { .appsuffix, .appheader__sep { display: none; } .brandmark { height: 20px; width: 65px; } .appbar__inner, .appheader__right { gap: var(--space-2); } } /* Icon theme toggle (moon in light, sun in dark), mirrored under both triggers */ .themetoggle .ic-sun { display: none; } [data-theme=\"dark\"] .themetoggle .ic-moon { display: none; } [data-theme=\"dark\"] .themetoggle .ic-sun { display: inline-block; } @media (prefers-color-scheme: dark) { :root:not([data-theme]) .themetoggle .ic-moon { display: none; } :root:not([data-theme]) .themetoggle .ic-sun { display: inline-block; } } [data-theme=\"light\"] .themetoggle .ic-moon { display: inline-block; } [data-theme=\"light\"] .themetoggle .ic-sun { display: none; }"
+        - figure [ref=f1e245]:
+          - generic [ref=f1e246]:
+            - generic [ref=f1e247]: "@pattern side-navigation"
+            - button "Copy" [ref=f1e248] [cursor=pointer]
+          - code [ref=f1e250]: ".adminnav { display: flex; flex-direction: column; } .adminnav__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-height: 3.5rem; padding: var(--space-2) var(--space-2) var(--space-2) var(--space-4); margin-bottom: var(--space-2); border-bottom: 1px solid var(--border); } @media (min-width: 900px) { .adminnav { position: sticky; top: var(--space-4); max-height: calc(100vh - var(--space-6)); overflow-y: auto; } .adminnav__head { display: none; } } @media (max-width: 899.98px) { .adminnav { position: fixed; inset-block: 0; inset-inline-start: 0; z-index: 70; width: min(20rem, 85vw); padding-bottom: var(--space-6); overflow-y: auto; background: var(--surface); border-inline-end: 1px solid var(--border); box-shadow: var(--shadow-3); transform: translateX(-100%); visibility: hidden; transition: transform 0.2s ease, visibility 0.2s ease; } .adminwrap:has(.navtoggle__input:checked) .adminnav { transform: none; visibility: visible; } } .navlink { display: flex; align-items: center; gap: var(--space-2); min-height: 2.25rem; padding: var(--space-2) var(--space-3); color: var(--text-secondary); text-decoration: none; white-space: nowrap; border-inline-start: 2px solid transparent; transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease; } .navlink:hover { color: var(--text); background: var(--bg-subtle); text-decoration: none; } .navlink[aria-current=\"page\"], .navlink.active { color: var(--accent-text); background: var(--accent-subtle); border-inline-start-color: var(--accent); font-weight: var(--weight-medium); } .navlink:focus-visible, .navgroup__label:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; } .navgroup { border-top: 1px solid var(--border); } .navgroup:last-child { border-bottom: 1px solid var(--border); } .navgroup__label { list-style: none; display: flex; align-items: center; gap: var(--space-2); min-height: 2.25rem; padding: var(--space-2) var(--space-3); cursor: pointer; font-size: var(--text-xs); font-weight: var(--weight-medium); letter-spacing: var(--tracking-wide); text-transform: uppercase; color: var(--text-secondary); white-space: nowrap; transition: color 0.15s ease, background-color 0.15s ease; } .navgroup__label::-webkit-details-marker { display: none; } .navgroup__label > span { flex: 1; } .navgroup__label:hover { color: var(--text); background: var(--bg-subtle); } .navgroup__chevron { transition: transform 0.15s ease; } .navgroup[open] > .navgroup__label .navgroup__chevron { transform: rotate(180deg); } .navgroup > .navlink { padding-inline-start: calc(var(--space-3) + 1rem + var(--space-2)); } @media (pointer: coarse) { .navlink, .navgroup__label { min-height: 2.75rem; } } /* Variant — flat. For a product whose destinations are peers with no grouping to nest (a monitoring surface), the nav is one flat list. Its collapse control is a chevron pinned to the sidebar's own edge, not an appbar hamburger: collapsing hides only labels, so the button belongs beside the thing it collapses. It drives the same hidden checkbox, so every rail rule above applies unchanged. */ .adminnav--flat { position: relative; padding-block-start: var(--space-6); } .navtoggle--edge { position: absolute; inset-block-start: var(--space-3); inset-inline-start: 100%; z-index: 5; translate: -50% 0; display: grid; place-items: center; width: 1.5rem; height: 1.5rem; padding: 0; border-radius: 50%; background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-2); color: var(--text-secondary); cursor: pointer; } .navtoggle--edge:hover { color: var(--text); } .navtoggle--edge .icon { width: 1rem; height: 1rem; } .navtoggle--edge .ic-expand { display: none; } .adminwrap:has(.navtoggle__input:checked) .navtoggle--edge .ic-collapse { display: none; } .adminwrap:has(.navtoggle__input:checked) .navtoggle--edge .ic-expand { display: block; } @media (min-width: 900px) { .adminwrap:has(.adminnav--flat) .navtoggle { display: none; } } @media (max-width: 899.98px) { .navtoggle--edge { display: none; } }"
+        - generic [ref=f1e251]:
+          - link "‹ Nav" [ref=f1e253] [cursor=pointer]:
+            - /url: nav.html
+          - link "Top navigation ›" [ref=f1e255] [cursor=pointer]:
+            - /url: top-navigation.html
+  - contentinfo [ref=f1e256]:
+    - generic [ref=f1e257]:
+      - separator [ref=f1e258]
+      - generic [ref=f1e259]:
+        - generic [ref=f1e260]:
+          - generic [ref=f1e261]: Documentation
+          - link "Foundations" [ref=f1e262] [cursor=pointer]:
+            - /url: ../foundations/principles.html
+          - link "Components" [ref=f1e263] [cursor=pointer]:
+            - /url: ../components/overview.html
+          - link "Frameworks" [ref=f1e264] [cursor=pointer]:
+            - /url: ../frameworks/blazor.html
+          - link "Themes" [ref=f1e265] [cursor=pointer]:
+            - /url: ../themes/tailwind.html
+          - link "Install" [ref=f1e266] [cursor=pointer]:
+            - /url: ../install.html
+        - generic [ref=f1e267]:
+          - generic [ref=f1e268]: Admin Kit
+          - link "Overview" [ref=f1e269] [cursor=pointer]:
+            - /url: ../admin-kit.html
+          - 'link "Live demo: Blazor" [ref=f1e270] [cursor=pointer]':
+            - /url: ../demos/blazor/
+          - 'link "Live demo: Tailwind" [ref=f1e271] [cursor=pointer]':
+            - /url: ../demos/tailwind/
+        - generic [ref=f1e272]:
+          - generic [ref=f1e273]: Resources
+          - link "npm package" [ref=f1e274] [cursor=pointer]:
+            - /url: https://www.npmjs.com/package/novus-design-kit
+          - link "GitHub repository" [ref=f1e275] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui
+          - link "Releases" [ref=f1e276] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui/releases
+          - link "Changelog" [ref=f1e277] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui/blob/main/CHANGELOG.md
+          - link "Asset index" [ref=f1e278] [cursor=pointer]:
+            - /url: ../foundations/assets.html
+        - generic [ref=f1e279]:
+          - generic [ref=f1e280]: Novus Technologies
+          - link "www.novustech.com.sg" [ref=f1e281] [cursor=pointer]:
+            - /url: https://www.novustech.com.sg
+          - link "LinkedIn" [ref=f1e282] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/novus-technologies-pte-ltd/
+      - paragraph [ref=f1e283]:
+        - text: © 2026 Novus Technologies Pte Ltd · This reference site documents and is built with
+        - code [ref=f1e284]: novus-design-kit v0.9.0
+        - text: .

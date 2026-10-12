@@ -1,0 +1,267 @@
+- generic [active] [ref=f7e1]:
+  - banner [ref=f7e2]:
+    - generic [ref=f7e3]:
+      - link "Novus Design Kit home" [ref=f7e4] [cursor=pointer]:
+        - /url: ../index.html
+        - img "Novus Technologies" [ref=f7e5]
+        - generic [ref=f7e6]: design kit
+        - generic "Documented kit version" [ref=f7e7]: v0.9.0
+      - button "Toggle light and dark theme" [ref=f7e8] [cursor=pointer]
+  - navigation "Site" [ref=f7e11]:
+    - generic [ref=f7e12]:
+      - link "Overview" [ref=f7e13] [cursor=pointer]:
+        - /url: ../index.html
+      - link "Foundations" [ref=f7e14] [cursor=pointer]:
+        - /url: ../foundations/principles.html
+      - link "Components" [ref=f7e15] [cursor=pointer]:
+        - /url: ../components/overview.html
+      - link "Frameworks" [ref=f7e16] [cursor=pointer]:
+        - /url: ../frameworks/blazor.html
+      - link "Themes" [ref=f7e17] [cursor=pointer]:
+        - /url: ../themes/tailwind.html
+      - link "Admin Kit" [ref=f7e18] [cursor=pointer]:
+        - /url: ../admin-kit.html
+      - link "AI agents" [ref=f7e19] [cursor=pointer]:
+        - /url: ../agents.html
+      - link "Install" [ref=f7e20] [cursor=pointer]:
+        - /url: ../install.html
+  - main [ref=f7e21]:
+    - generic [ref=f7e22]:
+      - group [ref=f7e23]:
+        - generic [ref=f7e24]:
+          - link "Overview" [ref=f7e25] [cursor=pointer]:
+            - /url: overview.html
+          - paragraph [ref=f7e26]: General
+          - link "Button" [ref=f7e27] [cursor=pointer]:
+            - /url: button.html
+          - link "Badge" [ref=f7e28] [cursor=pointer]:
+            - /url: badge.html
+          - link "Pills" [ref=f7e29] [cursor=pointer]:
+            - /url: pills.html
+          - link "Avatar" [ref=f7e30] [cursor=pointer]:
+            - /url: avatar.html
+          - link "Brand lockup" [ref=f7e31] [cursor=pointer]:
+            - /url: brand-lockup.html
+          - paragraph [ref=f7e32]: Layout
+          - link "Container" [ref=f7e33] [cursor=pointer]:
+            - /url: container.html
+          - link "Grid & Row" [ref=f7e34] [cursor=pointer]:
+            - /url: grid-row.html
+          - link "Surface & text utilities" [ref=f7e35] [cursor=pointer]:
+            - /url: surface.html
+          - link "App shell" [ref=f7e36] [cursor=pointer]:
+            - /url: app-shell.html
+          - link "Page header" [ref=f7e37] [cursor=pointer]:
+            - /url: page-header.html
+          - paragraph [ref=f7e38]: Data Display
+          - link "Card" [ref=f7e39] [cursor=pointer]:
+            - /url: card.html
+          - link "Table" [ref=f7e40] [cursor=pointer]:
+            - /url: table.html
+          - link "Charts" [ref=f7e41] [cursor=pointer]:
+            - /url: charts.html
+          - link "Calendar" [ref=f7e42] [cursor=pointer]:
+            - /url: calendar.html
+          - link "Stats" [ref=f7e43] [cursor=pointer]:
+            - /url: stats.html
+          - link "Bullets" [ref=f7e44] [cursor=pointer]:
+            - /url: bullets.html
+          - link "Leaders" [ref=f7e45] [cursor=pointer]:
+            - /url: leaders.html
+          - link "Logo wall" [ref=f7e46] [cursor=pointer]:
+            - /url: logo-wall.html
+          - link "Collapse & Disclosure" [ref=f7e47] [cursor=pointer]:
+            - /url: collapse.html
+          - link "Timeline" [ref=f7e48] [cursor=pointer]:
+            - /url: timeline.html
+          - link "Value chain" [ref=f7e49] [cursor=pointer]:
+            - /url: value-chain.html
+          - link "Descriptions" [ref=f7e50] [cursor=pointer]:
+            - /url: descriptions.html
+          - paragraph [ref=f7e51]: Feedback
+          - link "Alert" [ref=f7e52] [cursor=pointer]:
+            - /url: alert.html
+          - link "Progress" [ref=f7e53] [cursor=pointer]:
+            - /url: progress.html
+          - link "Modal" [ref=f7e54] [cursor=pointer]:
+            - /url: modal.html
+          - link "Slide-over" [ref=f7e55] [cursor=pointer]:
+            - /url: slide-over.html
+          - link "Skeleton" [ref=f7e56] [cursor=pointer]:
+            - /url: skeleton.html
+          - link "Empty state" [ref=f7e57] [cursor=pointer]:
+            - /url: empty.html
+          - paragraph [ref=f7e58]: Forms
+          - link "Field & Input" [ref=f7e59] [cursor=pointer]:
+            - /url: field-input.html
+          - link "Dropdown" [ref=f7e60] [cursor=pointer]:
+            - /url: dropdown.html
+          - link "Lead form & CTA row" [ref=f7e61] [cursor=pointer]:
+            - /url: lead-form.html
+          - link "Date picker" [ref=f7e62] [cursor=pointer]:
+            - /url: date-picker.html
+          - link "Filter bar" [ref=f7e63] [cursor=pointer]:
+            - /url: filter-bar.html
+          - paragraph [ref=f7e64]: Navigation
+          - link "Nav" [ref=f7e65] [cursor=pointer]:
+            - /url: nav.html
+          - link "Side navigation" [ref=f7e66] [cursor=pointer]:
+            - /url: side-navigation.html
+          - link "Top navigation" [ref=f7e67] [cursor=pointer]:
+            - /url: top-navigation.html
+          - link "App switcher" [ref=f7e68] [cursor=pointer]:
+            - /url: app-switcher.html
+          - link "User menu" [ref=f7e69] [cursor=pointer]:
+            - /url: user-menu.html
+          - link "Stepper" [ref=f7e70] [cursor=pointer]:
+            - /url: stepper.html
+          - link "Tabs" [ref=f7e71] [cursor=pointer]:
+            - /url: tabs.html
+          - link "Breadcrumb" [ref=f7e72] [cursor=pointer]:
+            - /url: breadcrumb.html
+          - link "Pagination" [ref=f7e73] [cursor=pointer]:
+            - /url: pagination.html
+          - paragraph [ref=f7e74]: Templates
+          - link "Sign-in page" [ref=f7e75] [cursor=pointer]:
+            - /url: sign-in-page.html
+          - link "Signed-out page" [ref=f7e76] [cursor=pointer]:
+            - /url: signed-out-page.html
+          - link "Settings layout" [ref=f7e77] [cursor=pointer]:
+            - /url: settings-layout.html
+          - paragraph [ref=f7e78]: Theming
+          - link "Browser tab" [ref=f7e79] [cursor=pointer]:
+            - /url: browser-tab.html
+          - link "Product themes" [ref=f7e80] [cursor=pointer]:
+            - /url: product-themes.html
+      - generic [ref=f7e81]:
+        - paragraph [ref=f7e82]: Navigation
+        - heading "Pagination" [level=1] [ref=f7e83]
+        - paragraph [ref=f7e84]: List footer for data lists (range, previous and next, page label, rows per page), plus numbered pages for long documents.
+        - paragraph [ref=f7e85]:
+          - code [ref=f7e86]: .listfooter
+          - text: ·
+          - code [ref=f7e87]: .paginator
+          - text: ·
+          - code [ref=f7e88]: composes .btn
+          - text: ·
+          - code [ref=f7e89]: aria-current=page
+        - group "Preview width" [ref=f7e90]:
+          - radio "Web" [checked]
+          - generic [ref=f7e91] [cursor=pointer]: Web
+          - radio "Mobile 375px"
+          - generic [ref=f7e92] [cursor=pointer]: Mobile 375px
+        - figure [ref=f7e93]:
+          - generic [ref=f7e95]:
+            - generic [ref=f7e96]: Showing 11-20 of 24
+            - generic [ref=f7e97]:
+              - generic [ref=f7e98]:
+                - button "Previous page" [ref=f7e99] [cursor=pointer]
+                - generic [ref=f7e102]: Page 2 of 3
+                - button "Next page" [ref=f7e103] [cursor=pointer]
+              - combobox "Rows per page" [ref=f7e107]:
+                - option "10 / page" [selected]
+                - option "20 / page"
+                - option "50 / page"
+          - generic [ref=f7e108]:
+            - generic [ref=f7e109]: List footer (every paged data list)
+            - button "Copy" [ref=f7e110] [cursor=pointer]
+          - code [ref=f7e112]: <div class="listfooter"> <span class="listfooter__range">Showing 11-20 of 24</span> <div class="listfooter__controls"> <div class="paginator"> <button type="button" aria-label="Previous page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button> <span class="paginator__label">Page 2 of 3</span> <button type="button" aria-label="Next page"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button> </div> <span class="selectwrap"><select class="select" aria-label="Rows per page"><option>10 / page</option><option>20 / page</option><option>50 / page</option></select></span> </div> </div>
+        - figure [ref=f7e113]:
+          - generic [ref=f7e115]:
+            - generic [ref=f7e116]: Showing 0 of 0
+            - generic [ref=f7e117]:
+              - generic [ref=f7e118]:
+                - button "Previous page" [disabled] [ref=f7e119]
+                - generic [ref=f7e122]: Page 1 of 1
+                - button "Next page" [disabled] [ref=f7e123]
+              - combobox "Rows per page" [ref=f7e127]:
+                - option "10 / page" [selected]
+                - option "20 / page"
+                - option "50 / page"
+          - generic [ref=f7e128]:
+            - generic [ref=f7e129]: "Nothing to page: zero results"
+            - button "Copy" [ref=f7e130] [cursor=pointer]
+          - code [ref=f7e132]: <div class="listfooter"> <span class="listfooter__range">Showing 0 of 0</span> <div class="listfooter__controls"> <div class="paginator"> <button type="button" aria-label="Previous page" disabled><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button> <span class="paginator__label">Page 1 of 1</span> <button type="button" aria-label="Next page" disabled><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button> </div> <span class="selectwrap"><select class="select" aria-label="Rows per page"><option>10 / page</option><option>20 / page</option><option>50 / page</option></select></span> </div> </div>
+        - figure [ref=f7e133]:
+          - navigation "Pagination" [ref=f7e135]:
+            - button "Previous page" [ref=f7e136] [cursor=pointer]
+            - button "1" [ref=f7e139] [cursor=pointer]
+            - button "2" [ref=f7e140] [cursor=pointer]
+            - button "3" [ref=f7e141] [cursor=pointer]
+            - generic [ref=f7e142]: …
+            - button "12" [ref=f7e143] [cursor=pointer]
+            - button "Next page" [ref=f7e144] [cursor=pointer]
+          - generic [ref=f7e147]:
+            - generic [ref=f7e148]: Numbered pages (long documents and search results)
+            - button "Copy" [ref=f7e149] [cursor=pointer]
+          - code [ref=f7e151]: <nav aria-label="Pagination" class="row" style="gap:var(--space-1)"> <button class="btn btn--ghost btn--sm" aria-label="Previous page"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button> <button class="btn btn--ghost btn--sm">1</button> <button class="btn btn--secondary btn--sm" aria-current="page" style="border-color:var(--accent);color:var(--accent-text)">2</button> <button class="btn btn--ghost btn--sm">3</button> <span class="muted" style="padding:0 var(--space-1)">…</span> <button class="btn btn--ghost btn--sm">12</button> <button class="btn btn--ghost btn--sm" aria-label="Next page"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button> </nav>
+        - heading "Usage" [level=2] [ref=f7e152]
+        - list [ref=f7e153]:
+          - listitem [ref=f7e154]: "›Every paged data list ends with the list footer: the range at the start; previous, the page label, next, and rows per page at the end."
+          - listitem [ref=f7e155]: ›Rows per page offers 10, 20, and 50, defaulting to 10. Changing it returns to page 1.
+          - listitem [ref=f7e156]: ›Previous is disabled on the first page and next on the last; both are 44px icon buttons with names.
+          - listitem [ref=f7e157]: "›The range always states the total: \"Showing 21-24 of 24\" on a short last page, \"Showing 0 of 0\" when nothing matches."
+          - listitem [ref=f7e158]:
+            - text: ›Numbered pages suit long documents and search results where jumping matters; the current page carries the accent border and
+            - code [ref=f7e159]: aria-current="page"
+            - text: .
+        - heading "CSS" [level=2] [ref=f7e160]
+        - paragraph [ref=f7e161]:
+          - text: These rules ship in the console pattern layer,
+          - code [ref=f7e162]: admin-kits/shared/novus-admin.css
+          - text: ", which this site and every Admin Kit flavor load after"
+          - code [ref=f7e163]: tokens.css
+          - text: . Copy the whole layer, or only the sections below; every value is a token.
+        - figure [ref=f7e164]:
+          - generic [ref=f7e165]:
+            - generic [ref=f7e166]: "@pattern list-footer"
+            - button "Copy" [ref=f7e167] [cursor=pointer]
+          - code [ref=f7e169]: ".listfooter { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-3); font-size: var(--text-sm); line-height: var(--lh-sm); } .listfooter__range { color: var(--text-secondary); font-variant-numeric: tabular-nums; } .listfooter__controls { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); } .listfooter .selectwrap { display: inline-block; } .paginator { display: flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); font-variant-numeric: tabular-nums; } .paginator button { display: inline-flex; align-items: center; justify-content: center; min-width: 2.75rem; min-height: 2.75rem; padding: 0; font: inherit; color: var(--accent-text); background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-md); cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease; } .paginator button:hover:not(:disabled) { background: var(--accent-subtle); border-color: var(--accent); } .paginator button:focus-visible { outline: none; box-shadow: var(--focus-ring); } .paginator button:disabled { opacity: var(--opacity-disabled); cursor: default; } .paginator__label { padding-inline: var(--space-1); color: var(--text); }"
+        - link "‹ Breadcrumb" [ref=f7e172] [cursor=pointer]:
+          - /url: breadcrumb.html
+  - contentinfo [ref=f7e173]:
+    - generic [ref=f7e174]:
+      - separator [ref=f7e175]
+      - generic [ref=f7e176]:
+        - generic [ref=f7e177]:
+          - generic [ref=f7e178]: Documentation
+          - link "Foundations" [ref=f7e179] [cursor=pointer]:
+            - /url: ../foundations/principles.html
+          - link "Components" [ref=f7e180] [cursor=pointer]:
+            - /url: ../components/overview.html
+          - link "Frameworks" [ref=f7e181] [cursor=pointer]:
+            - /url: ../frameworks/blazor.html
+          - link "Themes" [ref=f7e182] [cursor=pointer]:
+            - /url: ../themes/tailwind.html
+          - link "Install" [ref=f7e183] [cursor=pointer]:
+            - /url: ../install.html
+        - generic [ref=f7e184]:
+          - generic [ref=f7e185]: Admin Kit
+          - link "Overview" [ref=f7e186] [cursor=pointer]:
+            - /url: ../admin-kit.html
+          - 'link "Live demo: Blazor" [ref=f7e187] [cursor=pointer]':
+            - /url: ../demos/blazor/
+          - 'link "Live demo: Tailwind" [ref=f7e188] [cursor=pointer]':
+            - /url: ../demos/tailwind/
+        - generic [ref=f7e189]:
+          - generic [ref=f7e190]: Resources
+          - link "npm package" [ref=f7e191] [cursor=pointer]:
+            - /url: https://www.npmjs.com/package/novus-design-kit
+          - link "GitHub repository" [ref=f7e192] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui
+          - link "Releases" [ref=f7e193] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui/releases
+          - link "Changelog" [ref=f7e194] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui/blob/main/CHANGELOG.md
+          - link "Asset index" [ref=f7e195] [cursor=pointer]:
+            - /url: ../foundations/assets.html
+        - generic [ref=f7e196]:
+          - generic [ref=f7e197]: Novus Technologies
+          - link "www.novustech.com.sg" [ref=f7e198] [cursor=pointer]:
+            - /url: https://www.novustech.com.sg
+          - link "LinkedIn" [ref=f7e199] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/novus-technologies-pte-ltd/
+      - paragraph [ref=f7e200]:
+        - text: © 2026 Novus Technologies Pte Ltd · This reference site documents and is built with
+        - code [ref=f7e201]: novus-design-kit v0.9.0
+        - text: .

@@ -564,6 +564,8 @@
   --text-display: 3.75rem; --lh-display:3.9rem;
 
   /* Weights — Carlito/Calibri ship 400 & 700; 600 falls back to 700. */
+  /* Carlito ships 400 and 700 only, so --weight-medium (600) renders as Bold. Menus are
+     set in --weight-regular; only the selected item is --weight-bold. */
   --weight-regular:400; --weight-medium:600; --weight-bold:700;
   --tracking-tight:-0.01em; --tracking-normal:0; --tracking-wide:0.02em;
 }
@@ -664,6 +666,9 @@ hr { border:0; border-top:1px solid var(--border); margin:var(--space-6) 0; }
 }
 .input:hover,.select:hover,.textarea:hover { border-color:var(--neutral-400); }
 .input:focus-visible { border-color:var(--accent); box-shadow:var(--focus-ring); outline:none; }
+.input:disabled,.select:disabled,.textarea:disabled,
+.input[readonly],.select[readonly],.textarea[readonly] { background:var(--bg-muted); color:var(--text-muted); border-color:var(--border); cursor:not-allowed; }
+.input[readonly],.select[readonly],.textarea[readonly] { cursor:text; } /* readonly stays focusable and copyable, so no not-allowed */
 .field--error .input { border-color:var(--danger); }
 .field__error { color:var(--danger-text); font-size:var(--text-sm); }
 .field__help  { color:var(--text-muted);  font-size:var(--text-sm); }
@@ -772,8 +777,8 @@ hr { border:0; border-top:1px solid var(--border); margin:var(--space-6) 0; }
 /* Bulleted lists (LOCKED) — hanging indent: the marker sits in a fixed slot and
    wrapped text aligns under the TEXT, never under the marker. Use for any bullets. */
 .bullets{list-style:none;padding:0;margin:0;display:grid;gap:.45rem;color:var(--text-secondary);font-size:var(--text-sm);}
-.bullets li{display:flex;gap:.45rem;align-items:baseline;}
-.bullets li::before{content:"\203A";color:var(--accent-text);font-weight:var(--weight-bold);flex:0 0 auto;}
+.bullets li{padding-left:1.1em;text-indent:-1.1em;}
+.bullets li::before{content:"\203A";color:var(--accent-text);font-weight:var(--weight-bold);margin-right:.45em;}
 
 /* Clickable card — stretched-link overlay makes the whole card one accessible
    target (real <button>: keyboard + focus ring). Card container needs position:relative. */
@@ -787,6 +792,61 @@ dialog.vdialog::backdrop{background:rgba(11,22,32,.55);backdrop-filter:blur(3px)
 .vdialog__body h4{margin:var(--space-4) 0 var(--space-2);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-muted);}
 .modal-close{border:0;background:transparent;color:var(--text-secondary);font-size:1.1rem;line-height:1;cursor:pointer;width:36px;height:36px;border-radius:var(--radius-md);flex:0 0 auto;}
 .modal-close:hover{background:var(--bg-subtle);color:var(--text);}
+
+/* Slide-over panel — a native <dialog> pinned to the right edge. Same platform
+   deal as .vdialog, so focus trap, Esc, and the inert background come free from
+   showModal(); only the anchor and the slide are ours. The slide is a transition
+   on [open], so no script opens, closes, or measures it. */
+dialog.slideover{margin:0 0 0 auto;padding:0;width:min(40rem,100%);max-width:100%;height:100dvh;max-height:100dvh;border:0;border-left:1px solid var(--border);border-radius:0;background:var(--surface);color:var(--text);box-shadow:var(--shadow-3);}
+dialog.slideover::backdrop{background:var(--scrim);backdrop-filter:blur(3px);}
+dialog.slideover[open]{animation:slideover-in .22s cubic-bezier(.2,.7,.3,1);}
+dialog.slideover[open]::backdrop{animation:slideover-fade .22s ease;}
+@keyframes slideover-in{from{transform:translateX(100%);}to{transform:translateX(0);}}
+@keyframes slideover-fade{from{opacity:0;}to{opacity:1;}}
+.slideover{display:grid;grid-template-rows:auto minmax(0,1fr) auto;}
+.slideover__head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:var(--space-4);padding:var(--space-5) var(--space-6);border-bottom:1px solid var(--border);}
+.slideover__head>div{flex:1 1 11rem;min-width:0;}
+.slideover__title{margin:0;font-size:var(--text-lg);line-height:var(--lh-lg);}
+.slideover__code{display:block;font-size:var(--text-xs);color:var(--text-muted);letter-spacing:var(--tracking-wide);}
+.slideover__sub{margin:var(--space-1) 0 0;font-size:var(--text-sm);color:var(--text-secondary);}
+.slideover__body{padding:var(--space-5) var(--space-6);overflow-y:auto;overscroll-behavior:contain;}
+.slideover__body h4{margin:var(--space-4) 0 var(--space-2);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:var(--tracking-wide);color:var(--text-muted);}
+.slideover__cols{display:grid;gap:var(--space-6);}
+.slideover__cols>div>*:last-child{margin-bottom:0;}
+.slideover__facts{margin:0;}
+.slideover__facts>div{display:flex;align-items:center;gap:var(--space-3);justify-content:space-between;padding-block:var(--space-2);border-bottom:1px solid var(--border);}
+.slideover__facts>div:last-child{border-bottom:0;}
+.slideover__facts dt{font-size:var(--text-sm);color:var(--text-secondary);}
+.slideover__facts dd{margin:0;display:flex;align-items:center;gap:var(--space-2);}
+.slideover__facts .badge{font-variant-numeric:tabular-nums;min-width:1.75rem;justify-content:center;}
+.slideover__foot{display:flex;gap:var(--space-2);justify-content:flex-end;padding:var(--space-4) var(--space-6);border-top:1px solid var(--border);background:var(--bg-subtle);}
+/* The foot is the bottom edge of a full-height panel, which on a phone is where the
+   home indicator lives. max() keeps the token spacing when there is no inset. */
+@supports (padding:max(0px)){.slideover__foot{padding-bottom:max(var(--space-4),env(safe-area-inset-bottom));}}
+@media (min-width:60rem){.slideover__cols{grid-template-columns:minmax(0,1fr) 16rem;}}
+/* Phone: pin the close to the corner so the title gets the full measure, and let
+   the actions fill the foot instead of huddling at one edge. */
+@media (max-width:40rem){
+  .slideover__head{position:relative;padding-right:var(--space-6);}
+  .slideover__head:has(>.modal-close){padding-right:3.75rem;}
+  .slideover__head>div{flex:1 1 100%;}
+  .slideover__head>.modal-close{position:absolute;top:var(--space-4);right:var(--space-3);}
+  .slideover__foot>.btn{flex:1 1 0;}
+}
+/* The anatomy demo on the docs page draws the panel inline rather than opening
+   one, so it gets a frame and a capped height instead of the right-edge pin. */
+.slideover--preview{height:auto;border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-1);overflow:hidden;}
+@media (prefers-reduced-motion:reduce){dialog.slideover[open],dialog.slideover[open]::backdrop{animation:none;}}
+
+/* Empty state (composes .card) — the default whenever a list, table, or search result
+   has nothing to show. Plain text plus one action, centred in the space the content
+   would have filled so the page does not collapse when the data goes away. NO
+   illustration and no emoji: an empty state is information, not a mascot moment. */
+.empty { display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:var(--space-1); text-align:center; padding:var(--space-7) var(--space-5); min-height:14rem; }
+.empty__title { margin:0; font-weight:var(--weight-medium); color:var(--text); }
+.empty__text { margin:0; max-width:34ch; font-size:var(--text-sm); color:var(--text-secondary); }
+.empty__action { margin-top:var(--space-3); }
 
 /* Lead-capture form (in a dialog) — name / title / organisation / email / mobile. */
 .lead-form{display:grid;gap:var(--space-3);margin-top:var(--space-2);}
@@ -834,6 +894,46 @@ dialog.vdialog::backdrop{background:rgba(11,22,32,.55);backdrop-filter:blur(3px)
 .badge--danger  { background:var(--danger-subtle);  color:var(--danger-text);  border-color:transparent; }
 .badge__dot { width:.5rem; height:.5rem; border-radius:50%; background:currentColor; }
 
+/* Pills (labels, filters, removable chips) */
+.pill { display:inline-flex; align-items:center; gap:var(--space-2); padding:.25rem .75rem;
+  font-size:var(--text-sm); font-weight:var(--weight-medium); border-radius:var(--radius-pill);
+  background:var(--surface); color:var(--text-secondary); border:1px solid var(--border); min-height:2rem; }
+button.pill, a.pill { cursor:pointer; }
+button.pill:hover, a.pill:hover { background:var(--bg-muted); color:var(--text); }
+.pill[aria-pressed="true"] { background:var(--accent-subtle); color:var(--accent-text); border-color:transparent; }
+.pill__x { display:inline-flex; align-items:center; justify-content:center; width:1.25rem; height:1.25rem;
+  margin-right:-.375rem; border:0; border-radius:50%; background:transparent; color:inherit;
+  font:inherit; line-height:1; cursor:pointer; }
+.pill__x:hover { background:var(--bg-muted); }
+
+/* Tabs (native radios nested in their labels, switched by :has, works with JS off).
+   A fill is for .btn. A tab carries its state on an accent rule under the label and on the
+   label colour, so the row stays a row and the page keeps one accent per view. */
+.tabs__list { display:flex; flex-wrap:wrap; gap:var(--space-1); border-bottom:1px solid var(--border); }
+.tabs input[type="radio"] { position:absolute; opacity:0; pointer-events:none; }
+.tabs__tab { position:relative; display:inline-flex; align-items:center; gap:var(--space-2);
+  cursor:pointer; padding:var(--space-2) var(--space-3); min-height:2.75rem;
+  border-radius:var(--radius-sm) var(--radius-sm) 0 0;
+  font-size:var(--text-sm); font-weight:var(--weight-medium); color:var(--text-secondary);
+  transition:color .15s ease, background-color .15s ease; }
+.tabs__tab:hover { color:var(--text); background:var(--bg-subtle); }
+.tabs__tab::after { content:""; position:absolute; left:var(--space-3); right:var(--space-3); bottom:-1px;
+  height:2px; border-radius:2px; background:var(--accent); transform:scaleX(0); transition:transform .18s ease; }
+.tabs__tab:has(input:focus-visible) { outline:2px solid var(--accent); outline-offset:-2px; }
+.tabs__tab:has(input:checked) { color:var(--accent-text); }
+.tabs__tab:has(input:checked)::after { transform:scaleX(1); }
+.tabs__tab:has(input:checked):hover { color:var(--accent-text); }
+/* One panel per radio, matched by order. Six tabs is more than the pattern allows anyway. */
+.tabs__panel { display:none; }
+.tabs:has(.tabs__list>label:nth-of-type(1) input:checked)>.tabs__panel:nth-of-type(1),
+.tabs:has(.tabs__list>label:nth-of-type(2) input:checked)>.tabs__panel:nth-of-type(2),
+.tabs:has(.tabs__list>label:nth-of-type(3) input:checked)>.tabs__panel:nth-of-type(3),
+.tabs:has(.tabs__list>label:nth-of-type(4) input:checked)>.tabs__panel:nth-of-type(4),
+.tabs:has(.tabs__list>label:nth-of-type(5) input:checked)>.tabs__panel:nth-of-type(5),
+.tabs:has(.tabs__list>label:nth-of-type(6) input:checked)>.tabs__panel:nth-of-type(6) { display:block; animation:tabfade .18s ease; }
+@keyframes tabfade { from { opacity:0; transform:translateY(4px); } }
+@media (prefers-reduced-motion:reduce) { .tabs__tab, .tabs__tab::after { transition:none; } .tabs__panel { animation:none; } }
+
 /* Table (data-dense; numerals right-aligned) */
 .table { width:100%; border-collapse:collapse; font-size:var(--text-sm); }
 .table th, .table td { text-align:left; padding:.625rem .75rem; border-bottom:1px solid var(--border); }
@@ -850,8 +950,9 @@ dialog.vdialog::backdrop{background:rgba(11,22,32,.55);backdrop-filter:blur(3px)
 /* Nav */
 .nav { display:flex; align-items:center; gap:var(--space-5); padding:var(--space-3) var(--space-5);
   background:var(--surface); border-bottom:1px solid var(--border); }
-.nav a { color:var(--text-secondary); text-decoration:none; font-weight:var(--weight-medium); }
+.nav a { color:var(--text-secondary); text-decoration:none; font-weight:var(--weight-regular); }
 .nav a:hover, .nav a[aria-current="page"] { color:var(--text); }
+.nav a[aria-current="page"] { font-weight:var(--weight-bold); }
 
 /* Layout helpers */
 .container { max-width:var(--container); margin-inline:auto; padding-inline:var(--gutter); }

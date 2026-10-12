@@ -1,23 +1,31 @@
-<section class="demo" data-title="Empty state">
-  <div class="card" style="max-width:28rem;text-align:center;padding:var(--space-7) var(--space-5)">
-    <p style="margin:0 0 var(--space-1);font-weight:var(--weight-medium)">No transactions match this filter</p>
-    <p class="muted" style="margin:0 0 var(--space-4);font-size:var(--text-sm)">Risk holds from the last 24 hours will appear here.</p>
-    <button class="btn btn--secondary">Clear filter</button>
+<section class="demo" data-title="Filter-produced empty: offers to undo the filter">
+  <div class="card empty" style="max-width:28rem">
+    <p class="empty__title">No transactions match this filter</p>
+    <p class="empty__text">Risk holds from the last 24 hours will appear here.</p>
+    <button class="btn btn--secondary empty__action">Clear filter</button>
   </div>
 </section>
 
-<section class="demo" data-title="First-run empty state">
-  <div class="card" style="max-width:28rem;text-align:center;padding:var(--space-7) var(--space-5)">
-    <p style="margin:0 0 var(--space-1);font-weight:var(--weight-medium)">No terminals yet</p>
-    <p class="muted" style="margin:0 0 var(--space-4);font-size:var(--text-sm)">Provision the first terminal to start seeing fleet health.</p>
-    <button class="btn btn--primary">Provision a terminal</button>
+<section class="demo" data-title="First-run empty: offers the creating action">
+  <div class="card empty" style="max-width:28rem">
+    <p class="empty__title">No terminals yet</p>
+    <p class="empty__text">Provision the first terminal to start seeing fleet health.</p>
+    <button class="btn btn--primary empty__action"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Provision a terminal</button>
+  </div>
+</section>
+
+<section class="demo" data-title="No action to offer: search with no term, permission denied">
+  <div class="card empty" style="max-width:28rem">
+    <p class="empty__title">Nothing to show</p>
+    <p class="empty__text">This view is empty for now. It will fill once there is something to report.</p>
   </div>
 </section>
 
 <h2>Usage</h2>
 <ul class="bullets">
-  <li>Plain text plus one action button: no illustration, no emoji, no decoration. The empty state is information, not a mascot moment.</li>
-  <li>First line says what is empty; second line says when content will appear or what to do; the button does it.</li>
-  <li>A filter-produced empty state offers to clear the filter (secondary); a first-run empty state offers the creating action (primary, if it is the view's one primary).</li>
-  <li>Never show an empty state while loading; that is the skeleton's job.</li>
+  <li><code>.empty</code> composes <code>.card</code>: bordered surface, centred, and <code>min-height:14rem</code> so the block holds the space the rows would have filled instead of collapsing the page.</li>
+  <li>Plain text plus one action. No illustration, no emoji, no decoration &mdash; the empty state is information, not a mascot moment.</li>
+  <li>First line says what is empty; second line says when content will appear or what to do; the button does it. Keep the second line to two lines at most &mdash; <code>.empty__text</code> caps its measure at <code>34ch</code>.</li>
+  <li>A filter-produced empty offers to clear the filter (secondary); a first-run empty offers the creating action (primary, if it is the view's one primary). When there is no action to offer, drop <code>.empty__action</code> entirely rather than inventing one.</li>
+  <li>Never show an empty state while loading; that is the <a href="skeleton.html">skeleton</a>'s job. Never an empty state on an error &mdash; that is an <a href="alert.html">alert</a>.</li>
 </ul>

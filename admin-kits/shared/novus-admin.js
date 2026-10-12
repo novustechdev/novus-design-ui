@@ -3,8 +3,9 @@
    admin-kits/data/generate.mjs. Every pattern already works without this file
    (native details, checkbox drawer, form posts); this adds the conveniences:
    theme toggle, Escape and outside-click dismissal, drawer close on navigation,
-   and password visibility. Document-level delegation, so it survives client
-   routing (Blazor WebAssembly) and enhanced navigation (Blazor Server). */
+   password visibility, and Back to the previous console screen. Document-level
+   delegation, so it survives client routing (Blazor WebAssembly) and enhanced
+   navigation (Blazor Server). */
 (function () {
   if (window.novusAdmin) return;
   var doc = document;
@@ -48,6 +49,22 @@
         field.type = show ? "text" : "password";
         pw.setAttribute("aria-pressed", String(show));
         pw.setAttribute("aria-label", show ? "Hide password" : "Show password");
+      }
+    }
+
+    /* Back returns to the screen the person came from, with its filters and scroll
+       intact, when that screen was in this console. A cold entry (a bookmark, a
+       shared link, an email) or an outside referrer follows the href instead, the
+       parent screen, so Back never leaves the console. Modified clicks keep the
+       browser's own open-in-new-tab behaviour. */
+    var back = el.closest("a[data-back]");
+    if (back && !e.defaultPrevented && e.button === 0 && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) {
+      var from = null;
+      try { from = doc.referrer ? new URL(doc.referrer).origin : null; } catch (err) { /* malformed referrer: use the href */ }
+      // ponytail: a same-origin referrer stands in for "came from this console"; under client routing the referrer is the app's first page, so add a router-aware check if a kit needs one.
+      if (from === location.origin && history.length > 1) {
+        e.preventDefault();
+        history.back();
       }
     }
 

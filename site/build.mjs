@@ -31,10 +31,12 @@ function dedent(s) {
 }
 
 /* <section class="demo" data-title="X"> live markup </section>
-   → rendered example + escaped, copyable snippet (snippet === example by construction). */
+   → rendered example + escaped, copyable snippet (snippet === example by construction).
+   The closing tag must be flush-left: fragments nest their own <section> (tab panels,
+   setting sections), and a lazy `.*?` would stop at the first one and tear the page up. */
 function transformDemos(html) {
   return html.replace(
-    /<section class="demo"([^>]*)>([\s\S]*?)<\/section>/g,
+    /<section class="demo"([^>]*)>([\s\S]*?)\n<\/section>/g,
     (_, attrs, inner) => {
       const title = (attrs.match(/data-title="([^"]*)"/) || [, "Example"])[1];
       const code = dedent(inner);
@@ -117,12 +119,12 @@ const SITE_CSS = `
   .docwrap{display:grid;gap:var(--space-5);align-items:start;}
   .doccontent{min-width:0;}
   .sidenav{border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);}
-  .sidenav > summary{cursor:pointer;padding:var(--space-2) var(--space-3);font-weight:var(--weight-medium);color:var(--text-secondary);font-size:var(--text-sm);}
+  .sidenav > summary{cursor:pointer;padding:var(--space-2) var(--space-3);font-weight:var(--weight-regular);color:var(--text-secondary);font-size:var(--text-sm);}
   .sidenav__body{padding:var(--space-2) 0 var(--space-3);}
-  .sidenav .eyebrow{padding:var(--space-3) var(--space-3) var(--space-1);margin:0;}
+  .sidenav .eyebrow{padding:var(--space-3) var(--space-3) var(--space-1);margin:0;font-weight:var(--weight-regular);}
   .sidenav a{display:block;padding:var(--space-1) var(--space-3);color:var(--text-secondary);text-decoration:none;font-size:var(--text-sm);border-left:2px solid transparent;}
   .sidenav a:hover{color:var(--text);background:var(--bg-subtle);text-decoration:none;}
-  .sidenav a[aria-current="page"]{color:var(--accent-text);background:var(--accent-subtle);border-left-color:var(--accent);font-weight:var(--weight-medium);}
+  .sidenav a[aria-current="page"]{color:var(--accent-text);background:var(--accent-subtle);border-left-color:var(--accent);font-weight:var(--weight-bold);}
   @media (min-width:900px){
     .docwrap{gap:var(--space-6);}
     .sidenav{position:sticky;top:var(--space-4);max-height:calc(100vh - var(--space-6));overflow-y:auto;border:0;background:transparent;}
@@ -164,7 +166,18 @@ const SITE_CSS = `
   .pvtoggle input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: -2px; }
   .demo__canvas .authpage, .demo__canvas .signedout, .demo__canvas .adminwrap { min-height: 0; }
   .demo:has(details[open]), .demo:has(.nv-apps__panel:not([hidden])) { overflow: visible; }
-  body:has(#pv-mobile:checked) .demo__canvas { max-width: 375px; border-inline-end: 1px dashed var(--border-strong); }
+  /* The Mobile 375px toggle narrows the box, but a media query still reads the real
+     viewport, so wide layouts stay on inside a phone-width canvas and squeeze the text
+     column to nothing. container-type gives the canvas its own query context; restate the
+     phone rules under @container. Keep in step with the max-width:40rem block in tokens.css,
+     and add a line here when a component gains a wide-only layout. */
+  body:has(#pv-mobile:checked) .demo__canvas { max-width: 375px; border-inline-end: 1px dashed var(--border-strong); container-type: inline-size; }
+  @container (max-width: 40rem) {
+    .slideover__cols { grid-template-columns: minmax(0, 1fr); }
+    .slideover__head { position: relative; padding-right: 3.75rem; }
+    .slideover__head > div { flex: 1 1 100%; }
+    .slideover__foot > .btn { flex: 1 1 0; }
+  }
   @media (prefers-reduced-motion: reduce) { .pvtoggle label { transition: none; } }
 `;
 
@@ -186,10 +199,14 @@ function sideNav(groups, currentFile) {
 }
 
 const KIT_VERSION = JSON.parse(read(join(ROOT, "package.json"))).version;
+/* The browser tab title is the product, not the page you happen to be on: it must not
+   change as you move through the menu, or every tab in a row of open pages reads the same
+   and you lose which one you are looking at. */
+const SITE_TITLE = "Novus Design Kit";
 const header = read(join(SRC, "partials/header.html")).replaceAll("{{VERSION}}", KIT_VERSION);
 const footer = read(join(SRC, "partials/footer.html")).replaceAll("{{VERSION}}", KIT_VERSION).replaceAll("{{YEAR}}", String(new Date().getFullYear()));
 
-function shell({ title, content, depth, active, sidebar }) {
+function shell({ content, depth, active, sidebar }) {
   const rel = "../".repeat(depth);
   let hdr = header.replaceAll("{{REL}}", rel);
   for (const k of ["home", "foundations", "components", "frameworks", "themes", "admin", "agents", "install"]) {
@@ -203,11 +220,14 @@ function shell({ title, content, depth, active, sidebar }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} · Novus Design Kit</title>
+<title>${esc(SITE_TITLE)}</title>
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FFFFFF">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0B1620">
-<link rel="icon" type="image/png" sizes="512x512" href="${rel}assets/novus-favicon.png">
-<link rel="apple-touch-icon" href="${rel}assets/novus-favicon.png">
+<!-- Tab icons are drawn at the size they are used: 16px is 358 bytes, 32px is 506.
+     The 512 master only serves the manifest, where a large icon is wanted. -->
+<link rel="icon" type="image/png" sizes="32x32" href="${rel}assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${rel}assets/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="${rel}assets/favicon-180.png">
 <link rel="manifest" href="${rel}manifest.webmanifest">
 <link rel="stylesheet" href="${rel}tokens.css">
 <link rel="stylesheet" href="${rel}assets/novus-admin.css">
@@ -385,8 +405,7 @@ for (const name of ["index.html", "install.html", "admin-kit.html", "agents.html
   if (raw.includes("<!--AGENT-RULES-->")) raw = raw.replace("<!--AGENT-RULES-->", agentRules());
   if (raw.includes("<!--AGENT-PROMPTS-->")) raw = raw.replace("<!--AGENT-PROMPTS-->", agentPrompts());
   if (raw.includes("<!--AGENT-FILES-->")) raw = raw.replace("<!--AGENT-FILES-->", agentFiles());
-  const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, basename(name, ".html")])[1];
-  writePage(join(DIST, name), shell({ title, content: transformDemos(raw), depth: 0, active: ROOT_PAGE_KEY[name] }));
+  writePage(join(DIST, name), shell({ content: transformDemos(raw), depth: 0, active: ROOT_PAGE_KEY[name] }));
   built.push(name);
 }
 
@@ -415,9 +434,8 @@ if (existsSync(foundDir)) {
     let raw = read(join(foundDir, f));
     if (raw.includes("<!--ASSET-INDEX-->")) raw = raw.replace("<!--ASSET-INDEX-->", assetIndex());
     if (raw.includes("<!--ICON-INDEX-->")) raw = raw.replace("<!--ICON-INDEX-->", iconIndex());
-    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, label])[1];
     const sidebar = sideNav([["Foundations", present.map(([g, l]) => [g, l])]], f);
-    writePage(join(DIST, "foundations", f), shell({ title, content: transformDemos(raw), depth: 1, active: "foundations", sidebar }));
+    writePage(join(DIST, "foundations", f), shell({ content: transformDemos(raw), depth: 1, active: "foundations", sidebar }));
     built.push(`foundations/${f}`);
   }
 }
@@ -426,11 +444,10 @@ if (existsSync(foundDir)) {
    only guides the verification record marks "pass" are published (FR-017). */
 for (const [dir, label] of GUIDE_SECTIONS) {
   const present = publishedGuides[dir];
-  for (const [f, name] of present) {
+  for (const [f] of present) {
     const raw = read(join(SRC, dir, f));
-    const title = (raw.match(/<!--\s*title:\s*(.+?)\s*-->/) || [, name])[1];
     const sidebar = sideNav([[label, present.map(([g, l]) => [g, l])]], f);
-    writePage(join(DIST, dir, f), shell({ title, content: transformDemos(raw), depth: 1, active: dir, sidebar }));
+    writePage(join(DIST, dir, f), shell({ content: transformDemos(raw), depth: 1, active: dir, sidebar }));
     built.push(`${dir}/${f}`);
   }
 }
@@ -474,7 +491,7 @@ ${c.css ? patternCss(c.css) : ""}
   <span>${prev ? `<a href="${prev.id}.html">‹ ${esc(prev.name)}</a>` : ""}</span>
   <span>${next ? `<a href="${next.id}.html">${esc(next.name)} ›</a>` : ""}</span>
 </div>`;
-    writePage(join(DIST, "components", `${c.id}.html`), shell({ title: c.name, content, depth: 1, active: "components", sidebar: sideNav(compGroups, `${c.id}.html`) }));
+    writePage(join(DIST, "components", `${c.id}.html`), shell({ content, depth: 1, active: "components", sidebar: sideNav(compGroups, `${c.id}.html`) }));
     built.push(`components/${c.id}.html`);
   });
 
@@ -551,12 +568,12 @@ ${c.css ? patternCss(c.css) : ""}
   });
 })();
 </script>`;
-  writePage(join(DIST, "components", "overview.html"), shell({ title: "Components", content: ov, depth: 1, active: "components", sidebar: sideNav(compGroups, "overview.html") }));
+  writePage(join(DIST, "components", "overview.html"), shell({ content: ov, depth: 1, active: "components", sidebar: sideNav(compGroups, "overview.html") }));
   built.push("components/overview.html");
 
   /* Redirect stub for anyone landing on /components or /components/ — never a content page. */
   writeFileSync(join(DIST, "components", "index.html"), `<!DOCTYPE html><!--redirect-stub-->
-<html lang="en"><head><meta charset="utf-8"><title>Components · Novus Design Kit</title>
+<html lang="en"><head><meta charset="utf-8"><title>${esc(SITE_TITLE)}</title>
 <script>location.replace(location.pathname.replace(/\\/?(index(\\.html)?)?$/, "/overview.html"));</script>
 </head><body><p><a href="overview.html">Component overview</a></p></body></html>
 `);
