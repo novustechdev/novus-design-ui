@@ -1,0 +1,246 @@
+- generic [active] [ref=f11e1]:
+  - banner [ref=f11e2]:
+    - generic [ref=f11e3]:
+      - link "Novus Design Kit home" [ref=f11e4] [cursor=pointer]:
+        - /url: ../index.html
+        - img "Novus Technologies" [ref=f11e5]
+        - generic [ref=f11e6]: design kit
+        - generic "Documented kit version" [ref=f11e7]: v0.9.0
+      - button "Toggle light and dark theme" [ref=f11e8] [cursor=pointer]
+  - navigation "Site" [ref=f11e11]:
+    - generic [ref=f11e12]:
+      - link "Overview" [ref=f11e13] [cursor=pointer]:
+        - /url: ../index.html
+      - link "Foundations" [ref=f11e14] [cursor=pointer]:
+        - /url: ../foundations/principles.html
+      - link "Components" [ref=f11e15] [cursor=pointer]:
+        - /url: ../components/overview.html
+      - link "Frameworks" [ref=f11e16] [cursor=pointer]:
+        - /url: ../frameworks/blazor.html
+      - link "Themes" [ref=f11e17] [cursor=pointer]:
+        - /url: ../themes/tailwind.html
+      - link "Admin Kit" [ref=f11e18] [cursor=pointer]:
+        - /url: ../admin-kit.html
+      - link "AI agents" [ref=f11e19] [cursor=pointer]:
+        - /url: ../agents.html
+      - link "Install" [ref=f11e20] [cursor=pointer]:
+        - /url: ../install.html
+  - main [ref=f11e21]:
+    - generic [ref=f11e22]:
+      - group [ref=f11e23]:
+        - generic [ref=f11e24]:
+          - link "Overview" [ref=f11e25] [cursor=pointer]:
+            - /url: overview.html
+          - paragraph [ref=f11e26]: General
+          - link "Button" [ref=f11e27] [cursor=pointer]:
+            - /url: button.html
+          - link "Badge" [ref=f11e28] [cursor=pointer]:
+            - /url: badge.html
+          - link "Pills" [ref=f11e29] [cursor=pointer]:
+            - /url: pills.html
+          - link "Avatar" [ref=f11e30] [cursor=pointer]:
+            - /url: avatar.html
+          - link "Brand lockup" [ref=f11e31] [cursor=pointer]:
+            - /url: brand-lockup.html
+          - paragraph [ref=f11e32]: Layout
+          - link "Container" [ref=f11e33] [cursor=pointer]:
+            - /url: container.html
+          - link "Grid & Row" [ref=f11e34] [cursor=pointer]:
+            - /url: grid-row.html
+          - link "Surface & text utilities" [ref=f11e35] [cursor=pointer]:
+            - /url: surface.html
+          - link "App shell" [ref=f11e36] [cursor=pointer]:
+            - /url: app-shell.html
+          - link "Page header" [ref=f11e37] [cursor=pointer]:
+            - /url: page-header.html
+          - paragraph [ref=f11e38]: Data Display
+          - link "Card" [ref=f11e39] [cursor=pointer]:
+            - /url: card.html
+          - link "Table" [ref=f11e40] [cursor=pointer]:
+            - /url: table.html
+          - link "Charts" [ref=f11e41] [cursor=pointer]:
+            - /url: charts.html
+          - link "Calendar" [ref=f11e42] [cursor=pointer]:
+            - /url: calendar.html
+          - link "Stats" [ref=f11e43] [cursor=pointer]:
+            - /url: stats.html
+          - link "Bullets" [ref=f11e44] [cursor=pointer]:
+            - /url: bullets.html
+          - link "Leaders" [ref=f11e45] [cursor=pointer]:
+            - /url: leaders.html
+          - link "Logo wall" [ref=f11e46] [cursor=pointer]:
+            - /url: logo-wall.html
+          - link "Collapse & Disclosure" [ref=f11e47] [cursor=pointer]:
+            - /url: collapse.html
+          - link "Timeline" [ref=f11e48] [cursor=pointer]:
+            - /url: timeline.html
+          - link "Value chain" [ref=f11e49] [cursor=pointer]:
+            - /url: value-chain.html
+          - link "Descriptions" [ref=f11e50] [cursor=pointer]:
+            - /url: descriptions.html
+          - paragraph [ref=f11e51]: Feedback
+          - link "Alert" [ref=f11e52] [cursor=pointer]:
+            - /url: alert.html
+          - link "Progress" [ref=f11e53] [cursor=pointer]:
+            - /url: progress.html
+          - link "Modal" [ref=f11e54] [cursor=pointer]:
+            - /url: modal.html
+          - link "Slide-over" [ref=f11e55] [cursor=pointer]:
+            - /url: slide-over.html
+          - link "Skeleton" [ref=f11e56] [cursor=pointer]:
+            - /url: skeleton.html
+          - link "Empty state" [ref=f11e57] [cursor=pointer]:
+            - /url: empty.html
+          - paragraph [ref=f11e58]: Forms
+          - link "Field & Input" [ref=f11e59] [cursor=pointer]:
+            - /url: field-input.html
+          - link "Dropdown" [ref=f11e60] [cursor=pointer]:
+            - /url: dropdown.html
+          - link "Lead form & CTA row" [ref=f11e61] [cursor=pointer]:
+            - /url: lead-form.html
+          - link "Date picker" [ref=f11e62] [cursor=pointer]:
+            - /url: date-picker.html
+          - link "Filter bar" [ref=f11e63] [cursor=pointer]:
+            - /url: filter-bar.html
+          - paragraph [ref=f11e64]: Navigation
+          - link "Nav" [ref=f11e65] [cursor=pointer]:
+            - /url: nav.html
+          - link "Side navigation" [ref=f11e66] [cursor=pointer]:
+            - /url: side-navigation.html
+          - link "Top navigation" [ref=f11e67] [cursor=pointer]:
+            - /url: top-navigation.html
+          - link "App switcher" [ref=f11e68] [cursor=pointer]:
+            - /url: app-switcher.html
+          - link "User menu" [ref=f11e69] [cursor=pointer]:
+            - /url: user-menu.html
+          - link "Stepper" [ref=f11e70] [cursor=pointer]:
+            - /url: stepper.html
+          - link "Tabs" [ref=f11e71] [cursor=pointer]:
+            - /url: tabs.html
+          - link "Breadcrumb" [ref=f11e72] [cursor=pointer]:
+            - /url: breadcrumb.html
+          - link "Pagination" [ref=f11e73] [cursor=pointer]:
+            - /url: pagination.html
+          - paragraph [ref=f11e74]: Templates
+          - link "Sign-in page" [ref=f11e75] [cursor=pointer]:
+            - /url: sign-in-page.html
+          - link "Signed-out page" [ref=f11e76] [cursor=pointer]:
+            - /url: signed-out-page.html
+          - link "Settings layout" [ref=f11e77] [cursor=pointer]:
+            - /url: settings-layout.html
+          - paragraph [ref=f11e78]: Theming
+          - link "Browser tab" [ref=f11e79] [cursor=pointer]:
+            - /url: browser-tab.html
+          - link "Product themes" [ref=f11e80] [cursor=pointer]:
+            - /url: product-themes.html
+      - generic [ref=f11e81]:
+        - paragraph [ref=f11e82]: Forms
+        - heading "Dropdown" [level=1] [ref=f11e83]
+        - paragraph [ref=f11e84]: Native select with an inset chevron, and a details-based action menu that works with JavaScript off.
+        - paragraph [ref=f11e85]:
+          - code [ref=f11e86]: .selectwrap
+          - text: ·
+          - code [ref=f11e87]: composes .select
+          - text: ·
+          - code [ref=f11e88]: native details menu
+        - group "Preview width" [ref=f11e89]:
+          - radio "Web" [checked]
+          - generic [ref=f11e90] [cursor=pointer]: Web
+          - radio "Mobile 375px"
+          - generic [ref=f11e91] [cursor=pointer]: Mobile 375px
+        - figure [ref=f11e92]:
+          - generic [ref=f11e94]:
+            - generic [ref=f11e95]: Region
+            - combobox "Region" [ref=f11e97]:
+              - option "Singapore" [selected]
+              - option "Philippines"
+              - option "Sri Lanka"
+              - option "Indonesia"
+          - generic [ref=f11e98]:
+            - generic [ref=f11e99]: Select dropdown (native, with inset chevron)
+            - button "Copy" [ref=f11e100] [cursor=pointer]
+          - code [ref=f11e102]: <div class="field" style="max-width:20rem"> <label for="dd-region">Region</label> <span class="selectwrap"><select class="select" id="dd-region"> <option>Singapore</option> <option>Philippines</option> <option>Sri Lanka</option> <option>Indonesia</option> </select></span> </div>
+        - figure [ref=f11e103]:
+          - group [ref=f11e105]:
+            - generic "Export" [ref=f11e106] [cursor=pointer]
+          - generic [ref=f11e107]:
+            - generic [ref=f11e108]: Menu dropdown (native disclosure, works with JS off)
+            - button "Copy" [ref=f11e109] [cursor=pointer]
+          - code [ref=f11e111]: <details style="position:relative;display:inline-block"> <summary class="btn btn--secondary" style="list-style:none">Export</summary> <div class="card" style="position:absolute;left:0;margin-top:var(--space-2);min-width:12rem;padding:var(--space-2);z-index:10"> <a href="overview.html" style="display:block;padding:var(--space-2) var(--space-3);text-decoration:none;color:var(--text);border-radius:var(--radius-sm)">Download CSV</a> <a href="overview.html" style="display:block;padding:var(--space-2) var(--space-3);text-decoration:none;color:var(--text);border-radius:var(--radius-sm)">Download PDF</a> <a href="overview.html" style="display:block;padding:var(--space-2) var(--space-3);text-decoration:none;color:var(--text);border-radius:var(--radius-sm)">Send to email</a> </div> </details>
+        - heading "Usage" [level=2] [ref=f11e112]
+        - list [ref=f11e113]:
+          - listitem [ref=f11e114]:
+            - text: ›For choosing one value, use the native
+            - code [ref=f11e115]: <select class="select">
+            - text: inside a
+            - code [ref=f11e116]: .selectwrap
+            - text: ": the wrapper draws the chevron inset from the edge and the platform provides the option list, keyboard support, and mobile pickers."
+          - listitem [ref=f11e117]:
+            - text: ›Which of the two treatments it takes follows from where it sits. Inside a
+            - code [ref=f11e118]: .field
+            - text: "it is a field: it fills the column and has a label above it. Inside"
+            - code [ref=f11e119]: .filterrow
+            - text: or
+            - code [ref=f11e120]: .listfooter
+            - text: it is a control in a row, so it takes the Filters trigger's height, radius and inset padding — otherwise a bare select reads as a text field parked among buttons, with its label crowding the left edge.
+          - listitem [ref=f11e121]:
+            - text: ›For an action menu, use native
+            - code [ref=f11e122]: <details>
+            - text: with a button-styled
+            - code [ref=f11e123]: <summary>
+            - text: and a
+            - code [ref=f11e124]: .card
+            - text: "panel: it opens on click, closes on a second click, and needs no JavaScript."
+          - listitem [ref=f11e125]: "›Menus are click-driven, never hover: touch devices and keyboard users depend on it."
+          - listitem [ref=f11e126]: ›Keep menu items short, verb-first, and never more than seven; longer lists belong in a select.
+        - generic [ref=f11e127]:
+          - link "‹ Field & Input" [ref=f11e129] [cursor=pointer]:
+            - /url: field-input.html
+          - link "Lead form & CTA row ›" [ref=f11e131] [cursor=pointer]:
+            - /url: lead-form.html
+  - contentinfo [ref=f11e132]:
+    - generic [ref=f11e133]:
+      - separator [ref=f11e134]
+      - generic [ref=f11e135]:
+        - generic [ref=f11e136]:
+          - generic [ref=f11e137]: Documentation
+          - link "Foundations" [ref=f11e138] [cursor=pointer]:
+            - /url: ../foundations/principles.html
+          - link "Components" [ref=f11e139] [cursor=pointer]:
+            - /url: ../components/overview.html
+          - link "Frameworks" [ref=f11e140] [cursor=pointer]:
+            - /url: ../frameworks/blazor.html
+          - link "Themes" [ref=f11e141] [cursor=pointer]:
+            - /url: ../themes/tailwind.html
+          - link "Install" [ref=f11e142] [cursor=pointer]:
+            - /url: ../install.html
+        - generic [ref=f11e143]:
+          - generic [ref=f11e144]: Admin Kit
+          - link "Overview" [ref=f11e145] [cursor=pointer]:
+            - /url: ../admin-kit.html
+          - 'link "Live demo: Blazor" [ref=f11e146] [cursor=pointer]':
+            - /url: ../demos/blazor/
+          - 'link "Live demo: Tailwind" [ref=f11e147] [cursor=pointer]':
+            - /url: ../demos/tailwind/
+        - generic [ref=f11e148]:
+          - generic [ref=f11e149]: Resources
+          - link "npm package" [ref=f11e150] [cursor=pointer]:
+            - /url: https://www.npmjs.com/package/novus-design-kit
+          - link "GitHub repository" [ref=f11e151] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui
+          - link "Releases" [ref=f11e152] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui/releases
+          - link "Changelog" [ref=f11e153] [cursor=pointer]:
+            - /url: https://github.com/novustechdev/novus-design-ui/blob/main/CHANGELOG.md
+          - link "Asset index" [ref=f11e154] [cursor=pointer]:
+            - /url: ../foundations/assets.html
+        - generic [ref=f11e155]:
+          - generic [ref=f11e156]: Novus Technologies
+          - link "www.novustech.com.sg" [ref=f11e157] [cursor=pointer]:
+            - /url: https://www.novustech.com.sg
+          - link "LinkedIn" [ref=f11e158] [cursor=pointer]:
+            - /url: https://www.linkedin.com/company/novus-technologies-pte-ltd/
+      - paragraph [ref=f11e159]:
+        - text: © 2026 Novus Technologies Pte Ltd · This reference site documents and is built with
+        - code [ref=f11e160]: novus-design-kit v0.9.0
+        - text: .

@@ -293,10 +293,13 @@
 .authcard__forgot > p { margin: 0 auto; max-width: 22rem; }
 /* The one auth state with no fields: a circled check, the headline, then quiet links.
    Centred because there is nothing to fill and nothing to align to. */
-.authcard__done { text-align: center; }
+.authcard__done, .authcard__done > .authcard__title { text-align: center; }
 .authcard__done > .authcard__check { display: grid; place-items: center; width: 3rem; height: 3rem; margin: 0 auto var(--space-4); border-radius: 50%; background: var(--success-subtle); color: var(--success-text); }
 .authcard__done > .authcard__check > .icon { width: 1.5rem; height: 1.5rem; }
-.authcard__links { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border); }
+/* Its two actions sit side by side as equal buttons, never stacked: the primary is the
+   next step (back to sign in), the secondary the fallback (resend). */
+.authcard__links { display: flex; gap: var(--space-3); margin-top: var(--space-4); padding-top: var(--space-4); border-top: 1px solid var(--border); }
+.authcard__links > .btn { flex: 1; min-height: 2.75rem; }
 /* An SSO-only workspace drops the password form entirely, so the provider button
    takes the primary slot instead of sitting under an "or". */
 .authcard__sso--primary { background: var(--accent); color: var(--text-on-accent); }
