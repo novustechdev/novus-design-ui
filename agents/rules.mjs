@@ -220,6 +220,13 @@ export const RULES = [
     why: "buttons placed as bare siblings have no spacing of their own, so they touch, and the pair reads as one broken control rather than two choices",
     enforcedBy: "the .row utility in tokens.css, and the spacing of the container around it",
   },
+  {
+    id: "button-pair",
+    scope: "console",
+    text: "Two actions that answer the same moment, like Cancel and Save or Resend and Back to sign in, sit side by side in one .row, never stacked one above the other. One of the pair is .btn--primary, the next step, and the other is .btn--secondary, the fallback; never two secondaries. The secondary keeps its outline, so it still reads as a button beside the filled one. In a dialog or form foot the primary ends the row. Only a row too narrow for both may wrap.",
+    why: "stacked actions read as a list of unrelated links, and two secondaries leave the person to guess which one moves them forward",
+    enforcedBy: "the .row utility and the .btn--primary and .btn--secondary variants in tokens.css, and the Button component docs",
+  },
 ];
 
 export const ALWAYS = RULES.filter((r) => r.scope === "always");
