@@ -78,9 +78,9 @@
       "id": "page-header",
       "name": "Page header",
       "category": "Layout",
-      "classes": [".pagehead", ".pagehead__row", ".pagehead__actions", ".pagehead__desc"],
+      "classes": [".pagehead", ".pagehead__row", ".pagehead__actions", ".pagehead__desc", ".pagehead__back", "data-back"],
       "fragment": "src/components/page-header.html",
-      "summary": "Breadcrumb, title, end-aligned actions, and one line of description at the top of every console screen.",
+      "summary": "Breadcrumb, title, end-aligned actions, and one line of description at the top of every console screen; on a detail screen, Back in place of the breadcrumb.",
       "css": ["page-header"]
     },
     {
