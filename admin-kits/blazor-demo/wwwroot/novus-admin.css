@@ -458,8 +458,8 @@
 .emptystate[hidden] { display: none; }
 .chk { display: flex; gap: var(--space-2); align-items: center; min-height: 2.75rem; cursor: pointer; }
 .selectwrap { position: relative; display: block; }
-.selectwrap .select { appearance: none; padding-right: calc(var(--space-4) * 2); }
-.selectwrap::after { content: ""; position: absolute; right: var(--space-4); top: 50%; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--text-secondary); border-bottom: 2px solid var(--text-secondary); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
+.selectwrap .select { appearance: none; padding-right: calc(var(--space-5) + var(--space-4)); }
+.selectwrap::after { content: ""; position: absolute; right: var(--space-5); top: 50%; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--text-secondary); border-bottom: 2px solid var(--text-secondary); transform: translateY(-70%) rotate(45deg); pointer-events: none; }
 /* A dropdown that sits in a row of controls is a trigger, not a text field: the
    Filters button's height, radius and inset padding, so a row of them reads as one
    set instead of a field parked among buttons. A dropdown inside a .field keeps the
