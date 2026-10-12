@@ -22,6 +22,14 @@
   </div>
 </section>
 
+<section class="demo" data-title="Icons that name the action: add leads with the plus, back with the arrow">
+  <div class="row">
+    <button class="btn btn--primary"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> Add merchant</button>
+    <button class="btn btn--secondary"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg> New terminal</button>
+    <a class="btn btn--ghost" href="button.html"><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg> Back</a>
+  </div>
+</section>
+
 <section class="demo" data-title="Button rows carry the gap">
   <div class="field">
     <label for="br-name">Merchant name</label>
@@ -41,6 +49,7 @@
   <li>A pair of actions sits side by side, never stacked one on top of the other, and one of the pair is primary &mdash; two secondaries leave the reader to guess which is the next step. The secondary always keeps its outline so it still reads as a button beside the filled one.</li>
   <li>Links styled as buttons: use an <code>&lt;a class="btn …"&gt;</code>, the classes work on both elements.</li>
   <li>Don't invent new variants or colours; the accent re-skins per product via a theme class.</li>
+  <li>An action that creates something, Add, New, Create, Provision or Invite, leads with the plus icon, whatever its variant. Back leads with the left arrow. The icon goes before the label and never replaces it; the label still names the thing being added, like Add merchant.</li>
   <li>Buttons go in a <code>.row</code>, which spaces them and wraps at narrow widths. A button carries no margin of its own, so bare siblings touch and read as one broken control.</li>
   <li>Placement psychology (forms lead left, dialogs anchor right, danger stands apart) is covered in <a href="../foundations/actions.html">Actions &amp; placement</a>.</li>
 </ul>
