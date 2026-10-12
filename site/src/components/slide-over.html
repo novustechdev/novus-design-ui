@@ -1,0 +1,85 @@
+<section class="demo" data-title="Anatomy (drawn inline)">
+  <div class="slideover slideover--preview">
+    <div class="slideover__head">
+      <div>
+        <span class="slideover__code">CR-NVP-0013</span>
+        <h3 class="slideover__title">Gateway certificate renewal</h3>
+        <p class="slideover__sub">Waiting on client approval</p>
+      </div>
+      <span class="badge badge--warning">Pending approval</span>
+    </div>
+    <div class="slideover__body">
+      <div class="slideover__cols">
+        <div>
+          <h4>Description</h4>
+          <p style="margin:0">The terminal fleet on this site presents a certificate that expires in 14 days. Renewing keeps the accept path open through the next settlement window.</p>
+          <h4>Approvals</h4>
+          <ul class="bullets">
+            <li>Client approval, waiting on Delphine Okafor (1 of 2).</li>
+            <li>Novus approval, not started.</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Details</h4>
+          <dl class="slideover__facts">
+            <div><dt>Approvals</dt><dd><span class="badge">14</span></dd></div>
+            <div><dt>Attachments</dt><dd><span class="badge">3</span></dd></div>
+            <div><dt>Tenant</dt><dd>Harborline Freight</dd></div>
+            <div><dt>Priority</dt><dd>Medium</dd></div>
+            <div><dt>Requester</dt><dd>Owen Bristol</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="slideover__foot">
+      <button class="btn btn--secondary">Cancel</button>
+      <button class="btn btn--primary">Approve</button>
+    </div>
+  </div>
+</section>
+
+<section class="demo" data-title="Trigger + slide-over open">
+  <button class="btn btn--primary" onclick="this.nextElementSibling.showModal()">Open slide-over</button>
+  <dialog class="slideover" aria-labelledby="slideover-title">
+    <div class="slideover__head">
+      <div>
+        <span class="slideover__code">CR-NVP-0013</span>
+        <h3 class="slideover__title" id="slideover-title">Gateway certificate renewal</h3>
+        <p class="slideover__sub">Waiting on client approval</p>
+      </div>
+      <button class="modal-close" aria-label="Close" onclick="this.closest('dialog').close()">&times;</button>
+    </div>
+    <div class="slideover__body">
+      <div class="slideover__cols">
+        <div>
+          <h4>Description</h4>
+          <p style="margin:0">The terminal fleet on this site presents a certificate that expires in 14 days.</p>
+        </div>
+        <div>
+          <h4>Details</h4>
+          <dl class="slideover__facts">
+            <div><dt>Approvals</dt><dd><span class="badge">14</span></dd></div>
+            <div><dt>Attachments</dt><dd><span class="badge">3</span></dd></div>
+            <div><dt>Target date</dt><dd>4 September</dd></div>
+            <div><dt>Submitted</dt><dd>25 September</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+    <div class="slideover__foot">
+      <button class="btn btn--secondary" onclick="this.closest('dialog').close()">Cancel</button>
+      <button class="btn btn--primary" onclick="this.closest('dialog').close()">Approve</button>
+    </div>
+  </dialog>
+</section>
+
+<h2>Usage</h2>
+<ul class="bullets">
+  <li>A slide-over is a <code>&lt;dialog class="slideover"&gt;</code>. The right edge pin, focus trap, Esc, and the inert page behind come from the element itself; <code>showModal()</code> opens it, nothing else does.</li>
+  <li>Give the dialog an <code>aria-labelledby</code> pointing at its title so a screen reader announces the record, not just "dialog".</li>
+  <li>Use it when the task stays on one record and the page behind is context worth keeping visible. A <a href="modal.html">modal</a> asks for a decision; a slide-over shows a record and offers actions at its foot.</li>
+  <li>The slide is a keyframe on <code>[open]</code>, not a measured transform. Nothing scripts the panel open or shut, so it costs nothing and cannot desync.</li>
+  <li>Body scrolls on its own and carries <code>overscroll-behavior: contain</code>, so scrolling to the foot does not drag the page behind it. On a phone the panel goes full width; past 60rem the body splits into content and a details column.</li>
+  <li>Counts and attachments live in the details column as a <code>&lt;dl class="slideover__facts"&gt;</code>: muted term left, value right, and anything countable gets a <code>.badge</code> chip so a growing queue is visible at a glance.</li>
+  <li>Actions sit right in <code>.slideover__foot</code> with the primary last. Keep them to two: a cancel and the one thing the panel exists to do.</li>
+</ul>

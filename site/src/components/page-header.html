@@ -17,10 +17,25 @@
   </div>
 </section>
 
+<section class="demo" data-title="Detail screen: Back returns to wherever the person came from">
+  <div class="pagehead">
+    <a class="btn btn--ghost btn--sm pagehead__back" href="page-header.html" data-back><svg class="icon icon--sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6"/></svg> Back</a>
+    <div class="pagehead__row">
+      <h1>TXN-241099</h1>
+      <div class="pagehead__actions"><a class="btn btn--secondary btn--sm" href="page-header.html">Refund</a></div>
+    </div>
+    <p class="muted pagehead__desc">Settled card payment at Hillcrest Grocers Makati, 27 Aug 2026, 18:31.</p>
+  </div>
+</section>
+
 <h2>Usage</h2>
 <ul class="bullets">
   <li>Every console screen opens with a page header: the breadcrumb (area, then screen), the title, and the screen's actions aligned to the end of the title row.</li>
   <li>Actions stay in one row. On narrow screens the whole group moves under the title; buttons never wrap one by one.</li>
   <li>At most one primary action; the rest are secondary or ghost.</li>
   <li>The description is one sentence about what the screen holds.</li>
+  <li>A detail screen opens with Back in place of the breadcrumb: a ghost button with the arrow icon and the word Back, never an arrow alone and never a text link. It is the only thing above the title.</li>
+  <li>Back returns to the screen the person came from, the list with its filters, the dashboard, a search, so they land where they left. Mark it <code>data-back</code> and the console script calls the browser's own back.</li>
+  <li>Its <code>href</code> is the parent screen. That is where Back goes when there is nowhere to return to: a bookmark, a shared link, an email, or JavaScript off. Back never leaves the console.</li>
+  <li>The label stays Back, not Back to Transactions, because the destination depends on where the person entered from.</li>
 </ul>

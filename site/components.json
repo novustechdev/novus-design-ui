@@ -18,6 +18,14 @@
       "summary": "Status chip with semantic tints and an optional dot."
     },
     {
+      "id": "pills",
+      "name": "Pills",
+      "category": "General",
+      "classes": [".pill", ".pill[aria-pressed=true]", ".pill__x", "composes .badge for counts"],
+      "fragment": "src/components/pills.html",
+      "summary": "Actionable chips: labels with a remove button, filters toggled on aria-pressed, and counts inside."
+    },
+    {
       "id": "avatar",
       "name": "Avatar",
       "category": "General",
@@ -70,9 +78,9 @@
       "id": "page-header",
       "name": "Page header",
       "category": "Layout",
-      "classes": [".pagehead", ".pagehead__row", ".pagehead__actions", ".pagehead__desc"],
+      "classes": [".pagehead", ".pagehead__row", ".pagehead__actions", ".pagehead__desc", ".pagehead__back", "data-back"],
       "fragment": "src/components/page-header.html",
-      "summary": "Breadcrumb, title, end-aligned actions, and one line of description at the top of every console screen.",
+      "summary": "Breadcrumb, title, end-aligned actions, and one line of description at the top of every console screen; on a detail screen, Back in place of the breadcrumb.",
       "css": ["page-header"]
     },
     {
@@ -198,6 +206,14 @@
       "summary": "In-page detail dialog, native dialog gives focus trap, Esc, and inert background."
     },
     {
+      "id": "slide-over",
+      "name": "Slide-over",
+      "category": "Feedback",
+      "classes": [".slideover", ".slideover__head", ".slideover__body", ".slideover__cols", ".slideover__foot", ".slideover--preview"],
+      "fragment": "src/components/slide-over.html",
+      "summary": "Right-edge panel for one record: native dialog gives focus trap and an inert page, the slide is a keyframe on open."
+    },
+    {
       "id": "skeleton",
       "name": "Skeleton",
       "category": "Feedback",
@@ -217,9 +233,9 @@
       "id": "empty",
       "name": "Empty state",
       "category": "Feedback",
-      "classes": ["composes .card and .btn"],
+      "classes": [".empty", ".empty__title", ".empty__text", ".empty__action", "composes .card and .btn"],
       "fragment": "src/components/empty.html",
-      "summary": "Plain text plus one action: what is empty, when content appears, and the button that fixes it."
+      "summary": "The default for any list, table, or search result with no rows: what is empty, when content appears, and the one action that fixes it."
     },
     {
       "id": "dropdown",
@@ -266,9 +282,9 @@
       "id": "side-navigation",
       "name": "Side navigation",
       "category": "Navigation",
-      "classes": [".adminnav", ".navgroup", ".navlink", ".navtoggle__input", ".navscrim"],
+      "classes": [".adminnav", ".navgroup", ".navlink", ".navtoggle__input", ".navscrim", ".adminnav--flat", ".navtoggle--edge"],
       "fragment": "src/components/side-navigation.html",
-      "summary": "Grouped console navigation with line icons that collapses on desktop and opens as a drawer on phones, without JavaScript.",
+      "summary": "Two sidebars from one mechanism: grouped (NovaCard) with the appbar hamburger, flat (NovaPulse) with a chevron on its own edge. Both collapse to an icon rail on desktop and open as a drawer on phones, without JavaScript.",
       "css": ["console-shell", "side-navigation"]
     },
     {
@@ -304,7 +320,7 @@
       "category": "Navigation",
       "classes": [".userdd", ".userdd__trigger", ".userdd__menu"],
       "fragment": "src/components/user-menu.html",
-      "summary": "Header account menu on native details: identity, theme, and Sign out at its foot.",
+      "summary": "Header account menu on native details: identity, Profile, theme, and Sign out at its foot.",
       "css": ["user-menu"]
     },
     {
@@ -319,9 +335,17 @@
       "id": "tabs",
       "name": "Tabs",
       "category": "Navigation",
-      "classes": ["native radio + :has pattern", "animated accent indicator"],
+      "classes": [".tabs", ".tabs__list", ".tabs__tab", ".tabs__panel", "native radio + :has pattern"],
       "fragment": "src/components/tabs.html",
-      "summary": "Facet switcher on native radio inputs with an animated accent underline; works with JavaScript off."
+      "summary": "Facet switcher on native radio inputs; the selected tab takes the accent colour and a 2px rule, hover lifts the rest. Works with JavaScript off."
+    },
+    {
+      "id": "browser-tab",
+      "name": "Browser tab",
+      "category": "Theming",
+      "classes": ["one icon file per slot", "pinned <title>"],
+      "fragment": "src/components/browser-tab.html",
+      "summary": "What the tab strip shows: the product name pinned as the title, and a favicon cut per slot size so a 16px tab never downloads a 3 kB master."
     },
     {
       "id": "product-themes",
@@ -352,9 +376,9 @@
       "id": "sign-in-page",
       "name": "Sign-in page",
       "category": "Templates",
-      "classes": [".authpage", ".authsplit", ".authbrand", ".authcard", ".pwgroup", ".pwtoggle", ".field__req"],
+      "classes": [".authpage", ".authsplit", ".authbrand", ".authcard", ".pwgroup", ".pwtoggle", ".authcard__back", ".authcard__done", ".authcard__sso--primary", ".field__req"],
       "fragment": "src/components/sign-in-page.html",
-      "summary": "Split sign-in on the deep brand ground: brand panel beside a credential card with small-caps fields and a password toggle.",
+      "summary": "Split sign-in with the ambient brand panel, the three-screen forgot-password flow, and both SSO shapes: optional under the divider, or the only way in.",
       "css": ["sign-in"]
     },
     {

@@ -30,8 +30,8 @@ screens also load `console.css` after the tokens.
   Why: re-implemented components miss the accessibility, dark mode and responsive behaviour the originals carry. Checked by: the component catalog at https://ui-kit.novustech.dev/components/overview.html, which carries the markup for each pattern.
 - **Short content stays on one line. Identifiers, names, chips, dates, amounts, buttons and column headers never wrap to two or three rows, and a table scrolls inside its own card instead of squeezing its columns.**
   Why: wrapped identifiers and squeezed tables are the defect this kit was corrected twice to prevent. Checked by: release gate 11, the layout audit at 1440px and 375px.
-- **Do not cap portal text at a reading measure. A paragraph uses the width it has, unless it is deliberately marked as prose with the measure class.**
-  Why: a reading cap leaves text wrapping into three lines beside empty space. Checked by: release gate 14.
+- **Do not cap portal text at a reading measure, and do not narrow descriptive text with a margin: a paragraph, a help line or any other descriptive copy spans the full width of its container, with inline margins of zero if any were going to be set. Only text deliberately marked as prose with the measure class takes a reading cap.**
+  Why: a reading cap, or a margin narrowing the copy, leaves text wrapping into three lines beside empty space. Checked by: release gate 14.
 - **Light is the default theme. Dark comes only from a choice the person made, which persists. Do not follow the operating system unless the app opts in explicitly.**
   Why: portals were flipping to dark on first visit for anyone with a dark operating system. Checked by: js/novus-theme.js, which applies the default before first paint.
 - **Header, navigation and body text render at one size. Headings step up by their documented ratio, and never further.**
@@ -42,8 +42,14 @@ screens also load `console.css` after the tokens.
   Why: decorative motion in a console gets in the way of work. Checked by: the constitution's motion rule and the reduced-motion verification runs.
 - **Patterns keep working when JavaScript does not run. Menus, drawers, filter sheets and tabs are built on native elements first, with script only as an enhancement.**
   Why: a console that needs script to open its own menu fails in the environments enterprises actually run. Checked by: the JavaScript-off verification runs recorded for every Admin Kit flavor.
-- **Write plain copy. No em dashes anywhere in published text, and no marketing category jargon for the product.**
-  Why: the kit's copy style is checked mechanically and a stray character fails the release. Checked by: release gates 6 and 8, the copy audits.
+- **Write plain copy. No em dashes anywhere in published text, and no marketing category jargon for the product. Add descriptive text only when it was asked for: no invented helper line, hint, explanation or tooltip filling a space the instruction left open. If a control needs no explanation, ship it without one.**
+  Why: the kit's copy style is checked mechanically and a stray character fails the release, and copy nobody asked for is a maintenance cost nobody agreed to. Checked by: release gates 6 and 8, the copy audits.
+- **When generating a component, add no white space just to make a layout look symmetric: no empty element balancing one side against the other, no padding on one column to match its neighbour. Balance comes from the grid or flex rules the pattern already sets. Every other gap is deliberate too, coming from a spacing token or a container that carries it (.row spaces its children, .field pairs its label and control).**
+  Why: space invented to look balanced is invisible to the next change, so it drifts the moment one side moves and it never had a token behind it. Checked by: the spacing tokens in tokens.css and the container patterns in the catalog.
+- **A field's default edit mode is a real label above the control, the .field pattern. A placeholder is a hint that disappears once someone types, so it never stands in for the label, and an input ships with no placeholder-only field. Keep the placeholder for format examples, like name@novustech.com.sg.**
+  Why: a placeholder standing in for the label is gone the moment the field is filled, so the person cannot check what they typed. Checked by: the .field pattern in the catalog, and the field and input component docs.
+- **A field the person cannot edit carries no padlock icon. Say it with the control itself: readonly on an input the person may focus and copy from, disabled on one they cannot, and a .field__help line naming why it is locked, like Set by your administrator. The state stays legible from the styling the control already has, so no new icon joins the label.**
+  Why: a padlock in a field is decoration that competes with the control, and it disappears from the accessibility tree, so the state it describes is left to colour alone. Checked by: the form field pattern in tokens.css, whose disabled and readonly rules mute the surface and text, and which needs no extra element.
 
 ## Rules for console and portal screens
 
@@ -68,6 +74,12 @@ marketing pages.
   Why: hand-built filter bars were the specific complaint that produced this pattern. Checked by: console.css and the Admin Kit reference applications.
 - **Charts read their colours and fonts from the tokens at render time, redraw when the theme changes, and are accompanied by the same numbers as a table so a page without scripting still answers the question.**
   Why: a chart with baked-in colours goes wrong the moment the theme flips. Checked by: the charts pattern documented in the catalog.
+- **Every amount carries its currency and a thousands separator, and the separator is a comma: 1,250,000.00 LKR, 1,250,000.00 USD, 1,250,000.00 EUR. Never bare digits, never a space or a decimal comma where the thousands comma goes, never a rounded abbreviation standing in for a total. Within a product one currency reads one way across every screen, table, chart and export: the ISO code, LKR or USD or EUR, never a local symbol or abbreviation like Rs.**
+  Why: an amount without its currency is a number rather than a price, and Rs beside LKR on neighbouring screens leaves the reader working out whether they are the same money. Checked by: console.css and the Admin Kit reference applications.
+- **Buttons sit in a .row, which spaces them and wraps at narrow widths; a lone button gets the same treatment, and a dialog or form foot ends the row with inline justify-content: flex-end. A button carries no margin of its own, so a button never touches another button, a field, a table or any other component, above or below it. Where the container around a row carries no spacing, give the row one.**
+  Why: buttons placed as bare siblings have no spacing of their own, so they touch, and the pair reads as one broken control rather than two choices. Checked by: the .row utility in tokens.css, and the spacing of the container around it.
+- **Two actions that answer the same moment, like Cancel and Save or Resend and Back to sign in, sit side by side in one .row, never stacked one above the other. One of the pair is .btn--primary, the next step, and the other is .btn--secondary, the fallback; never two secondaries. The secondary keeps its outline, so it still reads as a button beside the filled one. In a dialog or form foot the primary ends the row. Only a row too narrow for both may wrap.**
+  Why: stacked actions read as a list of unrelated links, and two secondaries leave the person to guess which one moves them forward. Checked by: the .row utility and the .btn--primary and .btn--secondary variants in tokens.css, and the Button component docs.
 
 ## Checking your own work
 
