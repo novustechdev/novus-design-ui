@@ -199,6 +199,9 @@
 .adminmain h3 { font-size: var(--text-md); line-height: var(--lh-md); }
 .pagehead__actions { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
 .pagehead__desc { margin: 0; }
+/* Back opens a detail screen, above the title: a ghost button with the arrow, pulled
+   left by its own padding so the arrow lines up with the title's first letter. */
+.pagehead__back { align-self: flex-start; min-height: 2.75rem; margin-inline-start: calc(var(--space-3) * -1); }
 .crumbs ol { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin: 0; padding: 0; font-size: var(--text-sm); }
 .crumbs li { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--text-secondary); }
 .crumbs li + li::before { content: "/"; color: var(--text-muted); }
