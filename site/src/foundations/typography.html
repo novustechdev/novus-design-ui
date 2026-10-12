@@ -56,29 +56,29 @@ a constitution rule (Principle IV) and the gates measure it on every build.</p>
 <h2>Weights</h2>
 <p>Carlito ships two weights, Regular 400 and Bold 700. There is no Medium: a 500
 renders as Regular and the kit's <code>--weight-medium</code> (600) renders as Bold.
-So the choice is always between two faces, and menus take the lighter one.</p>
+So the choice is always between two faces: menus are Regular, and only the selected item is Bold.</p>
 
-<section class="demo" data-title="Menus are Regular; the current item is marked by colour, tint and edge">
+<section class="demo" data-title="Menus are Regular; the selected item is Bold">
   <div class="tablewrap">
   <table class="table">
     <thead><tr><th>Weight</th><th>Token</th><th>Used for</th></tr></thead>
     <tbody>
-      <tr><td style="font-weight:var(--weight-regular)">Regular 400</td><td><code>--weight-regular</code></td><td class="cell--wrap">Body copy, table cells, and every menu: side and top navigation, the nav bar, menu group labels, and the current item</td></tr>
-      <tr><td style="font-weight:var(--weight-bold)">Bold 700</td><td><code>--weight-bold</code>, and <code>--weight-medium</code>, which renders the same</td><td class="cell--wrap">Headings, buttons, field labels, table headers, and the current breadcrumb</td></tr>
+      <tr><td style="font-weight:var(--weight-regular)">Regular 400</td><td><code>--weight-regular</code></td><td class="cell--wrap">Body copy, table cells, and every menu item that is not selected: side and top navigation, the nav bar, and menu group labels</td></tr>
+      <tr><td style="font-weight:var(--weight-bold)">Bold 700</td><td><code>--weight-bold</code>, and <code>--weight-medium</code>, which renders the same</td><td class="cell--wrap">The selected menu item, headings, buttons, field labels, table headers, and the current breadcrumb</td></tr>
     </tbody>
   </table>
   </div>
 </section>
 
 <ul class="bullets">
-  <li>Menus are set in Regular, including the current item. A menu is a list people scan; Bold on every label turns the list into a row of headings and leaves nothing for the current item to stand out with.</li>
-  <li>The current item is marked by accent colour, the accent tint and the accent edge, never by weight alone.</li>
+  <li>Menus are set in Regular, and only the selected item is Bold. A menu is a list people scan; Bold on every label turns it into a row of headings and leaves the selected item nothing to stand out with.</li>
+  <li>The selected item carries Bold together with the accent colour, tint and edge, so it never relies on weight alone.</li>
   <li>Do not ask for 500 to get a Medium: there is no Medium face, and the text quietly renders as Regular.</li>
 </ul>
 
 <h2>Rules</h2>
 <ul class="bullets">
-  <li>Weights: 400 regular, 700 bold; 600 falls back to 700, and menus stay Regular (see Weights above). Emphasis by weight, never italics or all-caps shouting.</li>
+  <li>Weights: 400 regular, 700 bold; 600 falls back to 700, and menus are Regular with only the selected item Bold (see Weights above). Emphasis by weight, never italics or all-caps shouting.</li>
   <li>Body copy caps at ~68ch for readability (the kit sets this on paragraphs).</li>
   <li>Carlito covers Latin plus common punctuation; exotic Unicode symbols render as tofu, draw icons as inline SVG instead.</li>
   <li>Decks use a separate, larger slide scale (tokens.css §9), never on web pages.</li>
