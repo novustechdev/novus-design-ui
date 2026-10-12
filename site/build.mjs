@@ -124,7 +124,7 @@ const SITE_CSS = `
   .sidenav .eyebrow{padding:var(--space-3) var(--space-3) var(--space-1);margin:0;font-weight:var(--weight-regular);}
   .sidenav a{display:block;padding:var(--space-1) var(--space-3);color:var(--text-secondary);text-decoration:none;font-size:var(--text-sm);border-left:2px solid transparent;}
   .sidenav a:hover{color:var(--text);background:var(--bg-subtle);text-decoration:none;}
-  .sidenav a[aria-current="page"]{color:var(--accent-text);background:var(--accent-subtle);border-left-color:var(--accent);font-weight:var(--weight-regular);}
+  .sidenav a[aria-current="page"]{color:var(--accent-text);background:var(--accent-subtle);border-left-color:var(--accent);font-weight:var(--weight-bold);}
   @media (min-width:900px){
     .docwrap{gap:var(--space-6);}
     .sidenav{position:sticky;top:var(--space-4);max-height:calc(100vh - var(--space-6));overflow-y:auto;border:0;background:transparent;}
