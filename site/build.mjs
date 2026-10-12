@@ -119,12 +119,12 @@ const SITE_CSS = `
   .docwrap{display:grid;gap:var(--space-5);align-items:start;}
   .doccontent{min-width:0;}
   .sidenav{border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);}
-  .sidenav > summary{cursor:pointer;padding:var(--space-2) var(--space-3);font-weight:var(--weight-medium);color:var(--text-secondary);font-size:var(--text-sm);}
+  .sidenav > summary{cursor:pointer;padding:var(--space-2) var(--space-3);font-weight:var(--weight-regular);color:var(--text-secondary);font-size:var(--text-sm);}
   .sidenav__body{padding:var(--space-2) 0 var(--space-3);}
-  .sidenav .eyebrow{padding:var(--space-3) var(--space-3) var(--space-1);margin:0;}
+  .sidenav .eyebrow{padding:var(--space-3) var(--space-3) var(--space-1);margin:0;font-weight:var(--weight-regular);}
   .sidenav a{display:block;padding:var(--space-1) var(--space-3);color:var(--text-secondary);text-decoration:none;font-size:var(--text-sm);border-left:2px solid transparent;}
   .sidenav a:hover{color:var(--text);background:var(--bg-subtle);text-decoration:none;}
-  .sidenav a[aria-current="page"]{color:var(--accent-text);background:var(--accent-subtle);border-left-color:var(--accent);font-weight:var(--weight-medium);}
+  .sidenav a[aria-current="page"]{color:var(--accent-text);background:var(--accent-subtle);border-left-color:var(--accent);font-weight:var(--weight-regular);}
   @media (min-width:900px){
     .docwrap{gap:var(--space-6);}
     .sidenav{position:sticky;top:var(--space-4);max-height:calc(100vh - var(--space-6));overflow-y:auto;border:0;background:transparent;}
@@ -167,7 +167,7 @@ const SITE_CSS = `
   .demo__canvas .authpage, .demo__canvas .signedout, .demo__canvas .adminwrap { min-height: 0; }
   .demo:has(details[open]), .demo:has(.nv-apps__panel:not([hidden])) { overflow: visible; }
   /* The Mobile 375px toggle narrows the box, but a media query still reads the real
-     viewport — so wide layouts stay on inside a phone-width canvas and squeeze the text
+     viewport, so wide layouts stay on inside a phone-width canvas and squeeze the text
      column to nothing. container-type gives the canvas its own query context; restate the
      phone rules under @container. Keep in step with the max-width:40rem block in tokens.css,
      and add a line here when a component gains a wide-only layout. */

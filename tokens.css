@@ -564,6 +564,8 @@
   --text-display: 3.75rem; --lh-display:3.9rem;
 
   /* Weights — Carlito/Calibri ship 400 & 700; 600 falls back to 700. */
+  /* Carlito ships 400 and 700 only, so --weight-medium (600) renders as Bold. Menus are
+     set in --weight-regular: their current item is marked by colour, tint and edge. */
   --weight-regular:400; --weight-medium:600; --weight-bold:700;
   --tracking-tight:-0.01em; --tracking-normal:0; --tracking-wide:0.02em;
 }
@@ -948,7 +950,7 @@ button.pill:hover, a.pill:hover { background:var(--bg-muted); color:var(--text);
 /* Nav */
 .nav { display:flex; align-items:center; gap:var(--space-5); padding:var(--space-3) var(--space-5);
   background:var(--surface); border-bottom:1px solid var(--border); }
-.nav a { color:var(--text-secondary); text-decoration:none; font-weight:var(--weight-medium); }
+.nav a { color:var(--text-secondary); text-decoration:none; font-weight:var(--weight-regular); }
 .nav a:hover, .nav a[aria-current="page"] { color:var(--text); }
 
 /* Layout helpers */
