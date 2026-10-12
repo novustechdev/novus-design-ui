@@ -73,7 +73,7 @@
 
 <h2>Forgot password</h2>
 
-<section class="demo" data-title="Step 1 — request a reset link">
+<section class="demo" data-title="Step 1: request a reset link">
   <div class="authpage">
     <div class="authmain">
       <form class="card authcard" action="sign-in-page.html">
@@ -91,7 +91,7 @@
   </div>
 </section>
 
-<section class="demo" data-title="Step 2 — link sent (name the inbox, never the account)">
+<section class="demo" data-title="Step 2: link sent (name the inbox, never the account)">
   <div class="authpage">
     <div class="authmain">
       <div class="card authcard">
@@ -109,7 +109,7 @@
   </div>
 </section>
 
-<section class="demo" data-title="Step 3 — new password, with the expired-link error">
+<section class="demo" data-title="Step 3: new password, with the expired-link error">
   <div class="authpage">
     <div class="authmain">
       <form class="card authcard" action="sign-in-page.html">
@@ -136,7 +136,7 @@
 
 <h2>Single sign-on</h2>
 
-<section class="demo" data-title="SSO-only workspace — the provider takes the primary slot">
+<section class="demo" data-title="SSO-only workspace: the provider takes the primary slot">
   <div class="authpage">
     <div class="authmain">
       <form class="card authcard" action="sign-in-page.html">
@@ -150,7 +150,7 @@
   </div>
 </section>
 
-<section class="demo" data-title="SSO in flight and failed — the error keeps the way back">
+<section class="demo" data-title="SSO in flight and failed: the error keeps the way back">
   <div class="authpage">
     <div class="authmain">
       <form class="card authcard" action="sign-in-page.html" style="max-width:28.5rem">
@@ -179,7 +179,7 @@
   <li>The password toggle is a real button named "Show password" or "Hide password"; the console layer hides it when scripting is unavailable, so a page never shows a dead control.</li>
 </ul>
 
-<h2>Usage — forgot password</h2>
+<h2>Usage: forgot password</h2>
 <ul class="bullets">
   <li>Forgot password is its own screen, not a disclosure on the sign-in card. The link and every step's back link are the same affordance: <code>.authcard__back</code>, full width, centred, accent, underlined.</li>
   <li>Three screens: request (username only) &rarr; link sent &rarr; choose a new password. The brand panel drops away from step one &mdash; once someone has decided they are locked out, the artwork is in the way.</li>
@@ -189,7 +189,7 @@
   <li>Password policy is one line of sub-copy. Do not build a live rules checklist: the server is the authority and a client-side list always disagrees with it eventually.</li>
 </ul>
 
-<h2>Usage — single sign-on</h2>
+<h2>Usage: single sign-on</h2>
 <ul class="bullets">
   <li>Where SSO is one option among several it sits under the <code>or</code> divider as a secondary button, and the password form keeps the view's one primary.</li>
   <li>Where the workspace is SSO-only, delete the password form rather than disabling it, and promote the provider button with <code>.authcard__sso--primary</code>. A greyed-out password box reads as a broken login.</li>
