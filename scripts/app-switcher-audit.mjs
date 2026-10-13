@@ -123,7 +123,7 @@ for (const theme of THEMES) for (const vp of WIDTHS) for (const file of PAGES) {
       };
     });
     const phone = vp[0] < 600;
-    expect(g.tiles === 18, "LAYOUT", where, `${g.tiles} tiles for a viewer holding every role (want 17 apps and All apps)`);
+    expect(g.tiles === 19, "LAYOUT", where, `${g.tiles} tiles for a viewer holding every role (want 18 apps and All apps)`);
     expect(g.current === "novabank", "LAYOUT", where, `current tile is ${g.current}`);
     expect(g.columns === (vp[0] >= 900 ? 5 : phone ? 3 : 4), "LAYOUT", where, `${g.columns} columns`);
     expect(g.focused && g.placeholder === "Find Novus apps", "KEYS", where, "search is not focused on open, or its placeholder is wrong");
@@ -206,7 +206,18 @@ for (const vp of [[1366, 768], [390, 844]]) {
     const after = await page.evaluate(() => ({ hidden: document.querySelector(".nv-apps__panel").hidden, expanded: document.querySelector(".nv-apps__button").getAttribute("aria-expanded") }));
     expect(after.hidden && after.expanded === "false" && (await focused()) === "button", "KEYS", where, "Escape does not close and return focus to the button");
     await open(page);
-    await page.mouse.click(vp[0] - 5, vp[1] - 5);
+    // A panel with more apps reaches the bottom of a phone screen, so a fixed corner can land on
+    // it. Press the first candidate point whose element is neither inside the switcher nor a
+    // control of the page, so the check stays "a press outside closes the panel".
+    const outside = await page.evaluate(([w, h]) => {
+      const candidates = [[w - 5, h - 5], [5, h - 5], [w - 5, 5], [5, 5], [Math.round(w / 2), h - 5]];
+      return candidates.find(([x, y]) => {
+        const el = document.elementFromPoint(x, y);
+        return el && !el.closest("novus-app-switcher, .nv-apps__panel, .nv-apps__button") && !el.closest("a, button, input, select, textarea, [role=button]");
+      }) ?? null;
+    }, vp);
+    expect(outside !== null, "KEYS", where, "no point outside the switcher to press");
+    if (outside) await page.mouse.click(outside[0], outside[1]);
     expect(await page.$eval(".nv-apps__panel", (p) => p.hidden), "KEYS", where, "a press outside does not close the panel");
     await open(page);
     await page.keyboard.press("ArrowDown");
@@ -253,7 +264,7 @@ async function scenario(name, handler, { prime = false, fallback = false } = {})
     throw e;
   }
 }
-const all = ["novabank", "nova-lending", "novahub", "novamerchant-ops", "novamerchant", "novamerchant-pos", "novamerchant-biller", "novacard", "novatrace", "novus-id", "novaedge", "ibanking", "mbanking", "novaplan", "novaticket", "novasearch", "design-kit", "all"];
+const all = ["novabank", "nova-lending", "novahub", "novabridge", "novamerchant-ops", "novamerchant", "novamerchant-pos", "novamerchant-biller", "novacard", "novatrace", "novus-id", "novaedge", "ibanking", "mbanking", "novaplan", "novaticket", "novasearch", "design-kit", "all"];
 const cases = [
   ["error, with a good copy kept", (r) => r.fulfill({ status: 500, body: "" }), { prime: true }, (x) => JSON.stringify(x.tiles) === JSON.stringify(all)],
   ["garbage, with a good copy kept", (r) => r.fulfill({ status: 200, contentType: "application/json", body: "{\"oops\": true}" }), { prime: true }, (x) => JSON.stringify(x.tiles) === JSON.stringify(all)],
