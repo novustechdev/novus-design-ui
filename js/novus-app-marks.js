@@ -70,7 +70,13 @@
         '<path d="M9 14h.01M12 14h.01M15 14h.01M9 17h.01M12 17h.01M15 17h.01"/>' },
     /* A torn-off receipt with a bolt: a bill paid. On NovaMerchant's ground. */
     { id: "novamerchant-biller", name: "NovaMerchant Biller", token: "indigo-700",
-      glyph: '<path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="m12.8 7-2.6 4h3.6l-2.6 4"/>' }
+      glyph: '<path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="m12.8 7-2.6 4h3.6l-2.6 4"/>' },
+    /* A suspension bridge: the deck, two towers, the main cable slung between them with its
+       hanger, and the side cables to the banks. The glyph NovaBridge's own console draws, on the
+       amber it fills with. */
+    { id: "novabridge", name: "NovaBridge", token: "amber-700",
+      glyph: '<path d="M2 16h20"/><path d="M7 5v15"/><path d="M17 5v15"/><path d="M7 5q5 9 10 0"/>' +
+        '<path d="M2 12l5-7"/><path d="M17 5l5 7"/><path d="M12 9.5V16"/>' }
   ];
 
   /* The ground an app with no mark here is shown on, with its initial in white. */
