@@ -7,6 +7,14 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+### Added
+
+- NovaQR's product mark (`novaqr` in `js/novus-app-marks.js`, `logos/marks/novaqr.svg`): a QR
+  code drawn as three finder squares with data modules in the open corner. NovaQR is NovaCard's
+  sibling on the payments side and stands on NovaCard's ground (`indigo-500`), told apart by
+  glyph, because no palette step is left that sits 20 Lab units from every product colour.
+  Packaged kit files change.
+
 ## [0.9.0], 2026-10-04
 
 One Novus app switcher for every console (feature 014, constitution 1.17.0), at
