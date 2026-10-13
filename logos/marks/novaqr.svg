@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- GENERATED from js/novus-app-marks.js by admin-kits/data/generate.mjs. Do not edit. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="NovaQR">
+  <rect width="48" height="48" rx="12" fill="#534AB7"/>
+  <svg x="11" y="11" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.2"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.2"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1.2"/><path d="M6.75 6.75h.01M17.25 6.75h.01M6.75 17.25h.01"/><path d="M14 14h2.5v2.5M20.5 14h.01M14 20.5h.01M17.5 20.5h3v-3"/></svg>
+</svg>

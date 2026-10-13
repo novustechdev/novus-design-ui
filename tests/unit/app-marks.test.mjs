@@ -19,9 +19,9 @@ const MOVED = {
   novatrace: ["#D46420", '<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>'],
 };
 const NEW = ["novaplan", "novasearch", "novaticket", "novaedge", "novus-id", "design-kit", "ibanking", "mbanking", "nova-lending",
-  "novamerchant", "novamerchant-pos", "novamerchant-biller"];
+  "novamerchant", "novamerchant-pos", "novamerchant-biller", "novaqr"];
 /* Marks on another mark's ground: one product's apps share its colour and differ by glyph. */
-const GROUND = { "novamerchant-pos": "novamerchant", "novamerchant-biller": "novamerchant" };
+const GROUND = { "novamerchant-pos": "novamerchant", "novamerchant-biller": "novamerchant", novaqr: "novacard" };
 const product = (id) => GROUND[id] ?? id;
 
 function channel(c) {

@@ -8,7 +8,8 @@
    NovaBank, NovaHub, NovaCard and NovaTrace are the four marks the consoles already drew, moved
    here unchanged. The others are drawn in the same style. Each product has a colour of its own;
    NovaMerchant's three marks (the merchant app, its POS and its biller) share NovaMerchant's and
-   are told apart by glyph. An app with no mark here shows its initial on grey.
+   are told apart by glyph, and NovaQR shares NovaCard's the same way. An app with no mark
+   here shows its initial on grey.
 
    Usage: <script src=".../js/novus-app-marks.js"></script>, or
    import "novus-design-kit/js/novus-app-marks.js" from a bundler; either way the registry is
@@ -70,7 +71,13 @@
         '<path d="M9 14h.01M12 14h.01M15 14h.01M9 17h.01M12 17h.01M15 17h.01"/>' },
     /* A torn-off receipt with a bolt: a bill paid. On NovaMerchant's ground. */
     { id: "novamerchant-biller", name: "NovaMerchant Biller", token: "indigo-700",
-      glyph: '<path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="m12.8 7-2.6 4h3.6l-2.6 4"/>' }
+      glyph: '<path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4Z"/><path d="m12.8 7-2.6 4h3.6l-2.6 4"/>' },
+    /* A QR code: three finder squares, each with its centre, and data modules in the open corner.
+       NovaQR is NovaCard's sibling on the payments side, so it stands on NovaCard's ground. */
+    { id: "novaqr", name: "NovaQR", token: "indigo-500",
+      glyph: '<rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.2"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.2"/>' +
+        '<rect x="3.5" y="14" width="6.5" height="6.5" rx="1.2"/><path d="M6.75 6.75h.01M17.25 6.75h.01M6.75 17.25h.01"/>' +
+        '<path d="M14 14h2.5v2.5M20.5 14h.01M14 20.5h.01M17.5 20.5h3v-3"/>' }
   ];
 
   /* The ground an app with no mark here is shown on, with its initial in white. */
