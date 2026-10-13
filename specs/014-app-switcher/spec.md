@@ -128,6 +128,13 @@ Four consoles ship their own copy of the same switcher: a waffle at the **top ri
     other (the best three reach 17.8), and indigo-700 is the free step farthest from every other
     product (26.9, from Novus ID's blue-800) and reads white at 13:1. The distinctness rule holds
     between products, and every mark keeps a glyph of its own;
+  - NovaBridge (a suspension bridge: deck, two towers and the main cable between them, the glyph
+    its own console draws), on amber-700, the fill that console already uses, reading white at
+    5.7:1. With fourteen colours taken no free palette step clears both rules: amber-700 sits 19.0
+    from NovaPlan's amber-600 and 15.3 from Mobile banking's amber-800 in Lab. Its product owner
+    accepted those two pairs on 2026-10-13 until the design system adds a step that clears 20; the
+    test pins each at its measured distance rounded down to a tenth, and every other pair still
+    has to clear 20;
   - NovaPlan (a board);
   - NovaSearch (a lens);
   - NovaTicket (a ticket);

@@ -7,6 +7,25 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+### Added
+
+- NovaBridge's mark (`novabridge` in `js/novus-app-marks.js`, `logos/marks/novabridge.svg`): a
+  suspension bridge on amber-700, the glyph and fill NovaBridge's console already draws. The
+  sample catalog, the component page and the demo carry it, and the switcher audit expects
+  nineteen tiles for the every-role viewer.
+
+### Changed
+
+- The mark distinctness test accepts two named pairs closer than 20 in Lab, each pinned at its
+  measured distance rounded down to a tenth: NovaBridge and NovaPlan (measured 19.0, floor 18.9),
+  NovaBridge and Mobile banking (measured 15.3, floor 15.2). No
+  free palette step clears both white contrast and the distance rule against fourteen products;
+  NovaBridge's product owner accepted the pairs on 2026-10-13 until the design system adds a step
+  that does. Every other pair still has to clear 20.
+- The switcher audit's "a press outside closes the panel" check presses the first point that is
+  outside the switcher and not a page control, instead of the fixed bottom-right corner, which a
+  nineteen-tile panel covers on a 390-wide phone.
+
 ## [0.9.0], 2026-10-04
 
 One Novus app switcher for every console (feature 014, constitution 1.17.0), at

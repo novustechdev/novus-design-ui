@@ -19,7 +19,7 @@ const MOVED = {
   novatrace: ["#D46420", '<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>'],
 };
 const NEW = ["novaplan", "novasearch", "novaticket", "novaedge", "novus-id", "design-kit", "ibanking", "mbanking", "nova-lending",
-  "novamerchant", "novamerchant-pos", "novamerchant-biller"];
+  "novamerchant", "novamerchant-pos", "novamerchant-biller", "novabridge"];
 /* Marks on another mark's ground: one product's apps share its colour and differ by glyph. */
 const GROUND = { "novamerchant-pos": "novamerchant", "novamerchant-biller": "novamerchant" };
 const product = (id) => GROUND[id] ?? id;
@@ -60,6 +60,17 @@ test("every colour is a palette token, named by reference and never as a literal
   assert.ok(!/#[0-9a-fA-F]{3,8}\b/.test(readFileSync(join(ROOT, "js/novus-app-marks.js"), "utf8")));
 });
 
+/* Product pairs accepted closer than 20 in Lab, each pinned at its measured distance rounded down
+   to a tenth, so it cannot drift nearer. NovaBridge sits on amber-700 because no free palette step clears both rules
+   (white at 3:1 and 20 from every product); its product owner accepted these two pairs on
+   2026-10-13 until the design system adds a step that does. Every other pair, and any pair a
+   later product adds, still has to clear 20. */
+const ACCEPTED_CLOSE_PAIRS = new Map([
+  ["novabridge|novaplan", 18.9],
+  ["mbanking|novabridge", 15.2],
+]);
+const pairKey = (a, b) => [a, b].sort().join("|");
+
 test("white passes contrast on every mark, and every pair of products stays distinguishable", () => {
   const all = Array.from(M.ids());
   for (const id of all) {
@@ -73,7 +84,8 @@ test("white passes contrast on every mark, and every pair of products stays dist
   for (let i = 0; i < products.length; i++) for (let j = i + 1; j < products.length; j++) {
     const a = lab(hex(products[i])), b = lab(hex(products[j]));
     const distance = Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
-    assert.ok(distance >= 20, `${products[i]} and ${products[j]} are ${distance.toFixed(1)} apart in Lab, under 20`);
+    const floor = ACCEPTED_CLOSE_PAIRS.get(pairKey(products[i], products[j])) ?? 20;
+    assert.ok(distance >= floor, `${products[i]} and ${products[j]} are ${distance.toFixed(1)} apart in Lab, under ${floor}`);
   }
   const grey = M.unknown.token;
   assert.ok(1.05 / (luminance(P[grey]) + 0.05) >= 4.5, "an initial on the unknown grey must read as text");
