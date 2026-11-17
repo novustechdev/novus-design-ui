@@ -102,7 +102,7 @@
 
 @if (Selected_ is not null)
 {
-    <dialog class="vdialog" open>
+    <dialog class="vdialog" @ref="Dialog_" @onclose="() => Selected_ = null">
         <div class="vdialog__head">
             <h3 style="margin:0">@Selected_.Id</h3>
             <button class="modal-close" aria-label="Close" @onclick="() => Selected_ = null">×</button>
@@ -141,6 +141,16 @@
     string Query = "", Status = "all", DateFrom = "", DateTo = "";
     int Page = 1, PageSize = 10;
     Transaction? Selected_;
+    ElementReference Dialog_;
+
+    /* The detail opens as a modal, like the other flavors: centred over a backdrop, with the
+       focus trap and Escape from the browser, and the console script's press-outside close.
+       Closing it any way fires close, which clears Selected_. */
+    [Inject] IJSRuntime JS { get; set; } = default!;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (Selected_ is not null) await JS.InvokeVoidAsync("novusAdmin.showModal", Dialog_);
+    }
 
     int DateCount => (string.IsNullOrEmpty(DateFrom) ? 0 : 1) + (string.IsNullOrEmpty(DateTo) ? 0 : 1);
     int ActiveCount => Selected.Values.Sum(s => s.Count) + DateCount;

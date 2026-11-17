@@ -226,6 +226,8 @@ try { var t = localStorage.getItem("novus-theme");
   });
   var sheet = document.getElementById("txsheet");
   document.getElementById("d-close").addEventListener("click", function () { sheet.close(); });
+  // ponytail: the sheet has no padding, so a click that targets the dialog itself is on its backdrop.
+  sheet.addEventListener("click", function (e) { if (e.target === sheet) sheet.close(); });
   document.querySelectorAll("[data-tx]").forEach(function (r) {
     r.addEventListener("click", function () {
       var p = r.getAttribute("data-tx").split("|");

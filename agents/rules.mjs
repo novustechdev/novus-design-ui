@@ -227,6 +227,13 @@ export const RULES = [
     why: "stacked actions read as a list of unrelated links, and two secondaries leave the person to guess which one moves them forward",
     enforcedBy: "the .row utility and the .btn--primary and .btn--secondary variants in tokens.css, and the Button component docs",
   },
+  {
+    id: "click-away",
+    scope: "console",
+    text: "Whenever a dropdown or modal is open, a click anywhere outside it closes it, and so does Escape. A menu is a native details element carrying data-dismiss; a modal or slide-over is a native dialog opened with showModal(). Load js/novus-console.js and both close for free. A framework that renders the dialog from its own state calls novusAdmin.showModal(element) after render, never the open attribute, and clears that state on the dialog's close event, so the two never disagree.",
+    why: "a menu or modal that only its own button can close traps the person, who reaches for the page behind it and finds nothing happens",
+    enforcedBy: "js/novus-console.js, which closes every open menu and dialog on an outside press and on Escape, and the click-away audit, which presses outside every menu and dialog on every built page",
+  },
 ];
 
 export const ALWAYS = RULES.filter((r) => r.scope === "always");

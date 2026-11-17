@@ -7,6 +7,32 @@ repository around it; when the packaged kit files are unchanged, the entry says 
 
 ## [Unreleased]
 
+Click away to close, a design principle and an agent rule. Packaged kit files
+change (`js/novus-console.js`).
+
+### Added
+
+- Whenever a dropdown or modal is open, a click anywhere outside it closes it, and
+  so does Escape. The console script now closes an open modal dialog or slide-over
+  on a press on its backdrop; menus (`details[data-dismiss]`) already closed on an
+  outside click.
+- `novusAdmin.showModal(element)`, for a framework that renders its dialog from
+  its own state: it opens the dialog as a modal after render.
+- A "Click away to close" card on the Principles page, the rule in the Dropdown,
+  Modal and Slide-over docs, and a `click-away` rule in every agent file.
+- Release gate: the click-away audit (`scripts/click-away-audit.mjs`) presses
+  inside and outside every menu and dialog on every built page, at 1366px with a
+  mouse and at 390px with touch.
+
+### Fixed
+
+- The Blazor flavor's transaction detail opened in the page flow, below the fold
+  with no backdrop; it now opens as a modal like the other flavors.
+- The Dropdown docs' Export menu had no `data-dismiss`, so it never closed from
+  outside.
+- The iOS and Android mobile prototypes' detail sheet now closes on a tap on its
+  backdrop.
+
 ## [0.9.0], 2026-10-04
 
 One Novus app switcher for every console (feature 014, constitution 1.17.0), at

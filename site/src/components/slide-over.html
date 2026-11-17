@@ -75,7 +75,7 @@
 
 <h2>Usage</h2>
 <ul class="bullets">
-  <li>A slide-over is a <code>&lt;dialog class="slideover"&gt;</code>. The right edge pin, focus trap, Esc, and the inert page behind come from the element itself; <code>showModal()</code> opens it, nothing else does.</li>
+  <li>A slide-over is a <code>&lt;dialog class="slideover"&gt;</code>. The right edge pin, focus trap, Esc, and the inert page behind come from the element itself; <code>showModal()</code> opens it, nothing else does. A click on the page behind it closes it, from the console script, like every dialog.</li>
   <li>Give the dialog an <code>aria-labelledby</code> pointing at its title so a screen reader announces the record, not just "dialog".</li>
   <li>Use it when the task stays on one record and the page behind is context worth keeping visible. A <a href="modal.html">modal</a> asks for a decision; a slide-over shows a record and offers actions at its foot.</li>
   <li>The slide is a keyframe on <code>[open]</code>, not a measured transform. Nothing scripts the panel open or shut, so it costs nothing and cannot desync.</li>

@@ -32,6 +32,7 @@
 <h2>Usage</h2>
 <ul class="bullets">
   <li>Prefer native <code>&lt;dialog class="vdialog"&gt;</code>, the browser provides focus management and Esc for free.</li>
+  <li>A click anywhere outside the dialog, on the backdrop, closes it, the same as Cancel. The console script does this for every dialog opened with <code>showModal()</code>. A framework that renders the dialog from its own state still opens it that way, by calling <code>novusAdmin.showModal(dialog)</code> after render, never by drawing it with the <code>open</code> attribute, which leaves it in the page flow with no backdrop; it clears that state on the dialog's <code>close</code> event.</li>
   <li>Content that must stay reachable with JS off belongs in a <code>&lt;details&gt;</code> disclosure, not a modal.</li>
   <li>Actions sit right-aligned in <code>.modal__actions</code>; the primary action is last.</li>
 </ul>
