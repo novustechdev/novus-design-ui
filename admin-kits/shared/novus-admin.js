@@ -2,7 +2,7 @@
    ONE source: admin-kits/shared/novus-admin.js, copied into every flavor by
    admin-kits/data/generate.mjs. Every pattern already works without this file
    (native details, checkbox drawer, form posts); this adds the conveniences:
-   theme toggle, Escape and outside-click dismissal, drawer close on navigation,
+   theme toggle, Escape and outside-click dismissal of menus and dialogs, drawer close on navigation,
    password visibility, and Back to the previous console screen. Document-level
    delegation, so it survives client routing (Blazor WebAssembly) and enhanced
    navigation (Blazor Server). */
@@ -71,6 +71,16 @@
     if (el.closest(".adminnav a")) closeDrawer();
   });
 
+  /* A press on the backdrop of an open modal dialog or slide-over closes it. A dialog drawn
+     open as a page specimen is not modal, so it stays. Pointerdown, not click, so the click
+     that opens a dialog never closes it again on its way up to the document. */
+  doc.addEventListener("pointerdown", function (e) {
+    doc.querySelectorAll("dialog[open]:modal").forEach(function (d) {
+      var r = d.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) d.close();
+    });
+  });
+
   doc.addEventListener("keydown", function (e) {
     if (e.key !== "Escape") return;
     var open = doc.querySelector("details[data-dismiss][open]");
@@ -83,5 +93,9 @@
     closeDrawer();
   });
 
-  window.novusAdmin = { closeMenus: closeMenus, closeDrawer: closeDrawer };
+  /* For a framework that renders the dialog from its own state (Blazor): call this after
+     render so the dialog opens as a modal, never drawn open in the page flow. */
+  function showModal(d) { if (d && !d.open) d.showModal(); }
+
+  window.novusAdmin = { closeMenus: closeMenus, closeDrawer: closeDrawer, showModal: showModal };
 })();

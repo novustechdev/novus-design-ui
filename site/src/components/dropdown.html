@@ -11,7 +11,7 @@
 </section>
 
 <section class="demo" data-title="Menu dropdown (native disclosure, works with JS off)">
-  <details style="position:relative;display:inline-block">
+  <details data-dismiss style="position:relative;display:inline-block">
     <summary class="btn btn--secondary" style="list-style:none">Export</summary>
     <div class="card" style="position:absolute;left:0;margin-top:var(--space-2);min-width:12rem;padding:var(--space-2);z-index:10">
       <a href="overview.html" style="display:block;padding:var(--space-2) var(--space-3);text-decoration:none;color:var(--text);border-radius:var(--radius-sm)">Download CSV</a>
@@ -25,7 +25,8 @@
 <ul class="bullets">
   <li>For choosing one value, use the native <code>&lt;select class="select"&gt;</code> inside a <code>.selectwrap</code>: the wrapper draws the chevron inset from the edge and the platform provides the option list, keyboard support, and mobile pickers.</li>
   <li>Which of the two treatments it takes follows from where it sits. Inside a <code>.field</code> it is a field: it fills the column and has a label above it. Inside <code>.filterrow</code> or <code>.listfooter</code> it is a control in a row, so it takes the Filters trigger's height, radius and inset padding &mdash; otherwise a bare select reads as a text field parked among buttons, with its label crowding the left edge.</li>
-  <li>For an action menu, use native <code>&lt;details&gt;</code> with a button-styled <code>&lt;summary&gt;</code> and a <code>.card</code> panel: it opens on click, closes on a second click, and needs no JavaScript.</li>
+  <li>For an action menu, use native <code>&lt;details data-dismiss&gt;</code> with a button-styled <code>&lt;summary&gt;</code> and a <code>.card</code> panel: it opens on click, closes on a second click, and needs no JavaScript.</li>
+  <li>An open menu closes when you click anywhere outside it, and on Escape. The console script does this for every <code>details[data-dismiss]</code>, so a menu without the attribute is a bug. A plain disclosure, like a collapse section, leaves it off and stays open.</li>
   <li>Menus are click-driven, never hover: touch devices and keyboard users depend on it.</li>
   <li>Keep menu items short, verb-first, and never more than seven; longer lists belong in a select.</li>
 </ul>
