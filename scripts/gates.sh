@@ -168,6 +168,15 @@ if [ -d site/dist/demos/app-switcher ]; then
   else gate "app switcher audit" $RC "$(echo "$OUT" | grep -vE '^app switcher audit:' | head -3 | tr '\n' ' ')"; fi
 fi
 
+# Click away to close: every menu and dialog on every built page, in a real browser at 1366px
+# with a mouse and 390px with touch, closes on a press outside it and on Escape. Skips locally,
+# like the layout audit, when the browser tooling is absent.
+if [ -d site/dist ]; then
+  OUT=$(node scripts/click-away-audit.mjs 2>&1); RC=$?
+  if [ $RC -eq 2 ]; then echo "SKIP  click-away audit: $(echo "$OUT" | tail -1)"
+  else gate "click-away audit" $RC "$(echo "$OUT" | grep -vE '^click-away audit:' | head -3 | tr '\n' ' ')"; fi
+fi
+
 echo
 [ $FAIL -eq 0 ] && echo "ALL GATES PASS" || echo "GATE FAILURES — release blocked"
 exit $FAIL
